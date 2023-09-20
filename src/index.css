@@ -246,6 +246,7 @@ button:disabled {
   letter-spacing: var(--letter-spacing);
   line-height: 1.5;
 }
+
 .form-input,
 .form-textarea,
 .form-select {
@@ -256,11 +257,17 @@ button:disabled {
   border: 1px solid var(--grey-300);
   color: var(--text-color);
 }
+
 .form-input,
 .form-select,
 .form-btn {
   height: 35px;
 }
+
+.form-input-error {
+  border: 1px solid var(--red-dark);
+}
+
 .form-row {
   margin-bottom: 1rem;
 }
@@ -268,10 +275,12 @@ button:disabled {
 .form-textarea {
   height: 7rem;
 }
+
 ::placeholder {
   font-family: inherit;
   color: var(--grey-400);
 }
+
 .form-alert {
   color: var(--red-dark);
   letter-spacing: var(--letter-spacing);
@@ -324,6 +333,7 @@ button:disabled {
   background: #e0e8f9;
   color: #647acb;
 }
+
 .declined {
   background: #ffeeee;
   color: #d66a6a;

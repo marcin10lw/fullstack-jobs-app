@@ -20,7 +20,7 @@ const FormRow = ({ type, labelText, name, register, errors }: FormRowProps) => {
         {...register(name)}
         type={type}
         id={name}
-        className="form-input"
+        className={`form-input ${errors[name] ? "form-input-error" : ""}`}
         required
       />
       <p className="form-error">{errors[name]?.message}</p>
