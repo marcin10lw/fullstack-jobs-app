@@ -24,8 +24,6 @@ const Register = () => {
     resolver: zodResolver(registerFormData),
   });
 
-  console.log(errors);
-
   const onFormSubmit = (formData: RegisterFormData) => {};
 
   return (
@@ -35,36 +33,36 @@ const Register = () => {
         <h4>Register</h4>
 
         <FormRow
-          errors={errors}
-          register={register}
+          error={errors.name}
+          register={register("name")}
           labelText="name"
           name="name"
           type="text"
         />
         <FormRow
-          errors={errors}
-          register={register}
+          error={errors.lastName}
+          register={register("lastName")}
           labelText="last name"
           name="lastName"
           type="text"
         />
         <FormRow
-          errors={errors}
-          register={register}
+          error={errors.location}
+          register={register("location")}
           labelText="location"
           name="location"
           type="text"
         />
         <FormRow
-          errors={errors}
-          register={register}
+          error={errors.email}
+          register={register("email")}
           labelText="email"
           name="email"
           type="email"
         />
         <FormRow
-          errors={errors}
-          register={register}
+          error={errors.password}
+          register={register("password")}
           labelText="password"
           name="password"
           type="password"
