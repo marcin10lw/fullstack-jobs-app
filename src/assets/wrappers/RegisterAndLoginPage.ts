@@ -41,4 +41,11 @@ export const Wrapper = styled.section`
     letter-spacing: var(--letter-spacing);
     margin-left: 0.25rem;
   }
+
+  .form-error {
+    text-align: start;
+    font-size: 14px;
+    margin-top: 2px;
+    color: var(--red-dark);
+  }
 `;
