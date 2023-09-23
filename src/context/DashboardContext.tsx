@@ -1,8 +1,8 @@
-import { PropsWithChildren, createContext, useState } from "react";
+import { PropsWithChildren, createContext, useEffect, useState } from "react";
 
-import { User } from "src/types/user";
-
-type Theme = "light" | "dark";
+import { Theme, User } from "src/types";
+import { checkDefaultTheme } from "src/utils/checkDefaultTheme";
+import { saveValueToLocalStorage } from "src/utils/localStorage";
 
 type DashboardState = {
   user: User;
@@ -17,7 +17,7 @@ export const DashboardContext = createContext({} as DashboardState);
 
 const DashboardProvider = ({ children }: PropsWithChildren) => {
   const [showSidebar, setShowSidebar] = useState(false);
-  const [theme, setTheme] = useState<Theme>("light");
+  const [theme, setTheme] = useState<Theme>(checkDefaultTheme());
   const user = {
     name: "John",
   };
@@ -30,9 +30,12 @@ const DashboardProvider = ({ children }: PropsWithChildren) => {
 
       return "dark";
     });
-
-    document.body.classList.toggle("dark-theme", theme === "light");
   };
+
+  useEffect(() => {
+    saveValueToLocalStorage("theme", theme);
+    document.body.classList.toggle("dark-theme", theme === "dark");
+  }, [theme]);
 
   const toggleSidebar = () => {
     setShowSidebar((showSidebar) => !showSidebar);

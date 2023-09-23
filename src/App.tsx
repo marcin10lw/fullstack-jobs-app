@@ -1,5 +1,7 @@
+import { useEffect } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
+import { checkDefaultTheme } from "./utils/checkDefaultTheme";
 import {
   HomeLayout,
   Landing,
@@ -67,7 +69,13 @@ const router = createBrowserRouter([
   },
 ]);
 
+const isDarkTheme = checkDefaultTheme() === "dark";
+
 const App = () => {
+  useEffect(() => {
+    document.body.classList.toggle("dark-theme", isDarkTheme);
+  }, []);
+
   return <RouterProvider router={router} />;
 };
 export default App;
