@@ -147,6 +147,11 @@ h5 {
 }
  */
 
+button {
+  display: block;
+  padding: 0;
+}
+
 .text {
   margin-bottom: 1.5rem;
   max-width: 40em;
