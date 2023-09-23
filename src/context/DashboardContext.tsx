@@ -30,6 +30,8 @@ const DashboardProvider = ({ children }: PropsWithChildren) => {
 
       return "dark";
     });
+
+    document.body.classList.toggle("dark-theme", theme === "light");
   };
 
   const toggleSidebar = () => {
