@@ -26,7 +26,7 @@ export const Wrapper = styled.aside`
     }
 
     header {
-      height: 6rem;
+      height: var(--nav-height);
       display: flex;
       align-items: center;
       padding-left: 2.5rem;
