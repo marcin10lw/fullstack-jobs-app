@@ -9,20 +9,23 @@ export const Wrapper = styled.nav`
   background: var(--background-secondary-color);
 
   .nav-center {
-    display: flex;
     width: 90vw;
+    display: flex;
     align-items: center;
     justify-content: space-between;
   }
 
   .toggle-btn {
-    background: transparent;
-    border-color: transparent;
+    background-color: transparent;
+    padding: 0;
+    border: none;
     font-size: 1.75rem;
     color: var(--primary-500);
     cursor: pointer;
-    display: flex;
-    align-items: center;
+
+    svg {
+      display: block;
+    }
   }
 
   .logo-text {
@@ -33,6 +36,10 @@ export const Wrapper = styled.nav`
     display: flex;
     align-items: center;
     width: 100px;
+
+    img {
+      width: 100%;
+    }
   }
 
   .btn-container {
@@ -49,7 +56,9 @@ export const Wrapper = styled.nav`
     }
 
     .logo {
-      display: none;
+      img {
+        display: none;
+      }
     }
 
     .logo-text {
