@@ -2,11 +2,13 @@ import { PropsWithChildren, createContext, useState } from "react";
 
 import { User } from "src/types/user";
 
+type Theme = "light" | "dark";
+
 type DashboardState = {
   user: User;
   showSidebar: boolean;
-  isDarkTheme: boolean;
-  toggleDarkTheme: () => void;
+  theme: Theme;
+  toggleTheme: () => void;
   toggleSidebar: () => void;
   logoutUser: () => void;
 };
@@ -15,13 +17,19 @@ export const DashboardContext = createContext({} as DashboardState);
 
 const DashboardProvider = ({ children }: PropsWithChildren) => {
   const [showSidebar, setShowSidebar] = useState(false);
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const [theme, setTheme] = useState<Theme>("light");
   const user = {
     name: "John",
   };
 
-  const toggleDarkTheme = () => {
-    setIsDarkTheme((isDarkTheme) => !isDarkTheme);
+  const toggleTheme = () => {
+    setTheme((theme) => {
+      if (theme === "dark") {
+        return "light";
+      }
+
+      return "dark";
+    });
   };
 
   const toggleSidebar = () => {
@@ -34,9 +42,9 @@ const DashboardProvider = ({ children }: PropsWithChildren) => {
 
   const providerValue: DashboardState = {
     user,
-    isDarkTheme,
+    theme,
     showSidebar,
-    toggleDarkTheme,
+    toggleTheme,
     toggleSidebar,
     logoutUser,
   };
