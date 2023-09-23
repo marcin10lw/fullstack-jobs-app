@@ -46,6 +46,6 @@ export const Wrapper = styled.section`
     text-align: start;
     font-size: 14px;
     margin-top: 2px;
-    color: var(--red-dark);
+    color: var(--input-error);
   }
 `;

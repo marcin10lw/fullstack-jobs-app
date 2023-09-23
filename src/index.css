@@ -37,6 +37,7 @@ html {
   --black: #222;
   --white: #fff;
   --red-light: #f8d7da;
+  --input-error: #a82a2a;
   --red-dark: #842029;
   --green-light: #d1e7dd;
   --green-dark: #0f5132;
@@ -66,6 +67,7 @@ html {
   --dark-mode-text-color: #f0f0f0;
   --dark-mode-bg-secondary-color: #3f3f3f;
   --dark-mode-text-secondary-color: var(--grey-300);
+  --dark-mode-input-error: #f01717;
 
   --background-color: var(--grey-50);
   --text-color: var(--grey-900);
@@ -78,6 +80,7 @@ html {
   --background-color: var(--dark-mode-bg-color);
   --text-secondary-color: var(--dark-mode-text-secondary-color);
   --background-secondary-color: var(--dark-mode-bg-secondary-color);
+  --input-error: var(--dark-mode-input-error);
 }
 
 body {
@@ -270,7 +273,7 @@ button:disabled {
 }
 
 .form-input-error {
-  border: 1px solid var(--red-dark);
+  border: 1px solid var(--input-error);
 }
 
 .form-row {
