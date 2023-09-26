@@ -4,11 +4,13 @@ export const registerFormData = z.object({
   name: z
     .string()
     .trim()
-    .min(3, { message: "Name must be 3 or more characters" }),
+    .min(3, { message: "Name must be at least 3 characters" })
+    .max(30, { message: "Name must be less than 30 characters" }),
   lastName: z
     .string()
     .trim()
-    .min(3, { message: "Last Name must be 3 or more characters" }),
+    .min(2, { message: "Last Name must be at least 2 characters" })
+    .max(30, { message: "Last Name must be less than 30 characters" }),
   location: z.string().trim().min(1, { message: "Location is required" }),
   email: z.string().trim().email(),
   password: z
