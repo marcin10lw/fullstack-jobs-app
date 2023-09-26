@@ -10,8 +10,10 @@ import { Wrapper } from "src/assets/wrappers/RegisterAndLoginPage";
 import { Logo, FormRow } from "src/components";
 import { RegisterFormData, registerFormData } from "src/models/Register";
 
+type CustomAxiosError = AxiosError<{ msg?: string }>;
+
 const Register = () => {
-  const [error, setError] = useState<AxiosError | undefined>(undefined);
+  const [error, setError] = useState<CustomAxiosError | undefined>(undefined);
   const navigate = useNavigate();
 
   const {
@@ -24,7 +26,13 @@ const Register = () => {
   });
 
   const mutation = useMutation({
-    mutationFn: (formData: RegisterFormData) => {
+    mutationFn: async (formData: RegisterFormData) => {
+      await new Promise((resolve) =>
+        setTimeout(() => {
+          resolve("");
+        }, 1500)
+      );
+
       return customFetch.post("/auth/register", formData);
     },
     onSuccess: () => {
@@ -33,7 +41,7 @@ const Register = () => {
         reset();
       }, 5000);
     },
-    onError: (error: AxiosError) => {
+    onError: (error: CustomAxiosError) => {
       setError(error);
     },
   });
@@ -89,7 +97,7 @@ const Register = () => {
           type="submit"
           className="btn btn-block"
         >
-          Submit
+          {mutation.isLoading ? "Submitting..." : "Submit"}
         </button>
 
         <p>
@@ -106,10 +114,7 @@ const Register = () => {
         )}
 
         {mutation.isError && error && (
-          <p className="status-msg error-msg">
-            {error.response?.status === 400 && "invalid credentials"}
-            {error.response?.status === 404 && "could not register"}
-          </p>
+          <p className="status-msg error-msg">{error.response?.data.msg}</p>
         )}
       </form>
     </Wrapper>

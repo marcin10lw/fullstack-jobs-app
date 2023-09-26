@@ -36,7 +36,7 @@ export const Wrapper = styled.section`
     margin-top: 1rem;
 
     &:disabled {
-      pointer-events: stroke;
+      cursor: not-allowed;
     }
   }
 
