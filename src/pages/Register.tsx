@@ -27,7 +27,7 @@ const Register = () => {
       return customFetch.post("/auth/register", formData);
     },
     onSuccess: () => reset(),
-    onError: (error: AxiosError<{ msg: string | undefined }>) => {
+    onError: (error: AxiosError) => {
       setError(error);
     },
   });
