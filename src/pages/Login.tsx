@@ -1,27 +1,46 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
 
+import customFetch from "src/utils/customFetch";
+import { CustomAxiosError } from "src/types";
 import { Wrapper } from "src/assets/wrappers/RegisterAndLoginPage";
 import { FormRow, Logo } from "src/components";
 import { LoginFormData, loginFormData } from "src/models/Login";
 
-const defaultValues = {
-  email: "john_doe@gamil.com",
-  password: "secret123",
-};
-
 const Login = () => {
+  const [error, setError] = useState<CustomAxiosError | undefined>(undefined);
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<LoginFormData>({
-    defaultValues,
     resolver: zodResolver(loginFormData),
   });
 
-  const onFormSubmit = (formData: LoginFormData) => {};
+  const mutation = useMutation({
+    mutationFn: (formData: LoginFormData) => {
+      return customFetch.post("/auth/login", formData);
+    },
+    onSuccess: () => {
+      setTimeout(() => {
+        reset();
+        navigate("/dashboard");
+      }, 2000);
+    },
+    onError: (error: CustomAxiosError) => {
+      setError(error);
+    },
+  });
+
+  const onFormSubmit = (formData: LoginFormData) => {
+    mutation.mutate(formData);
+  };
 
   return (
     <Wrapper>
@@ -58,6 +77,16 @@ const Login = () => {
             Register
           </Link>
         </p>
+
+        {mutation.isSuccess && (
+          <p className="status-msg success-msg">
+            Login Successfully! <span>You will be redirected to dashboard</span>
+          </p>
+        )}
+
+        {mutation.isError && error && (
+          <p className="status-msg error-msg">{error.response?.data.msg}</p>
+        )}
       </form>
     </Wrapper>
   );

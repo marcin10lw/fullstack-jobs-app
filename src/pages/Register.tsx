@@ -3,14 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import { AxiosError } from "axios";
 
+import { CustomAxiosError } from "src/types";
 import customFetch from "src/utils/customFetch";
 import { Wrapper } from "src/assets/wrappers/RegisterAndLoginPage";
 import { Logo, FormRow } from "src/components";
 import { RegisterFormData, registerFormData } from "src/models/Register";
-
-type CustomAxiosError = AxiosError<{ msg?: string }>;
 
 const Register = () => {
   const [error, setError] = useState<CustomAxiosError | undefined>(undefined);
