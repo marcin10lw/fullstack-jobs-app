@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,7 +9,6 @@ import customFetch from "src/utils/customFetch";
 import { Wrapper } from "src/assets/wrappers/RegisterAndLoginPage";
 import { Logo, FormRow } from "src/components";
 import { RegisterFormData, registerFormData } from "src/models/Register";
-import { useState } from "react";
 
 const Register = () => {
   const [error, setError] = useState<AxiosError | undefined>(undefined);

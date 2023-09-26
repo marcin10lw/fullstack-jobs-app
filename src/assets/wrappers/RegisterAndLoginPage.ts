@@ -34,6 +34,10 @@ export const Wrapper = styled.section`
 
   .btn {
     margin-top: 1rem;
+
+    &:disabled {
+      pointer-events: stroke;
+    }
   }
 
   .member-btn {
