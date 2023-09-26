@@ -48,4 +48,18 @@ export const Wrapper = styled.section`
     margin-top: 2px;
     color: var(--input-error);
   }
+
+  .status-msg {
+    text-transform: capitalize;
+    font-weight: 600;
+    letter-spacing: var(--letter-spacing);
+  }
+
+  .error-msg {
+    color: var(--input-error);
+  }
+
+  .success-msg {
+    color: var(--green-success);
+  }
 `;
