@@ -10,14 +10,6 @@ import { Logo, FormRow } from "src/components";
 import { RegisterFormData, registerFormData } from "src/models/Register";
 import { useState } from "react";
 
-const defaultValues = {
-  name: "",
-  lastName: "",
-  location: "",
-  email: "",
-  password: "",
-};
-
 const Register = () => {
   const [error, setError] = useState<AxiosError | undefined>(undefined);
 
@@ -27,7 +19,6 @@ const Register = () => {
     reset,
     formState: { errors },
   } = useForm<RegisterFormData>({
-    defaultValues,
     resolver: zodResolver(registerFormData),
   });
 
