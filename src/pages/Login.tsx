@@ -28,8 +28,9 @@ const Login = () => {
       return customFetch.post("/auth/login", formData);
     },
     onSuccess: () => {
+      reset();
+
       setTimeout(() => {
-        reset();
         navigate("/dashboard");
       }, 2000);
     },
@@ -63,8 +64,12 @@ const Login = () => {
           type="password"
         />
 
-        <button type="submit" className="btn btn-block">
-          Submit
+        <button
+          disabled={mutation.isLoading}
+          type="submit"
+          className="btn btn-block"
+        >
+          {mutation.isLoading ? "Submitting..." : "Submit"}
         </button>
 
         <button type="button" className="btn btn-block">

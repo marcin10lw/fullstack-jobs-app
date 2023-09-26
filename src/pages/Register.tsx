@@ -34,9 +34,10 @@ const Register = () => {
       return customFetch.post("/auth/register", formData);
     },
     onSuccess: () => {
+      reset();
+
       setTimeout(() => {
         navigate("/login");
-        reset();
       }, 3500);
     },
     onError: (error: CustomAxiosError) => {
