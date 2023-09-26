@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
@@ -12,6 +12,7 @@ import { useState } from "react";
 
 const Register = () => {
   const [error, setError] = useState<AxiosError | undefined>(undefined);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -26,7 +27,12 @@ const Register = () => {
     mutationFn: (formData: RegisterFormData) => {
       return customFetch.post("/auth/register", formData);
     },
-    onSuccess: () => reset(),
+    onSuccess: () => {
+      setTimeout(() => {
+        navigate("/login");
+        reset();
+      }, 5000);
+    },
     onError: (error: AxiosError) => {
       setError(error);
     },
@@ -94,7 +100,9 @@ const Register = () => {
         </p>
 
         {mutation.isSuccess && (
-          <p className="status-msg success-msg">User Created!</p>
+          <p className="status-msg success-msg">
+            User Created! <span>You will be redirected to login page</span>
+          </p>
         )}
 
         {mutation.isError && error && (

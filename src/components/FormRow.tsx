@@ -21,14 +21,6 @@ const FormRow = ({ type, labelText, name, register, error }: FormRowProps) => {
           {labelText}
         </label>
         <div className="input-wrapper">
-          {type === "password" && (
-            <button
-              type="button"
-              onClick={() => setShowPassword((showPassword) => !showPassword)}
-            >
-              {showPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
-            </button>
-          )}
           <input
             {...register}
             type={
@@ -38,6 +30,14 @@ const FormRow = ({ type, labelText, name, register, error }: FormRowProps) => {
             className={`form-input ${error ? "form-input-error" : ""}`}
             required
           />
+          {type === "password" && (
+            <button
+              type="button"
+              onClick={() => setShowPassword((showPassword) => !showPassword)}
+            >
+              {showPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
+            </button>
+          )}
         </div>
         <p className="form-error">{error?.message}</p>
       </div>

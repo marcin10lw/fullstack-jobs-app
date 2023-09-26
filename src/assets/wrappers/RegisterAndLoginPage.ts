@@ -61,5 +61,9 @@ export const Wrapper = styled.section`
 
   .success-msg {
     color: var(--green-success);
+
+    span {
+      display: block;
+    }
   }
 `;
