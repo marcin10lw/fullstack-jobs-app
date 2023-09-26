@@ -30,7 +30,7 @@ const Register = () => {
       await new Promise((resolve) =>
         setTimeout(() => {
           resolve("");
-        }, 1500)
+        }, 1000)
       );
 
       return customFetch.post("/auth/register", formData);
@@ -39,7 +39,7 @@ const Register = () => {
       setTimeout(() => {
         navigate("/login");
         reset();
-      }, 5000);
+      }, 3500);
     },
     onError: (error: CustomAxiosError) => {
       setError(error);
