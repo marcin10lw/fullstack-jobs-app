@@ -5,12 +5,10 @@ import { checkDefaultTheme } from "src/utils/checkDefaultTheme";
 import { saveValueToLocalStorage } from "src/utils/localStorage";
 
 type DashboardState = {
-  user: User;
   showSidebar: boolean;
   theme: Theme;
   toggleTheme: () => void;
   toggleSidebar: () => void;
-  logoutUser: () => void;
 };
 
 export const DashboardContext = createContext({} as DashboardState);
@@ -18,9 +16,6 @@ export const DashboardContext = createContext({} as DashboardState);
 const DashboardProvider = ({ children }: PropsWithChildren) => {
   const [showSidebar, setShowSidebar] = useState(false);
   const [theme, setTheme] = useState<Theme>(checkDefaultTheme());
-  const user = {
-    name: "John",
-  };
 
   const toggleTheme = () => {
     setTheme((theme) => {
@@ -46,12 +41,10 @@ const DashboardProvider = ({ children }: PropsWithChildren) => {
   };
 
   const providerValue: DashboardState = {
-    user,
     theme,
     showSidebar,
     toggleTheme,
     toggleSidebar,
-    logoutUser,
   };
 
   return (

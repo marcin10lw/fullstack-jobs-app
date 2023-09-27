@@ -1,12 +1,17 @@
 import { FaAlignLeft } from "react-icons/fa";
 
+import { User } from "src/types";
 import { Wrapper } from "src/assets/wrappers/Navbar";
 import useDashboardContext from "src/hooks/useDashboardContext";
 import Logo from "./Logo";
 import LogoutContainer from "./LogoutContainer";
 import ThemeToggle from "./ThemeToggle";
 
-const Navbar = () => {
+type NavbarProps = {
+  user: User;
+};
+
+const Navbar = ({ user }: NavbarProps) => {
   const { toggleSidebar } = useDashboardContext();
 
   return (
@@ -21,7 +26,7 @@ const Navbar = () => {
         </div>
         <div className="btn-container">
           <ThemeToggle />
-          <LogoutContainer />
+          <LogoutContainer user={user} />
         </div>
       </div>
     </Wrapper>
