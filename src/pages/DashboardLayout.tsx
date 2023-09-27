@@ -1,11 +1,13 @@
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet, useOutletContext } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
 import { User } from "src/types";
 import customFetch from "src/utils/customFetch";
+import DashboardProvider from "src/context/DashboardContext";
 import { Wrapper } from "src/assets/wrappers/Dashboard";
 import { BigSidebar, Navbar, SmallSidebar } from "src/components";
-import DashboardProvider from "src/context/DashboardContext";
+
+type ContextType = { user: User };
 
 const DashboardLayout = () => {
   const {
@@ -15,9 +17,7 @@ const DashboardLayout = () => {
   } = useQuery({
     queryKey: ["currentUser"],
     queryFn: async (): Promise<User> => {
-      const { data } = await customFetch.get("/users/current-user", {
-        withCredentials: true,
-      });
+      const { data } = await customFetch.get("/users/current-user");
 
       return data.user;
     },
@@ -37,7 +37,7 @@ const DashboardLayout = () => {
               <Navbar user={user} />
 
               <div className="dashboard-page">
-                <Outlet />
+                <Outlet context={{ user } satisfies ContextType} />
               </div>
             </div>
           </main>
@@ -46,4 +46,9 @@ const DashboardLayout = () => {
     );
   }
 };
+
 export default DashboardLayout;
+
+export const useUser = () => {
+  return useOutletContext<ContextType>();
+};
