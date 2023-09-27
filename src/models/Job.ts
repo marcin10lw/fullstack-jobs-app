@@ -7,13 +7,13 @@ export const jobSchema = z.object({
   company: z
     .string()
     .trim()
-    .min(2, { message: "company must be at least 2 characters long" })
-    .max(30, { message: "company must be no more than 30 characters" }),
+    .min(2, { message: "must be 2 or more characters" })
+    .max(30, { message: "no more than 30 characters" }),
   position: z
     .string()
     .trim()
     .min(1, { message: "position is required" })
-    .max(30, { message: "position must be no more than 30 characters" }),
+    .max(30, { message: "no more than 30 characters" }),
   jobLocation: z
     .string()
     .trim()
