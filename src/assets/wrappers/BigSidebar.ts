@@ -17,7 +17,7 @@ export const Wrapper = styled.aside`
     }
 
     .content {
-      position: sticky;
+      position: fixed;
       top: 0;
     }
 
