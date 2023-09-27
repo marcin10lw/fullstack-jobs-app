@@ -22,6 +22,7 @@ const DashboardLayout = () => {
       return data.user;
     },
     retry: false,
+    cacheTime: 0,
   });
 
   if (isError) return <Navigate to="/login" />;
