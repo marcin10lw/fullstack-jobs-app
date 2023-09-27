@@ -8,7 +8,12 @@ import customFetch from "src/utils/customFetch";
 import { useUser } from "./DashboardLayout";
 import { Wrapper } from "src/assets/wrappers/DashboardFormPage";
 import { FormRow, FormRowSelect } from "src/components";
-import { Job, jobSchema, jobStatusItems, jobTypeItems } from "src/models/Job";
+import {
+  InferJob,
+  jobSchema,
+  jobStatusItems,
+  jobTypeItems,
+} from "src/models/Job";
 
 const AddJob = () => {
   const { user } = useUser();
@@ -19,7 +24,7 @@ const AddJob = () => {
     formState: { errors },
     handleSubmit,
     reset,
-  } = useForm<Job>({
+  } = useForm<InferJob>({
     defaultValues: {
       company: "",
       position: "",
@@ -33,7 +38,7 @@ const AddJob = () => {
   const qc = useQueryClient();
 
   const { mutate, isLoading } = useMutation({
-    mutationFn: (job: Job) => customFetch.post("/jobs", job),
+    mutationFn: (job: InferJob) => customFetch.post("/jobs", job),
     onSuccess: async () => {
       await qc.invalidateQueries(["jobs"]);
       reset();
@@ -45,7 +50,7 @@ const AddJob = () => {
     },
   });
 
-  const onFormSubmit = (job: Job) => {
+  const onFormSubmit = (job: InferJob) => {
     mutate(job);
   };
 
