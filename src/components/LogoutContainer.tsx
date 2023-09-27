@@ -46,7 +46,12 @@ const LogoutContainer = ({ user }: LogoutContainerProps) => {
 
       {showLogout && (
         <div className="dropdown">
-          <button onClick={logoutUser} type="button" className="dropdown-btn">
+          <button
+            onClick={logoutUser}
+            disabled={isLoading}
+            type="button"
+            className="dropdown-btn"
+          >
             logout
           </button>
         </div>
