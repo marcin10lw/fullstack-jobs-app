@@ -26,4 +26,10 @@ export const jobSchema = z.object({
   }),
 });
 
-export type Job = z.infer<typeof jobSchema>;
+export type InferJob = z.infer<typeof jobSchema>;
+
+export type Job = InferJob & {
+  createdAt: string;
+  createdBy: string;
+  _id: string;
+};
