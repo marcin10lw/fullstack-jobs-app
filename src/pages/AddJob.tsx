@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
@@ -11,6 +12,7 @@ import { Job, jobSchema, jobStatusItems, jobTypeItems } from "src/models/Job";
 
 const AddJob = () => {
   const { user } = useUser();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -33,6 +35,7 @@ const AddJob = () => {
     onSuccess: () => {
       reset();
       toast.success("Job added");
+      navigate("./all-jobs");
     },
     onError: () => {
       toast.error("Could not add a job");
