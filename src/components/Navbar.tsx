@@ -3,9 +3,7 @@ import { FaAlignLeft } from "react-icons/fa";
 import { User } from "src/types";
 import { Wrapper } from "src/assets/wrappers/Navbar";
 import useDashboardContext from "src/hooks/useDashboardContext";
-import Logo from "./Logo";
-import LogoutContainer from "./LogoutContainer";
-import ThemeToggle from "./ThemeToggle";
+import { Logo, LogoutContainer, ThemeToggle } from "src/components";
 
 type NavbarProps = {
   user: User;
