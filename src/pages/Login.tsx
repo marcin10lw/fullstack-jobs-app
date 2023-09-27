@@ -26,9 +26,7 @@ const Login = () => {
 
   const mutation = useMutation({
     mutationFn: (formData: LoginFormData) => {
-      return customFetch.post("/auth/login", formData, {
-        withCredentials: true,
-      });
+      return customFetch.post("/auth/login", formData);
     },
     onSuccess: () => {
       reset();
