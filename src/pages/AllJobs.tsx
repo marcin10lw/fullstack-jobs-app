@@ -21,8 +21,6 @@ const AllJobs = () => {
   if (isLoading) return <h4>Loading...</h4>;
 
   if (isSuccess) {
-    console.log(jobs);
-
     return (
       <>
         <SearchContainer />

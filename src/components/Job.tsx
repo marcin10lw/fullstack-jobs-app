@@ -41,13 +41,12 @@ const Job = ({ job }: JobProps) => {
       <div className="content">
         <div className="content-center">
           <JobInfo icon={<FaLocationArrow />} text={job.jobLocation} />
-          <JobInfo icon={<FaCalendar />} text={job.jobType} />
-          <JobInfo icon={<FaBriefcase />} text={job.jobStatus} />
-
+          <JobInfo icon={<FaCalendar />} text={date} />
+          <JobInfo icon={<FaBriefcase />} text={job.jobType} />
           <div className={`status ${job.jobStatus}`}>{job.jobStatus}</div>
         </div>
         <footer className="actions">
-          <Link to="" className="btn edit-btn">
+          <Link to={`../edit-job/${job._id}`} className="btn edit-btn">
             Edit
           </Link>
           <form>
