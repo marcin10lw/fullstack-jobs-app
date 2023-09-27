@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 import customFetch from "src/utils/customFetch";
 import { CustomAxiosError } from "src/types";
@@ -25,14 +26,17 @@ const Login = () => {
 
   const mutation = useMutation({
     mutationFn: (formData: LoginFormData) => {
-      return customFetch.post("/auth/login", formData);
+      return customFetch.post("/auth/login", formData, {
+        withCredentials: true,
+      });
     },
     onSuccess: () => {
       reset();
-
-      setTimeout(() => {
-        navigate("/dashboard");
-      }, 2000);
+      navigate("/dashboard");
+      toast.success("Login successful", {
+        position: "top-center",
+        autoClose: 2000,
+      });
     },
     onError: (error: CustomAxiosError) => {
       setError(error);
@@ -83,11 +87,11 @@ const Login = () => {
           </Link>
         </p>
 
-        {mutation.isSuccess && (
+        {/* {mutation.isSuccess && (
           <p className="status-msg success-msg">
             Login Successfully! <span>You will be redirected to dashboard</span>
           </p>
-        )}
+        )} */}
 
         {mutation.isError && error && (
           <p className="status-msg error-msg">{error.response?.data.msg}</p>
