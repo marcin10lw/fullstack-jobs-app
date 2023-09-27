@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
 
@@ -30,9 +30,12 @@ const AddJob = () => {
     resolver: zodResolver(jobSchema),
   });
 
+  const qc = useQueryClient();
+
   const { mutate, isLoading } = useMutation({
     mutationFn: (job: Job) => customFetch.post("/jobs", job),
-    onSuccess: () => {
+    onSuccess: async () => {
+      await qc.invalidateQueries(["jobs"]);
       reset();
       toast.success("Job added");
       navigate("./all-jobs");
