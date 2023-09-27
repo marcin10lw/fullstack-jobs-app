@@ -23,7 +23,7 @@ const LogoutContainer = ({ user }: LogoutContainerProps) => {
 
     try {
       await customFetch.get("/auth/logout");
-      navigate("/login");
+      navigate("/");
       toast.success("Logout successfully", { position: "top-center" });
       setIsLoading(false);
     } catch (error) {

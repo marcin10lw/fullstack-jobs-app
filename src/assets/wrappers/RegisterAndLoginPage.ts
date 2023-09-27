@@ -46,13 +46,6 @@ export const Wrapper = styled.section`
     margin-left: 0.25rem;
   }
 
-  .form-error {
-    text-align: start;
-    font-size: 14px;
-    margin-top: 2px;
-    color: var(--input-error);
-  }
-
   .status-msg {
     text-transform: capitalize;
     font-weight: 600;

@@ -85,12 +85,6 @@ const Login = () => {
           </Link>
         </p>
 
-        {/* {mutation.isSuccess && (
-          <p className="status-msg success-msg">
-            Login Successfully! <span>You will be redirected to dashboard</span>
-          </p>
-        )} */}
-
         {mutation.isError && error && (
           <p className="status-msg error-msg">{error.response?.data.msg}</p>
         )}
