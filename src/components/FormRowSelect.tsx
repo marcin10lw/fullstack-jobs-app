@@ -5,7 +5,7 @@ type FormRowSelectProps = {
   labelText: string;
   error: FieldError | undefined;
   register: UseFormRegisterReturn;
-  defaultValue: string;
+  defaultValue?: string;
   options: readonly string[];
 };
 

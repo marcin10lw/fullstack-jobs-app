@@ -84,7 +84,6 @@ const EditJobForm = ({ job, id }: EditJobFormProps) => {
           <FormRowSelect
             name="jobStatus"
             labelText="job status"
-            defaultValue={job.jobStatus}
             register={register("jobStatus")}
             error={errors.jobStatus}
             options={jobStatusItems}
@@ -92,7 +91,6 @@ const EditJobForm = ({ job, id }: EditJobFormProps) => {
           <FormRowSelect
             name="jobType"
             labelText="job type"
-            defaultValue={job.jobType}
             register={register("jobType")}
             error={errors.jobType}
             options={jobTypeItems}
