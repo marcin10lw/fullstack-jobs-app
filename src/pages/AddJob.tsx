@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import customFetch from "src/utils/customFetch";
 import { useUser } from "./DashboardLayout";
 import { Wrapper } from "src/assets/wrappers/DashboardFormPage";
-import { FormRow, FormRowSelect } from "src/components";
+import { FormRow, FormRowSelect, SubmitButton } from "src/components";
 import {
   InferJob,
   jobSchema,
@@ -96,13 +96,7 @@ const AddJob = () => {
             error={errors.jobType}
             options={jobTypeItems}
           />
-          <button
-            disabled={isLoading}
-            type="submit"
-            className="btn btn-block form-btn"
-          >
-            {isLoading ? "Submitting" : "Submit"}
-          </button>
+          <SubmitButton isLoading={isLoading} />
         </div>
       </form>
     </Wrapper>

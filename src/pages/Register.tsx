@@ -7,7 +7,7 @@ import { useMutation } from "@tanstack/react-query";
 import { CustomAxiosError } from "src/types";
 import customFetch from "src/utils/customFetch";
 import { Wrapper } from "src/assets/wrappers/RegisterAndLoginPage";
-import { Logo, FormRow } from "src/components";
+import { Logo, FormRow, SubmitButton } from "src/components";
 import { RegisterFormData, registerFormData } from "src/models/Register";
 
 const Register = () => {
@@ -91,13 +91,7 @@ const Register = () => {
           type="password"
         />
 
-        <button
-          disabled={mutation.isLoading}
-          type="submit"
-          className="btn btn-block"
-        >
-          {mutation.isLoading ? "Submitting..." : "Submit"}
-        </button>
+        <SubmitButton isLoading={mutation.isLoading} />
 
         <p>
           Already a member?{" "}

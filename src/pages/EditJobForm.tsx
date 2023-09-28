@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
 
 import { Wrapper } from "src/assets/wrappers/DashboardFormPage";
-import { FormRow, FormRowSelect } from "src/components";
+import { FormRow, FormRowSelect, SubmitButton } from "src/components";
 import {
   InferJob,
   Job as JobType,
@@ -96,13 +96,7 @@ const EditJobForm = ({ job, id }: EditJobFormProps) => {
             options={jobTypeItems}
           />
 
-          <button
-            disabled={isLoading}
-            type="submit"
-            className="btn btn-block form-btn"
-          >
-            {isLoading ? "Submitting" : "Submit"}
-          </button>
+          <SubmitButton isLoading={isLoading} />
         </div>
       </form>
     </Wrapper>

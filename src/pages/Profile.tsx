@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { useUser } from "./DashboardLayout";
 import { UpdatedUser, updateUserSchema } from "src/models/User";
 import { Wrapper } from "src/assets/wrappers/DashboardFormPage";
-import { FormRow } from "src/components";
+import { FormRow, SubmitButton } from "src/components";
 import customFetch from "src/utils/customFetch";
 
 const Profile = () => {
@@ -126,13 +126,7 @@ const Profile = () => {
             error={errors.location}
           />
 
-          <button
-            disabled={isLoading}
-            type="submit"
-            className="btn btn-block form-btn"
-          >
-            {isLoading ? "Submitting" : "Submit"}
-          </button>
+          <SubmitButton isLoading={isLoading} />
         </div>
       </form>
     </Wrapper>

@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import customFetch from "src/utils/customFetch";
 import { CustomAxiosError } from "src/types";
 import { Wrapper } from "src/assets/wrappers/RegisterAndLoginPage";
-import { FormRow, Logo } from "src/components";
+import { FormRow, Logo, SubmitButton } from "src/components";
 import { LoginFormData, loginFormData } from "src/models/Login";
 
 const Login = () => {
@@ -66,13 +66,7 @@ const Login = () => {
           type="password"
         />
 
-        <button
-          disabled={mutation.isLoading}
-          type="submit"
-          className="btn btn-block"
-        >
-          {mutation.isLoading ? "Submitting..." : "Submit"}
-        </button>
+        <SubmitButton isLoading={mutation.isLoading} />
 
         <button type="button" className="btn btn-block">
           explore the app
