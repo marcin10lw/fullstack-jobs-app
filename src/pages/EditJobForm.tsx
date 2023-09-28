@@ -96,7 +96,7 @@ const EditJobForm = ({ job, id }: EditJobFormProps) => {
             options={jobTypeItems}
           />
 
-          <SubmitButton isLoading={isLoading} />
+          <SubmitButton isLoading={isLoading} isFormBtn />
         </div>
       </form>
     </Wrapper>

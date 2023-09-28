@@ -96,7 +96,7 @@ const AddJob = () => {
             error={errors.jobType}
             options={jobTypeItems}
           />
-          <SubmitButton isLoading={isLoading} />
+          <SubmitButton isLoading={isLoading} isFormBtn />
         </div>
       </form>
     </Wrapper>

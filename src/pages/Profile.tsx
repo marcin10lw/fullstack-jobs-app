@@ -126,7 +126,7 @@ const Profile = () => {
             error={errors.location}
           />
 
-          <SubmitButton isLoading={isLoading} />
+          <SubmitButton isLoading={isLoading} isFormBtn />
         </div>
       </form>
     </Wrapper>
