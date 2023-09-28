@@ -39,7 +39,11 @@ const LogoutContainer = ({ user }: LogoutContainerProps) => {
         type="button"
         className="btn logout-btn"
       >
-        <FaUserCircle />
+        {user.avatar ? (
+          <img src={user.avatar} alt="user avatar" className="image" />
+        ) : (
+          <FaUserCircle />
+        )}
         {user.name}
         <FaCaretDown />
       </button>
