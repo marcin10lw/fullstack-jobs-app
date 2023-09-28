@@ -28,8 +28,6 @@ const DashboardLayout = () => {
   if (isError) return <Navigate to="/login" />;
 
   if (isSuccess) {
-    console.log(user);
-
     return (
       <DashboardProvider>
         <Wrapper>

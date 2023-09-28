@@ -16,6 +16,7 @@ const AllJobs = () => {
       const { data } = await customFetch.get("/jobs");
       return data.jobs;
     },
+    keepPreviousData: true,
   });
 
   if (isLoading) return <h4>Loading...</h4>;
