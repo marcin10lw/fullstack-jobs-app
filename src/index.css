@@ -273,6 +273,13 @@ button:disabled {
   height: 35px;
 }
 
+.form-error {
+  text-align: start;
+  font-size: 14px;
+  margin-top: 4px;
+  color: var(--input-error);
+}
+
 .form-input-error {
   border: 1px solid var(--input-error);
 }

@@ -19,11 +19,4 @@ export const Wrapper = styled.div`
       display: block;
     }
   }
-
-  .form-error {
-    text-align: start;
-    font-size: 14px;
-    margin-top: 4px;
-    color: var(--input-error);
-  }
 `;
