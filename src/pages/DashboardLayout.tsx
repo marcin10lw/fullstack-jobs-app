@@ -15,7 +15,7 @@ const DashboardLayout = () => {
     isError,
     isSuccess,
   } = useQuery({
-    queryKey: ["currentUser"],
+    queryKey: ["user"],
     queryFn: async (): Promise<User> => {
       const { data } = await customFetch.get("/users/current-user");
 
