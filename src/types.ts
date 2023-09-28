@@ -14,4 +14,6 @@ export type User = {
   location: string;
   role: UserRole;
   _id: string;
+  avatar?: string;
+  avatarPublicId?: string;
 };

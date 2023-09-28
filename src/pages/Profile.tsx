@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { useUser } from "./DashboardLayout";
 import { UpdatedUser, updateUserSchema } from "src/models/User";
 import { Wrapper } from "src/assets/wrappers/DashboardFormPage";
-import { FormRow, FormRowSelect } from "src/components";
+import { FormRow } from "src/components";
 import customFetch from "src/utils/customFetch";
 
 const Profile = () => {
@@ -47,6 +47,10 @@ const Profile = () => {
     userEntries.forEach(([key, value]) => {
       formData.append(key, value);
     });
+
+    if (!user.avatar) {
+      formData.delete("avatar");
+    }
 
     mutate(formData);
   };
