@@ -14,6 +14,8 @@ import {
   jobTypeItems,
 } from "src/models/Job";
 import customFetch from "src/utils/customFetch";
+import { CustomAxiosError } from "src/types";
+import errorMessage from "src/utils/errorMessage";
 
 type EditJobFormProps = {
   job: JobType;
@@ -46,8 +48,8 @@ const EditJobForm = ({ job, id }: EditJobFormProps) => {
       navigate("../all-jobs");
       toast.success("Task updated");
     },
-    onError: () => {
-      toast.error("Could not update job");
+    onError: (error: CustomAxiosError) => {
+      errorMessage(error, "Could not update job");
     },
   });
 

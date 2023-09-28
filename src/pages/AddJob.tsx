@@ -14,6 +14,8 @@ import {
   jobStatusItems,
   jobTypeItems,
 } from "src/models/Job";
+import { CustomAxiosError } from "src/types";
+import errorMessage from "src/utils/errorMessage";
 
 const AddJob = () => {
   const { user } = useUser();
@@ -45,8 +47,8 @@ const AddJob = () => {
       toast.success("Job added");
       navigate("./all-jobs");
     },
-    onError: () => {
-      toast.error("Could not add a job");
+    onError: (error: CustomAxiosError) => {
+      errorMessage(error, "Could not find this job");
     },
   });
 

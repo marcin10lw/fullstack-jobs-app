@@ -8,6 +8,8 @@ import { UpdatedUser, updateUserSchema } from "src/models/User";
 import { Wrapper } from "src/assets/wrappers/DashboardFormPage";
 import { FormRow, SubmitButton } from "src/components";
 import customFetch from "src/utils/customFetch";
+import { CustomAxiosError } from "src/types";
+import errorMessage from "src/utils/errorMessage";
 
 const Profile = () => {
   const { user } = useUser();
@@ -20,8 +22,8 @@ const Profile = () => {
       qc.invalidateQueries(["user"]);
       toast.success("User updated!");
     },
-    onError: () => {
-      toast.error("Could not update user");
+    onError: (error: CustomAxiosError) => {
+      errorMessage(error, "Could not update user");
     },
   });
 

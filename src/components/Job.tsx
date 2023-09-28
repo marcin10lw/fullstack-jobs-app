@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { FaLocationArrow, FaBriefcase, FaCalendar } from "react-icons/fa";
-import { IconType } from "react-icons";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 dayjs.extend(advancedFormat);
@@ -10,6 +9,8 @@ import { Wrapper, JobInfoWrapper } from "src/assets/wrappers/Job";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import customFetch from "src/utils/customFetch";
 import { toast } from "react-toastify";
+import { CustomAxiosError } from "src/types";
+import errorMessage from "src/utils/errorMessage";
 
 type JobInfoProps = {
   icon: JSX.Element;
@@ -39,8 +40,8 @@ const Job = ({ job }: JobProps) => {
       await qc.invalidateQueries(["jobs"]);
       toast.success("Job deleted");
     },
-    onError: () => {
-      toast.error("Could not delete this job");
+    onError: (error: CustomAxiosError) => {
+      errorMessage(error, "Could not update user");
     },
   });
 
