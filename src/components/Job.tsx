@@ -7,6 +7,9 @@ dayjs.extend(advancedFormat);
 
 import { Job as JobType } from "src/models/Job";
 import { Wrapper, JobInfoWrapper } from "src/assets/wrappers/Job";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import customFetch from "src/utils/customFetch";
+import { toast } from "react-toastify";
 
 type JobInfoProps = {
   icon: JSX.Element;
@@ -28,6 +31,18 @@ type JobProps = {
 
 const Job = ({ job }: JobProps) => {
   const date = dayjs(job.createdAt).format("MMM Do, YYYY");
+  const qc = useQueryClient();
+
+  const { isLoading, mutate } = useMutation({
+    mutationFn: () => customFetch.delete(`/jobs/${job._id}`),
+    onSuccess: async () => {
+      await qc.invalidateQueries(["jobs"]);
+      toast.success("Job deleted");
+    },
+    onError: () => {
+      toast.error("Could not delete this job");
+    },
+  });
 
   return (
     <Wrapper>
@@ -49,8 +64,15 @@ const Job = ({ job }: JobProps) => {
           <Link to={`../edit-job/${job._id}`} className="btn edit-btn">
             Edit
           </Link>
-          <form>
-            <button className="btn delete-btn">Delete</button>
+          <form
+            onSubmit={(event) => {
+              event.preventDefault();
+              mutate();
+            }}
+          >
+            <button disabled={isLoading} className="btn delete-btn">
+              Delete
+            </button>
           </form>
         </footer>
       </div>
