@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
 
@@ -14,7 +14,7 @@ const Profile = () => {
   const qc = useQueryClient();
 
   const { mutate, isLoading } = useMutation({
-    mutationFn: (user: UpdatedUser) =>
+    mutationFn: (user: FormData) =>
       customFetch.patch("/users/update-user", user),
     onSuccess: () => {
       qc.invalidateQueries(["user"]);
@@ -29,6 +29,7 @@ const Profile = () => {
     register,
     formState: { errors },
     handleSubmit,
+    control,
   } = useForm<UpdatedUser>({
     defaultValues: {
       name: user.name,
@@ -40,26 +41,57 @@ const Profile = () => {
   });
 
   const onFormSubmit = (user: UpdatedUser) => {
-    mutate(user);
+    const formData = new FormData();
+    const userEntries = Object.entries(user);
+
+    userEntries.forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+
+    mutate(formData);
   };
 
   return (
     <Wrapper>
-      <form className="form" onSubmit={handleSubmit(onFormSubmit)} noValidate>
-        <h4 className="form-title">update user</h4>
+      <form
+        className="form"
+        onSubmit={handleSubmit(onFormSubmit)}
+        noValidate
+        encType="multipart/form-data"
+      >
+        <h4 className="form-title">profile</h4>
+
         <div className="form-center">
-          <div className="form-row">
-            <label htmlFor="image" className="form-label">
-              Select image (max 0.5 MB)
-            </label>
-            <input
-              type="file"
-              id="image"
-              name="avatar"
-              className="form-input"
-              accept="image/*"
-            />
-          </div>
+          <Controller
+            control={control}
+            name={"avatar"}
+            render={({ field }) => {
+              return (
+                <div className="form-row">
+                  <label htmlFor="avatar" className="form-label">
+                    Select Image (max 0.5 MB)
+                  </label>
+                  <div className="input-wrapper">
+                    <input
+                      onChange={({ target }) => {
+                        if (target.files) {
+                          field.onChange(target.files[0]);
+                        }
+                      }}
+                      type="file"
+                      id="avatar"
+                      className={`form-input ${
+                        errors.avatar ? "form-input-error" : ""
+                      }`}
+                    />
+                  </div>
+                  {errors.avatar && (
+                    <p className="form-error">{errors.avatar.message}</p>
+                  )}
+                </div>
+              );
+            }}
+          />
 
           <FormRow
             type="text"
