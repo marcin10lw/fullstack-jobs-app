@@ -19,7 +19,6 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginFormData),
   });
@@ -29,12 +28,7 @@ const Login = () => {
       return customFetch.post("/auth/login", formData);
     },
     onSuccess: () => {
-      reset();
       navigate("/dashboard");
-      toast.success("Login successful", {
-        position: "top-center",
-        autoClose: 2000,
-      });
     },
     onError: (error: CustomAxiosError) => {
       setError(error);
@@ -42,7 +36,30 @@ const Login = () => {
   });
 
   const onFormSubmit = (formData: LoginFormData) => {
-    mutation.mutate(formData);
+    mutation.mutate(formData, {
+      onSuccess: () => {
+        toast.success("Login successful", {
+          position: "top-center",
+          autoClose: 2000,
+        });
+      },
+    });
+  };
+
+  const onLoginDemo = () => {
+    const demoCredentials = {
+      email: "test2137@gmail.com",
+      password: "test1234!",
+    };
+
+    mutation.mutate(demoCredentials, {
+      onSuccess: () => {
+        toast.success("Have fun!", {
+          position: "top-center",
+          autoClose: 2000,
+        });
+      },
+    });
   };
 
   return (
@@ -68,7 +85,7 @@ const Login = () => {
 
         <SubmitButton isLoading={mutation.isLoading} />
 
-        <button type="button" className="btn btn-block">
+        <button onClick={onLoginDemo} type="button" className="btn btn-block">
           explore the app
         </button>
 
