@@ -3,8 +3,13 @@ import { FaTimes } from "react-icons/fa";
 import useDashboardContext from "src/hooks/useDashboardContext";
 import { Wrapper } from "src/assets/wrappers/SmallSidebar";
 import { Logo, NavLinks } from "src/components";
+import { UserRole } from "src/types";
 
-const SmallSidebar = () => {
+type SmallSidebarProps = {
+  userRole: UserRole;
+};
+
+const SmallSidebar = ({ userRole }: SmallSidebarProps) => {
   const { showSidebar, toggleSidebar } = useDashboardContext();
 
   return (
@@ -17,7 +22,7 @@ const SmallSidebar = () => {
           <header>
             <Logo />
           </header>
-          <NavLinks />
+          <NavLinks userRole={userRole} />
         </div>
       </div>
     </Wrapper>

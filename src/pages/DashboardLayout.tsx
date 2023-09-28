@@ -28,12 +28,14 @@ const DashboardLayout = () => {
   if (isError) return <Navigate to="/login" />;
 
   if (isSuccess) {
+    console.log(user);
+
     return (
       <DashboardProvider>
         <Wrapper>
           <main className="dashboard">
-            <SmallSidebar />
-            <BigSidebar />
+            <SmallSidebar userRole={user.role} />
+            <BigSidebar userRole={user.role} />
             <div>
               <Navbar user={user} />
 
