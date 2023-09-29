@@ -8,7 +8,8 @@ type WrapperProps = {
 export const Wrapper = styled.article<WrapperProps>`
   padding: 2rem;
   background-color: var(--background-secondary-color);
-  border-bottom: 5px solid ${({ bcg }) => bcg};
+  border-bottom: 5px solid ${({ color }) => color};
+  border-radius: var(--border-radius);
 
   header {
     display: flex;
