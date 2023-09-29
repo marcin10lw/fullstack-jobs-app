@@ -17,3 +17,19 @@ export type User = {
   avatar?: string;
   avatarPublicId?: string;
 };
+
+export type DefaultStats = {
+  pending: number;
+  interview: number;
+  declined: number;
+};
+
+export type MonthlyApplications = {
+  count: number;
+  date: string;
+}[];
+
+export type ApiStatsResponse = {
+  defaultStats: DefaultStats;
+  monthlyApplications: MonthlyApplications;
+};
