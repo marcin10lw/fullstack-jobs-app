@@ -2,16 +2,25 @@ import { useState } from "react";
 import { FieldError, UseFormRegisterReturn } from "react-hook-form";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { Wrapper } from "src/assets/wrappers/FormRow";
+import { SearchOnChange } from "src/types";
 
 type FormRowProps = {
   type: string;
   name: string;
   labelText: string;
-  error: FieldError | undefined;
-  register: UseFormRegisterReturn;
+  error?: FieldError;
+  register?: UseFormRegisterReturn;
+  onInputChange?: (event: SearchOnChange) => void;
 };
 
-const FormRow = ({ type, labelText, name, register, error }: FormRowProps) => {
+const FormRow = ({
+  type,
+  labelText,
+  name,
+  register,
+  error,
+  onInputChange,
+}: FormRowProps) => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -22,13 +31,14 @@ const FormRow = ({ type, labelText, name, register, error }: FormRowProps) => {
         </label>
         <div className="input-wrapper">
           <input
+            name={name}
             {...register}
             type={
               type === "password" ? (showPassword ? "text" : "password") : type
             }
             id={name}
             className={`form-input ${error ? "form-input-error" : ""}`}
-            required
+            onChange={register ? undefined : onInputChange}
           />
           {type === "password" && (
             <button
