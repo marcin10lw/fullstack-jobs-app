@@ -22,6 +22,7 @@ const SearchContainer = ({
   const onInputChange = (event: SearchOnChange) => {
     const { name, value } = event.target;
 
+    searchParams.set("page", "1");
     searchParams.set(name, value);
     setSearchParams(searchParams);
   };
