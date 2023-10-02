@@ -6,9 +6,19 @@ import { Job } from "src/models/Job";
 import SearchContainer from "src/components/SearchContainer";
 import JobsContainer from "src/components/JobsContainer";
 import { useEffect } from "react";
+import { SearchParamsObject } from "src/types";
+
+const searchParamsDefaultValues: SearchParamsObject = {
+  jobStatus: "all",
+  jobType: "all",
+  search: "",
+  sort: "newest",
+};
 
 const AllJobs = () => {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams(
+    searchParamsDefaultValues
+  );
 
   const {
     data: jobs,
@@ -28,7 +38,13 @@ const AllJobs = () => {
   });
 
   useEffect(() => {
-    refetch();
+    const timeoutId = setTimeout(() => {
+      refetch();
+    }, 300);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, [searchParams]);
 
   if (isLoading) return <h4>Loading...</h4>;
@@ -36,7 +52,11 @@ const AllJobs = () => {
   if (isSuccess) {
     return (
       <>
-        <SearchContainer />
+        <SearchContainer
+          searchParams={searchParams}
+          setSearchParams={setSearchParams}
+          searchParamsDefaultValues={searchParamsDefaultValues}
+        />
         <JobsContainer jobs={jobs} />
       </>
     );
