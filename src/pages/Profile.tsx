@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
+import { AiOutlinePlus } from "react-icons/ai";
 
 import { useUser } from "./DashboardLayout";
 import { UpdatedUser, updateUserSchema } from "src/models/User";
@@ -67,38 +68,48 @@ const Profile = () => {
       >
         <h4 className="form-title">profile</h4>
 
-        <div className="form-center">
-          <Controller
-            control={control}
-            name={"avatar"}
-            render={({ field }) => {
-              return (
-                <div className="form-row">
-                  <label htmlFor="avatar" className="form-label">
-                    Select Image (max 0.5 MB)
-                  </label>
-                  <div className="input-wrapper">
-                    <input
-                      onChange={({ target }) => {
-                        if (target.files) {
-                          field.onChange(target.files[0]);
-                        }
-                      }}
-                      type="file"
-                      id="avatar"
-                      className={`form-input ${
-                        errors.avatar ? "form-input-error" : ""
-                      }`}
-                    />
-                  </div>
-                  {errors.avatar && (
-                    <p className="form-error">{errors.avatar.message}</p>
-                  )}
-                </div>
-              );
-            }}
-          />
+        <Controller
+          control={control}
+          name={"avatar"}
+          render={({ field }) => {
+            return (
+              <div className="avatar-container">
+                <label htmlFor="avatar" className="avatar-label">
+                  <img
+                    src={
+                      field.value && !errors.avatar
+                        ? URL.createObjectURL(field.value)
+                        : user.avatar
+                    }
+                    alt="user avatar"
+                  />
 
+                  <div className="avatar-overlay">
+                    <AiOutlinePlus />
+                  </div>
+                </label>
+
+                <input
+                  onChange={({ target }) => {
+                    if (target.files) {
+                      field.onChange(target.files[0]);
+                    }
+                  }}
+                  type="file"
+                  id="avatar"
+                  className="avatar-input"
+                />
+                {errors.avatar && (
+                  <p className="form-error avatar-info">
+                    {errors.avatar.message}
+                  </p>
+                )}
+              </div>
+            );
+          }}
+        />
+
+        <div className="form-center">
           <FormRow
             type="text"
             name="name"

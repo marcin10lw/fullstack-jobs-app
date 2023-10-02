@@ -6,6 +6,62 @@ export const Wrapper = styled.div`
   background: var(--background-secondary-color);
   padding: 3rem 2rem 4rem;
 
+  .avatar-container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+
+    input {
+      display: none;
+    }
+
+    .avatar-info {
+      top: calc(100% + 0.3rem);
+      text-align: center;
+    }
+  }
+
+  .avatar-label {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .avatar-overlay {
+      position: absolute;
+      left: 0;
+      top: 0;
+      inset: 0;
+      z-index: 9;
+      background-color: black;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: var(--transition);
+      display: grid;
+      place-items: center;
+
+      svg {
+        width: 2rem;
+        height: 2rem;
+      }
+    }
+
+    &:hover .avatar-overlay {
+      opacity: 0.4;
+    }
+  }
+
   .form-title {
     margin-bottom: 2rem;
   }
@@ -34,6 +90,7 @@ export const Wrapper = styled.div`
   .form-center {
     display: grid;
     row-gap: 1rem;
+    margin-top: 3rem;
   }
 
   .form-btn {
