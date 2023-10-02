@@ -1,4 +1,5 @@
 import { AxiosError } from "axios";
+import { Job } from "./models/Job";
 
 export type SearchOnChange = React.ChangeEvent<
   HTMLInputElement | HTMLSelectElement
@@ -28,6 +29,13 @@ export type DefaultStats = {
   declined: number;
 };
 
+export type ApiJobsResponse = {
+  jobs: Job[];
+  currentPage: number;
+  totalJobs: number;
+  numOfPages: number;
+};
+
 export type MonthlyApplications = {
   count: number;
   date: string;
@@ -43,4 +51,5 @@ export type SearchParamsObject = {
   jobStatus?: "all" | "pending" | "interview" | "declined";
   jobType?: "all" | "full-time" | "part-time" | "internship";
   sort?: "newest" | "oldest" | "a-z" | "z-a";
+  page?: string;
 };
