@@ -49,7 +49,6 @@ const AllJobs = () => {
 
     if (top) {
       window.scrollTo({
-        behavior: "smooth",
         top: top - document.body.getBoundingClientRect().top - 136,
       });
     }
