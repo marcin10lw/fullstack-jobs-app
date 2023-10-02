@@ -6,6 +6,17 @@ export const Wrapper = styled.div`
   background: var(--background-secondary-color);
   padding: 3rem 2rem 4rem;
 
+  .user-info {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem;
+    align-items: center;
+
+    .user-name {
+      font-size: clamp(1.5rem, 2vw, 3rem);
+    }
+  }
+
   .avatar-container {
     position: relative;
     width: 200px;
@@ -104,6 +115,13 @@ export const Wrapper = styled.div`
   .form-input,
   .form-btn {
     height: 38px;
+  }
+
+  @media (max-width: 768px) {
+    .user-info {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
   }
 
   @media (min-width: 992px) {

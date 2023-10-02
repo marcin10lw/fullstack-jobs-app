@@ -68,46 +68,52 @@ const Profile = () => {
       >
         <h4 className="form-title">profile</h4>
 
-        <Controller
-          control={control}
-          name={"avatar"}
-          render={({ field }) => {
-            return (
-              <div className="avatar-container">
-                <label htmlFor="avatar" className="avatar-label">
-                  <img
-                    src={
-                      field.value && !errors.avatar
-                        ? URL.createObjectURL(field.value)
-                        : user.avatar
-                    }
-                    alt="user avatar"
+        <div className="user-info">
+          <Controller
+            control={control}
+            name={"avatar"}
+            render={({ field }) => {
+              console.log(field.value);
+
+              return (
+                <div className="avatar-container">
+                  <label htmlFor="avatar" className="avatar-label">
+                    <img
+                      src={
+                        field.value && field.value.type.includes("image/")
+                          ? URL.createObjectURL(field.value)
+                          : user.avatar
+                      }
+                      alt="user avatar"
+                    />
+
+                    <div className="avatar-overlay">
+                      <AiOutlinePlus />
+                    </div>
+                  </label>
+
+                  <input
+                    onChange={({ target }) => {
+                      if (target.files) {
+                        field.onChange(target.files[0]);
+                      }
+                    }}
+                    type="file"
+                    id="avatar"
+                    className="avatar-input"
                   />
+                  {errors.avatar && (
+                    <p className="form-error avatar-info">
+                      {errors.avatar.message}
+                    </p>
+                  )}
+                </div>
+              );
+            }}
+          />
 
-                  <div className="avatar-overlay">
-                    <AiOutlinePlus />
-                  </div>
-                </label>
-
-                <input
-                  onChange={({ target }) => {
-                    if (target.files) {
-                      field.onChange(target.files[0]);
-                    }
-                  }}
-                  type="file"
-                  id="avatar"
-                  className="avatar-input"
-                />
-                {errors.avatar && (
-                  <p className="form-error avatar-info">
-                    {errors.avatar.message}
-                  </p>
-                )}
-              </div>
-            );
-          }}
-        />
+          <div className="user-name">Hello, {user.name}!</div>
+        </div>
 
         <div className="form-center">
           <FormRow
