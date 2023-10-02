@@ -1,12 +1,12 @@
 import { FieldError, UseFormRegisterReturn } from "react-hook-form";
-import { SearchOnChange } from "src/types";
+import { SearchOnChange, SearchParamsObject } from "src/types";
 
 type FormRowSelectProps = {
   name: string;
   labelText: string;
   error?: FieldError;
   register?: UseFormRegisterReturn;
-  defaultValue?: string;
+  value?: string;
   options: readonly string[];
   onInputChange?: (event: SearchOnChange) => void;
 };
@@ -16,7 +16,7 @@ const FormRowSelect = ({
   labelText,
   register,
   error,
-  defaultValue = "",
+  value,
   options,
   onInputChange,
 }: FormRowSelectProps) => {
@@ -26,12 +26,12 @@ const FormRowSelect = ({
         {labelText}
       </label>
       <select
-        name={name}
         {...register}
+        value={value}
+        onChange={onInputChange}
+        name={name}
         id={name}
         className="form-select"
-        defaultValue={defaultValue}
-        onChange={register ? undefined : onInputChange}
       >
         {options.map((item) => (
           <option key={item} value={item}>

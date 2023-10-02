@@ -7,6 +7,7 @@ import { SearchOnChange } from "src/types";
 type FormRowProps = {
   type: string;
   name: string;
+  value?: string;
   labelText: string;
   error?: FieldError;
   register?: UseFormRegisterReturn;
@@ -17,6 +18,7 @@ const FormRow = ({
   type,
   labelText,
   name,
+  value,
   register,
   error,
   onInputChange,
@@ -31,14 +33,15 @@ const FormRow = ({
         </label>
         <div className="input-wrapper">
           <input
-            name={name}
             {...register}
+            value={value}
+            onChange={onInputChange}
+            name={name}
             type={
               type === "password" ? (showPassword ? "text" : "password") : type
             }
             id={name}
             className={`form-input ${error ? "form-input-error" : ""}`}
-            onChange={register ? undefined : onInputChange}
           />
           {type === "password" && (
             <button

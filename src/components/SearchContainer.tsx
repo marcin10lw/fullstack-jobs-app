@@ -1,14 +1,24 @@
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, SetURLSearchParams } from "react-router-dom";
 
 import { jobStatusItems, jobTypeItems } from "src/models/Job";
 import { Wrapper } from "src/assets/wrappers/DashboardFormPage";
 import FormRow from "./FormRow";
 import FormRowSelect from "./FormRowSelect";
-import SubmitButton from "./SubmitButton";
-import { SearchOnChange } from "src/types";
+import { SearchOnChange, SearchParamsObject } from "src/types";
 
-const SearchContainer = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+type SearchContainerProps = {
+  searchParams: URLSearchParams;
+  setSearchParams: SetURLSearchParams;
+  searchParamsDefaultValues: SearchParamsObject;
+};
+
+const SearchContainer = ({
+  searchParams,
+  searchParamsDefaultValues,
+  setSearchParams,
+}: SearchContainerProps) => {
+  const { jobStatus, jobType, search, sort } = searchParamsDefaultValues;
+
   const onInputChange = (event: SearchOnChange) => {
     const { name, value } = event.target;
 
@@ -26,32 +36,39 @@ const SearchContainer = () => {
             labelText="search"
             name="search"
             onInputChange={onInputChange}
+            value={searchParams.get("search") || search}
           />
           <FormRowSelect
             labelText="job status"
             name="jobStatus"
             options={["all", ...jobStatusItems]}
-            defaultValue="all"
+            value={searchParams.get("jobStatus") || jobStatus}
             onInputChange={onInputChange}
           />
           <FormRowSelect
             labelText="job type"
             name="jobType"
             options={["all", ...jobTypeItems]}
-            defaultValue="all"
+            value={searchParams.get("jobType") || jobType}
             onInputChange={onInputChange}
           />
           <FormRowSelect
             labelText="sort"
             name="sort"
             options={["newest", "oldest", "a-z", "z-a"]}
-            defaultValue="newest"
+            value={searchParams.get("sort") || sort}
             onInputChange={onInputChange}
           />
-          <Link to="/dashboard/all-jobs" className="btn form-btn delete-btn">
+          <Link
+            to="/dashboard/all-jobs"
+            type="button"
+            onClick={() => {
+              setSearchParams(searchParamsDefaultValues);
+            }}
+            className="btn form-btn delete-btn"
+          >
             Reset Search Values
           </Link>
-          <SubmitButton isLoading={false} isFormBtn />
         </div>
       </form>
     </Wrapper>
