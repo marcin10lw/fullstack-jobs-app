@@ -38,7 +38,7 @@ const Register = () => {
 
       setTimeout(() => {
         navigate("/login");
-      }, 3500);
+      }, 2000);
     },
     onError: (error: CustomAxiosError) => {
       setError(error);

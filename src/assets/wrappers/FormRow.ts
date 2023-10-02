@@ -19,4 +19,10 @@ export const Wrapper = styled.div`
       display: block;
     }
   }
+
+  .form-error {
+    text-align: start;
+    margin-top: 5px;
+    line-height: 1;
+  }
 `;
