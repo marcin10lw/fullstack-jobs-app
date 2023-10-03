@@ -1,5 +1,5 @@
 import { FieldError, UseFormRegisterReturn } from "react-hook-form";
-import { SearchOnChange, SearchParamsObject } from "src/types";
+import { SearchOnChange } from "src/types";
 
 type FormRowSelectProps = {
   name: string;
@@ -25,20 +25,29 @@ const FormRowSelect = ({
       <label htmlFor={name} className="form-label">
         {labelText}
       </label>
-      <select
-        {...register}
-        value={value}
-        onChange={onInputChange}
-        name={name}
-        id={name}
-        className="form-select"
-      >
-        {options.map((item) => (
-          <option key={item} value={item}>
-            {item}
-          </option>
-        ))}
-      </select>
+      {register ? (
+        <select {...register} name={name} id={name} className="form-select">
+          {options.map((item) => (
+            <option key={item} value={item}>
+              {item}
+            </option>
+          ))}
+        </select>
+      ) : (
+        <select
+          value={value}
+          onChange={onInputChange}
+          name={name}
+          id={name}
+          className="form-select"
+        >
+          {options.map((item) => (
+            <option key={item} value={item}>
+              {item}
+            </option>
+          ))}
+        </select>
+      )}
     </div>
   );
 };
