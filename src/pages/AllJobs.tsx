@@ -39,8 +39,6 @@ const AllJobs = () => {
     cacheTime: 0,
   });
 
-  console.log(jobsData?.jobs);
-
   const setPage = (pageNumber: number) => {
     searchParams.set("page", String(pageNumber));
     setSearchParams(searchParams);

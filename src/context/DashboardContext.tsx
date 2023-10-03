@@ -36,10 +36,6 @@ const DashboardProvider = ({ children }: PropsWithChildren) => {
     setShowSidebar((showSidebar) => !showSidebar);
   };
 
-  const logoutUser = async () => {
-    console.log("Logout User");
-  };
-
   const providerValue: DashboardState = {
     theme,
     showSidebar,

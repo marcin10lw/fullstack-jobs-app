@@ -85,7 +85,6 @@ const AddJob = () => {
           <FormRowSelect
             name="jobStatus"
             labelText="job status"
-            defaultValue="pending"
             register={register("jobStatus")}
             error={errors.jobStatus}
             options={jobStatusItems}
@@ -93,7 +92,6 @@ const AddJob = () => {
           <FormRowSelect
             name="jobType"
             labelText="job type"
-            defaultValue="full-time"
             register={register("jobType")}
             error={errors.jobType}
             options={jobTypeItems}

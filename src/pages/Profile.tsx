@@ -73,8 +73,6 @@ const Profile = () => {
             control={control}
             name={"avatar"}
             render={({ field }) => {
-              console.log(field.value);
-
               return (
                 <div className="avatar-container">
                   <label htmlFor="avatar" className="avatar-label">
