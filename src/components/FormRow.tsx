@@ -32,17 +32,36 @@ const FormRow = ({
           {labelText}
         </label>
         <div className="input-wrapper">
-          <input
-            {...register}
-            value={value}
-            onChange={onInputChange}
-            name={name}
-            type={
-              type === "password" ? (showPassword ? "text" : "password") : type
-            }
-            id={name}
-            className={`form-input ${error ? "form-input-error" : ""}`}
-          />
+          {register ? (
+            <input
+              {...register}
+              name={name}
+              type={
+                type === "password"
+                  ? showPassword
+                    ? "text"
+                    : "password"
+                  : type
+              }
+              id={name}
+              className={`form-input ${error ? "form-input-error" : ""}`}
+            />
+          ) : (
+            <input
+              value={value}
+              onChange={onInputChange}
+              name={name}
+              type={
+                type === "password"
+                  ? showPassword
+                    ? "text"
+                    : "password"
+                  : type
+              }
+              id={name}
+              className={`form-input ${error ? "form-input-error" : ""}`}
+            />
+          )}
           {type === "password" && (
             <button
               type="button"
