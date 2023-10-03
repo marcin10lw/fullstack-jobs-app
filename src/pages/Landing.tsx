@@ -13,16 +13,13 @@ const Landing = () => {
       <div className="container page">
         <div className="info">
           <h1>
-            job <span>tracking</span> app
+            jobs <span>tracking</span> app
           </h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates
-            officia alias assumenda molestiae. Laudantium impedit mollitia
-            animi, laboriosam ducimus distinctio ullam aliquam, molestiae
-            necessitatibus repellat porro obcaecati fuga eligendi libero, eum
-            quas numquam veritatis facere quidem ipsa similique? Id in dicta
-            maxime recusandae commodi. Ea omnis veritatis consequatur eligendi
-            ipsum.
+            Discover the ease of managing your job applications with our app.
+            Say goodbye to scattered notes and endless spreadsheets – simply add
+            the jobs you've applied for, and let our app keep you organized
+            throughout your job search journey.
           </p>
 
           <Link to="/register" className="btn register-link">
