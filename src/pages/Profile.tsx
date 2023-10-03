@@ -99,6 +99,7 @@ const Profile = () => {
                     type="file"
                     id="avatar"
                     className="avatar-input"
+                    accept="image/*"
                   />
                   {errors.avatar && (
                     <p className="form-error avatar-info">
