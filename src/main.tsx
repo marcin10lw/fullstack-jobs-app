@@ -13,7 +13,13 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <App />
-      <ToastContainer position="bottom-center" />
+      <ToastContainer
+        position="bottom-center"
+        limit={3}
+        pauseOnHover={false}
+        pauseOnFocusLoss={false}
+        autoClose={2000}
+      />
     </QueryClientProvider>
   </React.StrictMode>
 );
