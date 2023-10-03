@@ -1,5 +1,9 @@
 import { useLayoutEffect } from "react";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  RouterProvider,
+  createBrowserRouter,
+  createHashRouter,
+} from "react-router-dom";
 
 import { checkDefaultTheme } from "./utils/checkDefaultTheme";
 import {
@@ -17,7 +21,7 @@ import {
   EditJob,
 } from "./pages";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <HomeLayout />,

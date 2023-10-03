@@ -55,5 +55,6 @@ const Admin = () => {
       </Wrapper>
     );
   }
+  return <></>;
 };
 export default Admin;

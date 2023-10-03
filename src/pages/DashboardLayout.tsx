@@ -25,27 +25,28 @@ const DashboardLayout = () => {
     cacheTime: 0,
   });
 
-  if (isError) return <Navigate to="/login" />;
+  return (
+    <>
+      {isError && <Navigate to="/login" />}
+      {isSuccess && (
+        <DashboardProvider>
+          <Wrapper>
+            <main className="dashboard">
+              <SmallSidebar userRole={user.role} />
+              <BigSidebar userRole={user.role} />
+              <div>
+                <Navbar user={user} />
 
-  if (isSuccess) {
-    return (
-      <DashboardProvider>
-        <Wrapper>
-          <main className="dashboard">
-            <SmallSidebar userRole={user.role} />
-            <BigSidebar userRole={user.role} />
-            <div>
-              <Navbar user={user} />
-
-              <div className="dashboard-page">
-                <Outlet context={{ user } satisfies ContextType} />
+                <div className="dashboard-page">
+                  <Outlet context={{ user } satisfies ContextType} />
+                </div>
               </div>
-            </div>
-          </main>
-        </Wrapper>
-      </DashboardProvider>
-    );
-  }
+            </main>
+          </Wrapper>
+        </DashboardProvider>
+      )}
+    </>
+  );
 };
 
 export default DashboardLayout;

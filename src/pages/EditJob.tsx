@@ -25,5 +25,6 @@ const EditJob = () => {
   if (status === "error") return <NotFound text="Could not find this job..." />;
 
   if (status === "success") return <EditJobForm job={job} id={id} />;
+  return <></>;
 };
 export default EditJob;
