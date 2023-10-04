@@ -85,8 +85,13 @@ const Login = () => {
 
         <SubmitButton isLoading={mutation.isLoading} />
 
-        <button onClick={onLoginDemo} type="button" className="btn btn-block">
-          explore the app
+        <button
+          onClick={onLoginDemo}
+          disabled={mutation.isLoading}
+          type="button"
+          className="btn btn-block"
+        >
+          {mutation.isLoading ? "Loading demo user..." : "explore the app"}
         </button>
 
         <p>
