@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Wrapper = styled.section`
   min-height: 100vh;
@@ -14,11 +14,6 @@ export const Wrapper = styled.section`
     display: block;
     margin: 0 auto;
     margin-bottom: 1.38rem;
-  }
-
-  .form {
-    max-width: 400px;
-    border-top: 5px solid var(--primary-500);
   }
 
   h4 {
