@@ -1,7 +1,6 @@
 import { useLayoutEffect } from "react";
 import {
   RouterProvider,
-  createBrowserRouter,
   createHashRouter,
 } from "react-router-dom";
 
