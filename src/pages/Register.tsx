@@ -35,9 +35,9 @@ const Register = () => {
     onSuccess: () => {
       reset();
 
-      // setTimeout(() => {
-      //   navigate('/login');
-      // }, 10000);
+      setTimeout(() => {
+        navigate('/login');
+      }, 2500);
     },
     onError: (error: CustomAxiosError) => {
       setError(error);
