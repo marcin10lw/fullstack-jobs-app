@@ -52,7 +52,7 @@ const Register = () => {
     <section className="grid min-h-screen items-center">
       <form
         onSubmit={handleSubmit(onFormSubmit)}
-        className="form max-w-[400px] border-b-[5px] border-solid border-[--primary-500]"
+        className="form max-w-[400px] border-t-[5px] border-solid border-[--primary-500]"
         noValidate
       >
         <div className="mb-6 flex justify-center">
@@ -96,7 +96,7 @@ const Register = () => {
           type="password"
         />
 
-        <div className="mt-8">
+        <div className="mt-8 h-[30px]">
           <SubmitButton isLoading={mutation.isLoading} />
         </div>
 

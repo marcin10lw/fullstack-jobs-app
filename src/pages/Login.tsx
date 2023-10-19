@@ -65,7 +65,7 @@ const Login = () => {
     <section className="grid min-h-screen items-center">
       <form
         onSubmit={handleSubmit(onFormSubmit)}
-        className="form max-w-[400px] border-b-[5px] border-solid border-[--primary-500]"
+        className="form max-w-[400px] border-t-[5px] border-solid border-[--primary-500]"
         noValidate
       >
         <div className="mb-6 flex justify-center">
@@ -88,7 +88,7 @@ const Login = () => {
           type="password"
         />
 
-        <div className="mt-8">
+        <div className="mt-8 h-[30px]">
           <SubmitButton isLoading={mutation.isLoading} />
         </div>
 
@@ -96,7 +96,7 @@ const Login = () => {
           onClick={onLoginDemo}
           disabled={mutation.isLoading}
           type="button"
-          className="btn mt-4 w-full"
+          className="btn mt-4 h-[30px] w-full"
         >
           {mutation.isLoading ? 'Loading demo user...' : 'explore the app'}
         </button>
