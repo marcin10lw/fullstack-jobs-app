@@ -73,20 +73,22 @@ const Login = () => {
         </div>
         <h4 className="mx-auto mb-[1.4rem] text-center">Login</h4>
 
-        <FormRow
-          error={errors.email}
-          register={register('email')}
-          labelText="email"
-          name="email"
-          type="email"
-        />
-        <FormRow
-          error={errors.password}
-          register={register('password')}
-          labelText="password"
-          name="password"
-          type="password"
-        />
+        <div className="flex flex-col gap-4">
+          <FormRow
+            error={errors.email}
+            register={register('email')}
+            labelText="email"
+            name="email"
+            type="email"
+          />
+          <FormRow
+            error={errors.password}
+            register={register('password')}
+            labelText="password"
+            name="password"
+            type="password"
+          />
+        </div>
 
         <div className="mt-8 h-[30px]">
           <SubmitButton isLoading={mutation.isLoading} />

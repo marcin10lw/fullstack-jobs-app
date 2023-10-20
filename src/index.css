@@ -275,8 +275,6 @@ h5 {
     color: var(--text-color);
   }
 
-  .form-input,
-  .form-select,
   .form-btn {
     height: 35px;
   }
@@ -290,10 +288,6 @@ h5 {
 
   .form-input-error {
     border: 1px solid var(--input-error);
-  }
-
-  .form-row {
-    margin-bottom: 1rem;
   }
 
   .form-textarea {
@@ -310,7 +304,6 @@ h5 {
     letter-spacing: var(--letter-spacing);
     text-transform: capitalize;
   }
-  /* alert */
 
   @keyframes spinner {
     to {
@@ -327,8 +320,6 @@ h5 {
     animation: spinner 0.6s linear infinite;
   }
 
-  /* title */
-
   .title {
     text-align: center;
   }
@@ -341,7 +332,6 @@ h5 {
     margin-top: 1rem;
   }
 
-  /* BUTTONS AND BADGES */
   .pending {
     background: #fef3c7;
     color: #f59e0b;
@@ -355,5 +345,9 @@ h5 {
   .declined {
     background: #ffeeee;
     color: #d66a6a;
+  }
+
+  svg {
+    display: block;
   }
 }

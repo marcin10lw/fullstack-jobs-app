@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { FieldError, UseFormRegisterReturn } from "react-hook-form";
-import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import { Wrapper } from "src/assets/wrappers/FormRow";
-import { SearchOnChange } from "src/types";
+import { useState } from 'react';
+import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+import { Wrapper } from 'src/assets/wrappers/FormRow';
+import { SearchOnChange } from 'src/types';
 
 type FormRowProps = {
   type: string;
@@ -11,6 +11,7 @@ type FormRowProps = {
   labelText: string;
   error?: FieldError;
   register?: UseFormRegisterReturn;
+  isDashboardRow?: boolean;
   onInputChange?: (event: SearchOnChange) => void;
 };
 
@@ -21,30 +22,31 @@ const FormRow = ({
   value,
   register,
   error,
+  isDashboardRow,
   onInputChange,
 }: FormRowProps) => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <Wrapper>
-      <div className="form-row">
+    <div>
+      <div className={`relative`}>
         <label htmlFor={name} className="form-label">
           {labelText}
         </label>
-        <div className="input-wrapper">
+        <div className="input-wrapper relative">
           {register ? (
             <input
               {...register}
               name={name}
               type={
-                type === "password"
+                type === 'password'
                   ? showPassword
-                    ? "text"
-                    : "password"
+                    ? 'text'
+                    : 'password'
                   : type
               }
               id={name}
-              className={`form-input ${error ? "form-input-error" : ""}`}
+              className={`form-input ${error ? 'form-input-error' : ''}`}
             />
           ) : (
             <input
@@ -52,28 +54,37 @@ const FormRow = ({
               onChange={onInputChange}
               name={name}
               type={
-                type === "password"
+                type === 'password'
                   ? showPassword
-                    ? "text"
-                    : "password"
+                    ? 'text'
+                    : 'password'
                   : type
               }
               id={name}
-              className={`form-input ${error ? "form-input-error" : ""}`}
+              className={`form-input ${error ? 'form-input-error' : ''}`}
             />
           )}
-          {type === "password" && (
+          {type === 'password' && (
             <button
               type="button"
               onClick={() => setShowPassword((showPassword) => !showPassword)}
+              className="absolute right-[10px] top-1/2 -translate-y-1/2 text-[--text-secondary-color]"
             >
               {showPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
             </button>
           )}
         </div>
-        <p className="form-error">{error?.message}</p>
+        {error?.message && (
+          <p
+            className={`form-error ${
+              isDashboardRow ? 'absolute left-0 mt-1' : ''
+            }`}
+          >
+            {error.message}
+          </p>
+        )}
       </div>
-    </Wrapper>
+    </div>
   );
 };
 export default FormRow;

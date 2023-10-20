@@ -1,21 +1,20 @@
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "react-toastify";
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { toast } from 'react-toastify';
 
-import customFetch from "src/utils/customFetch";
-import { useUser } from "./DashboardLayout";
-import { Wrapper } from "src/assets/wrappers/DashboardFormPage";
-import { FormRow, FormRowSelect, SubmitButton } from "src/components";
+import customFetch from 'src/utils/customFetch';
+import { useUser } from './DashboardLayout';
+import { FormRow, FormRowSelect, SubmitButton } from 'src/components';
 import {
   InferJob,
   jobSchema,
   jobStatusItems,
   jobTypeItems,
-} from "src/models/Job";
-import { CustomAxiosError } from "src/types";
-import errorMessage from "src/utils/errorMessage";
+} from 'src/models/Job';
+import { CustomAxiosError } from 'src/types';
+import errorMessage from 'src/utils/errorMessage';
 
 const AddJob = () => {
   const { user } = useUser();
@@ -28,11 +27,11 @@ const AddJob = () => {
     reset,
   } = useForm<InferJob>({
     defaultValues: {
-      company: "",
-      position: "",
+      company: '',
+      position: '',
       jobLocation: user.location,
-      jobStatus: "pending",
-      jobType: "full-time",
+      jobStatus: 'pending',
+      jobType: 'full-time',
     },
     resolver: zodResolver(jobSchema),
   });
@@ -40,15 +39,15 @@ const AddJob = () => {
   const qc = useQueryClient();
 
   const { mutate, isLoading } = useMutation({
-    mutationFn: (job: InferJob) => customFetch.post("/jobs", job),
+    mutationFn: (job: InferJob) => customFetch.post('/jobs', job),
     onSuccess: async () => {
-      await qc.invalidateQueries(["jobs"]);
+      await qc.invalidateQueries(['jobs']);
       reset();
-      toast.success("Job added");
-      navigate("./all-jobs");
+      toast.success('Job added');
+      navigate('./all-jobs');
     },
     onError: (error: CustomAxiosError) => {
-      errorMessage(error, "Could not find this job");
+      errorMessage(error, 'Could not find this job');
     },
   });
 
@@ -57,49 +56,59 @@ const AddJob = () => {
   };
 
   return (
-    <Wrapper>
-      <form onSubmit={handleSubmit(onFormSubmit)} className="form" noValidate>
-        <h4 className="form-title">add job</h4>
-        <div className="form-center">
+    <div className="w-full rounded-[--border-radius] bg-[--background-secondary-color] p-[3rem_2rem_4rem]">
+      <form
+        onSubmit={handleSubmit(onFormSubmit)}
+        className="form rounded-0 m-0 w-full max-w-full p-0 shadow-none"
+        noValidate
+      >
+        <h4 className="mb-8">add job</h4>
+        <div className="mt-12 grid gap-4 md:grid-cols-2 md:items-center md:gap-[2rem_1rem] lg:grid-cols-3">
           <FormRow
             type="text"
             name="position"
             labelText="position"
-            register={register("position")}
+            register={register('position')}
             error={errors.position}
+            isDashboardRow
           />
           <FormRow
             type="text"
             name="company"
             labelText="company"
-            register={register("company")}
+            register={register('company')}
             error={errors.company}
+            isDashboardRow
           />
           <FormRow
             type="text"
             name="jobLocation"
             labelText="job location"
-            register={register("jobLocation")}
+            register={register('jobLocation')}
             error={errors.jobLocation}
+            isDashboardRow
           />
           <FormRowSelect
             name="jobStatus"
             labelText="job status"
-            register={register("jobStatus")}
+            register={register('jobStatus')}
             error={errors.jobStatus}
             options={jobStatusItems}
           />
           <FormRowSelect
             name="jobType"
             labelText="job type"
-            register={register("jobType")}
+            register={register('jobType')}
             error={errors.jobType}
             options={jobTypeItems}
           />
-          <SubmitButton isLoading={isLoading} isFormBtn />
+
+          <div className="mt-4 md:mt-8">
+            <SubmitButton isLoading={isLoading} isFormBtn />
+          </div>
         </div>
       </form>
-    </Wrapper>
+    </div>
   );
 };
 export default AddJob;

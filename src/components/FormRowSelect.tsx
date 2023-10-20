@@ -1,5 +1,5 @@
-import { FieldError, UseFormRegisterReturn } from "react-hook-form";
-import { SearchOnChange } from "src/types";
+import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
+import { SearchOnChange } from 'src/types';
 
 type FormRowSelectProps = {
   name: string;
@@ -21,7 +21,7 @@ const FormRowSelect = ({
   onInputChange,
 }: FormRowSelectProps) => {
   return (
-    <div className="form-row">
+    <div className="relative">
       <label htmlFor={name} className="form-label">
         {labelText}
       </label>
