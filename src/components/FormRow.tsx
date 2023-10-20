@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
-import { Wrapper } from 'src/assets/wrappers/FormRow';
 import { SearchOnChange } from 'src/types';
 
 type FormRowProps = {

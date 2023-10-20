@@ -1,12 +1,11 @@
-import { useLayoutEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { FaSuitcaseRolling, FaCalendarCheck } from "react-icons/fa";
+import { useLayoutEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { FaSuitcaseRolling, FaCalendarCheck } from 'react-icons/fa';
 
-import customFetch from "src/utils/customFetch";
-import { Wrapper } from "src/assets/wrappers/StatsContainer";
-import { StatItem } from "src/components";
+import customFetch from 'src/utils/customFetch';
+import { StatItem } from 'src/components';
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -16,9 +15,9 @@ const Admin = () => {
     status,
     isError,
   } = useQuery({
-    queryKey: ["app-stats"],
+    queryKey: ['app-stats'],
     queryFn: async (): Promise<{ users: number; jobs: number }> => {
-      const { data } = await customFetch.get("/users/admin/app-stats");
+      const { data } = await customFetch.get('/users/admin/app-stats');
       return data;
     },
     retry: 0,
@@ -27,17 +26,17 @@ const Admin = () => {
   useLayoutEffect(() => {
     if (isError) {
       toast.error("You're not authorized to view this page", {
-        position: "top-center",
+        position: 'top-center',
       });
-      navigate("/dashboard");
+      navigate('/dashboard');
     }
   }, [isError]);
 
-  if (status === "success") {
+  if (status === 'success') {
     const { jobs, users } = appStats;
 
     return (
-      <Wrapper>
+      <section className="grid gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-3">
         <StatItem
           title="current users"
           count={users}
@@ -52,7 +51,7 @@ const Admin = () => {
           bcg="#e0e8f9"
           icon={<FaCalendarCheck />}
         />
-      </Wrapper>
+      </section>
     );
   }
   return <></>;

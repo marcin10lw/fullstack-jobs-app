@@ -1,7 +1,6 @@
 import { FaTimes } from 'react-icons/fa';
 
 import useDashboardContext from 'src/hooks/useDashboardContext';
-import { Wrapper } from 'src/assets/wrappers/SmallSidebar';
 import { Logo, NavLinks } from 'src/components';
 import { UserRole } from 'src/types';
 

@@ -88,7 +88,7 @@ const Profile = () => {
                           : userIcon
                       }
                       alt="user avatar"
-                      className="block h-full object-cover"
+                      className="block h-full w-full object-cover"
                     />
 
                     <div className="absolute inset-0 z-10 grid place-items-center bg-black opacity-0 transition-opacity duration-300 group-hover:opacity-40">
