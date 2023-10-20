@@ -1,7 +1,6 @@
-import { ApiJobsResponse } from "src/types";
-import PageBtnContainer from "./PageBtnContainer";
-import { Wrapper } from "src/assets/wrappers/JobsContainer";
-import { Job } from "src/components";
+import { ApiJobsResponse } from 'src/types';
+import PageBtnContainer from './PageBtnContainer';
+import { Job } from 'src/components';
 
 type JobsContainerProps = {
   jobsData: ApiJobsResponse;
@@ -20,18 +19,18 @@ const JobsContainer = ({
 
   if (jobs.length === 0)
     return (
-      <Wrapper>
-        <h2>No jobs to display...</h2>
-      </Wrapper>
+      <section className="mt-16">
+        <h2 className="normal-case">No jobs to display...</h2>
+      </section>
     );
 
   return (
-    <Wrapper ref={jobsContainerRef}>
-      <h5>
-        {totalJobs} {totalJobs > 1 ? "jobs" : "job"}
+    <section ref={jobsContainerRef} className="mt-16">
+      <h5 className="mb-6 font-bold">
+        {totalJobs} {totalJobs > 1 ? 'jobs' : 'job'}
       </h5>
 
-      <div className="jobs">
+      <div className="grid gap-8 xl:grid-cols-2">
         {jobs.map((job) => (
           <Job key={job._id} job={job} />
         ))}
@@ -45,7 +44,7 @@ const JobsContainer = ({
           scrollToJobs={scrollToJobs}
         />
       )}
-    </Wrapper>
+    </section>
   );
 };
 

@@ -1,6 +1,4 @@
-import { HiChevronDoubleLeft, HiChevronDoubleRight } from "react-icons/hi";
-
-import { Wrapper } from "src/assets/wrappers/PageBtnContainer";
+import { HiChevronDoubleLeft, HiChevronDoubleRight } from 'react-icons/hi';
 
 type PageBtnContainerProps = {
   numOfPages: number;
@@ -15,8 +13,6 @@ const PageBtnContainer = ({
   setPage,
   scrollToJobs,
 }: PageBtnContainerProps) => {
-  let pages = Array.from({ length: numOfPages }, (_, index) => index + 1);
-
   const addPageButton = ({
     pageNumber,
     activeClass,
@@ -26,7 +22,11 @@ const PageBtnContainer = ({
   }) => {
     return (
       <button
-        className={`btn page-btn ${activeClass ? "active" : ""}`}
+        className={`btn h-[40px] w-[50px] rounded-[--border-radius] text-xl font-bold ${
+          activeClass
+            ? 'bg-[--primary-500] text-[--white]'
+            : 'bg-transparent text-[--primary-500]'
+        }`}
         key={pageNumber}
         onClick={() => {
           setPage(pageNumber);
@@ -45,14 +45,17 @@ const PageBtnContainer = ({
       addPageButton({
         pageNumber: 1,
         activeClass: currentPage === 1,
-      })
+      }),
     );
 
     if (currentPage > 3) {
       pageButtons.push(
-        <span className="page-btn dots" key="dots-1">
+        <span
+          className="page-btn grid h-[40px] w-[50px] cursor-text place-items-center rounded-[--border-radius] text-xl font-bold"
+          key="dots-1"
+        >
           ...
-        </span>
+        </span>,
       );
     }
 
@@ -61,7 +64,7 @@ const PageBtnContainer = ({
         addPageButton({
           pageNumber: currentPage - 1,
           activeClass: false,
-        })
+        }),
       );
     }
 
@@ -70,7 +73,7 @@ const PageBtnContainer = ({
         addPageButton({
           pageNumber: currentPage,
           activeClass: true,
-        })
+        }),
       );
     }
 
@@ -79,15 +82,18 @@ const PageBtnContainer = ({
         addPageButton({
           pageNumber: currentPage + 1,
           activeClass: false,
-        })
+        }),
       );
     }
 
     if (currentPage < numOfPages - 2) {
       pageButtons.push(
-        <span className="page-btn dots" key="dots+1">
+        <span
+          className="page-btn grid h-[40px] w-[50px] cursor-text place-items-center rounded-[--border-radius] text-xl font-bold"
+          key="dots+1"
+        >
           ...
-        </span>
+        </span>,
       );
     }
 
@@ -95,7 +101,7 @@ const PageBtnContainer = ({
       addPageButton({
         pageNumber: numOfPages,
         activeClass: currentPage === numOfPages,
-      })
+      }),
     );
 
     return pageButtons;
@@ -120,25 +126,27 @@ const PageBtnContainer = ({
   };
 
   return (
-    <Wrapper>
+    <footer className="mt-8 flex h-24 flex-wrap items-center justify-end gap-4">
       <button
         onClick={toPrevPage}
-        className="btn prev-btn"
         disabled={currentPage <= 1}
+        className="btn text=[--primary-500] flex h-[40px] w-[100px] items-center justify-center gap-2 rounded-[--border-radius] bg-[--background-secondary-color] capitalize tracking-[--letter-spacing] disabled:pointer-events-none"
       >
         <HiChevronDoubleLeft />
         prev
       </button>
-      <div className="btn-container">{renderButtons()}</div>
+      <div className="flex items-center rounded-[--border-radius] bg-[--background-secondary-color]">
+        {renderButtons()}
+      </div>
       <button
         onClick={toNextPage}
-        className="btn next-btn"
+        className="btn text=[--primary-500] flex h-[40px] w-[100px] items-center justify-center gap-2 rounded-[--border-radius] bg-[--background-secondary-color] capitalize tracking-[--letter-spacing] disabled:pointer-events-none"
         disabled={currentPage >= numOfPages}
       >
         next
         <HiChevronDoubleRight />
       </button>
-    </Wrapper>
+    </footer>
   );
 };
 

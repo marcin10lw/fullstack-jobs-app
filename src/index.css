@@ -332,6 +332,17 @@ h5 {
     margin-top: 1rem;
   }
 
+  .status {
+    border-radius: var(--border-radius);
+    text-transform: capitalize;
+    letter-spacing: var(--letter-spacing);
+    text-align: center;
+    display: grid;
+    place-items: center;
+    width: 100px;
+    height: 30px;
+  }
+
   .pending {
     background: #fef3c7;
     color: #f59e0b;
