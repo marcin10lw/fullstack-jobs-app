@@ -1,8 +1,7 @@
-import { FaSuitcaseRolling, FaCalendarCheck, FaBug } from "react-icons/fa";
+import { FaSuitcaseRolling, FaCalendarCheck, FaBug } from 'react-icons/fa';
 
-import { DefaultStats } from "src/types";
-import { Wrapper } from "src/assets/wrappers/StatsContainer";
-import StatItem from "./StatItem";
+import { DefaultStats } from 'src/types';
+import StatItem from './StatItem';
 
 type StatsContainerProps = {
   defaultStats: DefaultStats;
@@ -11,34 +10,34 @@ type StatsContainerProps = {
 const StatsContainer = ({ defaultStats }: StatsContainerProps) => {
   const stats = [
     {
-      title: "pending applications",
+      title: 'pending applications',
       count: defaultStats.pending,
       icon: <FaSuitcaseRolling />,
-      color: "#f59e0b",
-      bcg: "#fef3c7",
+      color: '#f59e0b',
+      bcg: '#fef3c7',
     },
     {
-      title: "interviews scheduled",
+      title: 'interviews scheduled',
       count: defaultStats.interview,
       icon: <FaCalendarCheck />,
-      color: "#647acb",
-      bcg: "#e0e8f9",
+      color: '#647acb',
+      bcg: '#e0e8f9',
     },
     {
-      title: "declined applications",
+      title: 'declined applications',
       count: defaultStats.declined,
       icon: <FaBug />,
-      color: "#d66a6a",
-      bcg: "#ffeeee",
+      color: '#d66a6a',
+      bcg: '#ffeeee',
     },
   ];
 
   return (
-    <Wrapper>
+    <section className="grid gap-8 md:grid-cols-2 md:gap-x-4 lg:grid-cols-3">
       {stats.map((stat) => (
         <StatItem key={stat.title} {...stat} />
       ))}
-    </Wrapper>
+    </section>
   );
 };
 

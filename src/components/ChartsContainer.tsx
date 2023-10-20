@@ -1,39 +1,42 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import { MonthlyApplications } from "src/types";
-import { Wrapper } from "src/assets/wrappers/ChartsContainer";
-import BarChart from "./BarChart";
-import AreaChart from "./AreaChart";
+import { MonthlyApplications } from 'src/types';
+import BarChart from './BarChart';
+import AreaChart from './AreaChart';
 
 type ChartsContainerProps = {
   monthlyApplications: MonthlyApplications;
 };
 
 const ChartsContainer = ({ monthlyApplications }: ChartsContainerProps) => {
-  const [chart, setChart] = useState<"bar" | "area">("bar");
+  const [chart, setChart] = useState<'bar' | 'area'>('bar');
 
   const toggleChart = () => {
     setChart((chart) => {
-      if (chart === "bar") {
-        return "area";
+      if (chart === 'bar') {
+        return 'area';
       }
 
-      return "bar";
+      return 'bar';
     });
   };
 
   return (
-    <Wrapper>
-      <h4>Monthly Applications</h4>
-      <button onClick={toggleChart} type="button">
-        {chart === "area" ? "Area Chart" : "BarChart"}
+    <section className="mt-16 text-center">
+      <h4 className="mb-3 text-center">Monthly Applications</h4>
+      <button
+        className="mx-auto mt-4 text-xl capitalize text-[--primary-500]"
+        onClick={toggleChart}
+        type="button"
+      >
+        {chart === 'area' ? 'Area Chart' : 'Bar Chart'}
       </button>
-      {chart === "bar" ? (
+      {chart === 'bar' ? (
         <BarChart monthlyApplications={monthlyApplications} />
       ) : (
         <AreaChart monthlyApplications={monthlyApplications} />
       )}
-    </Wrapper>
+    </section>
   );
 };
 

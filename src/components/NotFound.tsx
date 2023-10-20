@@ -1,19 +1,4 @@
-import notFoundImage from "src/assets/images/not-found.svg";
-import styled from "styled-components";
-
-const Wrapper = styled.section`
-  h2 {
-    text-transform: none;
-    text-align: center;
-  }
-
-  img {
-    display: block;
-    width: 70%;
-    max-width: 700px;
-    margin: 4rem auto 0;
-  }
-`;
+import notFoundImage from 'src/assets/images/not-found.svg';
 
 type NotFoundProps = {
   text: string;
@@ -21,10 +6,14 @@ type NotFoundProps = {
 
 const NotFound = ({ text }: NotFoundProps) => {
   return (
-    <Wrapper>
-      <h2>{text}</h2>
-      <img src={notFoundImage} alt={text} />
-    </Wrapper>
+    <section>
+      <h2 className="text-center normal-case">{text}</h2>
+      <img
+        className="m-[4rem_auto_0] block w-[70%] max-w-[700px]"
+        src={notFoundImage}
+        alt={text}
+      />
+    </section>
   );
 };
 export default NotFound;
