@@ -1,16 +1,16 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Controller, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "react-toastify";
-import { AiOutlinePlus } from "react-icons/ai";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { Controller, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { toast } from 'react-toastify';
+import { AiOutlinePlus } from 'react-icons/ai';
 
-import { useUser } from "./DashboardLayout";
-import { UpdatedUser, updateUserSchema } from "src/models/User";
-import { Wrapper } from "src/assets/wrappers/DashboardFormPage";
-import { FormRow, SubmitButton } from "src/components";
-import customFetch from "src/utils/customFetch";
-import { CustomAxiosError } from "src/types";
-import errorMessage from "src/utils/errorMessage";
+import { useUser } from './DashboardLayout';
+import { UpdatedUser, updateUserSchema } from 'src/models/User';
+import { Wrapper } from 'src/assets/wrappers/DashboardFormPage';
+import { FormRow, SubmitButton } from 'src/components';
+import customFetch from 'src/utils/customFetch';
+import { CustomAxiosError } from 'src/types';
+import errorMessage from 'src/utils/errorMessage';
 
 const Profile = () => {
   const { user } = useUser();
@@ -18,13 +18,13 @@ const Profile = () => {
 
   const { mutate, isLoading } = useMutation({
     mutationFn: (user: FormData) =>
-      customFetch.patch("/users/update-user", user),
+      customFetch.patch('/users/update-user', user),
     onSuccess: () => {
-      qc.invalidateQueries(["user"]);
-      toast.success("User updated!");
+      qc.invalidateQueries(['user']);
+      toast.success('User updated!');
     },
     onError: (error: CustomAxiosError) => {
-      errorMessage(error, "Could not update user");
+      errorMessage(error, 'Could not update user');
     },
   });
 
@@ -52,41 +52,47 @@ const Profile = () => {
     });
 
     if (!user.avatar) {
-      formData.delete("avatar");
+      formData.delete('avatar');
     }
 
     mutate(formData);
   };
 
   return (
-    <Wrapper>
+    <div className="w-full rounded-[--border-radius] bg-[--background-secondary-color] p-[3rem_2rem_4rem]">
       <form
-        className="form"
+        className="form m-0 w-full max-w-full rounded-none p-0 shadow-none"
         onSubmit={handleSubmit(onFormSubmit)}
         noValidate
         encType="multipart/form-data"
       >
-        <h4 className="form-title">profile</h4>
+        <h4 className="mb-8">profile</h4>
 
-        <div className="user-info">
+        <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-[1fr_2fr] md:gap-4">
           <Controller
             control={control}
-            name={"avatar"}
+            name={'avatar'}
             render={({ field }) => {
               return (
-                <div className="avatar-container">
-                  <label htmlFor="avatar" className="avatar-label">
+                <div className="relative h-[200px] w-[200px]">
+                  <label
+                    htmlFor="avatar"
+                    className="group relative block h-full w-full cursor-pointer overflow-hidden rounded-full"
+                  >
                     <img
                       src={
-                        field.value && field.value.type.includes("image/")
+                        field.value && field.value.type.includes('image/')
                           ? URL.createObjectURL(field.value)
                           : user.avatar
                       }
                       alt="user avatar"
+                      className="block object-cover"
                     />
 
-                    <div className="avatar-overlay">
-                      <AiOutlinePlus />
+                    <div className="absolute inset-0 z-10 grid place-items-center bg-black opacity-0 transition-opacity duration-300 group-hover:opacity-40">
+                      <div className="h-8 w-8">
+                        <AiOutlinePlus />
+                      </div>
                     </div>
                   </label>
 
@@ -98,11 +104,11 @@ const Profile = () => {
                     }}
                     type="file"
                     id="avatar"
-                    className="avatar-input"
+                    className="hidden"
                     accept="image/*"
                   />
                   {errors.avatar && (
-                    <p className="form-error avatar-info">
+                    <p className="form-error top-[calc(100%_+_0.3rem)] text-center">
                       {errors.avatar.message}
                     </p>
                   )}
@@ -111,43 +117,47 @@ const Profile = () => {
             }}
           />
 
-          <div className="user-name">Hello, {user.name}!</div>
+          <div className="text-[clamp(1.5rem,_2vw,_3rem)]">
+            Hello, {user.name}!
+          </div>
         </div>
 
-        <div className="form-center">
+        <div className="mt-12 grid gap-y-4 lg:grid-cols-2 lg:gap-[2rem_1rem] xl:grid-cols-3">
           <FormRow
             type="text"
             name="name"
             labelText="name"
-            register={register("name")}
+            register={register('name')}
             error={errors.name}
           />
           <FormRow
             type="text"
             name="lastName"
             labelText="last name"
-            register={register("lastName")}
+            register={register('lastName')}
             error={errors.lastName}
           />
           <FormRow
             type="email"
             name="email"
             labelText="email"
-            register={register("email")}
+            register={register('email')}
             error={errors.email}
           />
           <FormRow
             type="text"
             name="location"
             labelText="location"
-            register={register("location")}
+            register={register('location')}
             error={errors.location}
           />
 
-          <SubmitButton isLoading={isLoading} isFormBtn />
+          <div className="mt-4 lg:mt-8">
+            <SubmitButton isLoading={isLoading} isFormBtn />
+          </div>
         </div>
       </form>
-    </Wrapper>
+    </div>
   );
 };
 export default Profile;
