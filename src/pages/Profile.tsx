@@ -6,7 +6,6 @@ import { AiOutlinePlus } from 'react-icons/ai';
 
 import { useUser } from './DashboardLayout';
 import { UpdatedUser, updateUserSchema } from 'src/models/User';
-import { Wrapper } from 'src/assets/wrappers/DashboardFormPage';
 import { FormRow, SubmitButton } from 'src/components';
 import customFetch from 'src/utils/customFetch';
 import { CustomAxiosError } from 'src/types';

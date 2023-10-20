@@ -1,8 +1,8 @@
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 
-import useDashboardContext from "src/hooks/useDashboardContext";
-import { UserRole } from "src/types";
-import { links } from "src/utils/links";
+import useDashboardContext from 'src/hooks/useDashboardContext';
+import { UserRole } from 'src/types';
+import { links } from 'src/utils/links';
 
 type NavLinksProps = {
   isBigSidebar?: boolean;
@@ -19,21 +19,31 @@ const NavLinks = ({ isBigSidebar, userRole }: NavLinksProps) => {
   };
 
   return (
-    <div className="nav-links">
+    <div className={`flex flex-col pt-8`}>
       {links.map(({ id, icon, path, text }) => {
-        if (path === "admin" && userRole !== "admin") {
+        if (path === 'admin' && userRole !== 'admin') {
           return;
         }
 
         return (
           <NavLink
             to={path}
-            className="nav-link"
+            className={({ isActive }) =>
+              `${
+                isActive
+                  ? 'text-[--primary-500]'
+                  : 'text-[--text-secondary-color]'
+              } flex items-center py-4 capitalize transition-all duration-300 hover:text-[--primary-500] ${
+                isBigSidebar ? 'pl-10 hover:pl-12' : ''
+              }`
+            }
             onClick={onNavLinkClick}
             key={id}
             end
           >
-            <span className="icon">{icon}</span>
+            <span className="mr-4 grid place-items-center text-2xl">
+              {icon}
+            </span>
             {text}
           </NavLink>
         );
