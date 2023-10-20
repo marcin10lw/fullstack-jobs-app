@@ -1,15 +1,17 @@
-import { BsFillSunFill, BsFillMoonFill } from "react-icons/bs";
+import { BsFillSunFill, BsFillMoonFill } from 'react-icons/bs';
 
-import useDashboardContext from "src/hooks/useDashboardContext";
-import { Wrapper } from "src/assets/wrappers/ThemeToggle";
+import useDashboardContext from 'src/hooks/useDashboardContext';
 
 const ThemeToggle = () => {
   const { theme, toggleTheme } = useDashboardContext();
 
   return (
-    <Wrapper onClick={toggleTheme}>
-      {theme === "dark" ? <BsFillSunFill /> : <BsFillMoonFill />}
-    </Wrapper>
+    <button
+      onClick={toggleTheme}
+      className="mr-4 grid aspect-square w-6 place-items-center text-[--text-color]"
+    >
+      {theme === 'dark' ? <BsFillSunFill /> : <BsFillMoonFill />}
+    </button>
   );
 };
 

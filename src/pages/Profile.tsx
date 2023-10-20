@@ -10,6 +10,7 @@ import { FormRow, SubmitButton } from 'src/components';
 import customFetch from 'src/utils/customFetch';
 import { CustomAxiosError } from 'src/types';
 import errorMessage from 'src/utils/errorMessage';
+import userIcon from 'src/assets/images/user.svg';
 
 const Profile = () => {
   const { user } = useUser();
@@ -83,9 +84,11 @@ const Profile = () => {
                         field.value && field.value.type.includes('image/')
                           ? URL.createObjectURL(field.value)
                           : user.avatar
+                          ? user.avatar
+                          : userIcon
                       }
                       alt="user avatar"
-                      className="block object-cover"
+                      className="block h-full object-cover"
                     />
 
                     <div className="absolute inset-0 z-10 grid place-items-center bg-black opacity-0 transition-opacity duration-300 group-hover:opacity-40">

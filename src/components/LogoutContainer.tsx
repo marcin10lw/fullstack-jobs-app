@@ -1,12 +1,11 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { FaCaretDown, FaUserCircle } from "react-icons/fa";
-import { toast } from "react-toastify";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { FaCaretDown, FaUserCircle } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
-import { User } from "src/types";
-import customFetch from "src/utils/customFetch";
-import useOutsideClick from "src/hooks/useOutsideClick";
-import { Wrapper } from "src/assets/wrappers/LogoutContainer";
+import { User } from 'src/types';
+import customFetch from 'src/utils/customFetch';
+import useOutsideClick from 'src/hooks/useOutsideClick';
 
 type LogoutContainerProps = {
   user: User;
@@ -22,45 +21,53 @@ const LogoutContainer = ({ user }: LogoutContainerProps) => {
     setIsLoading(true);
 
     try {
-      await customFetch.get("/auth/logout");
-      navigate("/");
-      toast.success("Logout successfully", { position: "top-center" });
+      await customFetch.get('/auth/logout');
+      navigate('/');
+      toast.success('Logout successfully', { position: 'top-center' });
       setIsLoading(false);
     } catch (error) {
-      toast.error("Could not logout");
+      toast.error('Could not logout');
       setIsLoading(false);
     }
   };
 
   return (
-    <Wrapper ref={ref}>
+    <div ref={ref} className="relative">
       <button
         onClick={() => setShowLogout((showLogout) => !showLogout)}
         type="button"
-        className="btn logout-btn"
+        className="btn flex max-w-[140px] items-center justify-start gap-2 px-2 py-1"
       >
-        {user.avatar ? (
-          <img src={user.avatar} alt="user avatar" className="image" />
-        ) : (
-          <FaUserCircle />
-        )}
-        {user.name}
-        <FaCaretDown />
+        <div className="h-[25px] w-[25px] flex-shrink-0">
+          {user.avatar ? (
+            <img
+              src={user.avatar}
+              alt="user avatar"
+              className="h-full w-full rounded-full object-cover"
+            />
+          ) : (
+            <FaUserCircle />
+          )}
+        </div>
+        <span className="block overflow-x-clip text-ellipsis">{user.name}</span>
+        <div className="h-4 w-4 flex-shrink-0">
+          <FaCaretDown />
+        </div>
       </button>
 
       {showLogout && (
-        <div className="dropdown">
+        <div className="absolute left-1/2 top-[calc(100%_+_20px)] w-full -translate-x-1/2 rounded-[--border-radius] bg-[--primary-500]">
           <button
             onClick={logoutUser}
             disabled={isLoading}
             type="button"
-            className="dropdown-btn"
+            className="w-full cursor-pointer rounded-[--border-radius] p-2 capitalize tracking-[--letter-spacing] text-[--white]"
           >
             logout
           </button>
         </div>
       )}
-    </Wrapper>
+    </div>
   );
 };
 
