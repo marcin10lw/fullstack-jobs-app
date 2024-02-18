@@ -3,7 +3,7 @@ import { ChartsContainer, StatsContainer } from 'src/components';
 import NotFound from 'src/components/NotFound';
 
 import { ApiStatsResponse } from 'src/types';
-import customFetch from 'src/utils/customFetch';
+import customFetch from 'src/helpers/customFetch';
 
 const Stats = () => {
   const { data, status } = useQuery({

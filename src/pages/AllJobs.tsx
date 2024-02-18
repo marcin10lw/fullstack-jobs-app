@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router-dom";
 
-import customFetch from "src/utils/customFetch";
+import customFetch from "src/helpers/customFetch";
 import SearchContainer from "src/components/SearchContainer";
 import JobsContainer from "src/components/JobsContainer";
 import { ApiJobsResponse, SearchParamsObject } from "src/types";

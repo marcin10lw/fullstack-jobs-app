@@ -1,8 +1,8 @@
 import { PropsWithChildren, createContext, useEffect, useState } from "react";
 
 import { Theme, User } from "src/types";
-import { checkDefaultTheme } from "src/utils/checkDefaultTheme";
-import { saveValueToLocalStorage } from "src/utils/localStorage";
+import { checkDefaultTheme } from "src/helpers/checkDefaultTheme";
+import { saveValueToLocalStorage } from "src/helpers/localStorage";
 
 type DashboardState = {
   showSidebar: boolean;

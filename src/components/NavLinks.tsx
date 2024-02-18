@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 
 import useDashboardContext from 'src/hooks/useDashboardContext';
 import { UserRole } from 'src/types';
-import { links } from 'src/utils/links';
+import { links } from 'src/helpers/links';
 
 type NavLinksProps = {
   isBigSidebar?: boolean;

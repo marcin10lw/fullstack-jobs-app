@@ -88,7 +88,7 @@ html {
   --input-error: var(--dark-mode-input-error);
 }
 
-body {
+/* body {
   background: var(--background-color);
   color: var(--text-color);
   font-family:
@@ -105,7 +105,7 @@ body {
     sans-serif;
   font-weight: 400;
   line-height: 1;
-}
+} */
 
 p {
   margin: 0;

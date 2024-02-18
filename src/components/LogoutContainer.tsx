@@ -4,7 +4,7 @@ import { FaCaretDown, FaUserCircle } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 
 import { User } from 'src/types';
-import customFetch from 'src/utils/customFetch';
+import customFetch from 'src/helpers/customFetch';
 import useOutsideClick from 'src/hooks/useOutsideClick';
 
 type LogoutContainerProps = {

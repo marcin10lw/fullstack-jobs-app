@@ -1,10 +1,7 @@
-import { useLayoutEffect } from "react";
-import {
-  RouterProvider,
-  createHashRouter,
-} from "react-router-dom";
+import { useLayoutEffect } from 'react';
+import { RouterProvider, createHashRouter } from 'react-router-dom';
 
-import { checkDefaultTheme } from "./utils/checkDefaultTheme";
+import { checkDefaultTheme } from './helpers/checkDefaultTheme';
 import {
   HomeLayout,
   Landing,
@@ -18,11 +15,12 @@ import {
   Profile,
   Admin,
   EditJob,
-} from "./pages";
+} from './pages';
+import { ROUTES } from './routes';
 
 const router = createHashRouter([
   {
-    path: "/",
+    path: '/',
     element: <HomeLayout />,
     errorElement: <Error />,
     children: [
@@ -31,17 +29,17 @@ const router = createHashRouter([
         element: <Landing />,
       },
       {
-        path: "register",
+        path: ROUTES.register,
         element: <Register />,
       },
       {
-        path: "login",
+        path: ROUTES.login,
         element: <Login />,
       },
     ],
   },
   {
-    path: "/dashboard",
+    path: '/dashboard',
     element: <DashboardLayout />,
     errorElement: <Error />,
     children: [
@@ -50,23 +48,23 @@ const router = createHashRouter([
         element: <AddJob />,
       },
       {
-        path: "stats",
+        path: 'stats',
         element: <Stats />,
       },
       {
-        path: "all-jobs",
+        path: 'all-jobs',
         element: <AllJobs />,
       },
       {
-        path: "profile",
+        path: 'profile',
         element: <Profile />,
       },
       {
-        path: "admin",
+        path: 'admin',
         element: <Admin />,
       },
       {
-        path: "edit-job/:id",
+        path: 'edit-job/:id',
         element: <EditJob />,
       },
     ],
@@ -79,7 +77,7 @@ const App = () => {
   const theme = checkDefaultTheme();
 
   useLayoutEffect(() => {
-    document.body.classList.toggle("dark-theme", theme === "dark");
+    document.body.classList.toggle('dark-theme', theme === 'dark');
   }, [theme]);
 
   return <RouterProvider router={router} />;

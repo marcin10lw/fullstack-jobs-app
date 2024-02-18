@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'react-toastify';
 
-import customFetch from 'src/utils/customFetch';
+import customFetch from 'src/helpers/customFetch';
 import { useUser } from './DashboardLayout';
 import { FormRow, FormRowSelect, SubmitButton } from 'src/components';
 import {
@@ -14,7 +14,7 @@ import {
   jobTypeItems,
 } from 'src/models/Job';
 import { CustomAxiosError } from 'src/types';
-import errorMessage from 'src/utils/errorMessage';
+import errorMessage from 'src/helpers/errorMessage';
 
 const AddJob = () => {
   const { user } = useUser();

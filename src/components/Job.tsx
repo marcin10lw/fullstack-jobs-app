@@ -7,9 +7,9 @@ import advancedFormat from 'dayjs/plugin/advancedFormat';
 dayjs.extend(advancedFormat);
 
 import { Job as JobType } from 'src/models/Job';
-import customFetch from 'src/utils/customFetch';
+import customFetch from 'src/helpers/customFetch';
 import { CustomAxiosError } from 'src/types';
-import errorMessage from 'src/utils/errorMessage';
+import errorMessage from 'src/helpers/errorMessage';
 
 type JobInfoProps = {
   icon: JSX.Element;

@@ -1,7 +1,7 @@
 import { useLocation, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
-import customFetch from "src/utils/customFetch";
+import customFetch from "src/helpers/customFetch";
 import { Job as JobType } from "src/models/Job";
 import NotFound from "src/components/NotFound";
 import EditJobForm from "./EditJobForm";

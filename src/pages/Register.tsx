@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 
 import { CustomAxiosError } from 'src/types';
-import customFetch from 'src/utils/customFetch';
+import customFetch from 'src/helpers/customFetch';
 import { Logo, FormRow, SubmitButton } from 'src/components';
 import { RegisterFormData, registerFormData } from 'src/models/Register';
 

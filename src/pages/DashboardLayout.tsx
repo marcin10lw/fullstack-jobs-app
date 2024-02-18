@@ -2,7 +2,7 @@ import { Navigate, Outlet, useOutletContext } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
 import { User } from 'src/types';
-import customFetch from 'src/utils/customFetch';
+import customFetch from 'src/helpers/customFetch';
 import DashboardProvider from 'src/context/DashboardContext';
 import { BigSidebar, Navbar, SmallSidebar } from 'src/components';
 
