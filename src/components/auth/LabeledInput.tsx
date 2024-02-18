@@ -24,7 +24,9 @@ const LabeledInput = ({
       </Label>
       <Input {...register} type={type} id={name} />
       {error?.message && (
-        <p className="text-destructive text-xs font-medium mt-1">{error.message}</p>
+        <p className="text-destructive mt-1 text-xs font-medium capitalize">
+          {error.message}
+        </p>
       )}
     </div>
   );
