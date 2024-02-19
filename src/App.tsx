@@ -77,7 +77,7 @@ const App = () => {
   const theme = checkDefaultTheme();
 
   useLayoutEffect(() => {
-    document.body.classList.toggle('dark-theme', theme === 'dark');
+    document.body.classList.toggle('dark', theme === 'dark');
   }, [theme]);
 
   return <RouterProvider router={router} />;

@@ -8,6 +8,7 @@ interface LabeledInputProps {
   label: string;
   error?: FieldError;
   register?: UseFormRegisterReturn;
+  children?: React.ReactNode;
 }
 
 const LabeledInput = ({
@@ -16,6 +17,7 @@ const LabeledInput = ({
   name,
   type = 'text',
   error,
+  children,
 }: LabeledInputProps) => {
   return (
     <div>
@@ -24,10 +26,11 @@ const LabeledInput = ({
       </Label>
       <Input {...register} type={type} id={name} />
       {error?.message && (
-        <p className="text-destructive mt-1 text-xs font-medium capitalize">
+        <p className="mt-1 text-xs font-medium capitalize text-destructive">
           {error.message}
         </p>
       )}
+      {children}
     </div>
   );
 };

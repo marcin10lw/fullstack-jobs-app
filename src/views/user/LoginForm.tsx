@@ -50,7 +50,7 @@ const LoginForm = () => {
             </Button>
           </div>
           {errors.password?.message && (
-            <p className="text-destructive mt-1 text-xs font-medium capitalize">
+            <p className="mt-1 text-xs font-medium capitalize text-destructive">
               {errors.password.message}
             </p>
           )}
@@ -85,10 +85,10 @@ const LoginForm = () => {
       <p className="mt-6 text-center leading-6">
         Not a member yet?{' '}
         <Link
-          to={ROUTES.login}
-          className="text-primary ml-1 font-medium tracking-wide"
+          to={ROUTES.register}
+          className="ml-1 font-medium tracking-wide text-primary"
         >
-          Login
+          Register
         </Link>
       </p>
     </form>

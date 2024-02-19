@@ -1,8 +1,8 @@
-import { PropsWithChildren, createContext, useEffect, useState } from "react";
+import { PropsWithChildren, createContext, useEffect, useState } from 'react';
 
-import { Theme, User } from "src/types";
-import { checkDefaultTheme } from "src/helpers/checkDefaultTheme";
-import { saveValueToLocalStorage } from "src/helpers/localStorage";
+import { Theme, User } from 'src/types';
+import { checkDefaultTheme } from 'src/helpers/checkDefaultTheme';
+import { saveValueToLocalStorage } from 'src/helpers/localStorage';
 
 type DashboardState = {
   showSidebar: boolean;
@@ -19,17 +19,17 @@ const DashboardProvider = ({ children }: PropsWithChildren) => {
 
   const toggleTheme = () => {
     setTheme((theme) => {
-      if (theme === "dark") {
-        return "light";
+      if (theme === 'dark') {
+        return 'light';
       }
 
-      return "dark";
+      return 'dark';
     });
   };
 
   useEffect(() => {
-    saveValueToLocalStorage("theme", theme);
-    document.body.classList.toggle("dark-theme", theme === "dark");
+    saveValueToLocalStorage('theme', theme);
+    document.body.classList.toggle('dark', theme === 'dark');
   }, [theme]);
 
   const toggleSidebar = () => {
