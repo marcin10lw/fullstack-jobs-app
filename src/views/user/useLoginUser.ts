@@ -3,8 +3,8 @@ import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from 'src/components/ui/use-toast';
+import { userAPI } from 'src/infrasctucture/user/userApiAdapter';
 
-import customFetch from 'src/helpers/customFetch';
 import { LoginFormData, loginFormData } from 'src/models/Login';
 import { ROUTES } from 'src/routes';
 import { CustomAxiosError } from 'src/types';
@@ -23,9 +23,7 @@ const useLoginUser = () => {
   });
 
   const { mutate: loginUser, status } = useMutation({
-    mutationFn: (formData: LoginFormData) => {
-      return customFetch.post('/auth/login', formData);
-    },
+    mutationFn: userAPI.loginUser,
     onSuccess: () => {
       navigate(ROUTES.dashboard);
     },
