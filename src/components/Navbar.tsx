@@ -1,25 +1,30 @@
-import { FaAlignLeft } from 'react-icons/fa';
-
-import { User } from 'src/types';
-import useDashboardContext from 'src/hooks/useDashboardContext';
+import { AlignJustify, ListCollapse } from 'lucide-react';
 import { Logo, LogoutContainer, ThemeToggle } from 'src/components';
+import useDashboardContext from 'src/hooks/useDashboardContext';
+import { cn } from 'src/lib/utils';
+import { User } from 'src/types';
 
 type NavbarProps = {
   user: User;
 };
 
 const Navbar = ({ user }: NavbarProps) => {
-  const { toggleSidebar } = useDashboardContext();
+  const { showSidebar, toggleSidebar } = useDashboardContext();
 
   return (
-    <nav className="top-0 z-[99] flex h-[--nav-height] items-center justify-center bg-[--background-secondary-color] shadow-[0_1px_0_0_rgba(0,_0,_0,_0.1)] lg:sticky">
+    <nav className="top-0 z-[99] flex h-24 items-center justify-center border-b-2 border-b-border bg-background shadow-sm lg:sticky">
       <div className="flex w-[90vw] items-center justify-between lg:w-[90%]">
         <button
           onClick={toggleSidebar}
           type="button"
-          className="flex-shrink-0 text-3xl text-[--primary-500]"
+          className="flex-shrink-0 text-3xl text-primary"
         >
-          <FaAlignLeft />
+          <AlignJustify className="block lg:hidden" />
+          <ListCollapse
+            className={cn('hidden transition-transform duration-300 lg:block', {
+              'rotate-180': showSidebar,
+            })}
+          />
         </button>
         <div className="flex w-[100px] items-center">
           <div className="hidden sm:block lg:hidden">

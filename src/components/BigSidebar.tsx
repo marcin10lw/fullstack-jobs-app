@@ -1,6 +1,7 @@
 import { NavLinks, Logo } from 'src/components';
 import { UserRole } from 'src/types';
 import useDashboardContext from 'src/hooks/useDashboardContext';
+import { cn } from 'src/lib/utils';
 
 type BigSidebarProps = {
   userRole: UserRole;
@@ -10,14 +11,17 @@ const BigSidebar = ({ userRole }: BigSidebarProps) => {
   const { showSidebar } = useDashboardContext();
 
   return (
-    <aside className="hidden shadow-[1px_0px_0px_0px_rgba(0,_0,_0,_0.1)] lg:block">
+    <aside className="hidden lg:block">
       <div
-        className={`-ml-[250px] h-full min-h-screen w-[250px] bg-[--background-secondary-color] transition-all duration-300 ease-in-out ${
-          showSidebar ? '' : 'ml-0'
-        }`}
+        className={cn(
+          '-ml-[250px] h-full min-h-screen w-[250px] border-r-2 border-r-border bg-background shadow-xl ease-in-out [transition:margin_300ms_ease-in-out]',
+          {
+            'ml-0': showSidebar,
+          },
+        )}
       >
-        <div className="fixed top-0">
-          <header className="flex h-[--nav-height] items-center pl-10">
+        <div className="sticky top-0">
+          <header className="flex h-24 items-center pl-10">
             <Logo />
           </header>
           <NavLinks isBigSidebar userRole={userRole} />

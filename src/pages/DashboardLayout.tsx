@@ -5,6 +5,7 @@ import { User } from 'src/types';
 import customFetch from 'src/helpers/customFetch';
 import DashboardProvider from 'src/context/DashboardContext';
 import { BigSidebar, Navbar, SmallSidebar } from 'src/components';
+import { ROUTES } from 'src/routes';
 
 type ContextType = { user: User };
 
@@ -26,7 +27,7 @@ const DashboardLayout = () => {
 
   return (
     <>
-      {isError && <Navigate to="/login" />}
+      {isError && <Navigate to={ROUTES.login} />}
       {isSuccess && (
         <DashboardProvider>
           <section>

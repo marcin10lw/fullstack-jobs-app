@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import useDashboardContext from 'src/hooks/useDashboardContext';
 import { UserRole } from 'src/types';
 import { links } from 'src/helpers/links';
+import { cn } from 'src/lib/utils';
 
 type NavLinksProps = {
   isBigSidebar?: boolean;
@@ -29,22 +30,23 @@ const NavLinks = ({ isBigSidebar, userRole }: NavLinksProps) => {
           <NavLink
             to={path}
             className={({ isActive }) =>
-              `${
-                isActive
-                  ? 'text-[--primary-500]'
-                  : 'text-[--text-secondary-color]'
-              } flex items-center py-4 capitalize transition-all duration-300 hover:text-[--primary-500] ${
-                isBigSidebar ? 'pl-10 hover:pl-12' : ''
-              }`
+              cn(`flex items-center py-4 capitalize`, {
+                'pl-10': isBigSidebar,
+                'border-y border-y-primary': isActive && isBigSidebar,
+                group: !isActive && isBigSidebar,
+                'border-b border-b-primary': !isBigSidebar && isActive,
+              })
             }
             onClick={onNavLinkClick}
             key={id}
             end
           >
-            <span className="mr-4 grid place-items-center text-2xl">
-              {icon}
-            </span>
-            {text}
+            <div className="flex items-center text-primary [transition:padding_150ms_ease-in-out] group-hover:pl-2">
+              <span className="mr-4 grid place-items-center text-2xl">
+                {icon}
+              </span>
+              {text}
+            </div>
           </NavLink>
         );
       })}
