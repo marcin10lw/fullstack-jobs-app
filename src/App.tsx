@@ -39,7 +39,7 @@ const router = createHashRouter([
     ],
   },
   {
-    path: '/dashboard',
+    path: ROUTES.dashboard,
     element: <DashboardLayout />,
     errorElement: <Error />,
     children: [
