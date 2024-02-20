@@ -30,6 +30,7 @@ const LoginForm = () => {
           <Label htmlFor="password" className="capitalize">
             password
           </Label>
+
           <div className="relative">
             <Input
               {...register('password')}
@@ -65,7 +66,7 @@ const LoginForm = () => {
         {status === 'loading' ? (
           <Loader2 className="animate-spin" />
         ) : (
-          'Sign up'
+          'Sign in'
         )}
       </Button>
 

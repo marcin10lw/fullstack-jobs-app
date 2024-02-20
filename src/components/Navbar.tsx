@@ -1,8 +1,8 @@
 import { AlignJustify, ListCollapse } from 'lucide-react';
 import { Logo, LogoutContainer, ThemeToggle } from 'src/components';
 import useDashboardContext from 'src/hooks/useDashboardContext';
+import { User } from 'src/infrasctucture/user/types';
 import { cn } from 'src/lib/utils';
-import { User } from 'src/types';
 
 type NavbarProps = {
   user: User;

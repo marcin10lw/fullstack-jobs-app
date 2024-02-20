@@ -1,6 +1,6 @@
 import { NavLinks, Logo } from 'src/components';
-import { UserRole } from 'src/types';
 import useDashboardContext from 'src/hooks/useDashboardContext';
+import { UserRole } from 'src/infrasctucture/user/types';
 import { cn } from 'src/lib/utils';
 
 type BigSidebarProps = {

@@ -1,27 +1,13 @@
-import { AxiosError } from "axios";
-import { Job } from "./models/Job";
+import { AxiosError } from 'axios';
+import { Job } from './models/Job';
 
 export type SearchOnChange = React.ChangeEvent<
   HTMLInputElement | HTMLSelectElement
 >;
 
-export type Theme = "light" | "dark";
+export type Theme = 'light' | 'dark';
 
 export type CustomAxiosError = AxiosError<{ msg?: string }>;
-
-export type UserRole = "admin" | "user";
-
-export type User = {
-  name: string;
-  lastName: string;
-  createdAt: string;
-  email: string;
-  location: string;
-  role: UserRole;
-  _id: string;
-  avatar?: string;
-  avatarPublicId?: string;
-};
 
 export type DefaultStats = {
   pending: number;
@@ -48,8 +34,8 @@ export type ApiStatsResponse = {
 
 export type SearchParamsObject = {
   search?: string;
-  jobStatus?: "all" | "pending" | "interview" | "declined";
-  jobType?: "all" | "full-time" | "part-time" | "internship";
-  sort?: "newest" | "oldest" | "a-z" | "z-a";
+  jobStatus?: 'all' | 'pending' | 'interview' | 'declined';
+  jobType?: 'all' | 'full-time' | 'part-time' | 'internship';
+  sort?: 'newest' | 'oldest' | 'a-z' | 'z-a';
   page?: string;
 };

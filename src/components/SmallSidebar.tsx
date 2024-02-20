@@ -1,7 +1,8 @@
-import { FaTimes } from 'react-icons/fa';
+import { X } from 'lucide-react';
 
 import useDashboardContext from 'src/hooks/useDashboardContext';
 import { Logo, NavLinks } from 'src/components';
+import { cn } from 'src/lib/utils';
 import { UserRole } from 'src/types';
 
 type SmallSidebarProps = {
@@ -14,19 +15,21 @@ const SmallSidebar = ({ userRole }: SmallSidebarProps) => {
   return (
     <aside className="lg:hidden">
       <div
-        className={`fixed inset-0 flex items-center justify-center bg-black/70 transition-opacity duration-300 ease-in-out ${
-          showSidebar
-            ? 'visible z-[99] opacity-100'
-            : 'invisible z-[-1] opacity-0'
-        }`}
+        className={cn(
+          `fixed inset-0 flex items-center justify-center bg-black/50 transition-opacity duration-300 ease-in-out`,
+          {
+            'visible z-[99] opacity-100': showSidebar,
+            'invisible z-[-1] opacity-0': !showSidebar,
+          },
+        )}
       >
-        <div className="relative flex h-[95vh] w-[--fluid-width] flex-col items-center rounded-[--border-radius] bg-[--background-secondary-color] p-[4rem_2rem]">
+        <div className="relative flex h-[95vh] w-[90%] flex-col items-center rounded-md bg-secondary-foreground p-[4rem_2rem]">
           <button
             onClick={toggleSidebar}
             type="button"
-            className="absolute left-[10px] top-[10px] text-[2rem] text-[--red-dark]"
+            className="absolute left-[10px] top-[10px] text-[2rem] text-destructive"
           >
-            <FaTimes />
+            <X className="h-8 w-8" />
           </button>
           <header>
             <Logo />
