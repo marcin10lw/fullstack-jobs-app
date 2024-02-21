@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import mainBackground from 'src/assets/images/main.svg';
-import { Logo } from 'src/components';
+import Logo from 'src/components/Logo';
 import { buttonVariants } from 'src/components/ui/button';
 import { ROUTES } from 'src/routes';
 

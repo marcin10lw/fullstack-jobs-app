@@ -20,7 +20,7 @@ type LogoutContainerProps = {
   user: User;
 };
 
-const LogoutContainer = ({ user }: LogoutContainerProps) => {
+const UserAvatar = ({ user }: LogoutContainerProps) => {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const navigate = useNavigate();
 
@@ -103,4 +103,4 @@ const LogoutContainer = ({ user }: LogoutContainerProps) => {
   );
 };
 
-export default LogoutContainer;
+export default UserAvatar;

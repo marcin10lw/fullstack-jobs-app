@@ -1,8 +1,10 @@
 import { AlignJustify, ListCollapse } from 'lucide-react';
-import { Logo, LogoutContainer, ThemeToggle } from 'src/components';
+import Logo from 'src/components/Logo';
 import useDashboardContext from 'src/hooks/useDashboardContext';
 import { User } from 'src/infrasctucture/user/types';
 import { cn } from 'src/lib/utils';
+import ThemeToggle from './ThemeToggle';
+import UserAvatar from 'src/components/UserAvatar';
 
 type NavbarProps = {
   user: User;
@@ -34,7 +36,7 @@ const Navbar = ({ user }: NavbarProps) => {
         </div>
         <div className="flex items-center">
           <ThemeToggle />
-          <LogoutContainer user={user} />
+          <UserAvatar user={user} />
         </div>
       </div>
     </nav>

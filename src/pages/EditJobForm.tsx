@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'react-toastify';
 
-import { FormRow, FormRowSelect, SubmitButton } from 'src/components';
 import {
   InferJob,
   Job as JobType,
@@ -15,6 +14,9 @@ import {
 import customFetch from 'src/helpers/customFetch';
 import { CustomAxiosError } from 'src/types';
 import errorMessage from 'src/helpers/errorMessage';
+import FormRow from 'src/components/FormRow';
+import FormRowSelect from 'src/components/FormRowSelect';
+import SubmitButton from 'src/components/SubmitButton';
 
 type EditJobFormProps = {
   job: JobType;

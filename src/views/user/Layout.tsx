@@ -1,4 +1,3 @@
-import { Logo } from 'src/components';
 import {
   Card,
   CardContent,
@@ -6,6 +5,7 @@ import {
   CardTitle,
 } from 'src/components/ui/card';
 import mainBackground from 'src/assets/images/main.svg';
+import Logo from 'src/components/Logo';
 
 interface LayoutProps {
   title: string;

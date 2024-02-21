@@ -4,13 +4,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'react-toastify';
 import { AiOutlinePlus } from 'react-icons/ai';
 
-import { useUser } from './DashboardLayout';
+import { useUser } from '../views/dashboard/DashboardLayout';
 import { UpdatedUser, updateUserSchema } from 'src/models/User';
-import { FormRow, SubmitButton } from 'src/components';
 import customFetch from 'src/helpers/customFetch';
 import { CustomAxiosError } from 'src/types';
 import errorMessage from 'src/helpers/errorMessage';
 import userIcon from 'src/assets/images/user.svg';
+import FormRow from 'src/components/FormRow';
+import SubmitButton from 'src/components/SubmitButton';
 
 const Profile = () => {
   const { user } = useUser();

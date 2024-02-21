@@ -1,6 +1,6 @@
 import { ApiJobsResponse } from 'src/types';
 import PageBtnContainer from './PageBtnContainer';
-import { Job } from 'src/components';
+import Job from './Job';
 
 type JobsContainerProps = {
   jobsData: ApiJobsResponse;

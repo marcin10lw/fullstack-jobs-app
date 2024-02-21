@@ -5,8 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'react-toastify';
 
 import customFetch from 'src/helpers/customFetch';
-import { useUser } from './DashboardLayout';
-import { FormRow, FormRowSelect, SubmitButton } from 'src/components';
+import { useUser } from '../views/dashboard/DashboardLayout';
 import {
   InferJob,
   jobSchema,
@@ -15,6 +14,9 @@ import {
 } from 'src/models/Job';
 import { CustomAxiosError } from 'src/types';
 import errorMessage from 'src/helpers/errorMessage';
+import FormRow from 'src/components/FormRow';
+import FormRowSelect from 'src/components/FormRowSelect';
+import SubmitButton from 'src/components/SubmitButton';
 
 const AddJob = () => {
   const { user } = useUser();

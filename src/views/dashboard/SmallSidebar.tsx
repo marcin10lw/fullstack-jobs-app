@@ -1,9 +1,10 @@
 import { X } from 'lucide-react';
+import Logo from 'src/components/Logo';
 
 import useDashboardContext from 'src/hooks/useDashboardContext';
-import { Logo, NavLinks } from 'src/components';
+import { UserRole } from 'src/infrasctucture/user/types';
 import { cn } from 'src/lib/utils';
-import { UserRole } from 'src/types';
+import NavLinks from './NavLinks';
 
 type SmallSidebarProps = {
   userRole: UserRole;

@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { FaSuitcaseRolling, FaCalendarCheck } from 'react-icons/fa';
 
 import customFetch from 'src/helpers/customFetch';
-import { StatItem } from 'src/components';
+import StatItem from 'src/components/StatItem';
 
 const Admin = () => {
   const navigate = useNavigate();

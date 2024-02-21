@@ -2,11 +2,13 @@ import { Navigate, Outlet, useOutletContext } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
 import DashboardProvider from 'src/context/DashboardContext';
-import { BigSidebar, Navbar, SmallSidebar } from 'src/components';
 import { ROUTES } from 'src/routes';
 import { userAPI } from 'src/infrasctucture/user/userApiAdapter';
 import { User } from 'src/infrasctucture/user/types';
 import { CURRENT_USER_QUERY_KEY } from 'src/infrasctucture/user/constants';
+import SmallSidebar from './SmallSidebar';
+import BigSidebar from './BigSidebar';
+import Navbar from './Navbar';
 
 type ContextType = { user: User };
 
@@ -29,7 +31,7 @@ const DashboardLayout = () => {
         <DashboardProvider>
           <section>
             <main className="grid grid-cols-1 lg:grid-cols-[auto_1fr]">
-              <SmallSidebar userRole={userResponse.user} />
+              <SmallSidebar userRole={userResponse.user.role} />
               <BigSidebar userRole={userResponse.user.role} />
               <div>
                 <Navbar user={userResponse.user} />

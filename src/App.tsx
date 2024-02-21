@@ -5,7 +5,6 @@ import { checkDefaultTheme } from './helpers/checkDefaultTheme';
 import {
   HomeLayout,
   Landing,
-  DashboardLayout,
   Register,
   Login,
   Error,
@@ -17,6 +16,7 @@ import {
   EditJob,
 } from './pages';
 import { ROUTES } from './routes';
+import DashboardLayout from './views/dashboard/DashboardLayout';
 
 const router = createHashRouter([
   {
