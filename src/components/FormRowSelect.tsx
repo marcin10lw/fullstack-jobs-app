@@ -15,7 +15,6 @@ const FormRowSelect = ({
   name,
   labelText,
   register,
-  error,
   value,
   options,
   onInputChange,

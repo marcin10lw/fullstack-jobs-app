@@ -29,14 +29,14 @@ const DashboardLayout = () => {
         <DashboardProvider>
           <section>
             <main className="grid grid-cols-1 lg:grid-cols-[auto_1fr]">
-              <SmallSidebar userRole={userResponse.data.role} />
-              <BigSidebar userRole={userResponse.data.role} />
+              <SmallSidebar userRole={userResponse.user} />
+              <BigSidebar userRole={userResponse.user.role} />
               <div>
-                <Navbar user={userResponse.data} />
+                <Navbar user={userResponse.user} />
 
                 <div className="mx-auto w-[90vw] py-8 lg:w-[90%]">
                   <Outlet
-                    context={{ user: userResponse.data } satisfies ContextType}
+                    context={{ user: userResponse.user } satisfies ContextType}
                   />
                 </div>
               </div>
@@ -50,6 +50,7 @@ const DashboardLayout = () => {
 
 export default DashboardLayout;
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useUser = () => {
   return useOutletContext<ContextType>();
 };

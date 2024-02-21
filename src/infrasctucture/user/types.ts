@@ -1,6 +1,6 @@
 export type UserRole = 'admin' | 'user';
 
-export type User = {
+export interface User {
   name: string;
   lastName: string;
   createdAt: string;
@@ -10,4 +10,8 @@ export type User = {
   _id: string;
   avatar?: string;
   avatarPublicId?: string;
-};
+}
+
+export interface UserApiResponse {
+  user: User;
+}

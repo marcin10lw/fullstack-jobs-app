@@ -1,6 +1,6 @@
 import { PropsWithChildren, createContext, useEffect, useState } from 'react';
 
-import { Theme, User } from 'src/types';
+import { Theme } from 'src/types';
 import { checkDefaultTheme } from 'src/helpers/checkDefaultTheme';
 import { saveValueToLocalStorage } from 'src/helpers/localStorage';
 

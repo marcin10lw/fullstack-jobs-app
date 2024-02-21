@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { FaCaretDown, FaUserCircle } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 
-import { User } from 'src/types';
 import customFetch from 'src/helpers/customFetch';
 import useOutsideClick from 'src/hooks/useOutsideClick';
+import { User } from 'src/infrasctucture/user/types';
 
 type LogoutContainerProps = {
   user: User;
@@ -24,9 +24,9 @@ const LogoutContainer = ({ user }: LogoutContainerProps) => {
       await customFetch.get('/auth/logout');
       navigate('/');
       toast.success('Logout successfully', { position: 'top-center' });
-      setIsLoading(false);
     } catch (error) {
       toast.error('Could not logout');
+    } finally {
       setIsLoading(false);
     }
   };
