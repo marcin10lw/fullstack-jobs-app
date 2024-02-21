@@ -1,5 +1,6 @@
 export const USER_API_URLS = {
-  login: '/auth/login',
-  register: '/auth/register',
+  loginUser: '/auth/login',
+  registerUser: '/auth/register',
   getCurrentUser: '/users/current-user',
+  logoutCurrentUser: '/auth/logout',
 };

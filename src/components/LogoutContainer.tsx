@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { Loader2 } from 'lucide-react';
 
-import customFetch from 'src/helpers/customFetch';
+import { useToast } from './ui/use-toast';
 import { getUserInitials } from 'src/helpers/getUserInitials';
 import { User } from 'src/infrasctucture/user/types';
+import { userAPI } from 'src/infrasctucture/user/userApiAdapter';
 import { ROUTES } from 'src/routes';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
 import {
@@ -14,39 +15,41 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from './ui/dropdown-menu';
-import { Loader2 } from 'lucide-react';
 
 type LogoutContainerProps = {
   user: User;
 };
 
 const LogoutContainer = ({ user }: LogoutContainerProps) => {
-  const [showDropdown, setShowDropdown] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const navigate = useNavigate();
+
+  const { toast } = useToast();
 
   const logoutUser = async () => {
     setIsLoggingOut(true);
 
     try {
       await new Promise((_, reject) => setTimeout(reject, 4000));
-      await customFetch.get('/auth/logout');
+      await userAPI.logoutUser();
       navigate('/');
-      toast.success('Logout successfully', { position: 'top-center' });
+      toast({
+        title: 'Successfully logout',
+        variant: 'success',
+      });
     } catch (error) {
-      toast.error('Could not logout');
+      toast({
+        title: 'Could not logout',
+        description: 'Please try again',
+        variant: 'destructive',
+      });
     } finally {
       setIsLoggingOut(false);
     }
   };
 
   return (
-    <DropdownMenu
-      open={showDropdown}
-      onOpenChange={() => {
-        setShowDropdown((prev) => !prev);
-      }}
-    >
+    <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Avatar className="size-8 cursor-pointer">
           <AvatarImage
@@ -60,7 +63,7 @@ const LogoutContainer = ({ user }: LogoutContainerProps) => {
         </Avatar>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent align="end" className="z-[1000] w-40">
+      <DropdownMenuContent align="end" className="w-50 z-[1000]">
         <div className="flex flex-col gap-1 p-2">
           <p className="truncate">Hello {user.name}!</p>
           <p className="truncate text-sm text-muted-foreground">{user.email}</p>
@@ -72,8 +75,22 @@ const LogoutContainer = ({ user }: LogoutContainerProps) => {
           </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
+        {user.role === 'admin' && (
+          <DropdownMenuItem>
+            <Link to={ROUTES.admin} className="w-full">
+              Admin
+            </Link>
+          </DropdownMenuItem>
+        )}
+        <DropdownMenuSeparator />
         <DropdownMenuItem className="cursor-pointer">
-          <button className="w-full text-start" onClick={logoutUser}>
+          <button
+            className="w-full text-start"
+            onClick={(event) => {
+              event.stopPropagation();
+              logoutUser();
+            }}
+          >
             {isLoggingOut ? (
               <Loader2 className="size-4 animate-spin" />
             ) : (
