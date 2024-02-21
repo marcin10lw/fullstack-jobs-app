@@ -10,7 +10,7 @@ type NavbarProps = {
 
 const Navbar = ({ user }: NavbarProps) => {
   const { showSidebar, toggleSidebar } = useDashboardContext();
-
+  console.log(user);
   return (
     <nav className="top-0 z-[99] flex h-24 items-center justify-center border-b-2 border-b-border bg-background shadow-sm lg:sticky">
       <div className="flex w-[90vw] items-center justify-between lg:w-[90%]">
@@ -30,7 +30,7 @@ const Navbar = ({ user }: NavbarProps) => {
           <div className="hidden sm:block lg:hidden">
             <Logo />
           </div>
-          <h4 className="hidden lg:block">dashboard</h4>
+          <h4 className="hidden text-2xl lg:block">dashboard</h4>
         </div>
         <div className="flex items-center">
           <ThemeToggle />

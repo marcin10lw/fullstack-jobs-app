@@ -1,12 +1,15 @@
-import { IoBarChartSharp } from "react-icons/io5";
-import { MdQueryStats, MdAdminPanelSettings } from "react-icons/md";
-import { FaWpforms } from "react-icons/fa";
-import { ImProfile } from "react-icons/im";
+import {
+  BarChart4,
+  CalendarPlus,
+  Contact2,
+  Lock,
+  NotebookTabs,
+} from 'lucide-react';
 
 export const links = [
-  { id: 1, text: "add job", path: ".", icon: <FaWpforms /> },
-  { id: 2, text: "all jobs", path: "all-jobs", icon: <MdQueryStats /> },
-  { id: 3, text: "stats", path: "stats", icon: <IoBarChartSharp /> },
-  { id: 4, text: "profile", path: "profile", icon: <ImProfile /> },
-  { id: 5, text: "admin", path: "admin", icon: <MdAdminPanelSettings /> },
+  { id: 1, text: 'add job', path: '.', icon: <CalendarPlus /> },
+  { id: 2, text: 'all jobs', path: 'all-jobs', icon: <NotebookTabs /> },
+  { id: 3, text: 'stats', path: 'stats', icon: <BarChart4 /> },
+  { id: 4, text: 'profile', path: 'profile', icon: <Contact2 /> },
+  { id: 5, text: 'admin', path: 'admin', icon: <Lock /> },
 ];

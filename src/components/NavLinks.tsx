@@ -36,7 +36,7 @@ const NavLinks = ({ isBigSidebar, userRole }: NavLinksProps) => {
             className={({ isActive }) =>
               cn(`flex items-center py-4 capitalize`, {
                 'pl-10': isBigSidebar,
-                'border-y-2 border-y-primary': isActive && isBigSidebar,
+                'border-y-2 border-y-primary/50': isActive && isBigSidebar,
                 group: !isActive && isBigSidebar,
                 'border-b border-b-primary': !isBigSidebar && isActive,
               })

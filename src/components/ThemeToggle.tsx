@@ -1,4 +1,4 @@
-import { BsFillSunFill, BsFillMoonFill } from 'react-icons/bs';
+import { Moon, Sun } from 'lucide-react';
 
 import useDashboardContext from 'src/hooks/useDashboardContext';
 
@@ -10,7 +10,11 @@ const ThemeToggle = () => {
       onClick={toggleTheme}
       className="mr-4 grid aspect-square w-6 place-items-center text-[--text-color]"
     >
-      {theme === 'dark' ? <BsFillSunFill /> : <BsFillMoonFill />}
+      {theme === 'dark' ? (
+        <Sun className="text-foreground" />
+      ) : (
+        <Moon className="text-foreground" />
+      )}
     </button>
   );
 };

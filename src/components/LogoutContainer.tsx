@@ -1,73 +1,88 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { FaCaretDown, FaUserCircle } from 'react-icons/fa';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import customFetch from 'src/helpers/customFetch';
-import useOutsideClick from 'src/hooks/useOutsideClick';
+import { getUserInitials } from 'src/helpers/getUserInitials';
 import { User } from 'src/infrasctucture/user/types';
+import { ROUTES } from 'src/routes';
+import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from './ui/dropdown-menu';
+import { Loader2 } from 'lucide-react';
 
 type LogoutContainerProps = {
   user: User;
 };
 
 const LogoutContainer = ({ user }: LogoutContainerProps) => {
-  const [showLogout, setShowLogout] = useState(false);
-  const ref = useOutsideClick<HTMLDivElement>(() => setShowLogout(false));
-  const [isLoading, setIsLoading] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const navigate = useNavigate();
 
   const logoutUser = async () => {
-    setIsLoading(true);
+    setIsLoggingOut(true);
 
     try {
+      await new Promise((_, reject) => setTimeout(reject, 4000));
       await customFetch.get('/auth/logout');
       navigate('/');
       toast.success('Logout successfully', { position: 'top-center' });
     } catch (error) {
       toast.error('Could not logout');
     } finally {
-      setIsLoading(false);
+      setIsLoggingOut(false);
     }
   };
 
   return (
-    <div ref={ref} className="relative">
-      <button
-        onClick={() => setShowLogout((showLogout) => !showLogout)}
-        type="button"
-        className="btn flex max-w-[140px] items-center justify-start gap-2 px-2 py-1"
-      >
-        <div className="h-[25px] w-[25px] flex-shrink-0">
-          {user.avatar ? (
-            <img
-              src={user.avatar}
-              alt="user avatar"
-              className="h-full w-full rounded-full object-cover"
-            />
-          ) : (
-            <FaUserCircle />
-          )}
-        </div>
-        <span className="block overflow-x-clip text-ellipsis">{user.name}</span>
-        <div className="h-4 w-4 flex-shrink-0">
-          <FaCaretDown />
-        </div>
-      </button>
+    <DropdownMenu
+      open={showDropdown}
+      onOpenChange={() => {
+        setShowDropdown((prev) => !prev);
+      }}
+    >
+      <DropdownMenuTrigger asChild>
+        <Avatar className="size-8 cursor-pointer">
+          <AvatarImage
+            src={user.avatar}
+            alt="profile picture"
+            className="object-cover"
+          />
+          <AvatarFallback className="text-sm">
+            {getUserInitials(user)}
+          </AvatarFallback>
+        </Avatar>
+      </DropdownMenuTrigger>
 
-      {showLogout && (
-        <div className="absolute left-1/2 top-[calc(100%_+_20px)] w-full -translate-x-1/2 rounded-[--border-radius] bg-[--primary-500]">
-          <button
-            onClick={logoutUser}
-            disabled={isLoading}
-            type="button"
-            className="w-full cursor-pointer rounded-[--border-radius] p-2 capitalize tracking-[--letter-spacing] text-[--white]"
-          >
-            logout
-          </button>
+      <DropdownMenuContent align="end" className="z-[1000] w-40">
+        <div className="flex flex-col gap-1 p-2">
+          <p className="truncate">Hello {user.name}!</p>
+          <p className="truncate text-sm text-muted-foreground">{user.email}</p>
         </div>
-      )}
-    </div>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>
+          <Link to={ROUTES.profile} className="w-full">
+            Profile
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem className="cursor-pointer">
+          <button className="w-full text-start" onClick={logoutUser}>
+            {isLoggingOut ? (
+              <Loader2 className="size-4 animate-spin" />
+            ) : (
+              'Logout'
+            )}
+          </button>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
 
