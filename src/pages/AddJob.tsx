@@ -1,11 +1,16 @@
-import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { Controller, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
+import ContentWrapper from 'src/components/ContentWrapper';
+import ErrorMessage from 'src/components/ErrorMessage';
+import LabeledInput from 'src/components/LabeledInput';
+import Select from 'src/components/Select';
+import { Button } from 'src/components/ui/button';
 import customFetch from 'src/helpers/customFetch';
-import { useUser } from '../views/dashboard/DashboardLayout';
+import errorMessage from 'src/helpers/errorMessage';
 import {
   InferJob,
   jobSchema,
@@ -13,10 +18,7 @@ import {
   jobTypeItems,
 } from 'src/models/Job';
 import { CustomAxiosError } from 'src/types';
-import errorMessage from 'src/helpers/errorMessage';
-import FormRow from 'src/components/FormRow';
-import FormRowSelect from 'src/components/FormRowSelect';
-import SubmitButton from 'src/components/SubmitButton';
+import { useUser } from '../views/dashboard/DashboardLayout';
 
 const AddJob = () => {
   const { user } = useUser();
@@ -27,6 +29,8 @@ const AddJob = () => {
     formState: { errors },
     handleSubmit,
     reset,
+    watch,
+    control,
   } = useForm<InferJob>({
     defaultValues: {
       company: '',
@@ -37,7 +41,7 @@ const AddJob = () => {
     },
     resolver: zodResolver(jobSchema),
   });
-
+  console.log(watch());
   const qc = useQueryClient();
 
   const { mutate, isLoading } = useMutation({
@@ -58,59 +62,86 @@ const AddJob = () => {
   };
 
   return (
-    <div className="w-full rounded-[--border-radius] bg-[--background-secondary-color] p-[3rem_2rem_4rem]">
-      <form
-        onSubmit={handleSubmit(onFormSubmit)}
-        className="form rounded-0 m-0 w-full max-w-full p-0 shadow-none"
-        noValidate
-      >
-        <h4 className="mb-8">add job</h4>
+    <ContentWrapper title="add job">
+      <form onSubmit={handleSubmit(onFormSubmit)} className="" noValidate>
         <div className="mt-12 grid gap-4 md:grid-cols-2 md:items-center md:gap-[2rem_1rem] lg:grid-cols-3">
-          <FormRow
+          <LabeledInput
             type="text"
             name="position"
-            labelText="position"
+            label="position"
             register={register('position')}
-            error={errors.position}
-            isDashboardRow
-          />
-          <FormRow
+          >
+            {errors.position?.message && (
+              <ErrorMessage
+                errorMessage={errors.position.message}
+                className="absolute"
+              />
+            )}
+          </LabeledInput>
+          <LabeledInput
             type="text"
             name="company"
-            labelText="company"
+            label="company"
             register={register('company')}
-            error={errors.company}
-            isDashboardRow
-          />
-          <FormRow
+          >
+            {errors.company?.message && (
+              <ErrorMessage
+                errorMessage={errors.company.message}
+                className="absolute"
+              />
+            )}
+          </LabeledInput>
+          <LabeledInput
             type="text"
             name="jobLocation"
-            labelText="job location"
+            label="job location"
             register={register('jobLocation')}
-            error={errors.jobLocation}
-            isDashboardRow
-          />
-          <FormRowSelect
+          >
+            {errors.jobLocation?.message && (
+              <ErrorMessage
+                errorMessage={errors.jobLocation.message}
+                className="absolute"
+              />
+            )}
+          </LabeledInput>
+
+          <Controller
             name="jobStatus"
-            labelText="job status"
-            register={register('jobStatus')}
-            error={errors.jobStatus}
-            options={jobStatusItems}
-          />
-          <FormRowSelect
-            name="jobType"
-            labelText="job type"
-            register={register('jobType')}
-            error={errors.jobType}
-            options={jobTypeItems}
+            control={control}
+            render={({ field: { value, onChange } }) => {
+              const onOptionChange = (value: string) => onChange(value);
+              return (
+                <Select
+                  label="job status"
+                  options={jobStatusItems}
+                  value={value}
+                  onOptionChange={onOptionChange}
+                />
+              );
+            }}
           />
 
-          <div className="mt-4 md:mt-8">
-            <SubmitButton isLoading={isLoading} isFormBtn />
-          </div>
+          <Controller
+            name="jobType"
+            control={control}
+            render={({ field: { value, onChange } }) => {
+              const onOptionChange = (value: string) => onChange(value);
+              return (
+                <Select
+                  label="job type"
+                  options={jobTypeItems}
+                  value={value}
+                  onOptionChange={onOptionChange}
+                />
+              );
+            }}
+          />
+
+          <Button>Add Job</Button>
         </div>
       </form>
-    </div>
+    </ContentWrapper>
   );
 };
+
 export default AddJob;

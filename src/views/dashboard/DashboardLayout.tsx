@@ -9,6 +9,7 @@ import { CURRENT_USER_QUERY_KEY } from 'src/infrasctucture/user/constants';
 import SmallSidebar from './SmallSidebar';
 import BigSidebar from './BigSidebar';
 import Navbar from './Navbar';
+import MaxWidthWrapper from 'src/components/MaxWidthWrapper';
 
 type ContextType = { user: User };
 
@@ -36,11 +37,11 @@ const DashboardLayout = () => {
               <div>
                 <Navbar user={userResponse.user} />
 
-                <div className="mx-auto w-[90vw] py-8 lg:w-[90%]">
+                <MaxWidthWrapper className="py-8 px-8">
                   <Outlet
                     context={{ user: userResponse.user } satisfies ContextType}
                   />
-                </div>
+                </MaxWidthWrapper>
               </div>
             </main>
           </section>

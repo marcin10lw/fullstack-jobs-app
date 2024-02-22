@@ -1,7 +1,7 @@
 import { Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-import LabeledInput from 'src/components/auth/LabeledInput';
+import LabeledInput from 'src/components/LabeledInput';
 import { Button } from 'src/components/ui/button';
 import { ROUTES } from 'src/routes';
 import { useRegisterUser } from './useRegisterUser';

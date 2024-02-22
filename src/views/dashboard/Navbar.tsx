@@ -5,6 +5,7 @@ import { User } from 'src/infrasctucture/user/types';
 import { cn } from 'src/lib/utils';
 import ThemeToggle from './ThemeToggle';
 import UserAvatar from 'src/components/UserAvatar';
+import MaxWidthWrapper from 'src/components/MaxWidthWrapper';
 
 type NavbarProps = {
   user: User;
@@ -12,10 +13,10 @@ type NavbarProps = {
 
 const Navbar = ({ user }: NavbarProps) => {
   const { showSidebar, toggleSidebar } = useDashboardContext();
-  console.log(user);
+
   return (
     <nav className="top-0 z-[99] flex h-24 items-center justify-center border-b-2 border-b-border bg-background shadow-sm lg:sticky">
-      <div className="flex w-[90vw] items-center justify-between lg:w-[90%]">
+      <MaxWidthWrapper className="flex items-center justify-between px-8">
         <button
           onClick={toggleSidebar}
           type="button"
@@ -38,7 +39,7 @@ const Navbar = ({ user }: NavbarProps) => {
           <ThemeToggle />
           <UserAvatar user={user} />
         </div>
-      </div>
+      </MaxWidthWrapper>
     </nav>
   );
 };

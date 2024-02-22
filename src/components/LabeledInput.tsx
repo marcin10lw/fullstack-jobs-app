@@ -1,6 +1,7 @@
 import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
-import { Input } from '../ui/input';
-import { Label } from '../ui/label';
+import { Input } from './ui/input';
+import { Label } from './ui/label';
+import ErrorMessage from './ErrorMessage';
 
 interface LabeledInputProps {
   type?: string;
@@ -20,16 +21,12 @@ const LabeledInput = ({
   children,
 }: LabeledInputProps) => {
   return (
-    <div>
+    <div className="relative">
       <Label htmlFor={name} className="capitalize">
         {label}
       </Label>
-      <Input {...register} type={type} id={name} />
-      {error?.message && (
-        <p className="mt-1 text-xs font-medium capitalize text-destructive">
-          {error.message}
-        </p>
-      )}
+      <Input {...register} type={type} id={name} className="mt-[2px]" />
+      {error?.message && <ErrorMessage errorMessage={error.message} />}
       {children}
     </div>
   );
