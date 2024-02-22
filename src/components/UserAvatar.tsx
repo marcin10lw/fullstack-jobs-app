@@ -30,7 +30,6 @@ const UserAvatar = ({ user }: LogoutContainerProps) => {
     setIsLoggingOut(true);
 
     try {
-      await new Promise((_, reject) => setTimeout(reject, 4000));
       await userAPI.logoutUser();
       navigate('/');
       toast({
@@ -76,13 +75,15 @@ const UserAvatar = ({ user }: LogoutContainerProps) => {
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         {user.role === 'admin' && (
-          <DropdownMenuItem>
-            <Link to={ROUTES.admin} className="w-full">
-              Admin
-            </Link>
-          </DropdownMenuItem>
+          <>
+            <DropdownMenuItem>
+              <Link to={ROUTES.admin} className="w-full">
+                Admin
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+          </>
         )}
-        <DropdownMenuSeparator />
         <DropdownMenuItem className="cursor-pointer">
           <button
             className="w-full text-start"

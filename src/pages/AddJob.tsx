@@ -1,14 +1,15 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import ContentWrapper from 'src/components/ContentWrapper';
 import ErrorMessage from 'src/components/ErrorMessage';
 import LabeledInput from 'src/components/LabeledInput';
-import Select from 'src/components/Select';
+import LabeledSelect from 'src/components/LabeledSelect';
 import { Button } from 'src/components/ui/button';
+import { Form, FormField } from 'src/components/ui/form';
 import customFetch from 'src/helpers/customFetch';
 import errorMessage from 'src/helpers/errorMessage';
 import {
@@ -24,14 +25,7 @@ const AddJob = () => {
   const { user } = useUser();
   const navigate = useNavigate();
 
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-    reset,
-    watch,
-    control,
-  } = useForm<InferJob>({
+  const form = useForm<InferJob>({
     defaultValues: {
       company: '',
       position: '',
@@ -41,10 +35,20 @@ const AddJob = () => {
     },
     resolver: zodResolver(jobSchema),
   });
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    reset,
+    control,
+    watch,
+  } = form;
   console.log(watch());
+
   const qc = useQueryClient();
 
-  const { mutate, isLoading } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: (job: InferJob) => customFetch.post('/jobs', job),
     onSuccess: async () => {
       await qc.invalidateQueries(['jobs']);
@@ -105,39 +109,34 @@ const AddJob = () => {
             )}
           </LabeledInput>
 
-          <Controller
-            name="jobStatus"
-            control={control}
-            render={({ field: { value, onChange } }) => {
-              const onOptionChange = (value: string) => onChange(value);
-              return (
-                <Select
+          <Form {...form}>
+            <FormField
+              control={control}
+              name="jobStatus"
+              render={({ field: { value, onChange } }) => (
+                <LabeledSelect
+                  value={value}
+                  onOptionChange={onChange}
                   label="job status"
                   options={jobStatusItems}
-                  value={value}
-                  onOptionChange={onOptionChange}
                 />
-              );
-            }}
-          />
-
-          <Controller
-            name="jobType"
-            control={control}
-            render={({ field: { value, onChange } }) => {
-              const onOptionChange = (value: string) => onChange(value);
-              return (
-                <Select
-                  label="job type"
+              )}
+            />
+            <FormField
+              control={control}
+              name="jobType"
+              render={({ field: { value, onChange } }) => (
+                <LabeledSelect
+                  value={value}
+                  onOptionChange={onChange}
+                  label="job types"
                   options={jobTypeItems}
-                  value={value}
-                  onOptionChange={onOptionChange}
                 />
-              );
-            }}
-          />
+              )}
+            />
+          </Form>
 
-          <Button>Add Job</Button>
+          <Button className="mt-6">Add Job</Button>
         </div>
       </form>
     </ContentWrapper>
