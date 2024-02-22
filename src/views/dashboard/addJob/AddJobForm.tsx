@@ -5,10 +5,18 @@ import { Button } from 'src/components/ui/button';
 import { Form, FormField } from 'src/components/ui/form';
 import { jobStatusItems, jobTypeItems } from 'src/models/Job';
 import useAddJob from './useAddJob';
+import { Loader2 } from 'lucide-react';
 
 const AddJobForm = () => {
-  const { form, control, errors, handleSubmit, onFormSubmit, register } =
-    useAddJob();
+  const {
+    form,
+    control,
+    errors,
+    isAddingJob,
+    handleSubmit,
+    onFormSubmit,
+    register,
+  } = useAddJob();
 
   return (
     <form onSubmit={handleSubmit(onFormSubmit)} className="" noValidate>
@@ -80,7 +88,9 @@ const AddJobForm = () => {
           />
         </Form>
 
-        <Button className="mt-6">Add Job</Button>
+        <Button disabled={isAddingJob} className="mt-6">
+          {isAddingJob ? <Loader2 className="animate-spin" /> : 'Add Job'}
+        </Button>
       </div>
     </form>
   );

@@ -2,17 +2,20 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 
-import customFetch from 'src/helpers/customFetch';
+import { useToast } from 'src/components/ui/use-toast';
 import errorMessage from 'src/helpers/errorMessage';
+import { jobAPI } from 'src/infrasctucture/job/jobApiAdapter';
 import { InferJob, jobSchema } from 'src/models/Job';
+import { ROUTES } from 'src/routes';
 import { CustomAxiosError } from 'src/types';
 import { useUser } from '../DashboardLayout';
 
 const useAddJob = () => {
   const { user } = useUser();
   const navigate = useNavigate();
+
+  const { toast } = useToast();
 
   const form = useForm<InferJob>({
     defaultValues: {
@@ -35,27 +38,34 @@ const useAddJob = () => {
 
   const qc = useQueryClient();
 
-  const { mutate } = useMutation({
-    mutationFn: (job: InferJob) => customFetch.post('/jobs', job),
+  const { mutate: addJob, isLoading: isAddingJob } = useMutation({
+    mutationFn: jobAPI.addNewJob,
     onSuccess: async () => {
-      await qc.invalidateQueries(['jobs']);
+      await qc.invalidateQueries(['jobs']); // TO REPLACE WITH CONSTANT
       reset();
-      toast.success('Job added');
-      navigate('./all-jobs');
+      toast({
+        title: 'Job added',
+        variant: 'success',
+      });
+      navigate(ROUTES.allJobs);
     },
     onError: (error: CustomAxiosError) => {
-      errorMessage(error, 'Could not find this job');
+      toast({
+        title: errorMessage(error, 'Could not find this job'),
+        variant: 'destructive',
+      });
     },
   });
 
   const onFormSubmit = (job: InferJob) => {
-    mutate(job);
+    addJob(job);
   };
 
   return {
     errors,
     control,
     form,
+    isAddingJob,
     register,
     handleSubmit,
     onFormSubmit,
