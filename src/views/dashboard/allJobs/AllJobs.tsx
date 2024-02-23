@@ -3,8 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router-dom";
 
 import customFetch from "src/helpers/customFetch";
-import SearchContainer from "src/components/SearchContainer";
-import JobsContainer from "src/components/JobsContainer";
+import SearchContainer from "src/views/dashboard/allJobs/SearchContainer";
+import JobsContainer from "src/views/dashboard/allJobs/JobsContainer";
 import { ApiJobsResponse, SearchParamsObject } from "src/types";
 
 const searchParamsDefaultValues: SearchParamsObject = {

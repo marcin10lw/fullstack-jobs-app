@@ -1,8 +1,8 @@
 import { Link, SetURLSearchParams } from 'react-router-dom';
 
 import { jobStatusItems, jobTypeItems } from 'src/models/Job';
-import FormRow from './FormRow';
-import FormRowSelect from './FormRowSelect';
+import FormRow from '../../../components/FormRow';
+import FormRowSelect from '../../../components/FormRowSelect';
 import { SearchOnChange, SearchParamsObject } from 'src/types';
 
 type SearchContainerProps = {
