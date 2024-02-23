@@ -2,8 +2,22 @@ import { PropsWithChildren, createContext, useEffect, useState } from 'react';
 
 import { Theme } from 'src/types';
 import { checkDefaultTheme } from 'src/helpers/checkDefaultTheme';
-import { saveValueToLocalStorage } from 'src/helpers/localStorage';
-import { LOCAL_STORAGE_THEME_KEY } from 'src/common/constants';
+import {
+  getValueFromLocalStorage,
+  saveValueToLocalStorage,
+} from 'src/helpers/localStorage';
+import {
+  LOCAL_STORAGE_SIDEBAR_VISIBLE_KEY,
+  LOCAL_STORAGE_THEME_KEY,
+} from 'src/common/constants';
+
+const getLocalStorageSidebarVisible = () => {
+  const localStorageTheme = getValueFromLocalStorage<boolean>(
+    LOCAL_STORAGE_SIDEBAR_VISIBLE_KEY,
+  );
+
+  return localStorageTheme ?? true;
+};
 
 type DashboardState = {
   showSidebar: boolean;
@@ -15,7 +29,9 @@ type DashboardState = {
 export const DashboardContext = createContext({} as DashboardState);
 
 const DashboardProvider = ({ children }: PropsWithChildren) => {
-  const [showSidebar, setShowSidebar] = useState(false);
+  const [showSidebar, setShowSidebar] = useState<boolean>(
+    getLocalStorageSidebarVisible(),
+  );
   const [theme, setTheme] = useState<Theme>(checkDefaultTheme());
 
   const toggleTheme = () => {
@@ -36,6 +52,10 @@ const DashboardProvider = ({ children }: PropsWithChildren) => {
   const toggleSidebar = () => {
     setShowSidebar((showSidebar) => !showSidebar);
   };
+
+  useEffect(() => {
+    saveValueToLocalStorage(LOCAL_STORAGE_SIDEBAR_VISIBLE_KEY, showSidebar);
+  }, [showSidebar]);
 
   const providerValue: DashboardState = {
     theme,
