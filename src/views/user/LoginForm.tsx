@@ -1,7 +1,7 @@
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-import LabeledInput from 'src/components/LabeledInput';
+import LabeledRegisterInput from 'src/components/LabeledRegisterInput';
 import { Button } from 'src/components/ui/button';
 import { Input } from 'src/components/ui/input';
 import { Label } from 'src/components/ui/label';
@@ -18,7 +18,7 @@ const LoginForm = () => {
   return (
     <form onSubmit={handleSubmit(onFormSubmit)} noValidate>
       <div className="flex flex-col gap-4">
-        <LabeledInput
+        <LabeledRegisterInput
           error={errors.email}
           register={register('email')}
           label="email"

@@ -8,7 +8,7 @@ import {
 } from 'src/components/ui/select';
 import { FormControl, FormItem, FormLabel } from './ui/form';
 
-interface LabeledSelectProps {
+interface LabeledFormSelectProps {
   label: string;
   options: string[] | readonly string[];
   value: string;
@@ -16,13 +16,13 @@ interface LabeledSelectProps {
   children?: React.ReactNode;
 }
 
-const LabeledSelect = ({
+const LabeledFormSelect = ({
   label,
   options,
   children,
   value,
   onOptionChange,
-}: LabeledSelectProps) => {
+}: LabeledFormSelectProps) => {
   return (
     <FormItem className="space-y-[2px]">
       <FormLabel className="capitalize">{label}</FormLabel>
@@ -47,4 +47,4 @@ const LabeledSelect = ({
   );
 };
 
-export default LabeledSelect;
+export default LabeledFormSelect;

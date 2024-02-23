@@ -1,24 +1,17 @@
-import { useEffect, useRef } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { useSearchParams } from "react-router-dom";
+import { useEffect, useRef } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { useSearchParams } from 'react-router-dom';
 
-import customFetch from "src/helpers/customFetch";
-import SearchContainer from "src/views/dashboard/allJobs/SearchContainer";
-import JobsContainer from "src/views/dashboard/allJobs/JobsContainer";
-import { ApiJobsResponse, SearchParamsObject } from "src/types";
-
-const searchParamsDefaultValues: SearchParamsObject = {
-  jobStatus: "all",
-  jobType: "all",
-  search: "",
-  sort: "newest",
-  page: "1",
-};
+import customFetch from 'src/helpers/customFetch';
+import SearchContainer from 'src/views/dashboard/allJobs/SearchContainer';
+import JobsContainer from 'src/views/dashboard/allJobs/JobsContainer';
+import { ApiJobsResponse } from 'src/types';
+import { searchParamsDefaultValues } from './constants';
 
 const AllJobs = () => {
   const jobsContainerRef = useRef<HTMLElement>(null);
   const [searchParams, setSearchParams] = useSearchParams(
-    searchParamsDefaultValues
+    searchParamsDefaultValues,
   );
 
   const {
@@ -27,9 +20,9 @@ const AllJobs = () => {
     isSuccess,
     refetch,
   } = useQuery({
-    queryKey: ["jobs"],
+    queryKey: ['jobs'],
     queryFn: async (): Promise<ApiJobsResponse> => {
-      const { data } = await customFetch.get("/jobs", {
+      const { data } = await customFetch.get('/jobs', {
         params: searchParams,
       });
 
@@ -40,7 +33,7 @@ const AllJobs = () => {
   });
 
   const setPage = (pageNumber: number) => {
-    searchParams.set("page", String(pageNumber));
+    searchParams.set('page', String(pageNumber));
     setSearchParams(searchParams);
   };
 
@@ -71,7 +64,6 @@ const AllJobs = () => {
         <SearchContainer
           searchParams={searchParams}
           setSearchParams={setSearchParams}
-          searchParamsDefaultValues={searchParamsDefaultValues}
         />
 
         <JobsContainer

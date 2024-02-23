@@ -10,7 +10,7 @@ import {
 interface SelectProps {
   label: string;
   options: string[] | readonly string[];
-  value: string;
+  value?: string;
   onOptionChange: (value: string) => void;
   children?: React.ReactNode;
 }

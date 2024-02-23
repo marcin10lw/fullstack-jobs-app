@@ -3,7 +3,7 @@ import { Input } from './ui/input';
 import { Label } from './ui/label';
 import ErrorMessage from './ErrorMessage';
 
-interface LabeledInputProps {
+interface LabeledRegisterInputProps {
   type?: string;
   name: string;
   label: string;
@@ -12,14 +12,14 @@ interface LabeledInputProps {
   children?: React.ReactNode;
 }
 
-const LabeledInput = ({
+const LabeledRegisterInput = ({
   register,
   label,
   name,
   type = 'text',
   error,
   children,
-}: LabeledInputProps) => {
+}: LabeledRegisterInputProps) => {
   return (
     <div className="relative">
       <Label htmlFor={name} className="capitalize">
@@ -32,4 +32,4 @@ const LabeledInput = ({
   );
 };
 
-export default LabeledInput;
+export default LabeledRegisterInput;

@@ -1,6 +1,6 @@
 import ErrorMessage from 'src/components/ErrorMessage';
-import LabeledInput from 'src/components/LabeledInput';
-import LabeledSelect from 'src/components/LabeledSelect';
+import LabeledRegisterInput from 'src/components/LabeledRegisterInput';
+import LabeledFormSelect from 'src/components/LabeledFormSelect';
 import { Button } from 'src/components/ui/button';
 import { Form, FormField } from 'src/components/ui/form';
 import { jobStatusItems, jobTypeItems } from 'src/models/Job';
@@ -19,9 +19,9 @@ const AddJobForm = () => {
   } = useAddJob();
 
   return (
-    <form onSubmit={handleSubmit(onFormSubmit)} className="" noValidate>
+    <form onSubmit={handleSubmit(onFormSubmit)} noValidate>
       <div className="mt-12 grid gap-4 md:grid-cols-2 md:items-center md:gap-[2rem_1rem] lg:grid-cols-3">
-        <LabeledInput
+        <LabeledRegisterInput
           type="text"
           name="position"
           label="position"
@@ -33,8 +33,8 @@ const AddJobForm = () => {
               className="absolute"
             />
           )}
-        </LabeledInput>
-        <LabeledInput
+        </LabeledRegisterInput>
+        <LabeledRegisterInput
           type="text"
           name="company"
           label="company"
@@ -46,8 +46,8 @@ const AddJobForm = () => {
               className="absolute"
             />
           )}
-        </LabeledInput>
-        <LabeledInput
+        </LabeledRegisterInput>
+        <LabeledRegisterInput
           type="text"
           name="jobLocation"
           label="job location"
@@ -59,14 +59,14 @@ const AddJobForm = () => {
               className="absolute"
             />
           )}
-        </LabeledInput>
+        </LabeledRegisterInput>
 
         <Form {...form}>
           <FormField
             control={control}
             name="jobStatus"
             render={({ field: { value, onChange } }) => (
-              <LabeledSelect
+              <LabeledFormSelect
                 value={value}
                 onOptionChange={onChange}
                 label="job status"
@@ -78,7 +78,7 @@ const AddJobForm = () => {
             control={control}
             name="jobType"
             render={({ field: { value, onChange } }) => (
-              <LabeledSelect
+              <LabeledFormSelect
                 value={value}
                 onOptionChange={onChange}
                 label="job types"

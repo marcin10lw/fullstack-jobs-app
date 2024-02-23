@@ -1,64 +1,53 @@
 import { Link, SetURLSearchParams } from 'react-router-dom';
 
+import ContentWrapper from 'src/components/ContentWrapper';
+import Select from 'src/components/Select';
+import { Input } from 'src/components/ui/input';
+import { Label } from 'src/components/ui/label';
 import { jobStatusItems, jobTypeItems } from 'src/models/Job';
-import FormRow from '../../../components/FormRow';
-import FormRowSelect from '../../../components/FormRowSelect';
-import { SearchOnChange, SearchParamsObject } from 'src/types';
+import { searchParamsDefaultValues } from './constants';
 
 type SearchContainerProps = {
   searchParams: URLSearchParams;
   setSearchParams: SetURLSearchParams;
-  searchParamsDefaultValues: SearchParamsObject;
 };
 
 const SearchContainer = ({
   searchParams,
-  searchParamsDefaultValues,
   setSearchParams,
 }: SearchContainerProps) => {
   const { jobStatus, jobType, search, sort } = searchParamsDefaultValues;
 
-  const onInputChange = (event: SearchOnChange) => {
-    const { name, value } = event.target;
-
-    searchParams.set('page', '1');
-    searchParams.set(name, value);
-    setSearchParams(searchParams);
-  };
-
   return (
-    <div className="w-full rounded-[--border-radius] bg-[--background-secondary-color] p-[3rem_2rem_4rem]">
-      <form className="form m-0 w-full max-w-full rounded-none p-0 shadow-none">
-        <h5 className="mb-8">search form</h5>
+    <ContentWrapper title="Search">
+      <form>
         <div className="mt-12 grid gap-4 lg:grid-cols-2 lg:items-center lg:gap-[2rem_1rem] xl:grid-cols-3">
-          <FormRow
-            type="search"
-            labelText="search"
-            name="search"
-            onInputChange={onInputChange}
-            value={searchParams.get('search') || search}
-          />
-          <FormRowSelect
-            labelText="job status"
-            name="jobStatus"
+          <div className="relative">
+            <Label htmlFor="search" className="sr-only">
+              search
+            </Label>
+            <Input id="search" placeholder="Search" />
+          </div>
+
+          <Select
+            label="job status"
             options={['all', ...jobStatusItems]}
             value={searchParams.get('jobStatus') || jobStatus}
-            onInputChange={onInputChange}
+            onOptionChange={() => {}}
           />
-          <FormRowSelect
-            labelText="job type"
-            name="jobType"
+          <Select
+            label="job type"
             options={['all', ...jobTypeItems]}
             value={searchParams.get('jobType') || jobType}
-            onInputChange={onInputChange}
+            onOptionChange={() => {}}
           />
-          <FormRowSelect
-            labelText="sort"
-            name="sort"
+          <Select
+            label="sort"
             options={['newest', 'oldest', 'a-z', 'z-a']}
             value={searchParams.get('sort') || sort}
-            onInputChange={onInputChange}
+            onOptionChange={() => {}}
           />
+
           <Link
             to="/dashboard/all-jobs"
             type="button"
@@ -71,7 +60,7 @@ const SearchContainer = ({
           </Link>
         </div>
       </form>
-    </div>
+    </ContentWrapper>
   );
 };
 

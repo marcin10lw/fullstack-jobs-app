@@ -1,7 +1,7 @@
 import { Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-import LabeledInput from 'src/components/LabeledInput';
+import LabeledRegisterInput from 'src/components/LabeledRegisterInput';
 import { Button } from 'src/components/ui/button';
 import { ROUTES } from 'src/routes';
 import { useRegisterUser } from './useRegisterUser';
@@ -13,32 +13,32 @@ const RegisterForm = () => {
   return (
     <form onSubmit={handleSubmit(onRegisterUser)} noValidate>
       <div className="flex flex-col gap-4">
-        <LabeledInput
+        <LabeledRegisterInput
           register={register('name')}
           label="name"
           name="name"
           error={errors.name}
         />
-        <LabeledInput
+        <LabeledRegisterInput
           register={register('lastName')}
           label="last name"
           name="lastName"
           error={errors.lastName}
         />
-        <LabeledInput
+        <LabeledRegisterInput
           register={register('location')}
           label="location"
           name="location"
           error={errors.location}
         />
-        <LabeledInput
+        <LabeledRegisterInput
           register={register('email')}
           label="email"
           name="email"
           error={errors.email}
           type="email"
         />
-        <LabeledInput
+        <LabeledRegisterInput
           register={register('password')}
           label="password"
           name="password"
