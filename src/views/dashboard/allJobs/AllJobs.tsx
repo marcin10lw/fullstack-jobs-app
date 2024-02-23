@@ -61,10 +61,7 @@ const AllJobs = () => {
   if (isSuccess) {
     return (
       <>
-        <SearchContainer
-          searchParams={searchParams}
-          setSearchParams={setSearchParams}
-        />
+        <SearchContainer />
 
         <JobsContainer
           jobsData={jobsData}
