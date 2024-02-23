@@ -3,6 +3,7 @@ import { PropsWithChildren, createContext, useEffect, useState } from 'react';
 import { Theme } from 'src/types';
 import { checkDefaultTheme } from 'src/helpers/checkDefaultTheme';
 import { saveValueToLocalStorage } from 'src/helpers/localStorage';
+import { LOCAL_STORAGE_THEME_KEY } from 'src/common/constants';
 
 type DashboardState = {
   showSidebar: boolean;
@@ -28,7 +29,7 @@ const DashboardProvider = ({ children }: PropsWithChildren) => {
   };
 
   useEffect(() => {
-    saveValueToLocalStorage('theme', theme);
+    saveValueToLocalStorage(LOCAL_STORAGE_THEME_KEY, theme);
     document.body.classList.toggle('dark', theme === 'dark');
   }, [theme]);
 

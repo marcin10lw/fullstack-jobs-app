@@ -1,7 +1,7 @@
 import { Navigate, Outlet, useOutletContext } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
-import DashboardProvider from 'src/context/DashboardContext';
+import DashboardProvider from 'src/views/dashboard/DashboardContext';
 import { ROUTES } from 'src/routes';
 import { userAPI } from 'src/infrasctucture/user/userApiAdapter';
 import { User } from 'src/infrasctucture/user/types';

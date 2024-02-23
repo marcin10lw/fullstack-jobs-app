@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 
-import useDashboardContext from 'src/hooks/useDashboardContext';
+import useDashboardContext from 'src/views/dashboard/useDashboardContext';
 import { links } from 'src/helpers/links';
 import { cn } from 'src/lib/utils';
 import { UserRole } from 'src/infrasctucture/user/types';

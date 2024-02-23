@@ -1,6 +1,6 @@
 import { Moon, Sun } from 'lucide-react';
 
-import useDashboardContext from 'src/hooks/useDashboardContext';
+import useDashboardContext from 'src/views/dashboard/useDashboardContext';
 
 const ThemeToggle = () => {
   const { theme, toggleTheme } = useDashboardContext();

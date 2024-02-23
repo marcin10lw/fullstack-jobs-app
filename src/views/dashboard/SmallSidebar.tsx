@@ -1,7 +1,7 @@
 import { X } from 'lucide-react';
 import Logo from 'src/components/Logo';
 
-import useDashboardContext from 'src/hooks/useDashboardContext';
+import useDashboardContext from 'src/views/dashboard/useDashboardContext';
 import { UserRole } from 'src/infrasctucture/user/types';
 import { cn } from 'src/lib/utils';
 import NavLinks from './NavLinks';

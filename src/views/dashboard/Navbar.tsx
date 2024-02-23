@@ -1,6 +1,6 @@
 import { AlignJustify, ListCollapse } from 'lucide-react';
 import Logo from 'src/components/Logo';
-import useDashboardContext from 'src/hooks/useDashboardContext';
+import useDashboardContext from 'src/views/dashboard/useDashboardContext';
 import { User } from 'src/infrasctucture/user/types';
 import { cn } from 'src/lib/utils';
 import ThemeToggle from './ThemeToggle';
