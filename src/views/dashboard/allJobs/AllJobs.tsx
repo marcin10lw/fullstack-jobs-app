@@ -1,11 +1,9 @@
 import { useEffect, useRef } from 'react';
-import { useQuery } from '@tanstack/react-query';
 import { useSearchParams } from 'react-router-dom';
 
-import customFetch from 'src/helpers/customFetch';
-import SearchContainer from 'src/views/dashboard/allJobs/SearchContainer';
+import { jobRepository } from 'src/infrasctucture/job/jobRepository';
 import JobsContainer from 'src/views/dashboard/allJobs/JobsContainer';
-import { ApiJobsResponse } from 'src/types';
+import SearchContainer from 'src/views/dashboard/allJobs/SearchContainer';
 import { searchParamsDefaultValues } from './constants';
 
 const AllJobs = () => {
@@ -19,18 +17,7 @@ const AllJobs = () => {
     isLoading,
     isSuccess,
     refetch,
-  } = useQuery({
-    queryKey: ['jobs'],
-    queryFn: async (): Promise<ApiJobsResponse> => {
-      const { data } = await customFetch.get('/jobs', {
-        params: searchParams,
-      });
-
-      return data;
-    },
-    keepPreviousData: true,
-    cacheTime: 0,
-  });
+  } = jobRepository.useGetAllJobs();
 
   const setPage = (pageNumber: number) => {
     searchParams.set('page', String(pageNumber));
