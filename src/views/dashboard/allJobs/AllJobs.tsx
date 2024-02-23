@@ -5,6 +5,7 @@ import { jobRepository } from 'src/infrasctucture/job/jobRepository';
 import JobsContainer from 'src/views/dashboard/allJobs/JobsContainer';
 import SearchContainer from 'src/views/dashboard/allJobs/SearchContainer';
 import { searchParamsDefaultValues } from './constants';
+import AllJobsSkeleton from './AllJobsSkeleton';
 
 const AllJobs = () => {
   const jobsContainerRef = useRef<HTMLElement>(null);
@@ -44,7 +45,7 @@ const AllJobs = () => {
     };
   }, [searchParams]);
 
-  if (isLoading) return <h4>Loading...</h4>;
+  if (isLoading) return <AllJobsSkeleton />;
   if (isSuccess) {
     return (
       <>
