@@ -3,19 +3,18 @@ import { RouterProvider, createHashRouter } from 'react-router-dom';
 
 import { checkDefaultTheme } from './helpers/checkDefaultTheme';
 
+import Admin from './pages/Admin';
+import Error from './pages/Error';
+import HomeLayout from './pages/HomeLayout';
+import Landing from './pages/Landing';
+import Profile from './pages/Profile';
+import Stats from './pages/Stats';
 import { ROUTES } from './routes';
 import DashboardLayout from './views/dashboard/DashboardLayout';
-import HomeLayout from './pages/HomeLayout';
-import Error from './pages/Error';
-import Landing from './pages/Landing';
-import Register from './views/user/Register';
-import Login from './views/user/Login';
 import AddJob from './views/dashboard/addJob/AddJob';
-import Stats from './pages/Stats';
 import AllJobs from './views/dashboard/allJobs/AllJobs';
-import Profile from './pages/Profile';
-import Admin from './pages/Admin';
-import EditJob from './pages/EditJob';
+import Login from './views/user/Login';
+import Register from './views/user/Register';
 
 const router = createHashRouter([
   {
@@ -61,10 +60,6 @@ const router = createHashRouter([
       {
         path: 'admin',
         element: <Admin />,
-      },
-      {
-        path: 'edit-job/:id',
-        element: <EditJob />,
       },
     ],
   },

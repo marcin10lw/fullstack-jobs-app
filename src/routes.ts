@@ -6,5 +6,4 @@ export const ROUTES = {
   allJobs: '/dashboard/all-jobs',
   stats: '/dashboard/stats',
   admin: '/dashboard/admin',
-  editJob: '/dashboard/edit-job/:jobId',
 };
