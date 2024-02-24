@@ -37,7 +37,7 @@ const DashboardLayout = () => {
               <div>
                 <Navbar user={userResponse.user} />
 
-                <MaxWidthWrapper className="py-8 px-8">
+                <MaxWidthWrapper className="scrollbar-w-4 scrollbar-track-gray-lighter scrollbar-thumb-gray h-[calc(100vh-96px)] overflow-y-auto px-8 py-8">
                   <Outlet
                     context={{ user: userResponse.user } satisfies ContextType}
                   />
