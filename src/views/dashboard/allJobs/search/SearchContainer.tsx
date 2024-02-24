@@ -5,17 +5,20 @@ import Select from 'src/components/Select';
 import { Button } from 'src/components/ui/button';
 import { Input } from 'src/components/ui/input';
 import { Label } from 'src/components/ui/label';
-import { useQueryParameter } from 'src/hooks/useQueryParameter';
+import { queryParams } from 'src/hooks/useQueryParameter';
 import { jobStatusItems, jobTypeItems } from 'src/models/Job';
-import { searchParamsDefaultValues } from '../constants';
+import { searchParamsDefaultValues } from './constants';
 
 const SearchContainer = () => {
-  const [searchParams, setSearchParams] = useSearchParams(
-    searchParamsDefaultValues,
-  );
+  const [searchParams] = useSearchParams(searchParamsDefaultValues);
   const { jobStatus, jobType, search, sort } = searchParamsDefaultValues;
 
-  const { setQuery } = useQueryParameter();
+  const { setQuery } = queryParams.useSetQueryParameter();
+  const { deleteQueryParameters } = queryParams.useDeleteQueryParameters();
+
+  const clearQueryParameters = () => {
+    deleteQueryParameters(Object.keys(searchParamsDefaultValues));
+  };
 
   return (
     <ContentWrapper title="Search">
@@ -52,13 +55,7 @@ const SearchContainer = () => {
             onOptionChange={(value) => setQuery('sort', value)}
           />
 
-          <Button
-            onClick={() => {
-              setSearchParams(searchParamsDefaultValues);
-            }}
-          >
-            Reset Search Values
-          </Button>
+          <Button onClick={clearQueryParameters}>Reset Search Values</Button>
         </div>
       </section>
     </ContentWrapper>

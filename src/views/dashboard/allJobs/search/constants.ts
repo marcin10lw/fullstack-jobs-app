@@ -1,4 +1,4 @@
-import { AllJobsSearchParams } from './types';
+import { AllJobsSearchParams } from '../types';
 
 export const searchParamsDefaultValues: AllJobsSearchParams = {
   jobStatus: 'all',
