@@ -59,12 +59,8 @@ const EditJobForm = ({ job, id }: EditJobFormProps) => {
   };
 
   return (
-    <div className="w-full rounded-[--border-radius] bg-[--background-secondary-color] p-[3rem_2rem_4rem]">
-      <form
-        className="form m-0 w-full max-w-full rounded-none p-0 shadow-none"
-        onSubmit={handleSubmit(onFormSubmit)}
-        noValidate
-      >
+    <div>
+      <form onSubmit={handleSubmit(onFormSubmit)} noValidate>
         <h4 className="mb-8">edit job</h4>
         <div className="mt-12 grid gap-y-4 lg:grid-cols-2 lg:items-center lg:gap-[2rem_1rem] xl:grid-cols-3">
           <FormRow

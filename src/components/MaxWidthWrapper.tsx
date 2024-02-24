@@ -5,9 +5,9 @@ import { ClassNameValue } from 'tailwind-merge';
 const MaxWidthWrapper = ({
   className,
   children,
-}: PropsWithChildren<{ className: ClassNameValue }>) => {
+}: PropsWithChildren<{ className?: ClassNameValue }>) => {
   return (
-    <div className={cn('m-auto w-full max-w-screen-xl', className)}>
+    <div className={cn('mx-auto w-full max-w-screen-xl', className)}>
       {children}
     </div>
   );

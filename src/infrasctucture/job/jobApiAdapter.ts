@@ -1,5 +1,5 @@
 import customFetch from 'src/helpers/customFetch';
-import { InferJob } from 'src/models/Job';
+import { InferJob, Job } from 'src/models/Job';
 import { JOB_API_URLS } from './jobApiUrls';
 import { ApiJobsResponse } from './types';
 
@@ -18,4 +18,12 @@ export const jobAPI = {
 
   deleteJob: (jobId: string) =>
     customFetch.delete(JOB_API_URLS.deleteJob.replace(':jobId', jobId)),
+
+  getJobById: async (jobId: string): Promise<Job> => {
+    const { data } = await customFetch.get(
+      JOB_API_URLS.getJobById.replace(':jobId', jobId),
+    );
+
+    return data.job;
+  },
 };
