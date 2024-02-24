@@ -26,12 +26,10 @@ const AllJobs = () => {
   };
 
   const scrollToJobs = () => {
-    const top = jobsContainerRef.current?.getBoundingClientRect().top;
+    const containerRef = jobsContainerRef;
 
-    if (top) {
-      window.scrollTo({
-        top: top - document.body.getBoundingClientRect().top - 136,
-      });
+    if (containerRef.current) {
+      containerRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   };
 

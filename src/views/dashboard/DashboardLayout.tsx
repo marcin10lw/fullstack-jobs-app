@@ -1,16 +1,13 @@
 import { Navigate, Outlet, useOutletContext } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
 
-import DashboardProvider from 'src/views/dashboard/DashboardContext';
-import { ROUTES } from 'src/routes';
-import { userAPI } from 'src/infrasctucture/user/userApiAdapter';
-import { User } from 'src/infrasctucture/user/types';
-import { CURRENT_USER_QUERY_KEY } from 'src/infrasctucture/user/constants';
-import SmallSidebar from './SmallSidebar';
-import BigSidebar from './BigSidebar';
-import Navbar from './Navbar';
 import MaxWidthWrapper from 'src/components/MaxWidthWrapper';
 import { ScrollArea } from 'src/components/ui/scroll-area';
+import { User } from 'src/infrasctucture/user/types';
+import { userRepository } from 'src/infrasctucture/user/userRepository';
+import { ROUTES } from 'src/routes';
+import DashboardProvider from 'src/views/dashboard/DashboardContext';
+import DesktopSidebar from './BigSidebar';
+import Navbar from './Navbar';
 
 type ContextType = { user: User };
 
@@ -19,12 +16,7 @@ const DashboardLayout = () => {
     data: userResponse,
     isError,
     isSuccess,
-  } = useQuery({
-    queryKey: [CURRENT_USER_QUERY_KEY],
-    queryFn: userAPI.getCurrentUser,
-    retry: false,
-    cacheTime: 0,
-  });
+  } = userRepository.useGetCurrentUser();
 
   return (
     <>
@@ -33,13 +25,12 @@ const DashboardLayout = () => {
         <DashboardProvider>
           <section>
             <main className="grid grid-cols-1 lg:grid-cols-[auto_1fr]">
-              <SmallSidebar userRole={userResponse.user.role} />
-              <BigSidebar userRole={userResponse.user.role} />
+              <DesktopSidebar userRole={userResponse.user.role} />
               <div>
                 <Navbar user={userResponse.user} />
 
                 <ScrollArea className="h-[calc(100vh-96px)]">
-                  <MaxWidthWrapper className="h-full px-4 md:px-8 py-8">
+                  <MaxWidthWrapper className="h-full px-4 py-8 md:px-8">
                     <Outlet
                       context={
                         { user: userResponse.user } satisfies ContextType

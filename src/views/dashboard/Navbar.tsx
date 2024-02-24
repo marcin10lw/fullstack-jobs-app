@@ -1,11 +1,13 @@
-import { AlignJustify, ListCollapse } from 'lucide-react';
+import { ListCollapse } from 'lucide-react';
+
 import Logo from 'src/components/Logo';
-import useDashboardContext from 'src/views/dashboard/useDashboardContext';
+import MaxWidthWrapper from 'src/components/MaxWidthWrapper';
+import UserAvatar from 'src/components/UserAvatar';
 import { User } from 'src/infrasctucture/user/types';
 import { cn } from 'src/lib/utils';
+import useDashboardContext from 'src/views/dashboard/useDashboardContext';
 import ThemeToggle from './ThemeToggle';
-import UserAvatar from 'src/components/UserAvatar';
-import MaxWidthWrapper from 'src/components/MaxWidthWrapper';
+import MobileSidebar from './SmallSidebar';
 
 type NavbarProps = {
   user: User;
@@ -17,14 +19,16 @@ const Navbar = ({ user }: NavbarProps) => {
   return (
     <nav className="top-0 flex h-24 items-center justify-center border-b-2 border-b-border bg-background shadow-sm lg:sticky">
       <MaxWidthWrapper className="flex items-center justify-between px-4 md:px-8">
+        <div className="lg:hidden">
+          <MobileSidebar userRole={user.role} />
+        </div>
         <button
           onClick={toggleSidebar}
           type="button"
-          className="flex-shrink-0 text-3xl text-primary"
+          className="hidden flex-shrink-0 text-3xl text-primary lg:block"
         >
-          <AlignJustify className="block lg:hidden" />
           <ListCollapse
-            className={cn('hidden transition-transform duration-300 lg:block', {
+            className={cn('transition-transform duration-300', {
               'rotate-180': showSidebar,
             })}
           />

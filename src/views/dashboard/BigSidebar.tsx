@@ -4,11 +4,11 @@ import { UserRole } from 'src/infrasctucture/user/types';
 import { cn } from 'src/lib/utils';
 import NavLinks from './NavLinks';
 
-type BigSidebarProps = {
+type DesktopSidebarProps = {
   userRole: UserRole;
 };
 
-const BigSidebar = ({ userRole }: BigSidebarProps) => {
+const DesktopSidebar = ({ userRole }: DesktopSidebarProps) => {
   const { showSidebar } = useDashboardContext();
 
   return (
@@ -31,4 +31,4 @@ const BigSidebar = ({ userRole }: BigSidebarProps) => {
     </aside>
   );
 };
-export default BigSidebar;
+export default DesktopSidebar;

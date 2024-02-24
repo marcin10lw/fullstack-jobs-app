@@ -25,7 +25,7 @@ const JobsContainer = ({
     );
 
   return (
-    <section ref={jobsContainerRef} className="mt-16">
+    <section ref={jobsContainerRef} className="pt-16">
       <h5 className="mb-6 font-bold">
         {totalJobs} {totalJobs > 1 ? 'jobs' : 'job'}
       </h5>
