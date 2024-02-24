@@ -43,6 +43,8 @@ const AllJobs = () => {
     return () => {
       clearTimeout(timeoutId);
     };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
   if (isLoading) return <AllJobsSkeleton />;

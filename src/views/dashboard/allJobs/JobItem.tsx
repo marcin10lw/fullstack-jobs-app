@@ -1,17 +1,11 @@
-import { Link } from 'react-router-dom';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { FaLocationArrow, FaBriefcase, FaCalendar } from 'react-icons/fa';
-import { toast } from 'react-toastify';
 import dayjs from 'dayjs';
 import advancedFormat from 'dayjs/plugin/advancedFormat';
+import { FaBriefcase, FaCalendar, FaLocationArrow } from 'react-icons/fa';
 dayjs.extend(advancedFormat);
 
-import { Job as JobType } from 'src/models/Job';
-import customFetch from 'src/helpers/customFetch';
-import { CustomAxiosError } from 'src/types';
-import errorMessage from 'src/helpers/errorMessage';
-import { buttonVariants } from 'src/components/ui/button';
 import { cn } from 'src/lib/utils';
+import { Job as JobType } from 'src/models/Job';
+import JobItemFooter from './JobItemFooter';
 
 type JobInfoProps = {
   icon: JSX.Element;
@@ -35,18 +29,6 @@ type JobProps = {
 
 const JobItem = ({ job }: JobProps) => {
   const date = dayjs(job.createdAt).format('MMM Do, YYYY');
-  const qc = useQueryClient();
-
-  const { isLoading, mutate } = useMutation({
-    mutationFn: () => customFetch.delete(`/jobs/${job._id}`),
-    onSuccess: async () => {
-      await qc.invalidateQueries(['jobs']);
-      toast.success('Job deleted');
-    },
-    onError: (error: CustomAxiosError) => {
-      errorMessage(error, 'Could not update user');
-    },
-  });
 
   return (
     <article className="grid grid-rows-[1fr_auto] rounded-lg bg-secondary shadow-xl">
@@ -79,32 +61,7 @@ const JobItem = ({ job }: JobProps) => {
             {job.jobStatus}
           </div>
         </div>
-        <footer className="mt-4 flex items-center">
-          <Link
-            to={`../edit-job/${job._id}`}
-            className={buttonVariants({
-              className: 'mr-2 flex h-[30px] items-center text-sm',
-            })}
-          >
-            Edit
-          </Link>
-          <form
-            onSubmit={(event) => {
-              event.preventDefault();
-              mutate();
-            }}
-          >
-            <button
-              disabled={isLoading}
-              className={buttonVariants({
-                className: 'mr-2 flex h-[30px] items-center text-sm',
-                variant: 'destructive',
-              })}
-            >
-              Delete
-            </button>
-          </form>
-        </footer>
+        <JobItemFooter jobId={job._id} />
       </div>
     </article>
   );

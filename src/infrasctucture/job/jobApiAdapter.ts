@@ -15,4 +15,7 @@ export const jobAPI = {
 
     return data;
   },
+
+  deleteJob: (jobId: string) =>
+    customFetch.delete(JOB_API_URLS.deleteJob.replace(':jobId', jobId)),
 };
