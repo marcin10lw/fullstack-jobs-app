@@ -1,4 +1,6 @@
 import { HiChevronDoubleLeft, HiChevronDoubleRight } from 'react-icons/hi';
+import { buttonVariants } from 'src/components/ui/button';
+import { cn } from 'src/lib/utils';
 
 type PageBtnContainerProps = {
   numOfPages: number;
@@ -22,11 +24,13 @@ const PageBtnContainer = ({
   }) => {
     return (
       <button
-        className={`btn h-[40px] w-[50px] rounded-[--border-radius] text-xl font-bold ${
-          activeClass
-            ? 'bg-[--primary-500] text-[--white]'
-            : 'bg-transparent text-[--primary-500]'
-        }`}
+        className={cn(
+          'h-[40px] w-[50px] cursor-pointer text-xl font-bold transition-colors duration-300 ease-in-out first:rounded-l-sm last:rounded-r-sm hover:bg-primary hover:text-white',
+          {
+            'bg-primary text-white': activeClass,
+            'bg-transparent text-primary': !activeClass,
+          },
+        )}
         key={pageNumber}
         onClick={() => {
           setPage(pageNumber);
@@ -51,7 +55,7 @@ const PageBtnContainer = ({
     if (currentPage > 3) {
       pageButtons.push(
         <span
-          className="page-btn grid h-[40px] w-[50px] cursor-text place-items-center rounded-[--border-radius] text-xl font-bold"
+          className="grid h-[40px] w-[50px] cursor-text place-items-center rounded-sm text-xl font-bold text-primary"
           key="dots-1"
         >
           ...
@@ -89,7 +93,7 @@ const PageBtnContainer = ({
     if (currentPage < numOfPages - 2) {
       pageButtons.push(
         <span
-          className="page-btn grid h-[40px] w-[50px] cursor-text place-items-center rounded-[--border-radius] text-xl font-bold"
+          className="grid h-[40px] w-[50px] cursor-text place-items-center rounded-sm text-xl font-bold text-primary"
           key="dots+1"
         >
           ...
@@ -130,17 +134,23 @@ const PageBtnContainer = ({
       <button
         onClick={toPrevPage}
         disabled={currentPage <= 1}
-        className="btn text=[--primary-500] flex h-[40px] w-[100px] items-center justify-center gap-2 rounded-[--border-radius] bg-[--background-secondary-color] capitalize tracking-[--letter-spacing] disabled:pointer-events-none"
+        className={buttonVariants({
+          className:
+            'flex h-[40px] w-[100px] items-center justify-center gap-2 rounded-sm capitalize tracking-wider disabled:pointer-events-none',
+        })}
       >
         <HiChevronDoubleLeft />
         prev
       </button>
-      <div className="flex items-center rounded-[--border-radius] bg-[--background-secondary-color]">
+      <div className="flex items-center rounded-sm bg-muted">
         {renderButtons()}
       </div>
       <button
         onClick={toNextPage}
-        className="btn text=[--primary-500] flex h-[40px] w-[100px] items-center justify-center gap-2 rounded-[--border-radius] bg-[--background-secondary-color] capitalize tracking-[--letter-spacing] disabled:pointer-events-none"
+        className={buttonVariants({
+          className:
+            'flex h-[40px] w-[100px] items-center justify-center gap-2 rounded-sm capitalize tracking-wider disabled:pointer-events-none',
+        })}
         disabled={currentPage >= numOfPages}
       >
         next
