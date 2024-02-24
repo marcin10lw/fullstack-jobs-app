@@ -1,5 +1,4 @@
 import { Loader2 } from 'lucide-react';
-import MaxWidthWrapper from 'src/components/MaxWidthWrapper';
 import { jobRepository } from 'src/infrasctucture/job/jobRepository';
 import EditJobForm from 'src/views/dashboard/allJobs/EditJobForm';
 
@@ -15,11 +14,7 @@ const EditJobDrawerContent = ({ jobId }: EditJobDrawerContentProps) => {
 
   if (!job) return null;
 
-  return (
-    <MaxWidthWrapper>
-      <EditJobForm job={job} id={jobId} />
-    </MaxWidthWrapper>
-  );
+  return <EditJobForm job={job} id={jobId} />;
 };
 
 export default EditJobDrawerContent;

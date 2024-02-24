@@ -1,9 +1,16 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
+import LabeledFormSelect from 'src/components/LabeledFormSelect';
+import LabeledRegisterInput from 'src/components/LabeledRegisterInput';
+import MaxWidthWrapper from 'src/components/MaxWidthWrapper';
+import { Button } from 'src/components/ui/button';
+import { Form, FormField } from 'src/components/ui/form';
+import customFetch from 'src/helpers/customFetch';
+import errorMessage from 'src/helpers/errorMessage';
 import {
   InferJob,
   Job as JobType,
@@ -11,12 +18,7 @@ import {
   jobStatusItems,
   jobTypeItems,
 } from 'src/models/Job';
-import customFetch from 'src/helpers/customFetch';
 import { CustomAxiosError } from 'src/types';
-import errorMessage from 'src/helpers/errorMessage';
-import FormRow from 'src/components/FormRow';
-import FormRowSelect from 'src/components/FormRowSelect';
-import SubmitButton from 'src/components/SubmitButton';
 
 type EditJobFormProps = {
   job: JobType;
@@ -27,11 +29,7 @@ const EditJobForm = ({ job, id }: EditJobFormProps) => {
   const qc = useQueryClient();
   const navigate = useNavigate();
 
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm<InferJob>({
+  const form = useForm<InferJob>({
     defaultValues: {
       position: job.position,
       company: job.company,
@@ -41,6 +39,13 @@ const EditJobForm = ({ job, id }: EditJobFormProps) => {
     },
     resolver: zodResolver(jobSchema),
   });
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    control,
+  } = form;
 
   const { mutate, isLoading } = useMutation({
     mutationFn: (job: InferJob) => customFetch.patch(`/jobs/${id}`, job),
@@ -59,52 +64,67 @@ const EditJobForm = ({ job, id }: EditJobFormProps) => {
   };
 
   return (
-    <div>
+    <MaxWidthWrapper>
       <form onSubmit={handleSubmit(onFormSubmit)} noValidate>
-        <h4 className="mb-8">edit job</h4>
+        <h4 className="text-xl">edit job</h4>
         <div className="mt-12 grid gap-y-4 lg:grid-cols-2 lg:items-center lg:gap-[2rem_1rem] xl:grid-cols-3">
-          <FormRow
-            type="text"
+          <LabeledRegisterInput
+            label="position"
             name="position"
-            labelText="position"
             register={register('position')}
             error={errors.position}
+            positionErrorAbsolute
           />
-          <FormRow
-            type="text"
+          <LabeledRegisterInput
+            label="company"
             name="company"
-            labelText="company"
             register={register('company')}
             error={errors.company}
+            positionErrorAbsolute
           />
-          <FormRow
-            type="text"
+          <LabeledRegisterInput
+            label="job location"
             name="jobLocation"
-            labelText="job location"
             register={register('jobLocation')}
             error={errors.jobLocation}
-          />
-          <FormRowSelect
-            name="jobStatus"
-            labelText="job status"
-            register={register('jobStatus')}
-            error={errors.jobStatus}
-            options={jobStatusItems}
-          />
-          <FormRowSelect
-            name="jobType"
-            labelText="job type"
-            register={register('jobType')}
-            error={errors.jobType}
-            options={jobTypeItems}
+            positionErrorAbsolute
           />
 
-          <div className="mt-4 lg:mt-8">
-            <SubmitButton isLoading={isLoading} isFormBtn />
+          <Form {...form}>
+            <FormField
+              control={control}
+              name="jobStatus"
+              render={({ field: { value, onChange } }) => (
+                <LabeledFormSelect
+                  value={value}
+                  onOptionChange={onChange}
+                  label="job status"
+                  options={jobStatusItems}
+                />
+              )}
+            />
+            <FormField
+              control={control}
+              name="jobType"
+              render={({ field: { value, onChange } }) => (
+                <LabeledFormSelect
+                  value={value}
+                  onOptionChange={onChange}
+                  label="job types"
+                  options={jobTypeItems}
+                />
+              )}
+            />
+          </Form>
+
+          <div className="mt-6">
+            <Button disabled={isLoading} className="w-full">
+              Update
+            </Button>
           </div>
         </div>
       </form>
-    </div>
+    </MaxWidthWrapper>
   );
 };
 

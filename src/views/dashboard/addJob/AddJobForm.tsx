@@ -1,11 +1,10 @@
-import ErrorMessage from 'src/components/ErrorMessage';
-import LabeledRegisterInput from 'src/components/LabeledRegisterInput';
+import { Loader2 } from 'lucide-react';
 import LabeledFormSelect from 'src/components/LabeledFormSelect';
+import LabeledRegisterInput from 'src/components/LabeledRegisterInput';
 import { Button } from 'src/components/ui/button';
 import { Form, FormField } from 'src/components/ui/form';
 import { jobStatusItems, jobTypeItems } from 'src/models/Job';
 import useAddJob from './useAddJob';
-import { Loader2 } from 'lucide-react';
 
 const AddJobForm = () => {
   const {
@@ -26,40 +25,25 @@ const AddJobForm = () => {
           name="position"
           label="position"
           register={register('position')}
-        >
-          {errors.position?.message && (
-            <ErrorMessage
-              errorMessage={errors.position.message}
-              className="absolute"
-            />
-          )}
-        </LabeledRegisterInput>
+          error={errors.position}
+          positionErrorAbsolute
+        />
         <LabeledRegisterInput
           type="text"
           name="company"
           label="company"
           register={register('company')}
-        >
-          {errors.company?.message && (
-            <ErrorMessage
-              errorMessage={errors.company.message}
-              className="absolute"
-            />
-          )}
-        </LabeledRegisterInput>
+          error={errors.company}
+          positionErrorAbsolute
+        />
         <LabeledRegisterInput
           type="text"
           name="jobLocation"
           label="job location"
           register={register('jobLocation')}
-        >
-          {errors.jobLocation?.message && (
-            <ErrorMessage
-              errorMessage={errors.jobLocation.message}
-              className="absolute"
-            />
-          )}
-        </LabeledRegisterInput>
+          error={errors.jobLocation}
+          positionErrorAbsolute
+        />
 
         <Form {...form}>
           <FormField

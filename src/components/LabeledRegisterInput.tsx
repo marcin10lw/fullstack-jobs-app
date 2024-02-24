@@ -10,6 +10,7 @@ interface LabeledRegisterInputProps {
   error?: FieldError;
   register?: UseFormRegisterReturn;
   children?: React.ReactNode;
+  positionErrorAbsolute?: boolean;
 }
 
 const LabeledRegisterInput = ({
@@ -19,6 +20,7 @@ const LabeledRegisterInput = ({
   type = 'text',
   error,
   children,
+  positionErrorAbsolute,
 }: LabeledRegisterInputProps) => {
   return (
     <div className="relative">
@@ -26,7 +28,12 @@ const LabeledRegisterInput = ({
         {label}
       </Label>
       <Input {...register} type={type} id={name} className="mt-[2px]" />
-      {error?.message && <ErrorMessage errorMessage={error.message} />}
+      {error?.message && (
+        <ErrorMessage
+          isAbsolute={positionErrorAbsolute}
+          errorMessage={error.message}
+        />
+      )}
       {children}
     </div>
   );
