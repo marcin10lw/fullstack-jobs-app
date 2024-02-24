@@ -1,5 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import { ALL_JOBS_QUERY_KEY, JOB_BY_ID_QUERY_KEY } from './constants';
+import {
+  ALL_JOBS_QUERY_KEY,
+  JOB_BY_ID_QUERY_KEY,
+  JOB_STATS_QUERY_KEY,
+} from './constants';
 import { jobAPI } from './jobApiAdapter';
 import { useSearchParams } from 'react-router-dom';
 
@@ -17,6 +21,13 @@ export const jobRepository = {
     return useQuery({
       queryKey: [JOB_BY_ID_QUERY_KEY, jobId],
       queryFn: () => jobAPI.getJobById(jobId),
+    });
+  },
+
+  useGetJobStats: () => {
+    return useQuery({
+      queryKey: [JOB_STATS_QUERY_KEY],
+      queryFn: jobAPI.getJobStats,
     });
   },
 };

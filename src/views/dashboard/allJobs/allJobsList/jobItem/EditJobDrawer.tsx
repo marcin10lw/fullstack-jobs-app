@@ -24,8 +24,8 @@ const EditJobDrawer = ({ jobId }: EditJobDrawerProps) => {
           Edit
         </Button>
       </DrawerTrigger>
-      <DrawerContent className="min-h-[40vh] px-5 pb-8 lg:px-10 lg:pb-16">
-        <div className="mt-10">
+      <DrawerContent className="max-h-[100vh] min-h-[40vh]">
+        <div className="mt-10 overflow-y-auto px-5 pb-8 lg:px-10 lg:pb-16">
           <EditJobDrawerContent jobId={jobId} closeDrawer={closeDrawer} />
         </div>
       </DrawerContent>

@@ -1,7 +1,7 @@
 import { FaSuitcaseRolling, FaCalendarCheck, FaBug } from 'react-icons/fa';
 
-import { DefaultStats } from 'src/types';
 import StatItem from './StatItem';
+import { DefaultStats } from 'src/infrasctucture/job/types';
 
 type StatsContainerProps = {
   defaultStats: DefaultStats;

@@ -7,8 +7,8 @@ import {
   CartesianGrid,
   Tooltip,
 } from "recharts";
+import { MonthlyApplications } from "src/infrasctucture/job/types";
 
-import { MonthlyApplications } from "src/types";
 
 type BarChartProps = {
   monthlyApplications: MonthlyApplications;

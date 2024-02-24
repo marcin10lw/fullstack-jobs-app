@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
-import { MonthlyApplications } from 'src/types';
 import BarChart from './BarChart';
 import AreaChart from './AreaChart';
+import { MonthlyApplications } from 'src/infrasctucture/job/types';
 
 type ChartsContainerProps = {
   monthlyApplications: MonthlyApplications;

@@ -1,7 +1,7 @@
 import customFetch from 'src/helpers/customFetch';
 import { InferJob, Job } from 'src/models/Job';
 import { JOB_API_URLS } from './jobApiUrls';
-import { ApiJobsResponse } from './types';
+import { ApiJobsResponse, ApiStatsResponse } from './types';
 
 export const jobAPI = {
   addNewJob: (job: InferJob) => customFetch.post(JOB_API_URLS.addNewJob, job),
@@ -29,4 +29,9 @@ export const jobAPI = {
 
   updateJobById: (job: InferJob, jobId: string) =>
     customFetch.patch(JOB_API_URLS.updateJobById.replace(':jobId', jobId), job),
+
+  getJobStats: async (): Promise<ApiStatsResponse> => {
+    const { data } = await customFetch.get(JOB_API_URLS.getJobStats);
+    return data;
+  },
 };

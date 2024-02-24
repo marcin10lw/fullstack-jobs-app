@@ -6,9 +6,8 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-} from "recharts";
-
-import { MonthlyApplications } from "src/types";
+} from 'recharts';
+import { MonthlyApplications } from 'src/infrasctucture/job/types';
 
 type AreaChartProps = {
   monthlyApplications: MonthlyApplications;
