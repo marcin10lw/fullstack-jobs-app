@@ -1,17 +1,17 @@
-import { useLocation, useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useLocation, useParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 
-import customFetch from "src/helpers/customFetch";
-import { Job as JobType } from "src/models/Job";
-import NotFound from "src/components/NotFound";
-import EditJobForm from "../views/dashboard/allJobs/EditJobForm";
+import customFetch from 'src/helpers/customFetch';
+import { Job as JobType } from 'src/models/Job';
+import NotFound from 'src/components/NotFound';
+import EditJobForm from '../views/dashboard/allJobs/EditJobForm';
 
 const EditJob = () => {
   const { id } = useParams();
   const { pathname } = useLocation();
 
   const { data: job, status } = useQuery({
-    queryKey: ["job", pathname],
+    queryKey: ['job', pathname],
     queryFn: async (): Promise<JobType> => {
       const { data } = await customFetch.get(`jobs/${id}`);
       return data.job;
@@ -20,11 +20,13 @@ const EditJob = () => {
     retry: false,
   });
 
-  if (status === "loading") return <h2>Loading...</h2>;
+  if (!id) return null;
 
-  if (status === "error") return <NotFound text="Could not find this job..." />;
+  if (status === 'loading') return <h2>Loading...</h2>;
 
-  if (status === "success") return <EditJobForm job={job} id={id} />;
+  if (status === 'error') return <NotFound text="Could not find this job..." />;
+
+  if (status === 'success') return <EditJobForm job={job} jobId={id} />;
   return <></>;
 };
 export default EditJob;

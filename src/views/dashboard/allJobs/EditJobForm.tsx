@@ -1,16 +1,17 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { Loader2 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 
 import LabeledFormSelect from 'src/components/LabeledFormSelect';
 import LabeledRegisterInput from 'src/components/LabeledRegisterInput';
 import MaxWidthWrapper from 'src/components/MaxWidthWrapper';
 import { Button } from 'src/components/ui/button';
 import { Form, FormField } from 'src/components/ui/form';
-import customFetch from 'src/helpers/customFetch';
+import { useToast } from 'src/components/ui/use-toast';
 import errorMessage from 'src/helpers/errorMessage';
+import { ALL_JOBS_QUERY_KEY } from 'src/infrasctucture/job/constants';
+import { jobAPI } from 'src/infrasctucture/job/jobApiAdapter';
 import {
   InferJob,
   Job as JobType,
@@ -22,21 +23,24 @@ import { CustomAxiosError } from 'src/types';
 
 type EditJobFormProps = {
   job: JobType;
-  id?: string;
+  jobId: string;
 };
 
-const EditJobForm = ({ job, id }: EditJobFormProps) => {
+const EditJobForm = ({ job, jobId }: EditJobFormProps) => {
   const qc = useQueryClient();
-  const navigate = useNavigate();
+
+  const { toast } = useToast();
+
+  const initialJob = {
+    position: job.position,
+    company: job.company,
+    jobLocation: job.jobLocation,
+    jobStatus: job.jobStatus,
+    jobType: job.jobType,
+  };
 
   const form = useForm<InferJob>({
-    defaultValues: {
-      position: job.position,
-      company: job.company,
-      jobLocation: job.jobLocation,
-      jobStatus: job.jobStatus,
-      jobType: job.jobType,
-    },
+    defaultValues: initialJob,
     resolver: zodResolver(jobSchema),
   });
 
@@ -45,23 +49,35 @@ const EditJobForm = ({ job, id }: EditJobFormProps) => {
     formState: { errors },
     handleSubmit,
     control,
+    watch,
   } = form;
 
-  const { mutate, isLoading } = useMutation({
-    mutationFn: (job: InferJob) => customFetch.patch(`/jobs/${id}`, job),
-    onSuccess: async () => {
-      await qc.invalidateQueries(['jobs, job']);
-      navigate('../all-jobs');
-      toast.success('Task updated');
+  const { mutate: updateJob, isLoading: isJobUpdating } = useMutation({
+    mutationFn: (job: InferJob) => jobAPI.updateJobById(job, jobId),
+    onSuccess: () => {
+      qc.invalidateQueries([ALL_JOBS_QUERY_KEY]);
+      toast({
+        title: 'Job updated successfully',
+        variant: 'success',
+      });
     },
     onError: (error: CustomAxiosError) => {
-      errorMessage(error, 'Could not update job');
+      toast({
+        title: 'An error occurred',
+        description: errorMessage(error, 'Failed to update job'),
+        variant: 'destructive',
+      });
     },
   });
 
   const onFormSubmit = (job: InferJob) => {
-    mutate(job);
+    updateJob(job);
   };
+
+  const currentFormValues = watch();
+  const hasAnyFieldChanged = Object.values(currentFormValues).some(
+    (value, index) => value !== Object.values(initialJob)[index],
+  );
 
   return (
     <MaxWidthWrapper>
@@ -118,8 +134,11 @@ const EditJobForm = ({ job, id }: EditJobFormProps) => {
           </Form>
 
           <div className="mt-6">
-            <Button disabled={isLoading} className="w-full">
-              Update
+            <Button
+              disabled={isJobUpdating || !hasAnyFieldChanged}
+              className="w-full"
+            >
+              {isJobUpdating ? <Loader2 className="animate-spin" /> : 'Update'}
             </Button>
           </div>
         </div>

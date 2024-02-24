@@ -7,14 +7,15 @@ interface EditJobDrawerContentProps {
 }
 
 const EditJobDrawerContent = ({ jobId }: EditJobDrawerContentProps) => {
-  const { data: job, isLoading } = jobRepository.useGetJobById(jobId);
-  console.log(job);
+  const { data: job, isLoading: isJobLoading } =
+    jobRepository.useGetJobById(jobId);
 
-  if (isLoading) return <Loader2 className="animate-spin" />;
+  if (isJobLoading)
+    return <Loader2 className="mx-auto mt-3 size-8 w-full animate-spin" />;
 
   if (!job) return null;
 
-  return <EditJobForm job={job} id={jobId} />;
+  return <EditJobForm job={job} jobId={jobId} />;
 };
 
 export default EditJobDrawerContent;

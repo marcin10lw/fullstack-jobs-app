@@ -26,4 +26,7 @@ export const jobAPI = {
 
     return data.job;
   },
+
+  updateJobById: (job: InferJob, jobId: string) =>
+    customFetch.patch(JOB_API_URLS.updateJobById.replace(':jobId', jobId), job),
 };

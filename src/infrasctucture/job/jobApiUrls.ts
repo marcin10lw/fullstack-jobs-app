@@ -3,4 +3,5 @@ export const JOB_API_URLS = {
   getAllJobs: '/jobs',
   deleteJob: '/jobs/:jobId',
   getJobById: '/jobs/:jobId',
+  updateJobById: '/jobs/:jobId',
 };

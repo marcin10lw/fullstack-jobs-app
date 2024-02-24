@@ -10,7 +10,6 @@ export const jobRepository = {
     return useQuery({
       queryKey: [ALL_JOBS_QUERY_KEY],
       queryFn: () => jobAPI.getAllJobs(searchParams),
-      keepPreviousData: true,
     });
   },
 
