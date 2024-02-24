@@ -15,7 +15,7 @@ const ContentWrapper = ({
   return (
     <div
       className={cn(
-        'm-auto w-full max-w-screen-xl rounded-lg bg-secondary p-[3rem_2rem_4rem]',
+        'm-auto w-full max-w-screen-xl rounded-lg bg-secondary p-[3rem_2rem_4rem] shadow-xl',
         className,
       )}
     >

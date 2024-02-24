@@ -11,7 +11,6 @@ export const jobRepository = {
       queryKey: [GET_ALL_JOBS_QUERY_KEY],
       queryFn: () => jobAPI.getAllJobs(searchParams),
       keepPreviousData: true,
-      cacheTime: 0,
     });
   },
 };

@@ -4,6 +4,7 @@ import useDashboardContext from 'src/views/dashboard/useDashboardContext';
 import { links } from 'src/helpers/links';
 import { cn } from 'src/lib/utils';
 import { UserRole } from 'src/infrasctucture/user/types';
+import { ROUTES } from 'src/routes';
 
 type NavLinksProps = {
   isBigSidebar?: boolean;
@@ -26,7 +27,7 @@ const NavLinks = ({ isBigSidebar, userRole }: NavLinksProps) => {
       })}
     >
       {links.map(({ id, icon, path, text }) => {
-        if (path === 'admin' && userRole !== 'admin') {
+        if (path === ROUTES.admin && userRole !== 'admin') {
           return;
         }
 

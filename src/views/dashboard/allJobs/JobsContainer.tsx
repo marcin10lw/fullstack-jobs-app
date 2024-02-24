@@ -1,6 +1,6 @@
-import PageBtnContainer from '../../../components/PageBtnContainer';
-import Job from '../../../components/Job';
 import { ApiJobsResponse } from 'src/infrasctucture/job/types';
+import AllJobsList from './AllJobsList';
+import PageBtnContainer from './PageBtnContainer';
 
 type JobsContainerProps = {
   jobsData: ApiJobsResponse;
@@ -29,13 +29,7 @@ const JobsContainer = ({
       <h5 className="mb-6 font-bold">
         {totalJobs} {totalJobs > 1 ? 'jobs' : 'job'}
       </h5>
-
-      <div className="grid gap-8 xl:grid-cols-2">
-        {jobs.map((job) => (
-          <Job key={job._id} job={job} />
-        ))}
-      </div>
-
+      <AllJobsList jobs={jobs} />
       {numOfPages > 1 && (
         <PageBtnContainer
           currentPage={currentPage}
