@@ -7,7 +7,7 @@ import { Input } from 'src/components/ui/input';
 import { Label } from 'src/components/ui/label';
 import { useQueryParameter } from 'src/hooks/useQueryParameter';
 import { jobStatusItems, jobTypeItems } from 'src/models/Job';
-import { searchParamsDefaultValues } from './constants';
+import { searchParamsDefaultValues } from '../constants';
 
 const SearchContainer = () => {
   const [searchParams, setSearchParams] = useSearchParams(

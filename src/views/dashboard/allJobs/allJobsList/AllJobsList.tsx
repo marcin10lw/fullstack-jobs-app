@@ -1,5 +1,5 @@
 import { Job } from 'src/models/Job';
-import JobItem from './JobItem';
+import JobItem from './jobItem/JobItem';
 
 interface AllJobsListProps {
   jobs: Job[];

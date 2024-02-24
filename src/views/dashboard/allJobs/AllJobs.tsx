@@ -2,8 +2,8 @@ import { useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { jobRepository } from 'src/infrasctucture/job/jobRepository';
-import JobsContainer from 'src/views/dashboard/allJobs/JobsContainer';
-import SearchContainer from 'src/views/dashboard/allJobs/SearchContainer';
+import JobsContainer from 'src/views/dashboard/allJobs/allJobsList/JobsContainer';
+import SearchContainer from 'src/views/dashboard/allJobs/search/SearchContainer';
 import { searchParamsDefaultValues } from './constants';
 import AllJobsSkeleton from './AllJobsSkeleton';
 

@@ -1,6 +1,6 @@
 import { Loader2 } from 'lucide-react';
 import { jobRepository } from 'src/infrasctucture/job/jobRepository';
-import EditJobForm from 'src/views/dashboard/allJobs/EditJobForm';
+import EditJobForm from 'src/views/dashboard/allJobs/allJobsList/jobItem/EditJobForm';
 
 interface EditJobDrawerContentProps {
   jobId: string;

@@ -1,6 +1,6 @@
 import { ApiJobsResponse } from 'src/infrasctucture/job/types';
 import AllJobsList from './AllJobsList';
-import PageBtnContainer from './PageBtnContainer';
+import PageBtnContainer from '../PageBtnContainer';
 
 type JobsContainerProps = {
   jobsData: ApiJobsResponse;
