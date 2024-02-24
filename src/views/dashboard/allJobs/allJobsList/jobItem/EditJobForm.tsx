@@ -24,9 +24,10 @@ import { CustomAxiosError } from 'src/types';
 type EditJobFormProps = {
   job: JobType;
   jobId: string;
+  closeDrawer: () => void;
 };
 
-const EditJobForm = ({ job, jobId }: EditJobFormProps) => {
+const EditJobForm = ({ job, jobId, closeDrawer }: EditJobFormProps) => {
   const qc = useQueryClient();
 
   const { toast } = useToast();
@@ -56,10 +57,13 @@ const EditJobForm = ({ job, jobId }: EditJobFormProps) => {
     mutationFn: (job: InferJob) => jobAPI.updateJobById(job, jobId),
     onSuccess: () => {
       qc.invalidateQueries([ALL_JOBS_QUERY_KEY]);
-      toast({
-        title: 'Job updated successfully',
-        variant: 'success',
-      });
+      closeDrawer();
+      setTimeout(() => {
+        toast({
+          title: 'Job updated successfully',
+          variant: 'success',
+        });
+      }, 300);
     },
     onError: (error: CustomAxiosError) => {
       toast({

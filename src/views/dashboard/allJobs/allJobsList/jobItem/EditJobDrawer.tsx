@@ -1,14 +1,24 @@
 import { Button } from 'src/components/ui/button';
 import { Drawer, DrawerContent, DrawerTrigger } from 'src/components/ui/drawer';
 import EditJobDrawerContent from './EditJobDrawerContent';
+import { useState } from 'react';
 
 interface EditJobDrawerProps {
   jobId: string;
 }
 
 const EditJobDrawer = ({ jobId }: EditJobDrawerProps) => {
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const closeDrawer = () => {
+    setIsDrawerOpen(false);
+  };
+
   return (
-    <Drawer>
+    <Drawer
+      open={isDrawerOpen}
+      onOpenChange={(isOpen) => setIsDrawerOpen(isOpen)}
+    >
       <DrawerTrigger asChild>
         <Button className="mr-2 flex h-[30px] items-center text-sm">
           Edit
@@ -16,7 +26,7 @@ const EditJobDrawer = ({ jobId }: EditJobDrawerProps) => {
       </DrawerTrigger>
       <DrawerContent className="min-h-[40vh] px-5 pb-8 lg:px-10 lg:pb-16">
         <div className="mt-10">
-          <EditJobDrawerContent jobId={jobId} />
+          <EditJobDrawerContent jobId={jobId} closeDrawer={closeDrawer} />
         </div>
       </DrawerContent>
     </Drawer>

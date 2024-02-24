@@ -4,9 +4,13 @@ import EditJobForm from 'src/views/dashboard/allJobs/allJobsList/jobItem/EditJob
 
 interface EditJobDrawerContentProps {
   jobId: string;
+  closeDrawer: () => void;
 }
 
-const EditJobDrawerContent = ({ jobId }: EditJobDrawerContentProps) => {
+const EditJobDrawerContent = ({
+  jobId,
+  closeDrawer,
+}: EditJobDrawerContentProps) => {
   const { data: job, isLoading: isJobLoading } =
     jobRepository.useGetJobById(jobId);
 
@@ -15,7 +19,7 @@ const EditJobDrawerContent = ({ jobId }: EditJobDrawerContentProps) => {
 
   if (!job) return null;
 
-  return <EditJobForm job={job} jobId={jobId} />;
+  return <EditJobForm job={job} jobId={jobId} closeDrawer={closeDrawer} />;
 };
 
 export default EditJobDrawerContent;
