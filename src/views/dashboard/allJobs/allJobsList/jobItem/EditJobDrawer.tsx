@@ -2,6 +2,7 @@ import { Button } from 'src/components/ui/button';
 import { Drawer, DrawerContent, DrawerTrigger } from 'src/components/ui/drawer';
 import EditJobDrawerContent from './EditJobDrawerContent';
 import { useState } from 'react';
+import { ScrollArea } from 'src/components/ui/scroll-area';
 
 interface EditJobDrawerProps {
   jobId: string;
@@ -25,9 +26,11 @@ const EditJobDrawer = ({ jobId }: EditJobDrawerProps) => {
         </Button>
       </DrawerTrigger>
       <DrawerContent className="max-h-[100vh] min-h-[40vh]">
-        <div className="mt-10 overflow-y-auto px-5 pb-8 lg:px-10 lg:pb-16">
-          <EditJobDrawerContent jobId={jobId} closeDrawer={closeDrawer} />
-        </div>
+        <ScrollArea className="mt-10 px-5 lg:px-10">
+          <div className="pb-8 lg:pb-16">
+            <EditJobDrawerContent jobId={jobId} closeDrawer={closeDrawer} />
+          </div>
+        </ScrollArea>
       </DrawerContent>
     </Drawer>
   );

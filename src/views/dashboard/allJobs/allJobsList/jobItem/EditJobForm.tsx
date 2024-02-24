@@ -85,9 +85,13 @@ const EditJobForm = ({ job, jobId, closeDrawer }: EditJobFormProps) => {
 
   return (
     <MaxWidthWrapper>
-      <form onSubmit={handleSubmit(onFormSubmit)} noValidate>
+      <form
+        className="mx-1"
+        onSubmit={handleSubmit(onFormSubmit)}
+        noValidate
+      >
         <h4 className="text-xl">edit job</h4>
-        <div className="mt-12 grid gap-y-4 lg:grid-cols-2 lg:items-center lg:gap-[2rem_1rem] xl:grid-cols-3">
+        <div className="mt-8 grid gap-y-4 md:mt-12 lg:grid-cols-2 lg:items-center lg:gap-[2rem_1rem] xl:grid-cols-3">
           <LabeledRegisterInput
             label="position"
             name="position"

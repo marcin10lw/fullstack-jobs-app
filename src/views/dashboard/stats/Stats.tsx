@@ -1,7 +1,7 @@
 import NotFound from 'src/components/NotFound';
 
-import ChartsContainer from 'src/components/ChartsContainer';
-import StatsContainer from 'src/components/StatsContainer';
+import ChartsContainer from 'src/views/dashboard/stats/ChartsContainer';
+import StatsContainer from 'src/views/dashboard/stats/StatsContainer';
 import { jobRepository } from 'src/infrasctucture/job/jobRepository';
 
 const Stats = () => {

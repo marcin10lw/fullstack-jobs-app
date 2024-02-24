@@ -11,7 +11,7 @@ import { searchParamsDefaultValues } from './constants';
 
 const SearchContainer = () => {
   const [searchParams] = useSearchParams(searchParamsDefaultValues);
-  const { jobStatus, jobType, search, sort } = searchParamsDefaultValues;
+  const { search } = searchParamsDefaultValues;
 
   const { setQuery } = queryParams.useSetQueryParameter();
   const { deleteQueryParameters } = queryParams.useDeleteQueryParameters();
@@ -39,19 +39,19 @@ const SearchContainer = () => {
           <Select
             label="job status"
             options={['all', ...jobStatusItems]}
-            value={searchParams.get('jobStatus') || jobStatus}
+            value={searchParams.get('jobStatus') || undefined}
             onOptionChange={(value) => setQuery('jobStatus', value)}
           />
           <Select
             label="job type"
             options={['all', ...jobTypeItems]}
-            value={searchParams.get('jobType') || jobType}
+            value={searchParams.get('jobType') || undefined}
             onOptionChange={(value) => setQuery('jobType', value)}
           />
           <Select
             label="sort"
             options={['newest', 'oldest', 'a-z', 'z-a']}
-            value={searchParams.get('sort') || sort}
+            value={searchParams.get('sort') || undefined}
             onOptionChange={(value) => setQuery('sort', value)}
           />
 

@@ -49,30 +49,12 @@
   }
 }
 
-.scrollbar-w-4::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
-}
-
-.scrollbar-track-gray-lighter::-webkit-scrollbar-track {
-  margin: 0 0 160px;
-  background-color: transparent;
-}
-
-.scrollbar-thumb-gray::-webkit-scrollbar-thumb {
-  background-color: rgba(156, 163, 175, 0.5);
-}
-
-.scrollbar-thumb-rounded::-webkit-scrollbar-thumb {
-  border-radius: 4px;
-}
-
 @layer base {
   * {
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply overflow-hidden bg-background text-foreground;
   }
   html {
     font-family: 'Barlow', sans-serif;

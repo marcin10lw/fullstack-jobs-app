@@ -10,6 +10,7 @@ import SmallSidebar from './SmallSidebar';
 import BigSidebar from './BigSidebar';
 import Navbar from './Navbar';
 import MaxWidthWrapper from 'src/components/MaxWidthWrapper';
+import { ScrollArea } from 'src/components/ui/scroll-area';
 
 type ContextType = { user: User };
 
@@ -37,11 +38,15 @@ const DashboardLayout = () => {
               <div>
                 <Navbar user={userResponse.user} />
 
-                <MaxWidthWrapper className="scrollbar-w-4 scrollbar-track-gray-lighter scrollbar-thumb-gray h-[calc(100vh-96px)] overflow-y-auto px-8 py-8">
-                  <Outlet
-                    context={{ user: userResponse.user } satisfies ContextType}
-                  />
-                </MaxWidthWrapper>
+                <ScrollArea className="h-[calc(100vh-96px)]">
+                  <MaxWidthWrapper className="h-full px-4 md:px-8 py-8">
+                    <Outlet
+                      context={
+                        { user: userResponse.user } satisfies ContextType
+                      }
+                    />
+                  </MaxWidthWrapper>
+                </ScrollArea>
               </div>
             </main>
           </section>

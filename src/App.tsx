@@ -8,7 +8,7 @@ import Error from './pages/Error';
 import HomeLayout from './pages/HomeLayout';
 import Landing from './pages/Landing';
 import Profile from './pages/Profile';
-import Stats from './pages/Stats';
+import Stats from './views/dashboard/stats/Stats';
 import { ROUTES } from './routes';
 import DashboardLayout from './views/dashboard/DashboardLayout';
 import AddJob from './views/dashboard/addJob/AddJob';

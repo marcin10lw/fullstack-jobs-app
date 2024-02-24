@@ -15,7 +15,7 @@ const EditJobDrawerContent = ({
     jobRepository.useGetJobById(jobId);
 
   if (isJobLoading)
-    return <Loader2 className="mx-auto mt-3 size-8 w-full animate-spin" />;
+    return <Loader2 className="mx-auto mt-3 size-8 animate-spin" />;
 
   if (!job) return null;
 

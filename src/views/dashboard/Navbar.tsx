@@ -16,7 +16,7 @@ const Navbar = ({ user }: NavbarProps) => {
 
   return (
     <nav className="top-0 flex h-24 items-center justify-center border-b-2 border-b-border bg-background shadow-sm lg:sticky">
-      <MaxWidthWrapper className="flex items-center justify-between px-8">
+      <MaxWidthWrapper className="flex items-center justify-between px-4 md:px-8">
         <button
           onClick={toggleSidebar}
           type="button"

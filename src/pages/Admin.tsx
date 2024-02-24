@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { FaSuitcaseRolling, FaCalendarCheck } from 'react-icons/fa';
 
 import customFetch from 'src/helpers/customFetch';
-import StatItem from 'src/components/StatItem';
+import StatItem from 'src/views/dashboard/stats/StatItem';
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -40,16 +40,14 @@ const Admin = () => {
         <StatItem
           title="current users"
           count={users}
-          color="#e9b949"
-          bcg="#fcefc7"
-          icon={<FaSuitcaseRolling />}
+          color="text-foreground"
+          icon={<FaSuitcaseRolling className="size-10" />}
         />
         <StatItem
           title="current jobs"
           count={jobs}
-          color="#647acb"
-          bcg="#e0e8f9"
-          icon={<FaCalendarCheck />}
+          color="text-foreground"
+          icon={<FaCalendarCheck className="size-10" />}
         />
       </section>
     );
