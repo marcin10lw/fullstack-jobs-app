@@ -50,7 +50,6 @@ const AllJobs = () => {
     return (
       <>
         <SearchContainer />
-
         <JobsContainer
           jobsData={jobsData}
           setPage={setPage}

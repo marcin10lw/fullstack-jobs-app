@@ -21,7 +21,7 @@ const AreaChart = ({ monthlyApplications }: AreaChartProps) => {
         <XAxis dataKey="date" />
         <YAxis allowDecimals={false} />
         <Tooltip animationEasing="ease-in-out" />
-        <Area type="natural" dataKey="count" stroke="#2cb1bc" fill="#bef8fd" />
+        <Area type="natural" dataKey="count" stroke="#7e22ce" fill="#b292ce" />
       </Chart>
     </ResponsiveContainer>
   );
