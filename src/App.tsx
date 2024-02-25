@@ -1,13 +1,13 @@
 import { useLayoutEffect } from 'react';
 import { RouterProvider, createHashRouter } from 'react-router-dom';
 
-import { checkDefaultTheme } from './helpers/checkDefaultTheme';
+import { checkDefaultTheme } from './lib/helpers/checkDefaultTheme';
 
-import Admin from './pages/Admin';
-import Error from './pages/Error';
-import HomeLayout from './pages/HomeLayout';
-import Landing from './pages/Landing';
-import Profile from './pages/Profile';
+import Admin from './views/dashboard/admin/Admin';
+import Error from './views/Error';
+import HomeLayout from './views/HomeLayout';
+import Landing from './views/Landing';
+import Profile from './views/dashboard/profile/Profile';
 import Stats from './views/dashboard/stats/Stats';
 import { ROUTES } from './routes';
 import DashboardLayout from './views/dashboard/DashboardLayout';

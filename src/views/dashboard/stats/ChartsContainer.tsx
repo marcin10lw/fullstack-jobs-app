@@ -32,12 +32,14 @@ const ChartsContainer = ({ monthlyApplications }: ChartsContainerProps) => {
         {chart === 'area' ? 'Area Chart' : 'Bar Chart'}
       </button>
       <div className="relative">
-        <div className="absolute inset-0 h-full w-full -ml-6">
-          {chart === 'bar' ? (
-            <BarChart monthlyApplications={monthlyApplications} />
-          ) : (
-            <AreaChart monthlyApplications={monthlyApplications} />
-          )}
+        <div className="absolute inset-0 -ml-6 h-full w-full">
+          <div className='pb-5 lg:pb-10'>
+            {chart === 'bar' ? (
+              <BarChart monthlyApplications={monthlyApplications} />
+            ) : (
+              <AreaChart monthlyApplications={monthlyApplications} />
+            )}
+          </div>
         </div>
       </div>
     </section>

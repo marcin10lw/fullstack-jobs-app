@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
 import { useToast } from 'src/components/ui/use-toast';
-import errorMessage from 'src/helpers/errorMessage';
+import errorMessage from 'src/lib/helpers/errorMessage';
 import { jobAPI } from 'src/infrasctucture/job/jobApiAdapter';
 import { InferJob, jobSchema } from 'src/models/Job';
 import { ROUTES } from 'src/routes';

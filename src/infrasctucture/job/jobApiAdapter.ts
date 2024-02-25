@@ -1,4 +1,4 @@
-import customFetch from 'src/helpers/customFetch';
+import customFetch from 'src/lib/helpers/customFetch';
 import { InferJob, Job } from 'src/models/Job';
 import { JOB_API_URLS } from './jobApiUrls';
 import { ApiJobsResponse, ApiStatsResponse } from './types';

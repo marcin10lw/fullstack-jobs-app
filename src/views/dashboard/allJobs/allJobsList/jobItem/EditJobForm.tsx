@@ -9,7 +9,7 @@ import MaxWidthWrapper from 'src/components/MaxWidthWrapper';
 import { Button } from 'src/components/ui/button';
 import { Form, FormField } from 'src/components/ui/form';
 import { useToast } from 'src/components/ui/use-toast';
-import errorMessage from 'src/helpers/errorMessage';
+import errorMessage from 'src/lib/helpers/errorMessage';
 import { ALL_JOBS_QUERY_KEY } from 'src/infrasctucture/job/constants';
 import { jobAPI } from 'src/infrasctucture/job/jobApiAdapter';
 import {

@@ -1,4 +1,4 @@
-import customFetch from 'src/helpers/customFetch';
+import customFetch from 'src/lib/helpers/customFetch';
 import { LoginFormData } from 'src/models/Login';
 import { RegisterFormData } from 'src/models/Register';
 import { UserApiResponse } from './types';

@@ -1,11 +1,11 @@
 import { PropsWithChildren, createContext, useEffect, useState } from 'react';
 
 import { Theme } from 'src/types';
-import { checkDefaultTheme } from 'src/helpers/checkDefaultTheme';
+import { checkDefaultTheme } from 'src/lib/helpers/checkDefaultTheme';
 import {
   getValueFromLocalStorage,
   saveValueToLocalStorage,
-} from 'src/helpers/localStorage';
+} from 'src/lib/helpers/localStorage';
 import {
   LOCAL_STORAGE_SIDEBAR_VISIBLE_KEY,
   LOCAL_STORAGE_THEME_KEY,

@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
 
 import { useToast } from './ui/use-toast';
-import { getUserInitials } from 'src/helpers/getUserInitials';
+import { getUserInitials } from 'src/lib/helpers/getUserInitials';
 import { User } from 'src/infrasctucture/user/types';
 import { userAPI } from 'src/infrasctucture/user/userApiAdapter';
 import { ROUTES } from 'src/routes';
@@ -15,6 +15,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from './ui/dropdown-menu';
+import { useQueryClient } from '@tanstack/react-query';
 
 type LogoutContainerProps = {
   user: User;
@@ -24,6 +25,8 @@ const UserAvatar = ({ user }: LogoutContainerProps) => {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const navigate = useNavigate();
 
+  const queryClient = useQueryClient();
+
   const { toast } = useToast();
 
   const logoutUser = async () => {
@@ -31,6 +34,7 @@ const UserAvatar = ({ user }: LogoutContainerProps) => {
 
     try {
       await userAPI.logoutUser();
+      queryClient.clear();
       navigate('/');
       toast({
         title: 'Successfully logout',

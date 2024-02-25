@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { FaSuitcaseRolling, FaCalendarCheck } from 'react-icons/fa';
 
-import customFetch from 'src/helpers/customFetch';
+import customFetch from 'src/lib/helpers/customFetch';
 import StatItem from 'src/views/dashboard/stats/StatItem';
 
 const Admin = () => {

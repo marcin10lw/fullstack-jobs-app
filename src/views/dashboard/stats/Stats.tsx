@@ -15,7 +15,7 @@ const Stats = () => {
 
   if (status === 'success') {
     const { defaultStats, monthlyApplications } = data;
-    console.log(data);
+
     return (
       <>
         <StatsContainer defaultStats={defaultStats} />
