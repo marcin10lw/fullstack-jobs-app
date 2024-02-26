@@ -1,121 +1,96 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Controller, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'react-toastify';
-import { AiOutlinePlus } from 'react-icons/ai';
 
-import { useUser } from '../DashboardLayout';
-import { UpdatedUser, updateUserSchema } from 'src/models/User';
+import { Loader2 } from 'lucide-react';
+import ContentWrapper from 'src/components/ContentWrapper';
+import LabeledRegisterInput from 'src/components/LabeledRegisterInput';
+import { Button } from 'src/components/ui/button';
+import { checkHasAnyFieldChanged } from 'src/lib/helpers/checkHasAnyFieldChanged';
 import customFetch from 'src/lib/helpers/customFetch';
-import { CustomAxiosError } from 'src/types';
 import errorMessage from 'src/lib/helpers/errorMessage';
-import userIcon from 'src/assets/images/user.svg';
-import FormRow from 'src/components/FormRow';
-import SubmitButton from 'src/components/SubmitButton';
+import { UpdatedUser, updateUserSchema } from 'src/models/User';
+import { CustomAxiosError } from 'src/types';
+import { useUser } from '../DashboardLayout';
+import ProfilePicture from './ProfilePicture';
 
 const Profile = () => {
   const { user } = useUser();
   const qc = useQueryClient();
 
-  const { mutate, isLoading } = useMutation({
-    mutationFn: (user: FormData) =>
-      customFetch.patch('/users/update-user', user),
-    onSuccess: () => {
-      qc.invalidateQueries(['user']);
-      toast.success('User updated!');
-    },
-    onError: (error: CustomAxiosError) => {
-      errorMessage(error, 'Could not update user');
-    },
-  });
+  const initialValues: UpdatedUser = {
+    name: user.name,
+    lastName: user.lastName,
+    email: user.email,
+    location: user.location,
+    avatar: null,
+  };
 
   const {
     register,
     formState: { errors },
     handleSubmit,
     control,
+    watch,
+    reset,
   } = useForm<UpdatedUser>({
-    defaultValues: {
-      name: user.name,
-      lastName: user.lastName,
-      email: user.email,
-      location: user.location,
-    },
+    defaultValues: initialValues,
     resolver: zodResolver(updateUserSchema),
   });
 
+  const hasAnyFieldChanged = checkHasAnyFieldChanged(watch(), initialValues);
+
+  const { mutate: updateProfile, isLoading: isUpdatingProfile } = useMutation({
+    mutationFn: (user: FormData) =>
+      customFetch.patch('/users/update-user', user),
+    onSuccess: () => {
+      qc.invalidateQueries(['user']);
+      toast.success('User updated!');
+      reset();
+    },
+    onError: (error: CustomAxiosError) => {
+      errorMessage(error, 'Could not update user');
+    },
+  });
+
   const onFormSubmit = (user: UpdatedUser) => {
+    if (!hasAnyFieldChanged) return;
+
     const formData = new FormData();
     const userEntries = Object.entries(user);
 
     userEntries.forEach(([key, value]) => {
-      formData.append(key, value);
+      if (value) {
+        formData.append(key, value);
+      }
     });
 
     if (!user.avatar) {
       formData.delete('avatar');
     }
 
-    mutate(formData);
+    updateProfile(formData);
   };
 
   return (
-    <div className="w-full rounded-[--border-radius] bg-[--background-secondary-color] p-[3rem_2rem_4rem]">
+    <ContentWrapper title="profile">
       <form
-        className="form m-0 w-full max-w-full rounded-none p-0 shadow-none"
         onSubmit={handleSubmit(onFormSubmit)}
         noValidate
         encType="multipart/form-data"
       >
-        <h4 className="mb-8">profile</h4>
-
         <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-[1fr_2fr] md:gap-4">
           <Controller
             control={control}
-            name={'avatar'}
-            render={({ field }) => {
+            name="avatar"
+            render={({ field: { value, onChange } }) => {
               return (
-                <div className="relative h-[200px] w-[200px]">
-                  <label
-                    htmlFor="avatar"
-                    className="group relative block h-full w-full cursor-pointer overflow-hidden rounded-full"
-                  >
-                    <img
-                      src={
-                        field.value && field.value.type.includes('image/')
-                          ? URL.createObjectURL(field.value)
-                          : user.avatar
-                          ? user.avatar
-                          : userIcon
-                      }
-                      alt="user avatar"
-                      className="block h-full w-full object-cover"
-                    />
-
-                    <div className="absolute inset-0 z-10 grid place-items-center bg-black opacity-0 transition-opacity duration-300 group-hover:opacity-40">
-                      <div className="h-8 w-8">
-                        <AiOutlinePlus />
-                      </div>
-                    </div>
-                  </label>
-
-                  <input
-                    onChange={({ target }) => {
-                      if (target.files) {
-                        field.onChange(target.files[0]);
-                      }
-                    }}
-                    type="file"
-                    id="avatar"
-                    className="hidden"
-                    accept="image/*"
-                  />
-                  {errors.avatar && (
-                    <p className="form-error top-[calc(100%_+_0.3rem)] text-center">
-                      {errors.avatar.message}
-                    </p>
-                  )}
-                </div>
+                <ProfilePicture
+                  value={value}
+                  onChange={onChange}
+                  error={errors.avatar}
+                />
               );
             }}
           />
@@ -125,42 +100,50 @@ const Profile = () => {
           </div>
         </div>
 
-        <div className="mt-12 grid gap-y-4 lg:grid-cols-2 lg:gap-[2rem_1rem] xl:grid-cols-3">
-          <FormRow
-            type="text"
-            name="name"
-            labelText="name"
+        <div className="mt-14 grid gap-y-4 lg:grid-cols-2 lg:gap-[2rem_1rem] xl:grid-cols-3">
+          <LabeledRegisterInput
             register={register('name')}
+            label="name"
+            name="name"
             error={errors.name}
+            positionErrorAbsolute
           />
-          <FormRow
-            type="text"
-            name="lastName"
-            labelText="last name"
+          <LabeledRegisterInput
             register={register('lastName')}
+            label="last name"
+            name="lastName"
             error={errors.lastName}
+            positionErrorAbsolute
           />
-          <FormRow
-            type="email"
-            name="email"
-            labelText="email"
+          <LabeledRegisterInput
             register={register('email')}
+            label="email"
+            name="email"
+            type="email"
             error={errors.email}
+            positionErrorAbsolute
           />
-          <FormRow
-            type="text"
-            name="location"
-            labelText="location"
+          <LabeledRegisterInput
             register={register('location')}
+            label="location"
+            name="location"
             error={errors.location}
+            positionErrorAbsolute
           />
-
-          <div className="mt-4 lg:mt-8">
-            <SubmitButton isLoading={isLoading} isFormBtn />
-          </div>
+          <Button
+            type="submit"
+            disabled={isUpdatingProfile || !hasAnyFieldChanged}
+            className="mt-6"
+          >
+            {isUpdatingProfile ? (
+              <Loader2 className="animate-spin" />
+            ) : (
+              'Submit'
+            )}
+          </Button>
         </div>
       </form>
-    </div>
+    </ContentWrapper>
   );
 };
 export default Profile;

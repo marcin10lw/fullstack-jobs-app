@@ -1,4 +1,4 @@
-import { ZodType, z } from 'zod';
+import { z } from 'zod';
 
 export const updateUserSchema = z.object({
   name: z
@@ -14,7 +14,7 @@ export const updateUserSchema = z.object({
   location: z.string().trim().min(1, { message: 'Location is required' }),
   email: z.string().trim().email(),
   avatar: z
-    .any()
+    .custom<File>()
     .refine(
       (file) => {
         if (file) {
@@ -34,7 +34,8 @@ export const updateUserSchema = z.object({
         return true;
       },
       { message: 'File max size is 0.5 MB' },
-    ) as ZodType<File>,
+    )
+    .nullable(),
 });
 
 export type UpdatedUser = z.infer<typeof updateUserSchema>;

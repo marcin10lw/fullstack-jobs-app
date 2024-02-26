@@ -20,6 +20,7 @@ import {
   jobTypeItems,
 } from 'src/models/Job';
 import { CustomAxiosError } from 'src/types';
+import { checkHasAnyFieldChanged } from 'src/lib/helpers/checkHasAnyFieldChanged';
 
 type EditJobFormProps = {
   job: JobType;
@@ -53,6 +54,12 @@ const EditJobForm = ({ job, jobId, closeDrawer }: EditJobFormProps) => {
     watch,
   } = form;
 
+  const currentFormValues = watch();
+  const hasAnyFieldChanged = checkHasAnyFieldChanged(
+    currentFormValues,
+    initialJob,
+  );
+
   const { mutate: updateJob, isLoading: isJobUpdating } = useMutation({
     mutationFn: (job: InferJob) => jobAPI.updateJobById(job, jobId),
     onSuccess: () => {
@@ -75,21 +82,13 @@ const EditJobForm = ({ job, jobId, closeDrawer }: EditJobFormProps) => {
   });
 
   const onFormSubmit = (job: InferJob) => {
+    if (!hasAnyFieldChanged) return;
     updateJob(job);
   };
 
-  const currentFormValues = watch();
-  const hasAnyFieldChanged = Object.values(currentFormValues).some(
-    (value, index) => value !== Object.values(initialJob)[index],
-  );
-
   return (
     <MaxWidthWrapper>
-      <form
-        className="mx-1"
-        onSubmit={handleSubmit(onFormSubmit)}
-        noValidate
-      >
+      <form className="mx-1" onSubmit={handleSubmit(onFormSubmit)} noValidate>
         <h4 className="text-xl">edit job</h4>
         <div className="mt-8 grid gap-y-4 md:mt-12 lg:grid-cols-2 lg:items-center lg:gap-[2rem_1rem] xl:grid-cols-3">
           <LabeledRegisterInput
