@@ -3,7 +3,8 @@ export const ROUTES = {
   register: '/register',
   dashboard: '/dashboard',
   profile: '/dashboard/profile',
-  allJobs: '/dashboard/all-jobs',
+  allJobs: '/dashboard/jobs',
   stats: '/dashboard/stats',
   admin: '/dashboard/admin',
+  job: '/dashboard/jobs/:jobId',
 };

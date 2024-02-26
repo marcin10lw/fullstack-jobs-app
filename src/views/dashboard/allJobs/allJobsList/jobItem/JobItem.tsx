@@ -6,6 +6,9 @@ dayjs.extend(advancedFormat);
 import { cn } from 'src/lib/utils';
 import { Job as JobType } from 'src/models/Job';
 import JobItemFooter from './JobItemFooter';
+import { Link } from 'react-router-dom';
+import { ROUTES } from 'src/routes';
+import { ChevronRight } from 'lucide-react';
 
 type JobInfoProps = {
   icon: JSX.Element;
@@ -32,17 +35,20 @@ const JobItem = ({ job }: JobProps) => {
 
   return (
     <article className="grid grid-rows-[1fr_auto] rounded-lg bg-secondary shadow-xl">
-      <header className="grid grid-cols-[auto_1fr] items-center border-b border-slate-400 p-[1rem_1.5rem]">
-        <div className="mr-8 grid h-[60px] w-[60px] place-items-center rounded-[--border-radius] bg-primary text-2xl font-bold uppercase text-white">
-          {job.company.charAt(0)}
-        </div>
-        <div>
-          <h5 className="mb-2">{job.position}</h5>
-          <p className="capitalize tracking-widest text-muted-foreground">
-            {job.company}
-          </p>
-        </div>
-      </header>
+      <Link to={ROUTES.job.replace(':jobId', job._id)}>
+        <header className="group grid grid-cols-[auto_1fr_auto] items-center border-b border-slate-400 p-[1rem_1.5rem]">
+          <div className="mr-8 grid h-[60px] w-[60px] place-items-center rounded-[--border-radius] bg-primary text-2xl font-bold uppercase text-white">
+            {job.company.charAt(0)}
+          </div>
+          <div>
+            <h5 className="mb-2">{job.position}</h5>
+            <p className="capitalize tracking-widest text-muted-foreground">
+              {job.company}
+            </p>
+          </div>
+          <ChevronRight className="size-8 text-foreground/50 transition-all duration-300 group-hover:translate-x-1 group-hover:text-foreground" />
+        </header>
+      </Link>
       <div className="p-[1rem_1.5rem]">
         <div className="m-[1rem_0_1.5rem] grid items-center gap-6 sm:grid-cols-2">
           <JobInfo icon={<FaLocationArrow />} text={job.jobLocation} />

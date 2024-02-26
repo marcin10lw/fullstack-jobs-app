@@ -21,6 +21,7 @@ export const jobRepository = {
     return useQuery({
       queryKey: [JOB_BY_ID_QUERY_KEY, jobId],
       queryFn: () => jobAPI.getJobById(jobId),
+      retry: 1,
     });
   },
 

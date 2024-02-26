@@ -15,6 +15,7 @@ import AddJob from './views/dashboard/addJob/AddJob';
 import AllJobs from './views/dashboard/allJobs/AllJobs';
 import Login from './views/user/Login';
 import Register from './views/user/Register';
+import Job from './views/dashboard/job/Job';
 
 const router = createHashRouter([
   {
@@ -46,19 +47,23 @@ const router = createHashRouter([
         element: <AddJob />,
       },
       {
-        path: 'stats',
+        path: ROUTES.stats,
         element: <Stats />,
       },
       {
-        path: 'all-jobs',
+        path: ROUTES.allJobs,
         element: <AllJobs />,
       },
       {
-        path: 'profile',
+        path: ROUTES.job,
+        element: <Job />,
+      },
+      {
+        path: ROUTES.profile,
         element: <Profile />,
       },
       {
-        path: 'admin',
+        path: ROUTES.admin,
         element: <Admin />,
       },
     ],

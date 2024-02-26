@@ -3,8 +3,8 @@ import { cn } from 'src/lib/utils';
 type ContentWrapperElementProps = React.HTMLAttributes<HTMLDivElement>;
 
 interface ContentWrapperProps extends ContentWrapperElementProps {
-  title: string;
-  children: React.ReactNode;
+  title?: string;
+  children?: React.ReactNode;
 }
 
 const ContentWrapper = ({
@@ -15,11 +15,11 @@ const ContentWrapper = ({
   return (
     <div
       className={cn(
-        'm-auto w-full max-w-screen-xl rounded-lg bg-secondary p-4 md:p-[3rem_2rem_4rem] shadow-xl',
+        'm-auto w-full max-w-screen-xl rounded-lg bg-secondary p-4 shadow-xl md:p-[3rem_2rem_4rem]',
         className,
       )}
     >
-      <h4 className="mb-8">{title}</h4>
+      {title && <h4 className="mb-8">{title}</h4>}
       {children}
     </div>
   );
