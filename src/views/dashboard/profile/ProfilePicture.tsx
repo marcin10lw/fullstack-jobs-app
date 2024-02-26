@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Plus } from 'lucide-react';
-import { useUser } from '../DashboardLayout';
 import { FieldError } from 'react-hook-form';
 import userIcon from 'src/assets/images/user.svg';
+import { useUser } from '../DashboardLayout';
+import { Button, buttonVariants } from 'src/components/ui/button';
 
 interface ProfilePictureProps {
   value: File | null;
@@ -16,10 +16,7 @@ const ProfilePicture = ({ value, onChange, error }: ProfilePictureProps) => {
 
   return (
     <div className="relative h-[200px] w-[200px]">
-      <label
-        htmlFor="avatar"
-        className="group relative block h-full w-full cursor-pointer overflow-hidden rounded-full"
-      >
+      <div className="group relative block h-full w-full overflow-hidden rounded-full">
         <img
           src={
             value && value.type.includes('image/')
@@ -32,22 +29,36 @@ const ProfilePicture = ({ value, onChange, error }: ProfilePictureProps) => {
           className="block h-full w-full object-cover"
         />
 
-        <div className="absolute inset-0 z-10 grid place-items-center bg-black opacity-0 transition-opacity duration-300 group-hover:opacity-40">
-          <Plus className="size-12" />
-        </div>
-      </label>
+        <div className="absolute inset-0 z-10 grid place-items-center bg-black/0 transition-colors duration-300 group-hover:bg-black/50" />
 
-      <input
-        onChange={({ target }) => {
-          if (target.files) {
-            onChange(target.files[0]);
-          }
-        }}
-        type="file"
-        id="avatar"
-        className="hidden"
-        accept="image/*"
-      />
+        <div className="absolute inset-0 z-10 flex flex-col justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          <label
+            htmlFor="avatar"
+            className={buttonVariants({
+              className: 'z-10 inline-block cursor-pointer text-white',
+              variant: 'link',
+            })}
+          >
+            Upload photo
+          </label>
+          <Button variant="link" className="text-white">
+            Remove photo
+          </Button>
+        </div>
+
+        <input
+          onChange={({ target }) => {
+            if (target.files) {
+              onChange(target.files[0]);
+            }
+          }}
+          type="file"
+          id="avatar"
+          className="hidden"
+          accept="image/*"
+        />
+      </div>
+
       {error && (
         <p className="absolute top-[calc(100%_+_10px)] w-full text-center text-destructive">
           {error.message}

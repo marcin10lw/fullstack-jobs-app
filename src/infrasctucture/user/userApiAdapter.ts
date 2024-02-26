@@ -22,4 +22,7 @@ export const userAPI = {
     const { data } = await customFetch.get(USER_API_URLS.getAllUsersStats);
     return data;
   },
+
+  updateUser: (formData: FormData) =>
+    customFetch.patch(USER_API_URLS.updateUser, formData),
 };

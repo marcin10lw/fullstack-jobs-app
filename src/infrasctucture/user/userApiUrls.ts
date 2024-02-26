@@ -4,4 +4,5 @@ export const USER_API_URLS = {
   getCurrentUser: '/users/current-user',
   logoutCurrentUser: '/auth/logout',
   getAllUsersStats: '/users/admin/app-stats',
+  updateUser: '/users/update-user',
 };
