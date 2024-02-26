@@ -7,19 +7,19 @@ import { ROUTES } from 'src/routes';
 
 const Landing = () => {
   return (
-    <section>
+    <section className="relative">
       <nav className="h-20 px-10">
         <div className="mx-auto flex h-full max-w-screen-xl items-center">
           <Logo />
         </div>
       </nav>
       <article className="px-12">
-        <div className="mx-auto grid min-h-[calc(100vh-80px)] max-w-screen-xl items-center lg:grid-cols-[1fr,_400px] lg:gap-[0_3rem]">
+        <div className="mx-auto grid min-h-[calc(100vh-80px)] max-w-screen-xl items-center lg:grid-cols-[1fr,_480px] lg:gap-[0_3rem]">
           <div>
             <h1 className="mb-6 text-3xl font-bold md:text-5xl">
               jobs <span className="text-primary">tracking</span> app
             </h1>
-            <p className="text-foreground mb-6 max-w-[35rem] text-lg leading-loose">
+            <p className="mb-6 max-w-[35rem] text-lg leading-loose text-foreground">
               Discover the ease of managing your job applications with our app.
               Say goodbye to scattered notes and endless spreadsheets – simply
               add the jobs you've applied for, and let our app keep you
@@ -48,7 +48,7 @@ const Landing = () => {
           <img
             src={mainBackground}
             alt="job hunt"
-            className="img hidden lg:block"
+            className="absolute inset-0 -z-[1] h-full w-full [filter:blur(4px)_brightness(0.25)] lg:static lg:z-0 lg:block lg:[filter:none]"
           />
         </div>
       </article>

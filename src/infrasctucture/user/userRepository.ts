@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { CURRENT_USER_QUERY_KEY } from './constants';
+import { ALL_USERS_STATS_QUERY_KEY, CURRENT_USER_QUERY_KEY } from './constants';
 import { userAPI } from './userApiAdapter';
 
 export const userRepository = {
@@ -9,5 +9,12 @@ export const userRepository = {
       queryFn: userAPI.getCurrentUser,
       retry: false,
       cacheTime: 0,
+    }),
+
+  useGetAllUsersStats: () =>
+    useQuery({
+      queryKey: [ALL_USERS_STATS_QUERY_KEY],
+      queryFn: userAPI.getAllUsersStats,
+      retry: 0,
     }),
 };
