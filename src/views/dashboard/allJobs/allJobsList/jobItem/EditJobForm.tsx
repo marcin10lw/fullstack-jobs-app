@@ -10,7 +10,10 @@ import { Button } from 'src/components/ui/button';
 import { Form, FormField } from 'src/components/ui/form';
 import { useToast } from 'src/components/ui/use-toast';
 import errorMessage from 'src/lib/helpers/errorMessage';
-import { ALL_JOBS_QUERY_KEY } from 'src/infrasctucture/job/constants';
+import {
+  ALL_JOBS_QUERY_KEY,
+  JOB_BY_ID_QUERY_KEY,
+} from 'src/infrasctucture/job/constants';
 import { jobAPI } from 'src/infrasctucture/job/jobApiAdapter';
 import {
   InferJob,
@@ -64,6 +67,7 @@ const EditJobForm = ({ job, jobId, closeDrawer }: EditJobFormProps) => {
     mutationFn: (job: InferJob) => jobAPI.updateJobById(job, jobId),
     onSuccess: () => {
       qc.invalidateQueries([ALL_JOBS_QUERY_KEY]);
+      qc.invalidateQueries([JOB_BY_ID_QUERY_KEY]);
       closeDrawer();
       setTimeout(() => {
         toast({

@@ -7,7 +7,7 @@ import errorMessage from 'src/lib/helpers/errorMessage';
 import { ALL_JOBS_QUERY_KEY } from 'src/infrasctucture/job/constants';
 import { jobAPI } from 'src/infrasctucture/job/jobApiAdapter';
 import { CustomAxiosError } from 'src/types';
-import EditJobDrawer from './EditJobDrawer';
+import EditJobDrawer from '../../../EditJobDrawer';
 
 interface JobItemFooterProps {
   jobId: string;

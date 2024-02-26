@@ -19,7 +19,7 @@ const ContentWrapper = ({
         className,
       )}
     >
-      {title && <h4 className="mb-8">{title}</h4>}
+      <div>{title && <h4 className="mb-8">{title}</h4>}</div>
       {children}
     </div>
   );

@@ -7,6 +7,8 @@ import NotFound from 'src/components/NotFound';
 import { buttonVariants } from 'src/components/ui/button';
 import { jobRepository } from 'src/infrasctucture/job/jobRepository';
 import { ROUTES } from 'src/routes';
+import EditJobDrawer from '../EditJobDrawer';
+import JobDescription from './JobDescription';
 
 const Job = () => {
   const { jobId } = useParams<{ jobId: string }>();
@@ -43,17 +45,36 @@ const Job = () => {
   if (job)
     return (
       <ContentWrapper>
-        <h1 className="text-xl">Jobs details</h1>
+        <div className="flex items-center justify-between">
+          <h1 className="text-xl">Jobs details</h1>
+          <EditJobDrawer jobId={job._id} />
+        </div>
 
-        <dl className="mt-4">
-          <div className="flex items-center gap-2">
-            <dt className="font-semibold">Company:</dt>
-            <dd>{job.company}</dd>
+        <dl className="mt-4 grid max-w-[80%] md:grid-cols-2">
+          <div>
+            <JobDescription
+              descriptionTerm="Company:"
+              descriptionDetail={job.company}
+            />
+            <JobDescription
+              descriptionTerm="Position:"
+              descriptionDetail={job.position}
+            />
+            <JobDescription
+              descriptionTerm="Location:"
+              descriptionDetail={job.jobLocation}
+            />
           </div>
 
-          <div className="flex items-center gap-2">
-            <dt className="font-semibold">Position:</dt>
-            <dd>{job.position}</dd>
+          <div>
+            <JobDescription
+              descriptionTerm="Job Status:"
+              descriptionDetail={job.jobStatus}
+            />
+            <JobDescription
+              descriptionTerm="Job Type:"
+              descriptionDetail={job.jobType}
+            />
           </div>
         </dl>
       </ContentWrapper>

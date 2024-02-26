@@ -1,6 +1,6 @@
 import { Button } from 'src/components/ui/button';
 import { Drawer, DrawerContent, DrawerTrigger } from 'src/components/ui/drawer';
-import EditJobDrawerContent from './EditJobDrawerContent';
+import EditJobDrawerContent from './allJobs/allJobsList/jobItem/EditJobDrawerContent';
 import { useState } from 'react';
 import { ScrollArea } from 'src/components/ui/scroll-area';
 
