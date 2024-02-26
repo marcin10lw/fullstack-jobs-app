@@ -2,7 +2,7 @@ import { ListCollapse } from 'lucide-react';
 
 import Logo from 'src/components/Logo';
 import MaxWidthWrapper from 'src/components/MaxWidthWrapper';
-import UserAvatar from 'src/components/UserAvatar';
+import UserAvatar from 'src/views/dashboard/UserAvatar';
 import { User } from 'src/infrasctucture/user/types';
 import { cn } from 'src/lib/utils';
 import useDashboardContext from 'src/views/dashboard/useDashboardContext';

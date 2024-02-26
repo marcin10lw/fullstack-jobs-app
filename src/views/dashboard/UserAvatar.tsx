@@ -2,19 +2,19 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
 
-import { useToast } from './ui/use-toast';
+import { useToast } from '../../components/ui/use-toast';
 import { getUserInitials } from 'src/lib/helpers/getUserInitials';
 import { User } from 'src/infrasctucture/user/types';
 import { userAPI } from 'src/infrasctucture/user/userApiAdapter';
 import { ROUTES } from 'src/routes';
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '../../components/ui/avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from './ui/dropdown-menu';
+} from '../../components/ui/dropdown-menu';
 import { useQueryClient } from '@tanstack/react-query';
 
 type LogoutContainerProps = {
