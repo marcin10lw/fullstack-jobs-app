@@ -9,6 +9,7 @@ import { ROUTES } from 'src/routes';
 import EditJobDrawer from '../EditJobDrawer';
 import JobDescription from './JobDescription';
 import { Textarea } from 'src/components/ui/textarea';
+import DatePicker from './DatePicker';
 
 const Job = () => {
   const { jobId } = useParams<{ jobId: string }>();
@@ -85,6 +86,8 @@ const Job = () => {
               />
             </div>
           </dl>
+
+          <DatePicker />
 
           <div className="mt-8 flex flex-col md:mt-12">
             <Textarea placeholder="Job description" className="min-h-32" />
