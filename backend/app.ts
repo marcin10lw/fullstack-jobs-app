@@ -1,10 +1,22 @@
 require("dotenv").config();
 import express from "express";
-import config from "config";
+import { prisma } from "./db/prisma";
 
 const app = express();
 
-const port = config.get<number>("port");
-app.listen(port, () => {
-  console.log(`Server running on port: ${port}`);
-});
+const port = process.env.PORT || 8080;
+
+const start = async () => {
+  try {
+    await prisma.$connect();
+    app.listen(port, () => {
+      console.log(`Server running on port: ${port}`);
+    });
+  } catch (error) {
+    console.log(error);
+    await prisma.$disconnect();
+    process.exit(1);
+  }
+};
+
+start();
