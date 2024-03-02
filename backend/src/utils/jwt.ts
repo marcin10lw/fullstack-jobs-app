@@ -6,7 +6,7 @@ export const generateAccessToken = (user: User, options: SignOptions = {}) => {
 
   if (!accessTokenKey) throw new Error("JWT_ACCESS_SECRET env is missing");
 
-  return jwt.sign(user, accessTokenKey, {
+  return jwt.sign({ userId: user.id, role: user.role }, accessTokenKey, {
     ...(options && options),
     expiresIn: "15m",
   });

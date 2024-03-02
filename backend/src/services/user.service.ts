@@ -9,9 +9,11 @@ type UserCreate = Pick<
 >;
 export const createUser = async (user: UserCreate) => {
   user.password = bcrypt.hashSync(user.password, 12);
-  await prisma.user.create({
+  const newUser = await prisma.user.create({
     data: user,
   });
+
+  return newUser;
 };
 
 export const getCurrentUserById = async (id: string) => {
