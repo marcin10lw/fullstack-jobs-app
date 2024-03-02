@@ -9,6 +9,7 @@ type UserCreate = Pick<
 >;
 export const createUser = async (user: UserCreate) => {
   user.password = bcrypt.hashSync(user.password, 12);
+
   const newUser = await prisma.user.create({
     data: user,
   });
@@ -32,7 +33,6 @@ export const getCurrentUserByEmail = async (email: string) => {
     where: {
       email,
     },
-    select: prismaExclude("User", ["password"]),
   });
 
   return currentUser;
