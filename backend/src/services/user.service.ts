@@ -14,10 +14,21 @@ export const createUser = async (user: UserCreate) => {
   });
 };
 
-export const getCurrentUser = async (id: string) => {
+export const getCurrentUserById = async (id: string) => {
   const currentUser = await prisma.user.findFirst({
     where: {
       id,
+    },
+    select: prismaExclude("User", ["password"]),
+  });
+
+  return currentUser;
+};
+
+export const getCurrentUserByEmail = async (email: string) => {
+  const currentUser = await prisma.user.findFirst({
+    where: {
+      email,
     },
     select: prismaExclude("User", ["password"]),
   });
