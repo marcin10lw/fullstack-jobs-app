@@ -48,14 +48,18 @@ export const generateTokens = (user: User, jti: any) => {
   };
 };
 
-export const verifyAccessToken = (token: string) => {
+export const verifyAccessToken = <T>(token: string) => {
   const accessTokenKey = process.env.JWT_ACCESS_SECRET;
 
   if (!accessTokenKey) {
     throw new Error("missing access token key");
   }
 
-  return jwt.verify(token, accessTokenKey) as AccessTokenPayload;
+  try {
+    return jwt.verify(token, accessTokenKey) as T;
+  } catch (error) {
+    return null;
+  }
 };
 
 export const verifyRefreshToken = (token: string) => {
