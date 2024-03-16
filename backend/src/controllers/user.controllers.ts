@@ -1,10 +1,12 @@
 import { StatusCodes } from "http-status-codes";
-import { getCurrentUserById } from "../services/user.service";
+import { PAYLOAD_USER_NAME } from "../constants";
+import {
+  getApplicationStats,
+  getCurrentUserById,
+} from "../services/user.service";
 import { AccessTokenPayloadUser } from "../types";
 import AppError from "../utils/appError";
 import { asyncWrapper } from "../utils/asyncWrapper";
-import { PAYLOAD_USER_NAME } from "../constants";
-import { Request, Response } from "express";
 
 export const getCurrentUserController = asyncWrapper(async (req, res) => {
   const payloadUser = res.locals[PAYLOAD_USER_NAME] as AccessTokenPayloadUser;
@@ -18,4 +20,9 @@ export const getCurrentUserController = asyncWrapper(async (req, res) => {
   const { password, ...userWithoutPassword } = user;
 
   res.status(StatusCodes.OK).json({ user: userWithoutPassword });
+});
+
+export const getAppStatsController = asyncWrapper(async (req, res) => {
+  const { usersAmt, jobsAmt } = await getApplicationStats();
+  res.status(StatusCodes.OK).json({ users: usersAmt, jobs: jobsAmt });
 });
