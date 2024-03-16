@@ -7,6 +7,7 @@ type UserCreate = Pick<
   User,
   "name" | "lastName" | "email" | "location" | "password" | "role"
 >;
+
 export const createUser = async (user: UserCreate) => {
   user.password = bcrypt.hashSync(user.password, 12);
 
@@ -15,6 +16,19 @@ export const createUser = async (user: UserCreate) => {
   });
 
   return newUser;
+};
+
+type UpdatedUser = Partial<User>;
+
+export const updateUser = async (newUser: UpdatedUser, id: string) => {
+  const oldUser = await prisma.user.update({
+    data: newUser,
+    where: {
+      id,
+    },
+  });
+
+  return oldUser;
 };
 
 export const getCurrentUserById = async (id: string) => {
