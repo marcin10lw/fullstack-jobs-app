@@ -1,13 +1,13 @@
 import { User } from "@prisma/client";
 import jwt, { SignOptions } from "jsonwebtoken";
-import { AccessTokenPayload, RefreshTokenPayload } from "../types";
+import { AccessTokenPayloadUser, RefreshTokenPayload } from "../types";
 
 export const generateAccessToken = (user: User, options: SignOptions = {}) => {
   const accessTokenKey = process.env.JWT_ACCESS_SECRET;
 
   if (!accessTokenKey) throw new Error("JWT_ACCESS_SECRET env is missing");
 
-  const accessTokenPayload: AccessTokenPayload = {
+  const accessTokenPayload: AccessTokenPayloadUser = {
     userId: user.id,
     role: user.role,
   };

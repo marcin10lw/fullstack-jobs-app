@@ -1,6 +1,6 @@
 import { User } from "@prisma/client";
 
-export interface AccessTokenPayload {
+export interface AccessTokenPayloadUser {
   userId: string;
   role: User["role"];
 }
