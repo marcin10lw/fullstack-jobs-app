@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@prisma/client": "^5.11.0",
     "@types/bcryptjs": "^2.4.6",
     "@types/config": "^3.3.3",
     "@types/cookie-parser": "^1.4.6",
@@ -25,7 +26,6 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "@prisma/client": "^5.10.2",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^2.0.1",
     "cookie-parser": "^1.4.6",
