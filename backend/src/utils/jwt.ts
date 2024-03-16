@@ -1,12 +1,18 @@
 import { User } from "@prisma/client";
 import jwt, { SignOptions } from "jsonwebtoken";
+import { AccessTokenPayload, RefreshTokenPayload } from "../types";
 
 export const generateAccessToken = (user: User, options: SignOptions = {}) => {
   const accessTokenKey = process.env.JWT_ACCESS_SECRET;
 
   if (!accessTokenKey) throw new Error("JWT_ACCESS_SECRET env is missing");
 
-  return jwt.sign({ userId: user.id, role: user.role }, accessTokenKey, {
+  const accessTokenPayload: AccessTokenPayload = {
+    userId: user.id,
+    role: user.role,
+  };
+
+  return jwt.sign(accessTokenPayload, accessTokenKey, {
     ...(options && options),
     expiresIn: "15m",
   });
@@ -21,7 +27,12 @@ export const generateRefreshToken = (
 
   if (!refreshTokenKey) throw new Error("JWT_REFRESH_SECRET env is missing");
 
-  return jwt.sign({ userId: user.id, jti }, refreshTokenKey, {
+  const refreshTokenPayload: RefreshTokenPayload = {
+    userId: user.id,
+    jti,
+  };
+
+  return jwt.sign(refreshTokenPayload, refreshTokenKey, {
     ...(options && options),
     expiresIn: "24h",
   });
@@ -35,4 +46,24 @@ export const generateTokens = (user: User, jti: any) => {
     accessToken,
     refreshToken,
   };
+};
+
+export const verifyAccessToken = (token: string) => {
+  const accessTokenKey = process.env.JWT_ACCESS_SECRET;
+
+  if (!accessTokenKey) {
+    throw new Error("missing access token key");
+  }
+
+  return jwt.verify(token, accessTokenKey) as AccessTokenPayload;
+};
+
+export const verifyRefreshToken = (token: string) => {
+  const refreshTokenKey = process.env.JWT_REFRESH_SECRET;
+
+  if (!refreshTokenKey) {
+    throw new Error("missing access token key");
+  }
+
+  return jwt.verify(token, refreshTokenKey) as RefreshTokenPayload;
 };

@@ -1,18 +1,29 @@
 import { CookieOptions, Request } from "express";
+import bcryptjs from "bcryptjs";
+import { v4 as uuidv4 } from "uuid";
+import jwt from "jsonwebtoken";
+
+import { CreateUserInput, LoginUserInput } from "../schemas/user.schema";
 import { prisma } from "../db/prisma";
 import { asyncWrapper } from "../utils/asyncWrapper";
-import { CreateUserInput, LoginUserInput } from "../schemas/user.schema";
-import { createUser, getCurrentUserByEmail } from "../services/user.service";
+import {
+  createUser,
+  getCurrentUserByEmail,
+  getCurrentUserById,
+} from "../services/user.service";
 import { StatusCodes } from "http-status-codes";
+import { verifyRefreshToken, generateTokens } from "../utils/jwt";
 import AppError from "../utils/appError";
-import { v4 as uuidv4 } from "uuid";
-import { generateTokens } from "../utils/jwt";
-import { addRefreshTokenToWhitelist } from "../services/auth.service";
-import bcryptjs from "bcryptjs";
+import {
+  addRefreshTokenToWhitelist,
+  deleteRefreshToken,
+  findRefreshTokenById,
+} from "../services/auth.service";
 import {
   ACCESS_TOKEN_COOKIE_NAME,
   REFRESH_TOKEN_COOKIE_NAME,
 } from "../constants";
+import { hashToken } from "../utils/hashToken";
 
 const accessTokenCookieOptions: CookieOptions = {
   expires: new Date(Date.now() + 15 * 60 * 1000),
@@ -95,6 +106,52 @@ export const loginController = asyncWrapper(
       refreshTokenCookieOptions
     );
 
-    res.status(StatusCodes.CREATED).json({ accessToken, refreshToken });
+    res.status(StatusCodes.OK).json({ accessToken, refreshToken });
   }
 );
+
+export const refreshTokenController = asyncWrapper(async (req, res) => {
+  const { refreshToken } = req.body;
+
+  if (!refreshToken) {
+    throw new AppError("missing refresh token", StatusCodes.BAD_REQUEST);
+  }
+
+  const payload = verifyRefreshToken(refreshToken);
+  const dbRefreshToken = await findRefreshTokenById(payload.jti);
+
+  if (!dbRefreshToken || dbRefreshToken.revoked) {
+    throw new AppError("Unauthorized", StatusCodes.UNAUTHORIZED);
+  }
+
+  const hashedToken = hashToken(refreshToken);
+  if (hashedToken !== dbRefreshToken.hashedToken) {
+    throw new AppError("Unauthorized", StatusCodes.UNAUTHORIZED);
+  }
+
+  const user = await getCurrentUserById(payload.userId);
+  if (!user) {
+    throw new AppError("Unauthorized", StatusCodes.UNAUTHORIZED);
+  }
+
+  await deleteRefreshToken(dbRefreshToken.id);
+  const jti = uuidv4();
+  const { accessToken, refreshToken: newRefreshToken } = generateTokens(
+    user,
+    jti
+  );
+  await addRefreshTokenToWhitelist({
+    jti,
+    refreshToken: newRefreshToken,
+    userId: user.id,
+  });
+
+  res.cookie(ACCESS_TOKEN_COOKIE_NAME, accessToken, accessTokenCookieOptions);
+  res.cookie(
+    REFRESH_TOKEN_COOKIE_NAME,
+    refreshToken,
+    refreshTokenCookieOptions
+  );
+
+  res.status(StatusCodes.OK).json({ accessToken, refreshToken });
+});

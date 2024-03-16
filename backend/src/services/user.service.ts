@@ -22,7 +22,6 @@ export const getCurrentUserById = async (id: string) => {
     where: {
       id,
     },
-    select: prismaExclude("User", ["password"]),
   });
 
   return currentUser;
