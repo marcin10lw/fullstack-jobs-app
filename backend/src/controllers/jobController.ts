@@ -3,10 +3,11 @@ import { Request } from "express";
 import { StatusCodes } from "http-status-codes";
 import { PAYLOAD_USER_NAME } from "../constants";
 import { prisma } from "../db/prisma";
-import { getSingleJob } from "../services/job.service";
+import { createJob, getSingleJob } from "../services/job.service";
 import { AccessTokenPayloadUser } from "../types";
 import { asyncWrapper } from "../utils/asyncWrapper";
 import AppError from "../utils/appError";
+import { CreateJobInput } from "../schemas/job.schema";
 
 type SortOptions = "newest" | "oldest" | "a-z" | "z-a";
 
@@ -138,13 +139,12 @@ export const getSingleJobController = asyncWrapper(async (req, res) => {
   res.status(StatusCodes.OK).json({ job });
 });
 
-export const addJobController = asyncWrapper(async (req, res) => {
-  const job = await prisma.job.create({
-    data: {
-      userId: res.locals[PAYLOAD_USER_NAME].userId,
-      ...req.body,
-    },
-  });
+export const addJobController = asyncWrapper(
+  async (req: Request<{}, {}, CreateJobInput>, res) => {
+    const { userId } = res.locals[PAYLOAD_USER_NAME] as AccessTokenPayloadUser;
 
-  res.status(StatusCodes.CREATED).json({ job });
-});
+    const job = createJob(req.body, userId);
+
+    res.status(StatusCodes.CREATED).json({ job });
+  }
+);

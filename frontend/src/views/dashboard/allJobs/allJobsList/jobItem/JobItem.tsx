@@ -1,14 +1,16 @@
+import { ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
+
 import advancedFormat from 'dayjs/plugin/advancedFormat';
 import { FaBriefcase, FaCalendar, FaLocationArrow } from 'react-icons/fa';
-dayjs.extend(advancedFormat);
 
 import { cn } from 'src/lib/utils';
 import { Job as JobType } from 'src/models/Job';
 import JobItemFooter from './JobItemFooter';
-import { Link } from 'react-router-dom';
 import { ROUTES } from 'src/routes';
-import { ChevronRight } from 'lucide-react';
+
+dayjs.extend(advancedFormat);
 
 type JobInfoProps = {
   icon: JSX.Element;
