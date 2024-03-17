@@ -25,4 +25,6 @@ export const userAPI = {
 
   updateUser: (formData: FormData) =>
     customFetch.patch(USER_API_URLS.updateUser, formData),
+
+  removeUserAvatar: () => customFetch.delete(USER_API_URLS.removeUserAvatar),
 };

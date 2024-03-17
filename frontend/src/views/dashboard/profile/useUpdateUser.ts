@@ -1,7 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
 
 import { userAPI } from 'src/infrasctucture/user/userApiAdapter';
 import { checkHasAnyFieldChanged } from 'src/lib/helpers/checkHasAnyFieldChanged';
@@ -9,6 +8,8 @@ import errorMessage from 'src/lib/helpers/errorMessage';
 import { UpdatedUser, updateUserSchema } from 'src/models/User';
 import { CustomAxiosError } from 'src/types';
 import { useUser } from '../DashboardLayout';
+import { CURRENT_USER_QUERY_KEY } from 'src/infrasctucture/user/constants';
+import { useToast } from 'src/components/ui/use-toast';
 
 export const useUpdateUser = () => {
   const { user } = useUser();
@@ -36,15 +37,24 @@ export const useUpdateUser = () => {
 
   const hasAnyFieldChanged = checkHasAnyFieldChanged(watch(), initialValues);
 
+  const { toast } = useToast();
+
   const { mutate: updateProfile, isLoading: isUpdatingProfile } = useMutation({
     mutationFn: userAPI.updateUser,
     onSuccess: () => {
-      qc.invalidateQueries(['user']);
-      toast.success('User updated!');
+      qc.invalidateQueries([CURRENT_USER_QUERY_KEY]);
+      toast({
+        title: 'User updated',
+        variant: 'success',
+      });
       reset();
     },
     onError: (error: CustomAxiosError) => {
-      errorMessage(error, 'Could not update user');
+      console.log(error);
+      toast({
+        title: errorMessage(error, 'Could not update user'),
+        variant: 'destructive',
+      });
     },
   });
 

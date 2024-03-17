@@ -1,12 +1,13 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { FieldError } from 'react-hook-form';
+
 import userIcon from 'src/assets/images/user.svg';
+import { buttonVariants } from 'src/components/ui/button';
 import { useUser } from '../DashboardLayout';
-import { Button, buttonVariants } from 'src/components/ui/button';
+import RemoveAvatar from './RemoveAvatar';
 
 interface ProfilePictureProps {
   value: File | null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onChange: (...event: any[]) => void;
   error?: FieldError;
 }
@@ -41,9 +42,7 @@ const ProfilePicture = ({ value, onChange, error }: ProfilePictureProps) => {
           >
             Upload photo
           </label>
-          <Button variant="link" className="text-white">
-            Remove photo
-          </Button>
+          {user.avatar && <RemoveAvatar />}
         </div>
 
         <input
