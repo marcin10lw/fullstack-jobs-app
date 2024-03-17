@@ -5,6 +5,7 @@ import { Button } from 'src/components/ui/button';
 import { Form, FormField } from 'src/components/ui/form';
 import { jobStatusItems, jobTypeItems } from 'src/models/Job';
 import useAddJob from './useAddJob';
+import { buildSelectOptions } from 'src/lib/helpers/buildSelectOptions';
 
 const AddJobForm = () => {
   const {
@@ -54,7 +55,7 @@ const AddJobForm = () => {
                 value={value}
                 onOptionChange={onChange}
                 label="job status"
-                options={jobStatusItems}
+                options={buildSelectOptions(jobStatusItems)}
               />
             )}
           />
@@ -66,7 +67,7 @@ const AddJobForm = () => {
                 value={value}
                 onOptionChange={onChange}
                 label="job types"
-                options={jobTypeItems}
+                options={buildSelectOptions(jobTypeItems)}
               />
             )}
           />

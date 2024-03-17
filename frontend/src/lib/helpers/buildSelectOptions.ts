@@ -1,7 +1,7 @@
 import { SelectOption } from 'src/types';
 
 export const buildSelectOptions = (
-  options: string[],
+  options: string[] | readonly string[],
   substringToReplace: string = '_',
   replacementString: string = '-',
 ): SelectOption[] =>

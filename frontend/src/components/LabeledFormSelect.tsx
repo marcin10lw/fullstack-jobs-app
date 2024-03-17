@@ -7,10 +7,11 @@ import {
   Select as ShadcnSelect,
 } from 'src/components/ui/select';
 import { FormControl, FormItem, FormLabel } from './ui/form';
+import { SelectOption } from 'src/types';
 
 interface LabeledFormSelectProps {
   label: string;
-  options: string[] | readonly string[];
+  options: SelectOption[];
   value: string;
   onOptionChange: (value: string) => void;
   children?: React.ReactNode;
@@ -36,8 +37,8 @@ const LabeledFormSelect = ({
         <SelectContent>
           <SelectGroup>
             {options.map((option) => (
-              <SelectItem key={option} value={option}>
-                {option}
+              <SelectItem key={option.label} value={option.value}>
+                {option.label}
               </SelectItem>
             ))}
           </SelectGroup>

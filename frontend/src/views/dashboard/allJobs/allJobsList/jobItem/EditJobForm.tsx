@@ -7,6 +7,7 @@ import { Button } from 'src/components/ui/button';
 import { Form, FormField } from 'src/components/ui/form';
 import { Job as JobType, jobStatusItems, jobTypeItems } from 'src/models/Job';
 import { useUpdateJob } from './useUpdateJob';
+import { buildSelectOptions } from 'src/lib/helpers/buildSelectOptions';
 
 interface EditJobFormProps {
   job: JobType;
@@ -62,7 +63,7 @@ const EditJobForm = ({ job, jobId, closeDrawer }: EditJobFormProps) => {
                   value={value}
                   onOptionChange={onChange}
                   label="job status"
-                  options={jobStatusItems}
+                  options={buildSelectOptions(jobStatusItems)}
                 />
               )}
             />
@@ -74,7 +75,7 @@ const EditJobForm = ({ job, jobId, closeDrawer }: EditJobFormProps) => {
                   value={value}
                   onOptionChange={onChange}
                   label="job types"
-                  options={jobTypeItems}
+                  options={buildSelectOptions(jobTypeItems)}
                 />
               )}
             />

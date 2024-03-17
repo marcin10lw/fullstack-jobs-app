@@ -53,7 +53,10 @@ const JobItem = ({ job }: JobProps) => {
         <div className="m-[1rem_0_1.5rem] grid items-center gap-6 sm:grid-cols-2">
           <JobInfo icon={<FaLocationArrow />} text={job.jobLocation} />
           <JobInfo icon={<FaCalendar />} text={date} />
-          <JobInfo icon={<FaBriefcase />} text={job.jobType} />
+          <JobInfo
+            icon={<FaBriefcase />}
+            text={job.jobType.replace('_', '-')}
+          />
           <div
             className={cn(
               'flex h-[30px] w-[100px] items-center justify-center rounded-sm text-white',
