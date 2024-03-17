@@ -14,8 +14,11 @@ export const populateDb = async () => {
         jobStatus: job.jobStatus,
         jobType: job.jobType,
         position: job.position,
+        jobDescription: "",
       })),
     });
+
+    console.log("POPULATED DB SUCCESSFULLY");
   } catch (error) {
     console.log("ERROR POPULATING DB", error);
   }

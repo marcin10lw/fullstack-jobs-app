@@ -4,13 +4,18 @@ import { StatusCodes } from "http-status-codes";
 
 import { JOB_ID_ROUTE_PARAM, PAYLOAD_USER_NAME } from "../constants";
 import { prisma } from "../db/prisma";
-import { CreateJobInput, UpdateJobInput } from "../schemas/job.schema";
+import {
+  CreateJobInput,
+  UpdateJobDescriptionInput,
+  UpdateJobInput,
+} from "../schemas/job.schema";
 import {
   createJob,
   deleteJob,
   getJobStats,
   getSingleJob,
   updateJob,
+  updateJobDescription,
 } from "../services/job.service";
 import { AccessTokenPayloadUser } from "../types";
 import { asyncWrapper } from "../utils/asyncWrapper";
@@ -189,4 +194,14 @@ export const getStatsController = asyncWrapper(async (req, res) => {
   res
     .status(StatusCodes.OK)
     .json({ defaultStats, monthlyApplications: formattedMonthlyApplications });
+});
+
+export const updateJobDescriptionController = asyncWrapper(async (req, res) => {
+  const jobId = req.params[JOB_ID_ROUTE_PARAM];
+  const { userId } = res.locals[PAYLOAD_USER_NAME] as AccessTokenPayloadUser;
+  const { jobDescription }: UpdateJobDescriptionInput = req.body;
+
+  await updateJobDescription(jobId, userId, jobDescription);
+
+  res.status(StatusCodes.OK).json({ msg: "job description updated" });
 });

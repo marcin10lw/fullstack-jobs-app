@@ -1,5 +1,6 @@
 import { Router } from "express";
 
+import { JOB_ID_ROUTE_PARAM } from "../constants";
 import {
   addJobController,
   deleteJobController,
@@ -7,11 +8,11 @@ import {
   getSingleJobController,
   getStatsController,
   updateJobController,
-} from "../controllers/jobController";
-import { createJobSchema } from "../schemas/job.schema";
+  updateJobDescriptionController,
+} from "../controllers/job.controller";
 import { validate } from "../middleware/validate";
 import { validateIdParam } from "../middleware/validateIdParam";
-import { JOB_ID_ROUTE_PARAM } from "../constants";
+import { createJobSchema } from "../schemas/job.schema";
 
 const router = Router();
 
@@ -27,5 +28,10 @@ router
   .get(validateIdParam, getSingleJobController)
   .patch(validateIdParam, validate(createJobSchema), updateJobController)
   .delete(validateIdParam, deleteJobController);
+
+router.put(
+  `/update-description/:${JOB_ID_ROUTE_PARAM}`,
+  updateJobDescriptionController
+);
 
 export default router;

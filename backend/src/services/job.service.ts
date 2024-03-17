@@ -57,3 +57,16 @@ export const getJobStats = async (userId: string) => {
 
   return { stats, monthlyApplications };
 };
+
+export const updateJobDescription = async (
+  jobId: string,
+  userId: string,
+  jobDescription: string
+) => {
+  return await prisma.job.update({
+    where: { id: jobId, userId },
+    data: {
+      jobDescription,
+    },
+  });
+};

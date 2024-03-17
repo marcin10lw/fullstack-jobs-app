@@ -1,17 +1,17 @@
 require("dotenv").config();
-import express from "express";
-import morgan from "morgan";
+import { v2 as cloudinary } from "cloudinary";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import { v2 as cloudinary } from "cloudinary";
+import express from "express";
+import morgan from "morgan";
 
 import { prisma } from "./db/prisma";
-import { notFoundMiddleware } from "./middleware/notFound";
-import { errorHandlerMiddleware } from "./middleware/errorHandler";
-import authRouter from "./routes/auth.route";
-import userRouter from "./routes/user.route";
-import jobsRouter from "./routes/job.route";
 import { authMiddleware } from "./middleware/auth";
+import { errorHandlerMiddleware } from "./middleware/errorHandler";
+import { notFoundMiddleware } from "./middleware/notFound";
+import authRouter from "./routes/auth.route";
+import jobsRouter from "./routes/job.route";
+import userRouter from "./routes/user.route";
 
 const app = express();
 

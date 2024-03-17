@@ -34,5 +34,17 @@ export const createJobSchema = z.object({
 
 const updateJobSchema = createJobSchema;
 
+const updateJobDescriptionSchema = z.object({
+  body: z.object({
+    jobDescription: z
+      .string()
+      .trim()
+      .max(1000, { message: "no more than 1000 characters" }),
+  }),
+});
+
 export type CreateJobInput = z.TypeOf<typeof createJobSchema>["body"];
 export type UpdateJobInput = z.TypeOf<typeof updateJobSchema>["body"];
+export type UpdateJobDescriptionInput = z.TypeOf<
+  typeof updateJobDescriptionSchema
+>["body"];
