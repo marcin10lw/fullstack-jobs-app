@@ -1,55 +1,50 @@
-import { useState } from 'react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Link, useNavigate } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
 
-import { useToast } from '../../components/ui/use-toast';
-import { getUserInitials } from 'src/lib/helpers/getUserInitials';
 import { User } from 'src/infrasctucture/user/types';
 import { userAPI } from 'src/infrasctucture/user/userApiAdapter';
+import { getUserInitials } from 'src/lib/helpers/getUserInitials';
 import { ROUTES } from 'src/routes';
-import { Avatar, AvatarFallback, AvatarImage } from '../../components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from 'src/components/ui/avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '../../components/ui/dropdown-menu';
-import { useQueryClient } from '@tanstack/react-query';
+} from 'src/components/ui/dropdown-menu';
+import { useToast } from 'src/components/ui/use-toast';
 
 type LogoutContainerProps = {
   user: User;
 };
 
 const UserAvatar = ({ user }: LogoutContainerProps) => {
-  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const navigate = useNavigate();
 
   const queryClient = useQueryClient();
 
   const { toast } = useToast();
 
-  const logoutUser = async () => {
-    setIsLoggingOut(true);
-
-    try {
-      await userAPI.logoutUser();
+  const { mutate: logoutUser, isLoading: isLoggingOut } = useMutation({
+    mutationFn: userAPI.logoutUser,
+    onSuccess: () => {
       queryClient.clear();
       navigate('/');
       toast({
         title: 'Successfully logout',
         variant: 'success',
       });
-    } catch (error) {
+    },
+    onError: () => {
       toast({
         title: 'Could not logout',
         description: 'Please try again',
         variant: 'destructive',
       });
-    } finally {
-      setIsLoggingOut(false);
-    }
-  };
+    },
+  });
 
   return (
     <DropdownMenu>

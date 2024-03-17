@@ -16,7 +16,7 @@ export const userAPI = {
     return data;
   },
 
-  logoutUser: () => customFetch.get(USER_API_URLS.logoutCurrentUser),
+  logoutUser: () => customFetch.post(USER_API_URLS.logoutCurrentUser),
 
   getAllUsersStats: async (): Promise<{ users: number; jobs: number }> => {
     const { data } = await customFetch.get(USER_API_URLS.getAllUsersStats);
