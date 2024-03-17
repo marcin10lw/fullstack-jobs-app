@@ -78,7 +78,7 @@ export const removeUserAvatarController = asyncWrapper(async (req, res) => {
 
   const user = await getCurrentUserById(userId);
 
-  if (user && user.avatar && user.avatarPublicId) {
+  if (user && !user.avatar && !user.avatarPublicId) {
     throw new AppError("no avatar to remove", StatusCodes.BAD_REQUEST);
   }
 

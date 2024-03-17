@@ -155,3 +155,16 @@ export const refreshTokenController = asyncWrapper(async (req, res) => {
 
   res.status(StatusCodes.OK).json({ accessToken, refreshToken });
 });
+
+export const logoutController = asyncWrapper(async (req, res) => {
+  res.cookie(ACCESS_TOKEN_COOKIE_NAME, "", {
+    httpOnly: true,
+    expires: new Date(Date.now()),
+  });
+  res.cookie(REFRESH_TOKEN_COOKIE_NAME, "", {
+    httpOnly: true,
+    expires: new Date(Date.now()),
+  });
+
+  res.status(StatusCodes.OK).json({ msg: "user logged out" });
+});
