@@ -56,7 +56,7 @@ const Job = () => {
         <section className="mt-1">
           <div className="flex items-center justify-between">
             <h1 className="text-xl">Jobs details</h1>
-            <EditJobDrawer jobId={job._id} />
+            <EditJobDrawer jobId={job.id} />
           </div>
 
           <dl className="mt-4 grid max-w-[80%] md:grid-cols-2">

@@ -7,3 +7,8 @@ export type SearchOnChange = React.ChangeEvent<
 export type Theme = 'light' | 'dark';
 
 export type CustomAxiosError = AxiosError<{ msg?: string }>;
+
+export interface SelectOption {
+  label: string;
+  value: string;
+}

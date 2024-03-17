@@ -12,7 +12,7 @@ const AllJobsList = ({ jobs }: AllJobsListProps) => {
   return (
     <div ref={listRef} className="grid gap-8 xl:grid-cols-2">
       {jobs.map((job) => (
-        <JobItem key={job._id} job={job} />
+        <JobItem key={job.id} job={job} />
       ))}
     </div>
   );

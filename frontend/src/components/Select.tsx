@@ -6,10 +6,11 @@ import {
   SelectValue,
   Select as ShadcnSelect,
 } from 'src/components/ui/select';
+import { SelectOption } from 'src/types';
 
 interface SelectProps {
   label: string;
-  options: string[] | readonly string[];
+  options: SelectOption[];
   value?: string;
   onOptionChange: (value: string) => void;
   children?: React.ReactNode;
@@ -31,8 +32,8 @@ const Select = ({
       <SelectContent>
         <SelectGroup>
           {options.map((option) => (
-            <SelectItem key={option} value={option}>
-              {option}
+            <SelectItem key={option.label} value={option.value}>
+              {option.label}
             </SelectItem>
           ))}
         </SelectGroup>

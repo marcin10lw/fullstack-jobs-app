@@ -35,7 +35,7 @@ const JobItem = ({ job }: JobProps) => {
 
   return (
     <article className="grid grid-rows-[1fr_auto] rounded-lg bg-secondary shadow-xl">
-      <Link to={ROUTES.job.replace(':jobId', job._id)}>
+      <Link to={ROUTES.job.replace(':jobId', job.id)}>
         <header className="group grid grid-cols-[auto_1fr_auto] items-center border-b border-slate-400 p-[1rem_1.5rem]">
           <div className="mr-8 grid h-[60px] w-[60px] place-items-center rounded-[--border-radius] bg-primary text-2xl font-bold uppercase text-white">
             {job.company.charAt(0)}
@@ -67,7 +67,7 @@ const JobItem = ({ job }: JobProps) => {
             {job.jobStatus}
           </div>
         </div>
-        <JobItemFooter jobId={job._id} />
+        <JobItemFooter jobId={job.id} />
       </div>
     </article>
   );

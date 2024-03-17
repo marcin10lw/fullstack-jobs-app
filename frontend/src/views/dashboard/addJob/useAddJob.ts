@@ -23,7 +23,7 @@ const useAddJob = () => {
       position: '',
       jobLocation: user.location,
       jobStatus: 'pending',
-      jobType: 'full-time',
+      jobType: 'full_time',
     },
     resolver: zodResolver(jobSchema),
   });

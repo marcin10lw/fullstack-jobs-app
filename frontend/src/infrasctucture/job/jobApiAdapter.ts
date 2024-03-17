@@ -9,8 +9,10 @@ export const jobAPI = {
   getAllJobs: async (
     searchParams: URLSearchParams,
   ): Promise<ApiJobsResponse> => {
+    const params = Object.fromEntries(new URLSearchParams(searchParams));
+
     const { data } = await customFetch.get(JOB_API_URLS.getAllJobs, {
-      params: searchParams,
+      params,
     });
 
     return data;

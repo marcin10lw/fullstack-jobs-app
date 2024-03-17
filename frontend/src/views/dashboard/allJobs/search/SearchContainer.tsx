@@ -8,6 +8,7 @@ import { Label } from 'src/components/ui/label';
 import { queryParams } from 'src/hooks/useQueryParameter';
 import { jobStatusItems, jobTypeItems } from 'src/models/Job';
 import { searchParamsDefaultValues } from './constants';
+import { buildSelectOptions } from 'src/lib/helpers/buildSelectOptions';
 
 const SearchContainer = () => {
   const [searchParams] = useSearchParams(searchParamsDefaultValues);
@@ -38,19 +39,19 @@ const SearchContainer = () => {
 
           <Select
             label="job status"
-            options={['all', ...jobStatusItems]}
+            options={buildSelectOptions(['all', ...jobStatusItems])}
             value={searchParams.get('jobStatus') || undefined}
             onOptionChange={(value) => setQuery('jobStatus', value)}
           />
           <Select
             label="job type"
-            options={['all', ...jobTypeItems]}
+            options={buildSelectOptions(['all', ...jobTypeItems])}
             value={searchParams.get('jobType') || undefined}
             onOptionChange={(value) => setQuery('jobType', value)}
           />
           <Select
             label="sort"
-            options={['newest', 'oldest', 'a-z', 'z-a']}
+            options={buildSelectOptions(['newest', 'oldest', 'a-z', 'z-a'])}
             value={searchParams.get('sort') || undefined}
             onOptionChange={(value) => setQuery('sort', value)}
           />

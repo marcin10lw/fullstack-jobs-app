@@ -6,15 +6,31 @@ import {
 } from './constants';
 import { jobAPI } from './jobApiAdapter';
 import { useSearchParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { searchParamsDefaultValues } from 'src/views/dashboard/allJobs/search/constants';
 
 export const jobRepository = {
   useGetAllJobs: () => {
-    const [searchParams] = useSearchParams();
+    const [searchParams] = useSearchParams(searchParamsDefaultValues);
 
-    return useQuery({
+    const getAllJobsQuery = useQuery({
       queryKey: [ALL_JOBS_QUERY_KEY],
       queryFn: () => jobAPI.getAllJobs(searchParams),
     });
+
+    useEffect(() => {
+      const timeoutId = setTimeout(() => {
+        getAllJobsQuery.refetch();
+      }, 300);
+
+      return () => {
+        clearTimeout(timeoutId);
+      };
+
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [searchParams]);
+
+    return getAllJobsQuery;
   },
 
   useGetJobById: (jobId: string) => {

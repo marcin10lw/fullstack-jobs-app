@@ -1,20 +1,29 @@
 import { HiChevronDoubleLeft, HiChevronDoubleRight } from 'react-icons/hi';
+import { useSearchParams } from 'react-router-dom';
 import { buttonVariants } from 'src/components/ui/button';
 import { cn } from 'src/lib/utils';
+import { searchParamsDefaultValues } from './search/constants';
 
 type PageBtnContainerProps = {
   numOfPages: number;
   currentPage: number;
-  setPage: (pageNumber: number) => void;
   scrollToJobs: () => void;
 };
 
 const PageBtnContainer = ({
   currentPage,
   numOfPages,
-  setPage,
   scrollToJobs,
 }: PageBtnContainerProps) => {
+  const [searchParams, setSearchParams] = useSearchParams(
+    searchParamsDefaultValues,
+  );
+
+  const setPage = (pageNumber: number) => {
+    searchParams.set('page', String(pageNumber));
+    setSearchParams(searchParams);
+  };
+
   const addPageButton = ({
     pageNumber,
     activeClass,

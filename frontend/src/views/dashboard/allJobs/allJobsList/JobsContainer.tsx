@@ -1,20 +1,23 @@
 import { ApiJobsResponse } from 'src/infrasctucture/job/types';
 import AllJobsList from './AllJobsList';
 import PageBtnContainer from '../PageBtnContainer';
+import { useRef } from 'react';
 
 type JobsContainerProps = {
   jobsData: ApiJobsResponse;
-  jobsContainerRef: React.RefObject<HTMLElement>;
-  setPage: (pageNumber: number) => void;
-  scrollToJobs: () => void;
 };
 
-const JobsContainer = ({
-  jobsData,
-  jobsContainerRef,
-  setPage,
-  scrollToJobs,
-}: JobsContainerProps) => {
+const JobsContainer = ({ jobsData }: JobsContainerProps) => {
+  const jobsContainerRef = useRef<HTMLElement>(null);
+
+  const scrollToJobs = () => {
+    const containerRef = jobsContainerRef;
+
+    if (containerRef.current) {
+      containerRef.current.scrollIntoView();
+    }
+  };
+
   const { jobs, currentPage, numOfPages, totalJobs } = jobsData;
 
   if (jobs.length === 0)
@@ -34,7 +37,6 @@ const JobsContainer = ({
         <PageBtnContainer
           currentPage={currentPage}
           numOfPages={numOfPages}
-          setPage={setPage}
           scrollToJobs={scrollToJobs}
         />
       )}
