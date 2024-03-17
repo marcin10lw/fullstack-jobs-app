@@ -72,3 +72,28 @@ export const getAppStatsController = asyncWrapper(async (req, res) => {
   const { usersAmt, jobsAmt } = await getApplicationStats();
   res.status(StatusCodes.OK).json({ users: usersAmt, jobs: jobsAmt });
 });
+
+export const removeUserAvatarController = asyncWrapper(async (req, res) => {
+  const { userId } = res.locals[PAYLOAD_USER_NAME] as AccessTokenPayloadUser;
+
+  const user = await getCurrentUserById(userId);
+
+  if (user && user.avatar && user.avatarPublicId) {
+    throw new AppError("no avatar to remove", StatusCodes.BAD_REQUEST);
+  }
+
+  if (user && user.avatarPublicId) {
+    await cloudinary.v2.uploader.destroy(user.avatarPublicId);
+  }
+
+  await updateUser(
+    {
+      ...user,
+      avatar: null,
+      avatarPublicId: null,
+    },
+    userId
+  );
+
+  res.status(StatusCodes.OK).json({ msg: "avatar removed" });
+});

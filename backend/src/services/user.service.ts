@@ -20,21 +20,21 @@ export const createUser = async (user: UserCreate) => {
 
 type UpdatedUser = Partial<User>;
 
-export const updateUser = async (newUser: UpdatedUser, id: string) => {
+export const updateUser = async (newUser: UpdatedUser, userId: string) => {
   const oldUser = await prisma.user.update({
     data: newUser,
     where: {
-      id,
+      id: userId,
     },
   });
 
   return oldUser;
 };
 
-export const getCurrentUserById = async (id: string) => {
+export const getCurrentUserById = async (userId: string) => {
   const currentUser = await prisma.user.findFirst({
     where: {
-      id,
+      id: userId,
     },
   });
 
