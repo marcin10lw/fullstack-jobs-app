@@ -15,6 +15,7 @@ interface JobsQueryParams {
   jobStatus?: Job["jobStatus"] | "all";
   jobType?: Job["jobType"] | "all";
   sort?: SortOptions;
+  page?: string;
 }
 
 const getOrderByOptions = (sort: SortOptions | undefined) => {
@@ -71,25 +72,18 @@ const getQueryObject = (queryParams: JobsQueryParams) => {
 };
 
 export const getAllJobsController = asyncWrapper(
-  async (
-    req: Request<{}, {}, { cursor: string | null }, JobsQueryParams>,
-    res
-  ) => {
+  async (req: Request<{}, {}, {}, JobsQueryParams>, res) => {
     const queryObject = getQueryObject(req.query);
 
     const { userId } = res.locals[PAYLOAD_USER_NAME] as AccessTokenPayloadUser;
 
-    const lastCursor = req.body.cursor;
-
     const limit = 10;
+    const page = Number(req.query.page) || 1;
+    const skip = limit * (page - 1);
+
     const jobs = await prisma.job.findMany({
       take: limit,
-      ...(lastCursor && {
-        skip: 1,
-        cursor: {
-          id: lastCursor,
-        },
-      }),
+      skip,
       where: {
         userId,
         OR: queryObject.OR,
@@ -102,16 +96,23 @@ export const getAllJobsController = asyncWrapper(
       },
       orderBy: getOrderByOptions(req.query.sort),
     });
+    const totalJobs = await prisma.job.count({
+      where: {
+        userId,
+        OR: queryObject.OR,
+        jobStatus: {
+          equals: queryObject.jobStatus,
+        },
+        jobType: {
+          equals: queryObject.jobType,
+        },
+      },
+    });
+    const numOfPages = Math.ceil(totalJobs / limit);
 
-    if (jobs.length === 0) {
-      res.status(StatusCodes.OK).json({ jobs, nextCursor: null });
-      return;
-    }
-
-    let lastJob = jobs[jobs.length - 1];
-    const nextCursor = lastJob.id;
-
-    res.status(StatusCodes.OK).json({ jobs, nextCursor });
+    res
+      .status(StatusCodes.OK)
+      .json({ totalJobs, numOfPages, currentPage: page, jobs });
   }
 );
 

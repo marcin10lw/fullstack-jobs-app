@@ -12,7 +12,6 @@ import authRouter from "./routes/auth.route";
 import userRouter from "./routes/user.route";
 import jobsRouter from "./routes/job.route";
 import { authMiddleware } from "./middleware/auth";
-import { populateDb } from "./utils/populateDb";
 
 const app = express();
 
