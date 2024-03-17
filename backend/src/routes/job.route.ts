@@ -5,6 +5,7 @@ import {
   deleteJobController,
   getAllJobsController,
   getSingleJobController,
+  getStatsController,
   updateJobController,
 } from "../controllers/jobController";
 import { createJobSchema } from "../schemas/job.schema";
@@ -19,7 +20,7 @@ router
   .get(getAllJobsController)
   .post(validate(createJobSchema), addJobController);
 
-router.route("/stats").get();
+router.route("/stats").get(getStatsController);
 
 router
   .route(`/:${JOB_ID_ROUTE_PARAM}`)

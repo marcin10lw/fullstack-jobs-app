@@ -32,3 +32,28 @@ export const deleteJob = async (jobId: string, userId: string) => {
     where: { id: jobId, userId },
   });
 };
+
+export const getJobStats = async (userId: string) => {
+  const stats = await prisma.job.groupBy({
+    by: ["jobStatus"],
+    _count: {
+      jobStatus: true,
+    },
+    where: {
+      userId,
+    },
+  });
+
+  const monthlyApplications = (await prisma.$queryRaw`
+  SELECT
+    TO_CHAR("createdAt", 'Mon YY') AS date,
+    COUNT("id") AS count
+  FROM "Job"
+  WHERE "userId" = ${userId}
+  GROUP BY TO_CHAR("createdAt", 'Mon YY')
+  ORDER BY TO_DATE(TO_CHAR("createdAt", 'Mon YY'), 'Mon YY') DESC
+  LIMIT 6
+`) as { date: string; count: number }[];
+
+  return { stats, monthlyApplications };
+};

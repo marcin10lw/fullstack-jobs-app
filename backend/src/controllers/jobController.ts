@@ -8,6 +8,7 @@ import { CreateJobInput, UpdateJobInput } from "../schemas/job.schema";
 import {
   createJob,
   deleteJob,
+  getJobStats,
   getSingleJob,
   updateJob,
 } from "../services/job.service";
@@ -161,4 +162,31 @@ export const deleteJobController = asyncWrapper(async (req, res) => {
   res
     .status(StatusCodes.OK)
     .json({ msg: `Deleted job with id: ${jobId}`, job });
+});
+
+export const getStatsController = asyncWrapper(async (req, res) => {
+  const { userId } = res.locals[PAYLOAD_USER_NAME] as AccessTokenPayloadUser;
+
+  const { stats, monthlyApplications } = await getJobStats(userId);
+
+  let defaultStats = {
+    pending: 0,
+    interview: 0,
+    declined: 0,
+  };
+
+  stats.forEach((stat) => {
+    defaultStats[stat.jobStatus] = stat._count.jobStatus;
+  });
+
+  const formattedMonthlyApplications = monthlyApplications.map(
+    ({ date, count }) => ({
+      date,
+      count: Number(count),
+    })
+  );
+
+  res
+    .status(StatusCodes.OK)
+    .json({ defaultStats, monthlyApplications: formattedMonthlyApplications });
 });
