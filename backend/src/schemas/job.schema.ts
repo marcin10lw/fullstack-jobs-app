@@ -32,4 +32,7 @@ export const createJobSchema = z.object({
   }),
 });
 
+const updateJobSchema = createJobSchema;
+
 export type CreateJobInput = z.TypeOf<typeof createJobSchema>["body"];
+export type UpdateJobInput = z.TypeOf<typeof updateJobSchema>["body"];

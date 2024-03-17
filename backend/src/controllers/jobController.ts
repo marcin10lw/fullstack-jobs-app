@@ -1,13 +1,13 @@
 import { Job } from "@prisma/client";
 import { Request } from "express";
 import { StatusCodes } from "http-status-codes";
-import { PAYLOAD_USER_NAME } from "../constants";
+
+import { JOB_ID_ROUTE_PARAM, PAYLOAD_USER_NAME } from "../constants";
 import { prisma } from "../db/prisma";
-import { createJob, getSingleJob } from "../services/job.service";
+import { CreateJobInput, UpdateJobInput } from "../schemas/job.schema";
+import { createJob, getSingleJob, updateJob } from "../services/job.service";
 import { AccessTokenPayloadUser } from "../types";
 import { asyncWrapper } from "../utils/asyncWrapper";
-import AppError from "../utils/appError";
-import { CreateJobInput } from "../schemas/job.schema";
 
 type SortOptions = "newest" | "oldest" | "a-z" | "z-a";
 
@@ -118,23 +118,10 @@ export const getAllJobsController = asyncWrapper(
 );
 
 export const getSingleJobController = asyncWrapper(async (req, res) => {
-  const { id } = req.params;
-  const { userId, role } = res.locals[
-    PAYLOAD_USER_NAME
-  ] as AccessTokenPayloadUser;
+  const jobId = req.params[JOB_ID_ROUTE_PARAM];
+  const { userId } = res.locals[PAYLOAD_USER_NAME] as AccessTokenPayloadUser;
 
-  const job = await getSingleJob(id, userId);
-
-  if (!job) {
-    throw new AppError("job not found", StatusCodes.NOT_FOUND);
-  }
-
-  if (job.userId !== userId && role !== "admin") {
-    throw new AppError(
-      "not authorized to access this resource",
-      StatusCodes.FORBIDDEN
-    );
-  }
+  const job = await getSingleJob(jobId, userId);
 
   res.status(StatusCodes.OK).json({ job });
 });
@@ -146,5 +133,16 @@ export const addJobController = asyncWrapper(
     const job = createJob(req.body, userId);
 
     res.status(StatusCodes.CREATED).json({ job });
+  }
+);
+
+export const updateJobController = asyncWrapper(
+  async (req: Request<Record<string, any>, {}, UpdateJobInput>, res) => {
+    const jobId = req.params[JOB_ID_ROUTE_PARAM];
+    const { userId } = res.locals[PAYLOAD_USER_NAME] as AccessTokenPayloadUser;
+
+    const job = await updateJob(req.body, jobId, userId);
+
+    res.status(StatusCodes.OK).json({ job });
   }
 );
