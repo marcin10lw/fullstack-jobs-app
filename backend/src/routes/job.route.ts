@@ -2,6 +2,7 @@ import { Router } from "express";
 
 import {
   addJobController,
+  deleteJobController,
   getAllJobsController,
   getSingleJobController,
   updateJobController,
@@ -24,6 +25,6 @@ router
   .route(`/:${JOB_ID_ROUTE_PARAM}`)
   .get(validateIdParam, getSingleJobController)
   .patch(validateIdParam, validate(createJobSchema), updateJobController)
-  .delete();
+  .delete(validateIdParam, deleteJobController);
 
 export default router;

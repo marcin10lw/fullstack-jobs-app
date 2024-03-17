@@ -26,3 +26,9 @@ export const updateJob = async (
     data: job,
   });
 };
+
+export const deleteJob = async (jobId: string, userId: string) => {
+  return await prisma.job.delete({
+    where: { id: jobId, userId },
+  });
+};

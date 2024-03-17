@@ -5,7 +5,12 @@ import { StatusCodes } from "http-status-codes";
 import { JOB_ID_ROUTE_PARAM, PAYLOAD_USER_NAME } from "../constants";
 import { prisma } from "../db/prisma";
 import { CreateJobInput, UpdateJobInput } from "../schemas/job.schema";
-import { createJob, getSingleJob, updateJob } from "../services/job.service";
+import {
+  createJob,
+  deleteJob,
+  getSingleJob,
+  updateJob,
+} from "../services/job.service";
 import { AccessTokenPayloadUser } from "../types";
 import { asyncWrapper } from "../utils/asyncWrapper";
 
@@ -146,3 +151,14 @@ export const updateJobController = asyncWrapper(
     res.status(StatusCodes.OK).json({ job });
   }
 );
+
+export const deleteJobController = asyncWrapper(async (req, res) => {
+  const jobId = req.params[JOB_ID_ROUTE_PARAM];
+  const { userId } = res.locals[PAYLOAD_USER_NAME] as AccessTokenPayloadUser;
+
+  const job = await deleteJob(jobId, userId);
+
+  res
+    .status(StatusCodes.OK)
+    .json({ msg: `Deleted job with id: ${jobId}`, job });
+});
