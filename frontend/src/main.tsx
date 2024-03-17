@@ -5,7 +5,6 @@ import App from './App';
 
 import { Toaster } from './components/ui/toaster';
 
-import 'react-toastify/dist/ReactToastify.css';
 import './index.css';
 import './global.css';
 

@@ -5,4 +5,5 @@ export const JOB_API_URLS = {
   getJobById: '/jobs/:jobId',
   updateJobById: '/jobs/:jobId',
   getJobStats: '/jobs/stats',
+  updateJobDescription: '/jobs/update-description/:jobId',
 };

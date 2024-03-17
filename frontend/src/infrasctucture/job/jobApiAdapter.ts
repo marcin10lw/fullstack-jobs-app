@@ -36,4 +36,18 @@ export const jobAPI = {
     const { data } = await customFetch.get(JOB_API_URLS.getJobStats);
     return data;
   },
+
+  updateJobDescription: async ({
+    jobId,
+    jobDescription,
+  }: {
+    jobId: string;
+    jobDescription: string;
+  }) =>
+    customFetch.put(
+      JOB_API_URLS.updateJobDescription.replace(':jobId', jobId),
+      {
+        jobDescription,
+      },
+    ),
 };

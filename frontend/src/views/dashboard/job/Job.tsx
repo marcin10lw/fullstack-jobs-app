@@ -7,9 +7,9 @@ import { Button, buttonVariants } from 'src/components/ui/button';
 import { jobRepository } from 'src/infrasctucture/job/jobRepository';
 import { ROUTES } from 'src/routes';
 import EditJobDrawer from '../EditJobDrawer';
-import JobDescription from './JobDescription';
-import { Textarea } from 'src/components/ui/textarea';
+import JobDetail from './JobDetail';
 import DatePicker from './DatePicker';
+import JobDescription from './JobDescription';
 
 const Job = () => {
   const { jobId } = useParams<{ jobId: string }>();
@@ -61,39 +61,39 @@ const Job = () => {
 
           <dl className="mt-4 grid max-w-[80%] md:grid-cols-2">
             <div>
-              <JobDescription
+              <JobDetail
                 descriptionTerm="Company:"
                 descriptionDetail={job.company}
               />
-              <JobDescription
+              <JobDetail
                 descriptionTerm="Position:"
                 descriptionDetail={job.position}
               />
-              <JobDescription
+              <JobDetail
                 descriptionTerm="Location:"
                 descriptionDetail={job.jobLocation}
               />
             </div>
 
             <div>
-              <JobDescription
+              <JobDetail
                 descriptionTerm="Job Status:"
                 descriptionDetail={job.jobStatus}
               />
-              <JobDescription
+              <JobDetail
                 descriptionTerm="Job Type:"
                 descriptionDetail={job.jobType}
               />
             </div>
           </dl>
 
-          <DatePicker />
+          {/* <DatePicker /> */}
 
-          <div className="mt-8 flex flex-col md:mt-12">
-            <Textarea placeholder="Job description" className="min-h-32" />
-            <Button size="sm" className="mt-2 self-end">
-              Save
-            </Button>
+          <div className="mt-8 md:mt-12">
+            <JobDescription
+              jobDescription={job.jobDescription}
+              jobId={job.id}
+            />
           </div>
         </section>
       </ContentWrapper>
