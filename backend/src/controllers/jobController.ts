@@ -79,13 +79,17 @@ export const getAllJobsController = asyncWrapper(
 
     const { userId } = res.locals[PAYLOAD_USER_NAME] as AccessTokenPayloadUser;
 
-    const cursor = req.body.cursor;
+    const lastCursor = req.body.cursor;
 
     const limit = 10;
     const jobs = await prisma.job.findMany({
       take: limit,
-      skip: cursor ? 1 : undefined,
-      cursor: cursor ? { id: cursor } : undefined,
+      ...(lastCursor && {
+        skip: 1,
+        cursor: {
+          id: lastCursor,
+        },
+      }),
       where: {
         userId,
         OR: queryObject.OR,
@@ -99,12 +103,13 @@ export const getAllJobsController = asyncWrapper(
       orderBy: getOrderByOptions(req.query.sort),
     });
 
-    let nextCursor: string | undefined = undefined;
-
-    if (jobs.length > limit) {
-      const lastJob = jobs.pop();
-      nextCursor = lastJob?.id;
+    if (jobs.length === 0) {
+      res.status(StatusCodes.OK).json({ jobs, nextCursor: null });
+      return;
     }
+
+    let lastJob = jobs[jobs.length - 1];
+    const nextCursor = lastJob.id;
 
     res.status(StatusCodes.OK).json({ jobs, nextCursor });
   }
@@ -130,4 +135,15 @@ export const getSingleJobController = asyncWrapper(async (req, res) => {
   }
 
   res.status(StatusCodes.OK).json({ job });
+});
+
+export const addJobController = asyncWrapper(async (req, res) => {
+  const job = await prisma.job.create({
+    data: {
+      userId: res.locals[PAYLOAD_USER_NAME].userId,
+      ...req.body,
+    },
+  });
+
+  res.status(StatusCodes.CREATED).json({ job });
 });

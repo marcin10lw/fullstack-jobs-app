@@ -12,6 +12,7 @@ import authRouter from "./routes/auth.route";
 import userRouter from "./routes/user.route";
 import jobsRouter from "./routes/job.route";
 import { authMiddleware } from "./middleware/auth";
+import { populateDb } from "./utils/populateDb";
 
 const app = express();
 
@@ -25,7 +26,7 @@ if (process.env.NODE_ENV === "development") {
 
 app.use(
   cors({
-    origin: "localhost:5173",
+    origin: "http://localhost:5173",
     credentials: true,
   })
 );
