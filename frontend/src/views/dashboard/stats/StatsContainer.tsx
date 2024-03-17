@@ -1,4 +1,4 @@
-import { FaBug, FaCalendarCheck, FaSuitcaseRolling } from 'react-icons/fa';
+import { Briefcase, Bug, CalendarCheck } from 'lucide-react';
 
 import { DefaultStats } from 'src/infrasctucture/job/types';
 import StatItem from './StatItem';
@@ -14,7 +14,7 @@ const StatsContainer = ({ defaultStats }: StatsContainerProps) => {
       status: 'pending',
       title: 'pending applications',
       count: defaultStats.pending,
-      icon: <FaSuitcaseRolling className="size-8 text-muted-foreground" />,
+      icon: <Briefcase className="size-8 text-muted-foreground" />,
       color: 'test-primary-foreground',
     },
     {
@@ -22,7 +22,7 @@ const StatsContainer = ({ defaultStats }: StatsContainerProps) => {
       status: 'interview',
       title: 'interviews scheduled',
       count: defaultStats.interview,
-      icon: <FaCalendarCheck className="size-8 text-primary/80" />,
+      icon: <CalendarCheck className="size-8 text-primary/80" />,
       color: 'text-purple-700',
     },
     {
@@ -30,7 +30,7 @@ const StatsContainer = ({ defaultStats }: StatsContainerProps) => {
       status: 'declined',
       title: 'declined applications',
       count: defaultStats.declined,
-      icon: <FaBug className="size-8 text-destructive" />,
+      icon: <Bug className="size-8 text-destructive" />,
       color: 'text-red-800',
     },
   ];

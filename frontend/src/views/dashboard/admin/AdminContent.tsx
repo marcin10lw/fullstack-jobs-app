@@ -1,9 +1,10 @@
-import { FaCalendarCheck, FaSuitcaseRolling } from 'react-icons/fa';
-import StatItem from '../stats/StatItem';
-import { useNavigate } from 'react-router-dom';
-import { userRepository } from 'src/infrasctucture/user/userRepository';
 import { useLayoutEffect } from 'react';
-import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import { CalendarCheck, Users } from 'lucide-react';
+
+import { userRepository } from 'src/infrasctucture/user/userRepository';
+import StatItem from '../stats/StatItem';
+import { useToast } from 'src/components/ui/use-toast';
 
 const AdminContent = () => {
   const navigate = useNavigate();
@@ -14,13 +15,18 @@ const AdminContent = () => {
     isError,
   } = userRepository.useGetAllUsersStats();
 
+  const { toast } = useToast();
+
   useLayoutEffect(() => {
     if (isError) {
-      toast.error("You're not authorized to view this page", {
-        position: 'top-center',
+      toast({
+        title: "You're not authorized to view this page",
+        variant: 'destructive',
       });
       navigate('/dashboard');
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isError, navigate]);
 
   if (status === 'success') {
@@ -32,13 +38,13 @@ const AdminContent = () => {
           title="current users"
           count={users}
           color="text-foreground"
-          icon={<FaSuitcaseRolling className="size-10" />}
+          icon={<Users className="size-10" />}
         />
         <StatItem
           title="current jobs"
           count={jobs}
           color="text-foreground"
-          icon={<FaCalendarCheck className="size-10" />}
+          icon={<CalendarCheck className="size-10" />}
         />
       </section>
     );

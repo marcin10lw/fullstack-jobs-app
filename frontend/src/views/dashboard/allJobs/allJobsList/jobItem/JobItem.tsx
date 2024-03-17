@@ -1,9 +1,8 @@
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, Briefcase, Calendar, Navigation } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
 
 import advancedFormat from 'dayjs/plugin/advancedFormat';
-import { FaBriefcase, FaCalendar, FaLocationArrow } from 'react-icons/fa';
 
 import { cn } from 'src/lib/utils';
 import { Job as JobType } from 'src/models/Job';
@@ -53,12 +52,9 @@ const JobItem = ({ job }: JobProps) => {
       </Link>
       <div className="p-[1rem_1.5rem]">
         <div className="m-[1rem_0_1.5rem] grid items-center gap-6 sm:grid-cols-2">
-          <JobInfo icon={<FaLocationArrow />} text={job.jobLocation} />
-          <JobInfo icon={<FaCalendar />} text={date} />
-          <JobInfo
-            icon={<FaBriefcase />}
-            text={job.jobType.replace('_', '-')}
-          />
+          <JobInfo icon={<Navigation />} text={job.jobLocation} />
+          <JobInfo icon={<Calendar />} text={date} />
+          <JobInfo icon={<Briefcase />} text={job.jobType.replace('_', '-')} />
           <div
             className={cn(
               'flex h-[30px] w-[100px] items-center justify-center rounded-sm text-white',

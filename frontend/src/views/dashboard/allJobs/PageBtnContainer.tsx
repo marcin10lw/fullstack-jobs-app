@@ -1,5 +1,6 @@
-import { HiChevronDoubleLeft, HiChevronDoubleRight } from 'react-icons/hi';
 import { useSearchParams } from 'react-router-dom';
+import { ChevronsLeft, ChevronsRight } from 'lucide-react';
+
 import { buttonVariants } from 'src/components/ui/button';
 import { cn } from 'src/lib/utils';
 import { searchParamsDefaultValues } from './search/constants';
@@ -148,7 +149,7 @@ const PageBtnContainer = ({
             'flex h-[40px] w-[100px] items-center justify-center gap-2 rounded-sm capitalize tracking-wider disabled:pointer-events-none',
         })}
       >
-        <HiChevronDoubleLeft />
+        <ChevronsLeft />
         prev
       </button>
       <div className="flex items-center rounded-sm bg-muted">
@@ -163,7 +164,7 @@ const PageBtnContainer = ({
         disabled={currentPage >= numOfPages}
       >
         next
-        <HiChevronDoubleRight />
+        <ChevronsRight />
       </button>
     </footer>
   );
