@@ -1,15 +1,16 @@
 import { AxiosError } from 'axios';
 import { ArrowLeft, Loader2 } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
+
 import ContentWrapper from 'src/components/ContentWrapper';
 import NotFound from 'src/components/NotFound';
-import { Button, buttonVariants } from 'src/components/ui/button';
+import { buttonVariants } from 'src/components/ui/button';
 import { jobRepository } from 'src/infrasctucture/job/jobRepository';
 import { ROUTES } from 'src/routes';
 import EditJobDrawer from '../EditJobDrawer';
-import JobDetail from './JobDetail';
-import DatePicker from './DatePicker';
 import JobDescription from './JobDescription';
+import JobDetail from './JobDetail';
+import JobMap from './JobMap';
 
 const Job = () => {
   const { jobId } = useParams<{ jobId: string }>();
@@ -96,6 +97,10 @@ const Job = () => {
             />
           </div>
         </section>
+
+        <div className="mt-10">
+          <JobMap />
+        </div>
       </ContentWrapper>
     );
 

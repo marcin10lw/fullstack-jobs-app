@@ -5,6 +5,7 @@ import App from './App';
 
 import { Toaster } from './components/ui/toaster';
 
+import 'leaflet/dist/leaflet.css';
 import './index.css';
 import './global.css';
 
