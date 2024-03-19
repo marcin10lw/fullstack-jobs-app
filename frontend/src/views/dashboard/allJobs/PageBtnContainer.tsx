@@ -35,7 +35,7 @@ const PageBtnContainer = ({
     return (
       <button
         className={cn(
-          'h-[40px] w-[50px] cursor-pointer text-xl font-bold transition-colors duration-300 ease-in-out first:rounded-l-sm last:rounded-r-sm hover:bg-primary hover:text-white',
+          'h-[40px] w-[50px] shrink-0 cursor-pointer text-xl font-bold transition-colors duration-300 ease-in-out first:rounded-l-sm last:rounded-r-sm hover:bg-primary hover:text-white',
           {
             'bg-primary text-white': activeClass,
             'bg-transparent text-primary': !activeClass,
@@ -140,31 +140,31 @@ const PageBtnContainer = ({
   };
 
   return (
-    <footer className="mt-8 flex h-24 flex-wrap items-center justify-end gap-4">
+    <footer className="mt-8 flex h-24 flex-wrap items-center justify-around gap-4 md:justify-end">
       <button
         onClick={toPrevPage}
         disabled={currentPage <= 1}
         className={buttonVariants({
           className:
-            'flex h-[40px] w-[100px] items-center justify-center gap-2 rounded-sm capitalize tracking-wider disabled:pointer-events-none',
+            'flex h-[40px] w-[40px] items-center justify-center gap-2 rounded-sm capitalize tracking-wider disabled:pointer-events-none md:w-[100px]',
         })}
       >
-        <ChevronsLeft />
-        prev
+        <ChevronsLeft className="size-6 shrink-0" />
+        <span className="hidden md:inline-block">prev</span>
       </button>
-      <div className="flex items-center rounded-sm bg-muted">
+      <div className="flex max-w-[200px] items-center overflow-x-auto rounded-sm bg-muted min-[575px]:max-w-full">
         {renderButtons()}
       </div>
       <button
         onClick={toNextPage}
         className={buttonVariants({
           className:
-            'flex h-[40px] w-[100px] items-center justify-center gap-2 rounded-sm capitalize tracking-wider disabled:pointer-events-none',
+            'flex h-[40px] w-[40px] items-center justify-center gap-2 rounded-sm capitalize tracking-wider disabled:pointer-events-none md:w-[100px]',
         })}
         disabled={currentPage >= numOfPages}
       >
-        next
-        <ChevronsRight />
+        <span className="hidden md:inline-block">next</span>
+        <ChevronsRight className="size-6 shrink-0" />
       </button>
     </footer>
   );
