@@ -16,9 +16,7 @@ const FullscreenButton = ({
   const map = useMap();
 
   useEffect(() => {
-    if (isFullscreen) {
-      map.invalidateSize();
-    }
+    map.invalidateSize();
   }, [isFullscreen, map]);
 
   return (

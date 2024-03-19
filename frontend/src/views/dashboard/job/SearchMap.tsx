@@ -1,8 +1,14 @@
-import { useMap } from 'react-leaflet';
 import { X } from 'lucide-react';
+import { useMap } from 'react-leaflet';
 
 import { Button } from 'src/components/ui/button';
 import { Input } from 'src/components/ui/input';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from 'src/components/ui/tooltip';
 import useSearchMap from './useSearchMap';
 
 const SearchMap = () => {
@@ -36,12 +42,21 @@ const SearchMap = () => {
         >
           {searchResults.map((result) => (
             <li key={result.place_id}>
-              <button
-                onClick={() => onResultClick(result)}
-                className="w-full cursor-pointer truncate rounded-md p-2 text-start hover:bg-slate-700"
-              >
-                {result.display_name}
-              </button>
+              <TooltipProvider>
+                <Tooltip disableHoverableContent>
+                  <TooltipTrigger asChild>
+                    <button
+                      onClick={() => onResultClick(result)}
+                      className="w-full cursor-pointer truncate rounded-md p-2 text-start hover:bg-background"
+                    >
+                      {result.display_name}
+                    </button>
+                  </TooltipTrigger>
+                  <TooltipContent className="bg-popover" align="start">
+                    {result.display_name}
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
             </li>
           ))}
         </ul>
