@@ -111,10 +111,10 @@ export const loginController = asyncWrapper(
 );
 
 export const refreshTokenController = asyncWrapper(async (req, res) => {
-  const { refreshToken } = req.body;
+  const refreshToken = req.cookies[REFRESH_TOKEN_COOKIE_NAME];
 
   if (!refreshToken) {
-    throw new AppError("missing refresh token", StatusCodes.BAD_REQUEST);
+    throw new AppError("missing refresh token", StatusCodes.UNAUTHORIZED);
   }
 
   const payload = verifyRefreshToken(refreshToken);

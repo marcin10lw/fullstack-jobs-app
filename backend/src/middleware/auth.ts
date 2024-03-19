@@ -16,10 +16,7 @@ export const authMiddleware = asyncWrapper(async (req, res, next) => {
   const payload = verifyAccessToken<AccessTokenPayloadUser>(accessToken);
 
   if (!payload) {
-    throw new AppError(
-      "invalid token or user doesn't exist",
-      StatusCodes.UNAUTHORIZED
-    );
+    throw new AppError("not logged in", StatusCodes.UNAUTHORIZED);
   }
 
   const user = await getCurrentUserById(payload.userId);
