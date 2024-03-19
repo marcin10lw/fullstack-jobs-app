@@ -149,7 +149,7 @@ export const refreshTokenController = asyncWrapper(async (req, res) => {
   res.cookie(ACCESS_TOKEN_COOKIE_NAME, accessToken, accessTokenCookieOptions);
   res.cookie(
     REFRESH_TOKEN_COOKIE_NAME,
-    refreshToken,
+    newRefreshToken,
     refreshTokenCookieOptions
   );
 
