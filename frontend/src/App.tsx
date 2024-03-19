@@ -1,23 +1,23 @@
 import { useLayoutEffect } from 'react';
-import { RouterProvider, createHashRouter } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import { checkDefaultTheme } from './lib/helpers/checkDefaultTheme';
 
 import { ROUTES } from './routes';
-import Admin from './views/dashboard/admin/Admin';
 import Error from './views/Error';
 import HomeLayout from './views/HomeLayout';
 import Landing from './views/Landing';
-import Profile from './views/dashboard/profile/Profile';
-import Stats from './views/dashboard/stats/Stats';
 import DashboardLayout from './views/dashboard/DashboardLayout';
 import AddJob from './views/dashboard/addJob/AddJob';
+import Admin from './views/dashboard/admin/Admin';
 import AllJobs from './views/dashboard/allJobs/AllJobs';
+import Job from './views/dashboard/job/Job';
+import Profile from './views/dashboard/profile/Profile';
+import Stats from './views/dashboard/stats/Stats';
 import Login from './views/user/Login';
 import Register from './views/user/Register';
-import Job from './views/dashboard/job/Job';
 
-const router = createHashRouter([
+const router = createBrowserRouter([
   {
     path: '/',
     element: <HomeLayout />,

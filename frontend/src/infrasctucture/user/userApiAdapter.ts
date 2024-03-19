@@ -1,30 +1,30 @@
-import customFetch from 'src/lib/helpers/customFetch';
 import { LoginFormData } from 'src/models/Login';
 import { RegisterFormData } from 'src/models/Register';
 import { UserApiResponse } from './types';
 import { USER_API_URLS } from './userApiUrls';
+import { restApi } from '../restApi';
 
 export const userAPI = {
   loginUser: (formData: LoginFormData) =>
-    customFetch.post(USER_API_URLS.loginUser, formData),
+    restApi.private.post(USER_API_URLS.loginUser, formData),
 
   registerUser: (formData: RegisterFormData) =>
-    customFetch.post(USER_API_URLS.registerUser, formData),
+    restApi.private.post(USER_API_URLS.registerUser, formData),
 
   getCurrentUser: async (): Promise<UserApiResponse> => {
-    const { data } = await customFetch.get(USER_API_URLS.getCurrentUser);
+    const { data } = await restApi.private.get(USER_API_URLS.getCurrentUser);
     return data;
   },
 
-  logoutUser: () => customFetch.post(USER_API_URLS.logoutCurrentUser),
+  logoutUser: () => restApi.private.post(USER_API_URLS.logoutCurrentUser),
 
   getAllUsersStats: async (): Promise<{ users: number; jobs: number }> => {
-    const { data } = await customFetch.get(USER_API_URLS.getAllUsersStats);
+    const { data } = await restApi.private.get(USER_API_URLS.getAllUsersStats);
     return data;
   },
 
   updateUser: (formData: FormData) =>
-    customFetch.patch(USER_API_URLS.updateUser, formData),
+    restApi.private.patch(USER_API_URLS.updateUser, formData),
 
-  removeUserAvatar: () => customFetch.delete(USER_API_URLS.removeUserAvatar),
+  removeUserAvatar: () => restApi.private.delete(USER_API_URLS.removeUserAvatar),
 };

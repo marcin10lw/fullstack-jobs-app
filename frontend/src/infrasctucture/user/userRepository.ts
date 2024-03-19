@@ -8,7 +8,10 @@ export const userRepository = {
       queryKey: [CURRENT_USER_QUERY_KEY],
       queryFn: userAPI.getCurrentUser,
       retry: false,
-      cacheTime: 0,
+      cacheTime: Infinity,
+      staleTime: Infinity,
+      refetchOnWindowFocus: false,
+      refetchOnMount: true,
     }),
 
   useGetAllUsersStats: () =>

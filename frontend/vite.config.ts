@@ -9,7 +9,7 @@ export default defineConfig({
       typescript: true,
     }),
   ],
-  base: 'https://marcin10lw.github.io/fullstack-jobs-app',
+  base: 'https://marcin10lw.github.io/',
   resolve: {
     alias: {
       src: '/src',
