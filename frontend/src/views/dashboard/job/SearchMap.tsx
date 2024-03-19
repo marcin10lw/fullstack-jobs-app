@@ -1,61 +1,19 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import axios from 'axios';
-import { X } from 'lucide-react';
-import { useEffect, useState } from 'react';
 import { useMap } from 'react-leaflet';
+import { X } from 'lucide-react';
+
 import { Button } from 'src/components/ui/button';
 import { Input } from 'src/components/ui/input';
-import { convertBoundingBoxToBounds } from 'src/lib/helpers/map';
-
-const OPENSTREET_SEARCH_URL = 'https://nominatim.openstreetmap.org/search';
+import useSearchMap from './useSearchMap';
 
 const SearchMap = () => {
-  const [query, setQuery] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
-  const [selectedResult, setSelectedResult] = useState<Record<
-    string,
-    any
-  > | null>(null);
-
   const map = useMap();
 
-  const getSearchData = async () => {
-    const { data } = await axios.get(OPENSTREET_SEARCH_URL, {
-      params: {
-        q: query,
-        format: 'jsonv2',
-      },
-    });
-
-    setSearchResults(data);
-  };
-
-  useEffect(() => {
-    if (query === '') {
-      setSearchResults([]);
-      setSelectedResult(null);
-    }
-  }, [query]);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      !!query && getSearchData();
-    }, 500);
-
-    return () => clearTimeout(timeout);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query]);
-
-  const onResultClick = (result: any) => {
-    setSelectedResult(result);
-    map.flyToBounds(convertBoundingBoxToBounds(result.boundingbox as string[]));
-    setQuery('');
-  };
+  const { query, setQuery, onResultClick, searchResults, selectedResult } =
+    useSearchMap();
 
   return (
     <div className="relative">
-      <div className="relative">
+      <div className="relative max-w-[200px]">
         <Input
           value={selectedResult?.display_name ?? query}
           onChange={({ target }) => setQuery(target.value)}
@@ -71,8 +29,12 @@ const SearchMap = () => {
         </Button>
       </div>
       {searchResults.length > 0 && (
-        <ul className="absolute top-[calc(36px+8px)] w-full rounded-md bg-secondary p-2">
-          {searchResults.map((result: any) => (
+        <ul
+          onMouseOver={() => map.scrollWheelZoom.disable()}
+          onMouseLeave={() => map.scrollWheelZoom.enable()}
+          className="scrollbar-w-4 scrollbar-track scrollbar-thumb scrollbar-thumb-rounded absolute top-[calc(36px+8px)] max-h-[300px] w-full max-w-[300px] overflow-y-auto rounded-md bg-secondary p-2"
+        >
+          {searchResults.map((result) => (
             <li key={result.place_id}>
               <button
                 onClick={() => onResultClick(result)}
@@ -87,4 +49,5 @@ const SearchMap = () => {
     </div>
   );
 };
+
 export default SearchMap;

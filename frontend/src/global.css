@@ -60,3 +60,22 @@
     font-family: 'Barlow', sans-serif;
   }
 }
+
+.scrollbar-w-4::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+.scrollbar-track::-webkit-scrollbar-track {
+  --bg-opacity: 0.5;
+  background-color: #00000015;
+}
+
+.scrollbar-thumb::-webkit-scrollbar-thumb {
+  --bg-opacity: 0.5;
+  background-color: #3b475f;
+}
+
+.scrollbar-thumb-rounded::-webkit-scrollbar-thumb {
+  border-radius: 7px;
+}
