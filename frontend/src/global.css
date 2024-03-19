@@ -61,6 +61,16 @@
   }
 }
 
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+  background: hsl(var(--secondary)) !important;
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+.leaflet-control-zoom {
+  margin: 0 16px 16px 0 !important;
+}
+
 .scrollbar-w-4::-webkit-scrollbar {
   width: 0.5rem;
   height: 0.5rem;

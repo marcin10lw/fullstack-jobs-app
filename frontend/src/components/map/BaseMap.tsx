@@ -1,13 +1,16 @@
 import { MapContainer, TileLayer, ZoomControl } from 'react-leaflet';
+import { ClassValue } from 'clsx';
+import { cn } from 'src/lib/utils';
 
 interface BaseMapProps {
   children?: React.ReactNode;
+  className?: ClassValue;
 }
 
-const BaseMap = ({ children }: BaseMapProps) => {
+const BaseMap = ({ children, className }: BaseMapProps) => {
   return (
     <MapContainer
-      className="absolute inset-0 z-[100] w-full"
+      className={cn('absolute inset-0 z-[0] w-full', className)}
       center={[0, 0]}
       zoom={2}
       minZoom={2}
