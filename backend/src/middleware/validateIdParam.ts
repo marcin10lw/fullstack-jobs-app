@@ -12,6 +12,10 @@ export const validateIdParam = asyncWrapper(async (req, res, next) => {
     PAYLOAD_USER_NAME
   ] as AccessTokenPayloadUser;
 
+  if (!jobId) {
+    throw new AppError("jobId not provided", StatusCodes.BAD_REQUEST);
+  }
+
   const job = await getSingleJob(jobId, userId);
 
   if (!job) {

@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node-dev --respawn --transpile-only src/app.ts",
+    "build": "tsc",
+    "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
+    "prestart": "npm run build",
+    "start": "node dist/app.js",
     "db:push": "npx prisma db push"
   },
   "keywords": [],

@@ -12,11 +12,12 @@ import { notFoundMiddleware } from "./middleware/notFound";
 import authRouter from "./routes/auth.route";
 import jobsRouter from "./routes/job.route";
 import userRouter from "./routes/user.route";
+import path, { dirname } from "path";
+import { fileURLToPath } from "url";
 
 const app = express();
 
 app.use(express.json());
-
 app.use(cookieParser());
 
 if (process.env.NODE_ENV === "development") {
@@ -30,6 +31,8 @@ app.use(
   })
 );
 
+app.use(express.static(path.resolve(__dirname, "../../frontend/dist")));
+
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.CLOUD_API_KEY,
@@ -39,6 +42,10 @@ cloudinary.config({
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", authMiddleware, userRouter);
 app.use("/api/v1/jobs", authMiddleware, jobsRouter);
+
+app.get("*", (_req, res) => {
+  res.sendFile(path.resolve(__dirname, "../../frontend/dist", "index.html"));
+});
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);

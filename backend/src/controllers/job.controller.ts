@@ -132,7 +132,7 @@ export const getSingleJobController = asyncWrapper(async (req, res) => {
   const jobId = req.params[JOB_ID_ROUTE_PARAM];
   const { userId } = res.locals[PAYLOAD_USER_NAME] as AccessTokenPayloadUser;
 
-  const job = await getSingleJob(jobId, userId);
+  const job = await getSingleJob(jobId!, userId);
 
   res.status(StatusCodes.OK).json({ job });
 });
@@ -162,7 +162,7 @@ export const deleteJobController = asyncWrapper(async (req, res) => {
   const jobId = req.params[JOB_ID_ROUTE_PARAM];
   const { userId } = res.locals[PAYLOAD_USER_NAME] as AccessTokenPayloadUser;
 
-  const job = await deleteJob(jobId, userId);
+  const job = await deleteJob(jobId!, userId);
 
   res
     .status(StatusCodes.OK)
@@ -201,7 +201,7 @@ export const updateJobDescriptionController = asyncWrapper(async (req, res) => {
   const { userId } = res.locals[PAYLOAD_USER_NAME] as AccessTokenPayloadUser;
   const { jobDescription }: UpdateJobDescriptionInput = req.body;
 
-  await updateJobDescription(jobId, userId, jobDescription);
+  await updateJobDescription(jobId!, userId, jobDescription);
 
   res.status(StatusCodes.OK).json({ msg: "job description updated" });
 });
