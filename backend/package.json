@@ -9,6 +9,7 @@
     "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
     "prestart": "npm run build",
     "start": "node dist/app.js",
+    "postinstall": "prisma generate",
     "db:push": "npx prisma db push"
   },
   "keywords": [],
