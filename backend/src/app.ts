@@ -5,6 +5,7 @@ import cors from "cors";
 import express from "express";
 import morgan from "morgan";
 
+import path from "path";
 import { prisma } from "./db/prisma";
 import { authMiddleware } from "./middleware/auth";
 import { errorHandlerMiddleware } from "./middleware/errorHandler";
@@ -12,8 +13,6 @@ import { notFoundMiddleware } from "./middleware/notFound";
 import authRouter from "./routes/auth.route";
 import jobsRouter from "./routes/job.route";
 import userRouter from "./routes/user.route";
-import path, { dirname } from "path";
-import { fileURLToPath } from "url";
 
 const app = express();
 
@@ -24,14 +23,16 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-    credentials: true,
-  })
-);
-
 app.use(express.static(path.resolve(__dirname, "../../frontend/dist")));
+
+if (process.env.NODE_ENV === "development") {
+  app.use(
+    cors({
+      origin: "http://localhost:5173",
+      credentials: true,
+    })
+  );
+}
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
