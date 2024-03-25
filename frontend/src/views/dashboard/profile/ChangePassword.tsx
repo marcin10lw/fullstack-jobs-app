@@ -11,7 +11,7 @@ import { useToast } from 'src/components/ui/use-toast';
 import errorMessage from 'src/lib/helpers/errorMessage';
 import { CustomAxiosError } from 'src/types';
 
-const UpdatePassword = () => {
+const ChangePassword = () => {
   const {
     register: registerChangePassword,
     formState: { errors: changePasswordErrors },
@@ -87,4 +87,4 @@ const UpdatePassword = () => {
   );
 };
 
-export default UpdatePassword;
+export default ChangePassword;
