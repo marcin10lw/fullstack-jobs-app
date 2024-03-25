@@ -15,11 +15,15 @@ const ContentWrapper = ({
   return (
     <div
       className={cn(
-        'm-auto w-full max-w-screen-xl rounded-lg bg-secondary p-4 shadow-xl md:p-[3rem_2rem_4rem]',
+        'm-auto w-full max-w-screen-xl rounded-lg bg-secondary p-4 shadow-xl md:p-[2.5rem_2rem_3.5rem]',
         className,
       )}
     >
-      <div>{title && <h4 className="mb-8">{title}</h4>}</div>
+      <div>
+        {title && (
+          <h4 className="mb-8 text-lg font-semibold tracking-wider">{title}</h4>
+        )}
+      </div>
       {children}
     </div>
   );

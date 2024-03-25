@@ -26,7 +26,7 @@ const LabeledFormSelect = ({
 }: LabeledFormSelectProps) => {
   return (
     <FormItem className="space-y-[2px]">
-      <FormLabel className="capitalize">{label}</FormLabel>
+      <FormLabel className="font-normal capitalize">{label}</FormLabel>
       <ShadcnSelect value={value} onValueChange={onOptionChange}>
         <FormControl>
           <SelectTrigger className="relative w-full">
