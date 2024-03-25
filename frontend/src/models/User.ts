@@ -38,4 +38,20 @@ export const updateUserSchema = z.object({
     .nullable(),
 });
 
+export const updatePasswordSchema = z.object({
+  currentPassword: z
+    .string()
+    .trim()
+    .min(1, { message: 'password is required' }),
+  newPassword: z
+    .string()
+    .trim()
+    .min(1, { message: 'password is required' })
+    .min(6, { message: 'password must be at least 6 characters long' })
+    .max(30, {
+      message: 'password must be between 6 and 30 characters long',
+    }),
+});
+
 export type UpdatedUser = z.infer<typeof updateUserSchema>;
+export type UpdatePassword = z.infer<typeof updatePasswordSchema>;
