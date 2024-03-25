@@ -1,4 +1,3 @@
-import { Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import LabeledRegisterInput from 'src/components/LabeledRegisterInput';
@@ -51,13 +50,10 @@ const RegisterForm = () => {
         <Button
           className="w-full text-lg"
           disabled={status === 'loading'}
+          isLoading={status === 'loading'}
           type="submit"
         >
-          {status === 'loading' ? (
-            <Loader2 className="animate-spin" />
-          ) : (
-            'Sign up'
-          )}
+          Sign up
         </Button>
       </div>
 
@@ -65,7 +61,7 @@ const RegisterForm = () => {
         Already a member?{' '}
         <Link
           to={ROUTES.login}
-          className="text-primary ml-1 font-medium tracking-wide"
+          className="ml-1 font-medium tracking-wide text-primary"
         >
           Login
         </Link>

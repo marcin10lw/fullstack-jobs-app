@@ -29,7 +29,6 @@ export const useUpdateUser = () => {
     handleSubmit,
     control,
     watch,
-    reset,
   } = useForm<UpdatedUserSchema>({
     defaultValues: initialValues,
     resolver: zodResolver(updateUserSchema),
@@ -47,7 +46,6 @@ export const useUpdateUser = () => {
         title: 'User updated',
         variant: 'success',
       });
-      reset();
     },
     onError: (error: CustomAxiosError) => {
       console.log(error);

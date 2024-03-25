@@ -1,11 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { Loader2 } from 'lucide-react';
 
-import { buttonVariants } from 'src/components/ui/button';
+import { Button, buttonVariants } from 'src/components/ui/button';
 import { useToast } from 'src/components/ui/use-toast';
-import errorMessage from 'src/lib/helpers/errorMessage';
 import { ALL_JOBS_QUERY_KEY } from 'src/infrasctucture/job/constants';
 import { jobAPI } from 'src/infrasctucture/job/jobApiAdapter';
+import errorMessage from 'src/lib/helpers/errorMessage';
 import { CustomAxiosError } from 'src/types';
 import EditJobDrawer from '../../../EditJobDrawer';
 
@@ -41,15 +40,16 @@ const JobItemFooter = ({ jobId }: JobItemFooterProps) => {
           deleteJob(jobId);
         }}
       >
-        <button
+        <Button
           disabled={isDeletingJob}
+          isLoading={isDeletingJob}
           className={buttonVariants({
             className: 'mr-2 flex h-[30px] items-center text-sm',
             variant: 'destructive',
           })}
         >
-          {isDeletingJob ? <Loader2 className="animate-spin" /> : 'Delete'}
-        </button>
+          Delete
+        </Button>
       </form>
     </footer>
   );

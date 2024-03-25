@@ -1,5 +1,4 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { Loader2 } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from 'src/components/ui/button';
 import { Textarea } from 'src/components/ui/textarea';
@@ -20,22 +19,23 @@ const JobDescription = ({ jobId, jobDescription }: JobDescriptionProps) => {
   const qc = useQueryClient();
   const { toast } = useToast();
 
-  const { mutate: updateJobDescription, isLoading: isUpdating } = useMutation({
-    mutationFn: jobAPI.updateJobDescription,
-    onSuccess: () => {
-      toast({
-        title: 'Job description updated',
-        variant: 'success',
-      });
-      qc.invalidateQueries([JOB_BY_ID_QUERY_KEY]);
-    },
-    onError: () => {
-      toast({
-        title: 'Could not update job description',
-        variant: 'destructive',
-      });
-    },
-  });
+  const { mutate: updateJobDescription, isLoading: isUpdatingJobDescription } =
+    useMutation({
+      mutationFn: jobAPI.updateJobDescription,
+      onSuccess: () => {
+        toast({
+          title: 'Job description updated',
+          variant: 'success',
+        });
+        qc.invalidateQueries([JOB_BY_ID_QUERY_KEY]);
+      },
+      onError: () => {
+        toast({
+          title: 'Could not update job description',
+          variant: 'destructive',
+        });
+      },
+    });
 
   const onUpdate = () => {
     if (jobDescription === newJobDescription) return;
@@ -67,11 +67,15 @@ const JobDescription = ({ jobId, jobDescription }: JobDescriptionProps) => {
       </div>
       <Button
         onClick={onUpdate}
-        disabled={isUpdating || jobDescription === newJobDescription}
+        disabled={
+          isUpdatingJobDescription || jobDescription === newJobDescription
+        }
+        isLoading={isUpdatingJobDescription}
+        spinnerClassName="size-6"
         size="sm"
         className="mt-6 w-[54px] self-end"
       >
-        {isUpdating ? <Loader2 className="size-6 animate-spin" /> : 'Save'}
+        Save
       </Button>
     </div>
   );

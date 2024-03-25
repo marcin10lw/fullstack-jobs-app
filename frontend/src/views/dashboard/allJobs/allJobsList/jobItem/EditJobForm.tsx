@@ -1,13 +1,11 @@
-import { Loader2 } from 'lucide-react';
-
 import LabeledFormSelect from 'src/components/LabeledFormSelect';
 import LabeledRegisterInput from 'src/components/LabeledRegisterInput';
 import MaxWidthWrapper from 'src/components/MaxWidthWrapper';
 import { Button } from 'src/components/ui/button';
 import { Form, FormField } from 'src/components/ui/form';
+import { buildSelectOptions } from 'src/lib/helpers/buildSelectOptions';
 import { Job as JobType, jobStatusItems, jobTypeItems } from 'src/schema/Job';
 import { useUpdateJob } from './useUpdateJob';
-import { buildSelectOptions } from 'src/lib/helpers/buildSelectOptions';
 
 interface EditJobFormProps {
   job: JobType;
@@ -84,9 +82,10 @@ const EditJobForm = ({ job, jobId, closeDrawer }: EditJobFormProps) => {
           <div className="mt-6">
             <Button
               disabled={isJobUpdating || !hasAnyFieldChanged}
+              isLoading={isJobUpdating}
               className="w-full"
             >
-              {isJobUpdating ? <Loader2 className="animate-spin" /> : 'Update'}
+              Update
             </Button>
           </div>
         </div>

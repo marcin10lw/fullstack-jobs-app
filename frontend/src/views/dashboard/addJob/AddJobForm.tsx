@@ -1,11 +1,10 @@
-import { Loader2 } from 'lucide-react';
 import LabeledFormSelect from 'src/components/LabeledFormSelect';
 import LabeledRegisterInput from 'src/components/LabeledRegisterInput';
 import { Button } from 'src/components/ui/button';
 import { Form, FormField } from 'src/components/ui/form';
+import { buildSelectOptions } from 'src/lib/helpers/buildSelectOptions';
 import { jobStatusItems, jobTypeItems } from 'src/schema/Job';
 import useAddJob from './useAddJob';
-import { buildSelectOptions } from 'src/lib/helpers/buildSelectOptions';
 
 const AddJobForm = () => {
   const {
@@ -73,8 +72,8 @@ const AddJobForm = () => {
           />
         </Form>
 
-        <Button disabled={isAddingJob} className="mt-6">
-          {isAddingJob ? <Loader2 className="animate-spin" /> : 'Add Job'}
+        <Button disabled={isAddingJob} isLoading={isAddingJob} className="mt-6">
+          Add Job
         </Button>
       </div>
     </form>

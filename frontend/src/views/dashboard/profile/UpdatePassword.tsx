@@ -27,23 +27,25 @@ const UpdatePassword = () => {
 
   const { toast } = useToast();
 
-  const { mutate: changePassword } = useMutation({
-    mutationFn: userAPI.changePassword,
-    onSuccess: () => {
-      toast({
-        title: 'Password changed successfully',
-        variant: 'success',
-      });
-      resetChangePasswordForm();
+  const { mutate: changePassword, isLoading: isChangingPassword } = useMutation(
+    {
+      mutationFn: userAPI.changePassword,
+      onSuccess: () => {
+        toast({
+          title: 'Password changed successfully',
+          variant: 'success',
+        });
+        resetChangePasswordForm();
+      },
+      onError: (error: CustomAxiosError) => {
+        console.log(error);
+        toast({
+          title: errorMessage(error, 'Could not change password'),
+          variant: 'destructive',
+        });
+      },
     },
-    onError: (error: CustomAxiosError) => {
-      console.log(error);
-      toast({
-        title: errorMessage(error, 'Could not change password'),
-        variant: 'destructive',
-      });
-    },
-  });
+  );
 
   const onChangePasswordSubmit = (formData: ChangePasswordSchema) => {
     changePassword(formData);
@@ -72,7 +74,13 @@ const UpdatePassword = () => {
             name="newPassword"
             type="password"
           />
-          <Button className="mt-3">Change Password</Button>
+          <Button
+            disabled={isChangingPassword}
+            isLoading={isChangingPassword}
+            className="mt-3"
+          >
+            Change Password
+          </Button>
         </div>
       </form>
     </ContentWrapper>
