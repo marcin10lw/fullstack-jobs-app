@@ -28,7 +28,6 @@ const DashboardLayout = () => {
               <DesktopSidebar userRole={userResponse.user.role} />
               <div>
                 <Navbar user={userResponse.user} />
-
                 <ScrollArea className="h-[calc(100vh-96px)]">
                   <MaxWidthWrapper className="h-full px-4 py-8 md:px-8">
                     <Outlet

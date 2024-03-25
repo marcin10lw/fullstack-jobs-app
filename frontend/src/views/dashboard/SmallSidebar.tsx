@@ -13,6 +13,8 @@ type MobileSidebarProps = {
 const MobileSidebar = ({ userRole }: MobileSidebarProps) => {
   const [smallSidebarOpen, setSmallSidebarOpen] = useState(false);
 
+  const closeSmallSidebar = () => setSmallSidebarOpen(false);
+
   return (
     <>
       <button
@@ -44,7 +46,7 @@ const MobileSidebar = ({ userRole }: MobileSidebarProps) => {
             <header>
               <Logo />
             </header>
-            <NavLinks userRole={userRole} />
+            <NavLinks userRole={userRole} onClick={closeSmallSidebar} />
           </div>
         </div>
       </aside>

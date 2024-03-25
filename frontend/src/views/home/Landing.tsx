@@ -8,12 +8,12 @@ import { ROUTES } from 'src/routes';
 const Landing = () => {
   return (
     <section className="relative">
-      <nav className="h-20 px-10">
+      <nav className="px-10 pt-8">
         <div className="mx-auto flex h-full max-w-screen-xl items-center">
           <Logo />
         </div>
       </nav>
-      <article className="px-12">
+      <article className="px-12 md:-mt-7">
         <div className="mx-auto grid min-h-[calc(100vh-80px)] max-w-screen-xl items-center lg:grid-cols-[1fr,_480px] lg:gap-[0_3rem]">
           <div>
             <h1 className="mb-6 text-3xl font-bold md:text-5xl">

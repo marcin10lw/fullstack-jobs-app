@@ -1,23 +1,19 @@
 import { NavLink } from 'react-router-dom';
 
-import useDashboardContext from 'src/views/dashboard/useDashboardContext';
+import { UserRole } from 'src/infrasctucture/user/types';
 import { links } from 'src/lib/helpers/links';
 import { cn } from 'src/lib/utils';
-import { UserRole } from 'src/infrasctucture/user/types';
 import { ROUTES } from 'src/routes';
 
 type NavLinksProps = {
-  isBigSidebar?: boolean;
   userRole: UserRole;
+  onClick?: () => void;
+  isBigSidebar?: boolean;
 };
 
-const NavLinks = ({ isBigSidebar, userRole }: NavLinksProps) => {
-  const { toggleSidebar } = useDashboardContext();
-
+const NavLinks = ({ isBigSidebar, userRole, onClick }: NavLinksProps) => {
   const onNavLinkClick = () => {
-    if (!isBigSidebar) {
-      toggleSidebar();
-    }
+    onClick && onClick();
   };
 
   return (
@@ -44,7 +40,6 @@ const NavLinks = ({ isBigSidebar, userRole }: NavLinksProps) => {
             }
             onClick={onNavLinkClick}
             key={id}
-            end
           >
             <div className="flex items-center text-primary [transition:padding_150ms_ease-in-out] group-hover:pl-2">
               <span className="mr-4 grid place-items-center text-2xl">
