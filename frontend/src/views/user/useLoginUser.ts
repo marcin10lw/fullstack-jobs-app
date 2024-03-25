@@ -25,7 +25,7 @@ const useLoginUser = () => {
   const { mutate: loginUser, status } = useMutation({
     mutationFn: userAPI.loginUser,
     onSuccess: () => {
-      navigate(ROUTES.dashboard);
+      navigate(ROUTES.allJobs);
     },
     onError: (error: CustomAxiosError) => {
       toast({

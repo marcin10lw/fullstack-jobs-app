@@ -43,7 +43,7 @@ const router = createBrowserRouter([
     errorElement: <Error />,
     children: [
       {
-        index: true,
+        path: ROUTES.addJob,
         element: <AddJob />,
       },
       {
