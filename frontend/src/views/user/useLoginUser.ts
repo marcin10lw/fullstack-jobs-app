@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useToast } from 'src/components/ui/use-toast';
 import { userAPI } from 'src/infrasctucture/user/userApiAdapter';
 
-import { LoginFormData, loginFormData } from 'src/models/Login';
+import { LoginFormDataSchema, loginFormDataSchema } from 'src/models/Login';
 import { ROUTES } from 'src/routes';
 import { CustomAxiosError } from 'src/types';
 
@@ -18,8 +18,8 @@ const useLoginUser = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginFormData>({
-    resolver: zodResolver(loginFormData),
+  } = useForm<LoginFormDataSchema>({
+    resolver: zodResolver(loginFormDataSchema),
   });
 
   const { mutate: loginUser, status } = useMutation({
@@ -36,7 +36,7 @@ const useLoginUser = () => {
     },
   });
 
-  const onFormSubmit = (formData: LoginFormData) => {
+  const onFormSubmit = (formData: LoginFormDataSchema) => {
     loginUser(formData, {
       onSuccess: () => {
         toast({

@@ -1,14 +1,14 @@
-import { LoginFormData } from 'src/models/Login';
-import { RegisterFormData } from 'src/models/Register';
+import { LoginFormDataSchema } from 'src/models/Login';
+import { RegisterFormDataSchema } from 'src/models/Register';
 import { UserApiResponse } from './types';
 import { USER_API_URLS } from './userApiUrls';
 import { restApi } from '../restApi';
 
 export const userAPI = {
-  loginUser: (formData: LoginFormData) =>
+  loginUser: (formData: LoginFormDataSchema) =>
     restApi.private.post(USER_API_URLS.loginUser, formData),
 
-  registerUser: (formData: RegisterFormData) =>
+  registerUser: (formData: RegisterFormDataSchema) =>
     restApi.private.post(USER_API_URLS.registerUser, formData),
 
   getCurrentUser: async (): Promise<UserApiResponse> => {

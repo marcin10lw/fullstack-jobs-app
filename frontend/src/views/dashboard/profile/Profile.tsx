@@ -1,4 +1,4 @@
-import { Controller, useForm } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 
 import { Loader2 } from 'lucide-react';
 import ContentWrapper from 'src/components/ContentWrapper';
@@ -7,8 +7,7 @@ import { Button } from 'src/components/ui/button';
 import { useUser } from '../DashboardLayout';
 import ProfilePicture from './ProfilePicture';
 import { useUpdateUser } from './useUpdateUser';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { UpdatePassword, updatePasswordSchema } from 'src/models/User';
+import UpdatePassword from './UpdatePassword';
 
 const Profile = () => {
   const { user } = useUser();
@@ -21,20 +20,6 @@ const Profile = () => {
     onFormSubmit,
     hasAnyFieldChanged,
   } = useUpdateUser();
-
-  const {
-    register: registerChangePassword,
-    formState: { errors: changePasswordErrors },
-    handleSubmit: handleSubmitNewPassword,
-  } = useForm<UpdatePassword>({
-    defaultValues: {
-      currentPassword: '',
-      newPassword: '',
-    },
-    resolver: zodResolver(updatePasswordSchema),
-  });
-
-  const onChangePasswordSubmit = () => {};
 
   return (
     <div className="flex flex-col gap-8">
@@ -108,32 +93,8 @@ const Profile = () => {
           </div>
         </form>
       </ContentWrapper>
-      <ContentWrapper title="Change password">
-        <form
-          onSubmit={handleSubmitNewPassword(onChangePasswordSubmit)}
-          noValidate
-        >
-          <div className="flex flex-col gap-4 md:max-w-[300px]">
-            <LabeledRegisterInput
-              register={registerChangePassword('currentPassword')}
-              error={changePasswordErrors.currentPassword}
-              withPasswordToggle
-              label="current password"
-              name="currentPassword"
-              type="password"
-            />
-            <LabeledRegisterInput
-              register={registerChangePassword('newPassword')}
-              error={changePasswordErrors.newPassword}
-              withPasswordToggle
-              label="new password"
-              name="newPassword"
-              type="password"
-            />
-            <Button className="mt-3">Change Password</Button>
-          </div>
-        </form>
-      </ContentWrapper>
+      <UpdatePassword />
+
     </div>
   );
 };

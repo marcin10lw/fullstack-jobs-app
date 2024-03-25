@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useToast } from 'src/components/ui/use-toast';
 
 import { userAPI } from 'src/infrasctucture/user/userApiAdapter';
-import { RegisterFormData, registerFormData } from 'src/models/Register';
+import { RegisterFormDataSchema, registerFormDataSchema } from 'src/models/Register';
 import { ROUTES } from 'src/routes';
 
 export const useRegisterUser = () => {
@@ -18,8 +18,8 @@ export const useRegisterUser = () => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<RegisterFormData>({
-    resolver: zodResolver(registerFormData),
+  } = useForm<RegisterFormDataSchema>({
+    resolver: zodResolver(registerFormDataSchema),
   });
 
   const { mutate: registerUser, status } = useMutation({
@@ -44,7 +44,7 @@ export const useRegisterUser = () => {
     },
   });
 
-  const onRegisterUser = (formData: RegisterFormData) => {
+  const onRegisterUser = (formData: RegisterFormDataSchema) => {
     registerUser(formData);
   };
 

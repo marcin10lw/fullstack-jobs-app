@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const registerFormData = z.object({
+export const registerFormDataSchema = z.object({
   name: z
     .string()
     .trim()
@@ -19,4 +19,4 @@ export const registerFormData = z.object({
     .min(6, { message: "Password must be 6 or more characters" }),
 });
 
-export type RegisterFormData = z.infer<typeof registerFormData>;
+export type RegisterFormDataSchema = z.infer<typeof registerFormDataSchema>;
