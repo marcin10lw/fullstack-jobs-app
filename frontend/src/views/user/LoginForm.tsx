@@ -1,17 +1,12 @@
-import { Eye, EyeOff, Loader2 } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import LabeledRegisterInput from 'src/components/LabeledRegisterInput';
 import { Button } from 'src/components/ui/button';
-import { Input } from 'src/components/ui/input';
-import { Label } from 'src/components/ui/label';
 import { ROUTES } from 'src/routes';
 import useLoginUser from './useLoginUser';
-import { useState } from 'react';
 
 const LoginForm = () => {
-  const [showPassword, setShowPassword] = useState(false);
-
   const { status, errors, handleSubmit, onFormSubmit, register, onLoginDemo } =
     useLoginUser();
 
@@ -26,36 +21,14 @@ const LoginForm = () => {
           type="email"
         />
 
-        <div>
-          <Label htmlFor="password" className="capitalize">
-            password
-          </Label>
-
-          <div className="relative">
-            <Input
-              {...register('password')}
-              id="password"
-              type={showPassword ? 'text' : 'password'}
-            />
-            <Button
-              onClick={() => setShowPassword((prev) => !prev)}
-              type="button"
-              className="absolute right-0 top-1/2 -translate-y-1/2"
-              variant="link"
-            >
-              {showPassword ? (
-                <Eye className="h-5 w-5" />
-              ) : (
-                <EyeOff className="h-5 w-5" />
-              )}
-            </Button>
-          </div>
-          {errors.password?.message && (
-            <p className="mt-1 text-xs font-medium capitalize text-destructive">
-              {errors.password.message}
-            </p>
-          )}
-        </div>
+        <LabeledRegisterInput
+          register={register('password')}
+          label="password"
+          name="password"
+          error={errors.password}
+          type="password"
+          withPasswordToggle
+        />
       </div>
 
       <Button
