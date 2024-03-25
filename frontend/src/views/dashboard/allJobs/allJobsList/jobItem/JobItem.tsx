@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 import advancedFormat from 'dayjs/plugin/advancedFormat';
 
 import { cn } from 'src/lib/utils';
-import { Job as JobType } from 'src/models/Job';
+import { Job as JobType } from 'src/schema/Job';
 import JobItemFooter from './JobItemFooter';
 import { ROUTES } from 'src/routes';
 

@@ -10,7 +10,7 @@ import {
 import { jobAPI } from 'src/infrasctucture/job/jobApiAdapter';
 import { checkHasAnyFieldChanged } from 'src/lib/helpers/checkHasAnyFieldChanged';
 import errorMessage from 'src/lib/helpers/errorMessage';
-import { InferJob, Job, jobSchema } from 'src/models/Job';
+import { InferJob, Job, jobSchema } from 'src/schema/Job';
 import { CustomAxiosError } from 'src/types';
 
 interface Props {

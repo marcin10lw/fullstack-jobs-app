@@ -6,7 +6,7 @@ import { Button } from 'src/components/ui/button';
 import { Input } from 'src/components/ui/input';
 import { Label } from 'src/components/ui/label';
 import { queryParams } from 'src/hooks/useQueryParameter';
-import { jobStatusItems, jobTypeItems } from 'src/models/Job';
+import { jobStatusItems, jobTypeItems } from 'src/schema/Job';
 import { searchParamsDefaultValues } from './constants';
 import { buildSelectOptions } from 'src/lib/helpers/buildSelectOptions';
 

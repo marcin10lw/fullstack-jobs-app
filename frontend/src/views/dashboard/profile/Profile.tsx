@@ -94,7 +94,6 @@ const Profile = () => {
         </form>
       </ContentWrapper>
       <UpdatePassword />
-
     </div>
   );
 };

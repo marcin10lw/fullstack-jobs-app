@@ -1,4 +1,4 @@
-import { Job } from 'src/models/Job';
+import { Job } from 'src/schema/Job';
 import JobItem from './jobItem/JobItem';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 

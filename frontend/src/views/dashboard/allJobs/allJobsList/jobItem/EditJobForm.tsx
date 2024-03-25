@@ -5,7 +5,7 @@ import LabeledRegisterInput from 'src/components/LabeledRegisterInput';
 import MaxWidthWrapper from 'src/components/MaxWidthWrapper';
 import { Button } from 'src/components/ui/button';
 import { Form, FormField } from 'src/components/ui/form';
-import { Job as JobType, jobStatusItems, jobTypeItems } from 'src/models/Job';
+import { Job as JobType, jobStatusItems, jobTypeItems } from 'src/schema/Job';
 import { useUpdateJob } from './useUpdateJob';
 import { buildSelectOptions } from 'src/lib/helpers/buildSelectOptions';
 

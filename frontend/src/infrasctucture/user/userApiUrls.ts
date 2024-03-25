@@ -6,4 +6,5 @@ export const USER_API_URLS = {
   getAllUsersStats: '/users/admin/app-stats',
   updateUser: '/users/update-user',
   removeUserAvatar: '/users/remove-avatar',
+  changePassword: '/users/change-password',
 };

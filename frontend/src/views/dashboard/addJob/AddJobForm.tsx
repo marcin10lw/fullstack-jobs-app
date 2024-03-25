@@ -3,7 +3,7 @@ import LabeledFormSelect from 'src/components/LabeledFormSelect';
 import LabeledRegisterInput from 'src/components/LabeledRegisterInput';
 import { Button } from 'src/components/ui/button';
 import { Form, FormField } from 'src/components/ui/form';
-import { jobStatusItems, jobTypeItems } from 'src/models/Job';
+import { jobStatusItems, jobTypeItems } from 'src/schema/Job';
 import useAddJob from './useAddJob';
 import { buildSelectOptions } from 'src/lib/helpers/buildSelectOptions';
 

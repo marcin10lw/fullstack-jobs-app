@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useToast } from 'src/components/ui/use-toast';
 import { userAPI } from 'src/infrasctucture/user/userApiAdapter';
 
-import { LoginFormDataSchema, loginFormDataSchema } from 'src/models/Login';
+import { LoginFormDataSchema, loginFormDataSchema } from 'src/schema/Login';
 import { ROUTES } from 'src/routes';
 import { CustomAxiosError } from 'src/types';
 

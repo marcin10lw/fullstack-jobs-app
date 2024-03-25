@@ -38,7 +38,7 @@ export const updateUserSchema = z.object({
     .nullable(),
 });
 
-export const updatePasswordSchema = z.object({
+export const changePasswordSchema = z.object({
   currentPassword: z
     .string()
     .trim()
@@ -54,4 +54,4 @@ export const updatePasswordSchema = z.object({
 });
 
 export type UpdatedUserSchema = z.infer<typeof updateUserSchema>;
-export type UpdatePasswordSchema = z.infer<typeof updatePasswordSchema>;
+export type ChangePasswordSchema = z.infer<typeof changePasswordSchema>;

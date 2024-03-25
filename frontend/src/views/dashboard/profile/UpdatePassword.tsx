@@ -4,22 +4,50 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import ContentWrapper from 'src/components/ContentWrapper';
 import LabeledRegisterInput from 'src/components/LabeledRegisterInput';
 import { Button } from 'src/components/ui/button';
-import { UpdatePasswordSchema, updatePasswordSchema } from 'src/models/User';
+import { ChangePasswordSchema, changePasswordSchema } from 'src/schema/User';
+import { useMutation } from '@tanstack/react-query';
+import { userAPI } from 'src/infrasctucture/user/userApiAdapter';
+import { useToast } from 'src/components/ui/use-toast';
+import errorMessage from 'src/lib/helpers/errorMessage';
+import { CustomAxiosError } from 'src/types';
 
 const UpdatePassword = () => {
   const {
     register: registerChangePassword,
     formState: { errors: changePasswordErrors },
     handleSubmit: handleSubmitNewPassword,
-  } = useForm<UpdatePasswordSchema>({
+    reset: resetChangePasswordForm,
+  } = useForm<ChangePasswordSchema>({
     defaultValues: {
       currentPassword: '',
       newPassword: '',
     },
-    resolver: zodResolver(updatePasswordSchema),
+    resolver: zodResolver(changePasswordSchema),
   });
 
-  const onChangePasswordSubmit = () => {};
+  const { toast } = useToast();
+
+  const { mutate: changePassword } = useMutation({
+    mutationFn: userAPI.changePassword,
+    onSuccess: () => {
+      toast({
+        title: 'Password changed successfully',
+        variant: 'success',
+      });
+      resetChangePasswordForm();
+    },
+    onError: (error: CustomAxiosError) => {
+      console.log(error);
+      toast({
+        title: errorMessage(error, 'Could not change password'),
+        variant: 'destructive',
+      });
+    },
+  });
+
+  const onChangePasswordSubmit = (formData: ChangePasswordSchema) => {
+    changePassword(formData);
+  };
 
   return (
     <ContentWrapper title="Change password">

@@ -1,4 +1,4 @@
-import { InferJob, Job } from 'src/models/Job';
+import { InferJob, Job } from 'src/schema/Job';
 import { JOB_API_URLS } from './jobApiUrls';
 import { ApiJobsResponse, ApiStatsResponse } from './types';
 import { restApi } from '../restApi';

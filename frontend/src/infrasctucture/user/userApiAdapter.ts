@@ -1,8 +1,9 @@
-import { LoginFormDataSchema } from 'src/models/Login';
-import { RegisterFormDataSchema } from 'src/models/Register';
+import { LoginFormDataSchema } from 'src/schema/Login';
+import { RegisterFormDataSchema } from 'src/schema/Register';
 import { UserApiResponse } from './types';
 import { USER_API_URLS } from './userApiUrls';
 import { restApi } from '../restApi';
+import { ChangePasswordSchema } from 'src/schema/User';
 
 export const userAPI = {
   loginUser: (formData: LoginFormDataSchema) =>
@@ -23,8 +24,12 @@ export const userAPI = {
     return data;
   },
 
-  updateUser: (formData: FormData) =>
-    restApi.private.patch(USER_API_URLS.updateUser, formData),
+  updateUser: (updateUserFormData: FormData) =>
+    restApi.private.patch(USER_API_URLS.updateUser, updateUserFormData),
 
-  removeUserAvatar: () => restApi.private.delete(USER_API_URLS.removeUserAvatar),
+  removeUserAvatar: () =>
+    restApi.private.delete(USER_API_URLS.removeUserAvatar),
+
+  changePassword: (changePasswordFormData: ChangePasswordSchema) =>
+    restApi.private.post(USER_API_URLS.changePassword, changePasswordFormData),
 };

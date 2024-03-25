@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { userAPI } from 'src/infrasctucture/user/userApiAdapter';
 import { checkHasAnyFieldChanged } from 'src/lib/helpers/checkHasAnyFieldChanged';
 import errorMessage from 'src/lib/helpers/errorMessage';
-import { UpdatedUserSchema, updateUserSchema } from 'src/models/User';
+import { UpdatedUserSchema, updateUserSchema } from 'src/schema/User';
 import { CustomAxiosError } from 'src/types';
 import { useUser } from '../DashboardLayout';
 import { CURRENT_USER_QUERY_KEY } from 'src/infrasctucture/user/constants';

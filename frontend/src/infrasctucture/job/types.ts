@@ -1,4 +1,4 @@
-import { Job } from 'src/models/Job';
+import { Job } from 'src/schema/Job';
 
 export type ApiJobsResponse = {
   jobs: Job[];

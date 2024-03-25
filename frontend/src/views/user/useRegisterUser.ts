@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useToast } from 'src/components/ui/use-toast';
 
 import { userAPI } from 'src/infrasctucture/user/userApiAdapter';
-import { RegisterFormDataSchema, registerFormDataSchema } from 'src/models/Register';
+import { RegisterFormDataSchema, registerFormDataSchema } from 'src/schema/Register';
 import { ROUTES } from 'src/routes';
 
 export const useRegisterUser = () => {
