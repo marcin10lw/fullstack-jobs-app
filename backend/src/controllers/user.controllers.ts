@@ -2,6 +2,7 @@ import { Request } from "express";
 import { StatusCodes } from "http-status-codes";
 import cloudinary from "cloudinary";
 import { promises as fs } from "fs";
+import bcryptjs from "bcryptjs";
 
 import { PAYLOAD_USER_NAME } from "../constants";
 import {
@@ -13,7 +14,7 @@ import {
 import { AccessTokenPayloadUser } from "../types";
 import AppError from "../utils/appError";
 import { asyncWrapper } from "../utils/asyncWrapper";
-import { UpdateUserInput } from "../schemas/user.schema";
+import { ChangePasswordInput, UpdateUserInput } from "../schemas/user.schema";
 
 export const getCurrentUserController = asyncWrapper(async (req, res) => {
   const payloadUser = res.locals[PAYLOAD_USER_NAME] as AccessTokenPayloadUser;
@@ -97,3 +98,32 @@ export const removeUserAvatarController = asyncWrapper(async (req, res) => {
 
   res.status(StatusCodes.OK).json({ msg: "avatar removed" });
 });
+
+export const changePasswordController = asyncWrapper(
+  async (req: Request<{}, {}, ChangePasswordInput>, res) => {
+    const { userId } = res.locals[PAYLOAD_USER_NAME] as AccessTokenPayloadUser;
+    const { currentPassword, newPassword } = req.body;
+
+    const user = await getCurrentUserById(userId);
+
+    const passwordsMatch = await bcryptjs.compare(
+      currentPassword,
+      user!.password
+    );
+
+    if (!passwordsMatch) {
+      throw new AppError("invalid credentials", StatusCodes.BAD_REQUEST);
+    }
+
+    const newPasswordHashed = bcryptjs.hashSync(newPassword, 12);
+
+    await updateUser(
+      {
+        password: newPasswordHashed,
+      },
+      userId
+    );
+
+    res.status(StatusCodes.OK).json({ msg: "password changed" });
+  }
+);

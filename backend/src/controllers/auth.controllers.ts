@@ -1,7 +1,6 @@
 import { CookieOptions, Request } from "express";
 import bcryptjs from "bcryptjs";
 import { v4 as uuidv4 } from "uuid";
-import jwt from "jsonwebtoken";
 
 import { CreateUserInput, LoginUserInput } from "../schemas/user.schema";
 import { prisma } from "../db/prisma";

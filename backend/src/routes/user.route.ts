@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  changePasswordController,
   getAppStatsController,
   getCurrentUserController,
   removeUserAvatarController,
@@ -7,7 +8,7 @@ import {
 } from "../controllers/user.controllers";
 import { restrictTo } from "../middleware/restrictTo";
 import { validate } from "../middleware/validate";
-import { updateUserSchema } from "../schemas/user.schema";
+import { changePasswordSchema, updateUserSchema } from "../schemas/user.schema";
 import upload from "../middleware/multer";
 
 const router = Router();
@@ -20,5 +21,10 @@ router.patch(
   updateUserController
 );
 router.delete("/remove-avatar", removeUserAvatarController);
+router.post(
+  "/change-password",
+  validate(changePasswordSchema),
+  changePasswordController
+);
 
 export default router;
