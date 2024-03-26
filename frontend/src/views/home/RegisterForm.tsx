@@ -43,6 +43,7 @@ const RegisterForm = () => {
           name="password"
           error={errors.password}
           type="password"
+          withPasswordToggle
         />
       </div>
 
