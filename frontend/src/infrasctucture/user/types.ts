@@ -7,9 +7,10 @@ export interface User {
   email: string;
   location: string;
   role: UserRole;
-  _id: string;
+  id: string;
   avatar?: string;
   avatarPublicId?: string;
+  verified: boolean;
 }
 
 export interface UserApiResponse {

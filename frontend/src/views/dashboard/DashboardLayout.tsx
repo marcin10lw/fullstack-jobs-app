@@ -8,6 +8,7 @@ import { ROUTES } from 'src/routes';
 import DashboardProvider from 'src/views/dashboard/DashboardContext';
 import DesktopSidebar from './BigSidebar';
 import Navbar from './Navbar';
+import VerifyEmail from './VerifyEmail';
 
 type ContextType = { user: User };
 
@@ -21,27 +22,30 @@ const DashboardLayout = () => {
   return (
     <>
       {isError && <Navigate to={ROUTES.login} />}
-      {isSuccess && (
-        <DashboardProvider>
-          <section>
-            <main className="grid grid-cols-1 lg:grid-cols-[auto_1fr]">
-              <DesktopSidebar userRole={userResponse.user.role} />
-              <div>
-                <Navbar user={userResponse.user} />
-                <ScrollArea className="h-[calc(100vh-96px)]">
-                  <MaxWidthWrapper className="h-full px-4 py-8 md:px-8">
-                    <Outlet
-                      context={
-                        { user: userResponse.user } satisfies ContextType
-                      }
-                    />
-                  </MaxWidthWrapper>
-                </ScrollArea>
-              </div>
-            </main>
-          </section>
-        </DashboardProvider>
-      )}
+      {isSuccess &&
+        (userResponse.user.verified ? (
+          <DashboardProvider>
+            <section>
+              <main className="grid grid-cols-1 lg:grid-cols-[auto_1fr]">
+                <DesktopSidebar userRole={userResponse.user.role} />
+                <div>
+                  <Navbar user={userResponse.user} />
+                  <ScrollArea className="h-[calc(100vh-96px)]">
+                    <MaxWidthWrapper className="h-full px-4 py-8 md:px-8">
+                      <Outlet
+                        context={
+                          { user: userResponse.user } satisfies ContextType
+                        }
+                      />
+                    </MaxWidthWrapper>
+                  </ScrollArea>
+                </div>
+              </main>
+            </section>
+          </DashboardProvider>
+        ) : (
+          <VerifyEmail />
+        ))}
     </>
   );
 };
