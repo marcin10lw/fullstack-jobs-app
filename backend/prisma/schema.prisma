@@ -25,6 +25,7 @@ model User {
   avatar         String?
   avatarPublicId String?
   refreshTokens  RefreshToken[]
+  verified       Boolean        @default(false)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
