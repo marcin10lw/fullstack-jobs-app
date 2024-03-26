@@ -1,13 +1,10 @@
 import { User } from "@prisma/client";
 import { prisma } from "../db/prisma";
 import bcrypt from "bcryptjs";
-import {
-  getVerificationCode,
-  getVerificationCodeExpirationDate,
-} from "../utils/verificationCode";
+import { getVerificationCodeData } from "../utils/verificationCode";
 import { sendEmail } from "../utils/email";
 
-const sendVerificationEmail = async (
+export const sendVerificationEmail = async (
   email: User["email"],
   verificationCode: string
 ) => {
@@ -26,8 +23,8 @@ type UserCreate = Pick<
 
 export const createUser = async (user: UserCreate) => {
   user.password = bcrypt.hashSync(user.password, 12);
-  const verificationCode = getVerificationCode();
-  const verificationCodeExpiresAt = getVerificationCodeExpirationDate();
+  const { verificationCode, verificationCodeExpiresAt } =
+    getVerificationCodeData();
 
   await sendVerificationEmail(user.email, verificationCode);
 

@@ -4,7 +4,7 @@ export const verifyEmailSchema = z.object({
   body: z.object({
     verificationCode: z
       .string()
-      .length(6, { message: "invalid verification code" }),
+      .length(6, { message: "Invalid verification code" }),
   }),
 });
 

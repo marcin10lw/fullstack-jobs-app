@@ -6,6 +6,7 @@ import {
   logoutController,
   refreshTokenController,
   registerController,
+  sendVerificationCodeController,
   verifyEmailController,
 } from "../controllers/auth.controllers";
 import { verifyEmailSchema } from "../schemas/auth.schema";
@@ -22,6 +23,11 @@ router.post(
   authMiddleware,
   validate(verifyEmailSchema),
   verifyEmailController
+);
+router.post(
+  "/send-verification-code",
+  authMiddleware,
+  sendVerificationCodeController
 );
 
 export default router;

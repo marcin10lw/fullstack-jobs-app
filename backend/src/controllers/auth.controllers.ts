@@ -19,6 +19,7 @@ import {
   createUser,
   getCurrentUserByEmail,
   getCurrentUserById,
+  sendVerificationEmail,
   updateUser,
 } from "../services/user.service";
 import AppError from "../utils/appError";
@@ -27,6 +28,7 @@ import { hashToken } from "../utils/hashToken";
 import { generateTokens, verifyRefreshToken } from "../utils/jwt";
 import { VerifyEmailInput } from "../schemas/auth.schema";
 import { AccessTokenPayloadUser } from "../types";
+import { getVerificationCodeData } from "../utils/verificationCode";
 
 const accessTokenCookieOptions: CookieOptions = {
   expires: new Date(Date.now() + 15 * 60 * 1000),
@@ -178,13 +180,15 @@ export const verifyEmailController = asyncWrapper(
 
     if (!user) throw new AppError("Unauthorized", StatusCodes.UNAUTHORIZED);
 
-    if (
-      user.verified ||
-      !user.verificationCode ||
-      !user.verificationCodeExpiresAt
-    ) {
+    if (user.verified) {
       throw new AppError("Email already verified", StatusCodes.BAD_REQUEST);
     }
+
+    if (!user.verificationCode || !user.verificationCodeExpiresAt)
+      throw new AppError(
+        "Verification code does not exist",
+        StatusCodes.BAD_REQUEST
+      );
 
     if (user.verificationCodeExpiresAt < new Date()) {
       await updateUser(
@@ -216,3 +220,26 @@ export const verifyEmailController = asyncWrapper(
     res.status(StatusCodes.OK).json({ msg: "Email verified successfully" });
   }
 );
+
+export const sendVerificationCodeController = asyncWrapper(async (req, res) => {
+  const { userId } = res.locals[PAYLOAD_USER_NAME] as AccessTokenPayloadUser;
+
+  const user = await getCurrentUserById(userId);
+
+  if (!user) throw new AppError("Unauthorized", StatusCodes.UNAUTHORIZED);
+
+  const { verificationCode, verificationCodeExpiresAt } =
+    getVerificationCodeData();
+
+  await updateUser(
+    {
+      verificationCode,
+      verificationCodeExpiresAt,
+    },
+    userId
+  );
+
+  await sendVerificationEmail(user.email, verificationCode);
+
+  res.status(StatusCodes.OK).json({ msg: "Verification code sent" });
+});
