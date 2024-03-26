@@ -25,7 +25,12 @@ export const getCurrentUserController = asyncWrapper(async (req, res) => {
     throw new AppError("user not found", StatusCodes.NOT_FOUND);
   }
 
-  const { password, ...userWithoutPassword } = user;
+  const {
+    password,
+    verificationCode,
+    verificationCodeExpiresAt,
+    ...userWithoutPassword
+  } = user;
 
   res.status(StatusCodes.OK).json({ user: userWithoutPassword });
 });

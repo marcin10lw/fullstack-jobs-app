@@ -1,7 +1,23 @@
 import { User } from "@prisma/client";
 import { prisma } from "../db/prisma";
-import { prismaExclude } from "../utils/exclude";
 import bcrypt from "bcryptjs";
+import {
+  getVerificationCode,
+  getVerificationCodeExpirationDate,
+} from "../utils/verificationCode";
+import { sendEmail } from "../utils/email";
+
+const sendVerificationEmail = async (
+  email: User["email"],
+  verificationCode: string
+) => {
+  await sendEmail({
+    to: email,
+    subject: "Verify email",
+    text: "Verify email bruh",
+    html: `Your verification code: <b>${verificationCode}</b>`,
+  });
+};
 
 type UserCreate = Pick<
   User,
@@ -10,9 +26,17 @@ type UserCreate = Pick<
 
 export const createUser = async (user: UserCreate) => {
   user.password = bcrypt.hashSync(user.password, 12);
+  const verificationCode = getVerificationCode();
+  const verificationCodeExpiresAt = getVerificationCodeExpirationDate();
+
+  await sendVerificationEmail(user.email, verificationCode);
 
   const newUser = await prisma.user.create({
-    data: user,
+    data: {
+      ...user,
+      verificationCode,
+      verificationCodeExpiresAt,
+    },
   });
 
   return newUser;

@@ -1,28 +1,32 @@
-import { CookieOptions, Request } from "express";
 import bcryptjs from "bcryptjs";
+import { CookieOptions, Request } from "express";
 import { v4 as uuidv4 } from "uuid";
 
-import { CreateUserInput, LoginUserInput } from "../schemas/user.schema";
-import { prisma } from "../db/prisma";
-import { asyncWrapper } from "../utils/asyncWrapper";
-import {
-  createUser,
-  getCurrentUserByEmail,
-  getCurrentUserById,
-} from "../services/user.service";
 import { StatusCodes } from "http-status-codes";
-import { verifyRefreshToken, generateTokens } from "../utils/jwt";
-import AppError from "../utils/appError";
+import {
+  ACCESS_TOKEN_COOKIE_NAME,
+  PAYLOAD_USER_NAME,
+  REFRESH_TOKEN_COOKIE_NAME,
+} from "../constants";
+import { prisma } from "../db/prisma";
+import { CreateUserInput, LoginUserInput } from "../schemas/user.schema";
 import {
   addRefreshTokenToWhitelist,
   deleteRefreshToken,
   findRefreshTokenById,
 } from "../services/auth.service";
 import {
-  ACCESS_TOKEN_COOKIE_NAME,
-  REFRESH_TOKEN_COOKIE_NAME,
-} from "../constants";
+  createUser,
+  getCurrentUserByEmail,
+  getCurrentUserById,
+  updateUser,
+} from "../services/user.service";
+import AppError from "../utils/appError";
+import { asyncWrapper } from "../utils/asyncWrapper";
 import { hashToken } from "../utils/hashToken";
+import { generateTokens, verifyRefreshToken } from "../utils/jwt";
+import { VerifyEmailInput } from "../schemas/auth.schema";
+import { AccessTokenPayloadUser } from "../types";
 
 const accessTokenCookieOptions: CookieOptions = {
   expires: new Date(Date.now() + 15 * 60 * 1000),
@@ -48,10 +52,7 @@ export const registerController = asyncWrapper(
     const existingUser = await getCurrentUserByEmail(req.body.email);
 
     if (!!existingUser) {
-      throw new AppError(
-        "user with this email already exist",
-        StatusCodes.BAD_REQUEST
-      );
+      throw new AppError("Email already in use", StatusCodes.BAD_REQUEST);
     }
 
     const isFirstUser = (await prisma.user.count()) === 0;
@@ -167,3 +168,51 @@ export const logoutController = asyncWrapper(async (req, res) => {
 
   res.status(StatusCodes.OK).json({ msg: "user logged out" });
 });
+
+export const verifyEmailController = asyncWrapper(
+  async (req: Request<{}, {}, VerifyEmailInput>, res) => {
+    const { userId } = res.locals[PAYLOAD_USER_NAME] as AccessTokenPayloadUser;
+    const { verificationCode } = req.body;
+
+    const user = await getCurrentUserById(userId);
+
+    if (!user) throw new AppError("Unauthorized", StatusCodes.UNAUTHORIZED);
+
+    if (
+      user.verified ||
+      !user.verificationCode ||
+      !user.verificationCodeExpiresAt
+    ) {
+      throw new AppError("Email already verified", StatusCodes.BAD_REQUEST);
+    }
+
+    if (user.verificationCodeExpiresAt < new Date()) {
+      await updateUser(
+        {
+          verificationCode: null,
+          verificationCodeExpiresAt: null,
+        },
+        userId
+      );
+      throw new AppError("Verification code expired", StatusCodes.BAD_REQUEST);
+    }
+
+    if (user.verificationCode !== verificationCode) {
+      throw new AppError(
+        "Incorrect verification code",
+        StatusCodes.BAD_REQUEST
+      );
+    }
+
+    await updateUser(
+      {
+        verified: true,
+        verificationCode: null,
+        verificationCodeExpiresAt: null,
+      },
+      userId
+    );
+
+    res.status(StatusCodes.OK).json({ msg: "Email verified successfully" });
+  }
+);
