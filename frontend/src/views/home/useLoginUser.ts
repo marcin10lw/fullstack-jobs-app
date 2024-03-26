@@ -37,14 +37,7 @@ const useLoginUser = () => {
   });
 
   const onFormSubmit = (formData: LoginFormDataSchema) => {
-    loginUser(formData, {
-      onSuccess: () => {
-        toast({
-          title: 'Logged in successfully',
-          variant: 'success',
-        });
-      },
-    });
+    loginUser(formData);
   };
 
   const onLoginDemo = () => {

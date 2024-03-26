@@ -5,7 +5,10 @@ import { useNavigate } from 'react-router-dom';
 import { useToast } from 'src/components/ui/use-toast';
 
 import { userAPI } from 'src/infrasctucture/user/userApiAdapter';
-import { RegisterFormDataSchema, registerFormDataSchema } from 'src/schema/Register';
+import {
+  RegisterFormDataSchema,
+  registerFormDataSchema,
+} from 'src/schema/Register';
 import { ROUTES } from 'src/routes';
 
 export const useRegisterUser = () => {
@@ -28,12 +31,10 @@ export const useRegisterUser = () => {
       reset();
       toast({
         title: 'Registered Successfully',
-        description: "You'll be redirected to login page",
+        variant: 'success',
       });
 
-      setTimeout(() => {
-        navigate(ROUTES.login);
-      }, 2500);
+      navigate(ROUTES.login);
     },
     onError: () => {
       toast({

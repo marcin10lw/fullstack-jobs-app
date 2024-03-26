@@ -1,74 +1,28 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
 import { OTPInput, SlotProps } from 'input-otp';
-import { useState } from 'react';
 
 import { Button } from 'src/components/ui/button';
-import { useToast } from 'src/components/ui/use-toast';
-import { authAPI } from 'src/infrasctucture/auth/authApiAdapter';
-import { CURRENT_USER_QUERY_KEY } from 'src/infrasctucture/user/constants';
 import { cn } from 'src/lib/utils';
+import { useVerifyEmail } from './useVerifyEmail';
+import mainBackground from 'src/assets/images/main.svg';
+import { Card } from 'src/components/ui/card';
 
 const VerifyEmail = () => {
-  const [otp, setOtp] = useState('');
-  const [showSendButton, setShowSendButton] = useState(false);
-
-  const qc = useQueryClient();
-  const { toast } = useToast();
-
-  const { mutate: verifyEmail, isLoading: isVerifyingEmail } = useMutation({
-    mutationFn: authAPI.verifyEmail,
-    onSuccess: () => {
-      setShowSendButton(false);
-      setOtp('');
-      toast({
-        title: 'Email verified successfully',
-        variant: 'success',
-      });
-      qc.invalidateQueries([CURRENT_USER_QUERY_KEY]);
-    },
-    onError: (error) => {
-      if (
-        error instanceof AxiosError &&
-        error.response?.data.msg === 'Verification code expired'
-      ) {
-        setShowSendButton(true);
-        toast({
-          title: error.response?.data.msg,
-          description: 'Send new verification code and try again',
-          variant: 'destructive',
-        });
-      }
-    },
-  });
-
-  const { mutate: sendVerificationCode, isLoading: isSendingVerificationCode } =
-    useMutation({
-      mutationFn: authAPI.sendVerificationCode,
-      onSuccess: () => {
-        setOtp('');
-        setShowSendButton(false);
-        toast({
-          title: 'New verification code was sent',
-          variant: 'success',
-        });
-      },
-      onError: () => {
-        toast({
-          title: 'Something went wrong',
-          description: 'Please try again',
-          variant: 'destructive',
-        });
-      },
-    });
-
-  const onComplete = () => {
-    verifyEmail(otp);
-  };
+  const {
+    otp,
+    setOtp,
+    isSendingVerificationCode,
+    isVerifyingEmail,
+    showSendButton,
+    onComplete,
+    sendVerificationCode,
+  } = useVerifyEmail();
 
   return (
-    <main className="flex min-h-screen w-full items-center justify-center px-5">
-      <section className="flex flex-col gap-8">
+    <main className="relative flex min-h-screen w-full items-center justify-center px-5">
+      <div className="absolute h-full w-full p-4 [filter:blur(2px)_brightness(0.7)]">
+        <img src={mainBackground} alt="" className="h-full w-full" />
+      </div>
+      <Card className="z-10 flex flex-col gap-8 border-t-4 border-t-primary p-4 shadow-2xl md:p-6">
         <header className="flex flex-col gap-2 text-center text-sm md:text-2xl">
           <p>A verification code has been sent to your email address.</p>
           <p>Please check your inbox and enter the code below.</p>
@@ -105,7 +59,7 @@ const VerifyEmail = () => {
             Send verification code
           </Button>
         )}
-      </section>
+      </Card>
     </main>
   );
 };
