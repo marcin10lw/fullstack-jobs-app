@@ -191,13 +191,6 @@ export const verifyEmailController = asyncWrapper(
       );
 
     if (user.verificationCodeExpiresAt < new Date()) {
-      await updateUser(
-        {
-          verificationCode: null,
-          verificationCodeExpiresAt: null,
-        },
-        userId
-      );
       throw new AppError("Verification code expired", StatusCodes.BAD_REQUEST);
     }
 
