@@ -4,12 +4,12 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from 'src/components/ui/use-toast';
 
-import { userAPI } from 'src/infrasctucture/user/userApiAdapter';
+import { authAPI } from 'src/infrasctucture/auth/authApiAdapter';
+import { ROUTES } from 'src/routes';
 import {
   RegisterFormDataSchema,
   registerFormDataSchema,
 } from 'src/schema/Register';
-import { ROUTES } from 'src/routes';
 
 export const useRegisterUser = () => {
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ export const useRegisterUser = () => {
   });
 
   const { mutate: registerUser, status } = useMutation({
-    mutationFn: userAPI.registerUser,
+    mutationFn: authAPI.registerUser,
     onSuccess: () => {
       reset();
       toast({

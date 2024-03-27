@@ -3,10 +3,10 @@ import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from 'src/components/ui/use-toast';
-import { userAPI } from 'src/infrasctucture/user/userApiAdapter';
 
-import { LoginFormDataSchema, loginFormDataSchema } from 'src/schema/Login';
+import { authAPI } from 'src/infrasctucture/auth/authApiAdapter';
 import { ROUTES } from 'src/routes';
+import { LoginFormDataSchema, loginFormDataSchema } from 'src/schema/Login';
 import { CustomAxiosError } from 'src/types';
 
 const useLoginUser = () => {
@@ -23,7 +23,7 @@ const useLoginUser = () => {
   });
 
   const { mutate: loginUser, status } = useMutation({
-    mutationFn: userAPI.loginUser,
+    mutationFn: authAPI.loginUser,
     onSuccess: () => {
       navigate(ROUTES.allJobs);
     },

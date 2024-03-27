@@ -1,23 +1,13 @@
-import { LoginFormDataSchema } from 'src/schema/Login';
-import { RegisterFormDataSchema } from 'src/schema/Register';
+import { ChangePasswordSchema } from 'src/schema/User';
+import { restApi } from '../restApi';
 import { UserApiResponse } from './types';
 import { USER_API_URLS } from './userApiUrls';
-import { restApi } from '../restApi';
-import { ChangePasswordSchema } from 'src/schema/User';
 
 export const userAPI = {
-  loginUser: (formData: LoginFormDataSchema) =>
-    restApi.private.post(USER_API_URLS.loginUser, formData),
-
-  registerUser: (formData: RegisterFormDataSchema) =>
-    restApi.private.post(USER_API_URLS.registerUser, formData),
-
   getCurrentUser: async (): Promise<UserApiResponse> => {
     const { data } = await restApi.private.get(USER_API_URLS.getCurrentUser);
     return data;
   },
-
-  logoutUser: () => restApi.private.post(USER_API_URLS.logoutCurrentUser),
 
   getAllUsersStats: async (): Promise<{ users: number; jobs: number }> => {
     const { data } = await restApi.private.get(USER_API_URLS.getAllUsersStats);

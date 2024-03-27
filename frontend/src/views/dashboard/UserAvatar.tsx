@@ -1,11 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { Link, useNavigate } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 
-import { User } from 'src/infrasctucture/user/types';
-import { userAPI } from 'src/infrasctucture/user/userApiAdapter';
-import { getUserInitials } from 'src/lib/helpers/getUserInitials';
-import { ROUTES } from 'src/routes';
 import { Avatar, AvatarFallback, AvatarImage } from 'src/components/ui/avatar';
 import {
   DropdownMenu,
@@ -15,6 +11,10 @@ import {
   DropdownMenuTrigger,
 } from 'src/components/ui/dropdown-menu';
 import { useToast } from 'src/components/ui/use-toast';
+import { authAPI } from 'src/infrasctucture/auth/authApiAdapter';
+import { User } from 'src/infrasctucture/user/types';
+import { getUserInitials } from 'src/lib/helpers/getUserInitials';
+import { ROUTES } from 'src/routes';
 
 type LogoutContainerProps = {
   user: User;
@@ -28,7 +28,7 @@ const UserAvatar = ({ user }: LogoutContainerProps) => {
   const { toast } = useToast();
 
   const { mutate: logoutUser, isLoading: isLoggingOut } = useMutation({
-    mutationFn: userAPI.logoutUser,
+    mutationFn: authAPI.logoutUser,
     onSuccess: () => {
       queryClient.clear();
       navigate('/');
