@@ -22,7 +22,7 @@ const VerifyEmail = () => {
       <div className="absolute h-full w-full p-4 [filter:blur(2px)_brightness(0.7)]">
         <img src={mainBackground} alt="" className="h-full w-full" />
       </div>
-      <Card className="z-10 flex flex-col gap-8 border-t-4 border-t-primary p-4 shadow-2xl md:p-6">
+      <Card className="z-10 flex flex-col gap-8 border-t-4 border-t-primary p-4 pb-6 shadow-2xl md:p-6 md:pb-8">
         <header className="flex flex-col gap-2 text-center text-sm md:text-2xl">
           <p>A verification code has been sent to your email address.</p>
           <p>Please check your inbox and enter the code below.</p>

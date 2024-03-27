@@ -34,7 +34,7 @@ export const useRegisterUser = () => {
         variant: 'success',
       });
 
-      navigate(ROUTES.login);
+      navigate(ROUTES.allJobs);
     },
     onError: () => {
       toast({

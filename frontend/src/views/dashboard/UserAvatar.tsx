@@ -32,10 +32,6 @@ const UserAvatar = ({ user }: LogoutContainerProps) => {
     onSuccess: () => {
       queryClient.clear();
       navigate('/');
-      toast({
-        title: 'Successfully logout',
-        variant: 'success',
-      });
     },
     onError: () => {
       toast({
