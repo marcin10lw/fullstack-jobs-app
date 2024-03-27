@@ -1,11 +1,11 @@
-import Layout from './Layout';
+import AuthFormLayout from './AuthFormLayout';
 import LoginForm from './LoginForm';
 
 const Login = () => {
   return (
-    <Layout title="Login">
+    <AuthFormLayout title="Login">
       <LoginForm />
-    </Layout>
+    </AuthFormLayout>
   );
 };
 export default Login;

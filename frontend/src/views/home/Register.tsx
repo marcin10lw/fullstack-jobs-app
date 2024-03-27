@@ -1,11 +1,11 @@
-import Layout from './Layout';
+import AuthFormLayout from './AuthFormLayout';
 import RegisterForm from './RegisterForm';
 
 const Register = () => {
   return (
-    <Layout title="Register">
+    <AuthFormLayout title="Register">
       <RegisterForm />
-    </Layout>
+    </AuthFormLayout>
   );
 };
 export default Register;

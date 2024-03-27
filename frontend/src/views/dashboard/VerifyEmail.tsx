@@ -1,10 +1,10 @@
 import { OTPInput, SlotProps } from 'input-otp';
 
+import ImageWrapper from 'src/components/ImageWrapper';
 import { Button } from 'src/components/ui/button';
+import { Card } from 'src/components/ui/card';
 import { cn } from 'src/lib/utils';
 import { useVerifyEmail } from './useVerifyEmail';
-import mainBackground from 'src/assets/images/main.svg';
-import { Card } from 'src/components/ui/card';
 
 const VerifyEmail = () => {
   const {
@@ -18,10 +18,7 @@ const VerifyEmail = () => {
   } = useVerifyEmail();
 
   return (
-    <main className="relative flex min-h-screen w-full items-center justify-center px-5">
-      <div className="absolute h-full w-full p-4 [filter:blur(2px)_brightness(0.7)]">
-        <img src={mainBackground} alt="" className="h-full w-full" />
-      </div>
+    <ImageWrapper>
       <Card className="z-10 flex flex-col gap-8 border-t-4 border-t-primary p-4 pb-6 shadow-2xl md:p-6 md:pb-8">
         <header className="flex flex-col gap-2 text-center text-sm md:text-2xl">
           <p>A verification code has been sent to your email address.</p>
@@ -60,7 +57,7 @@ const VerifyEmail = () => {
           </Button>
         )}
       </Card>
-    </main>
+    </ImageWrapper>
   );
 };
 
