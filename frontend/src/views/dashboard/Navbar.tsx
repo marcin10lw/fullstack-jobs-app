@@ -7,7 +7,7 @@ import { User } from 'src/infrasctucture/user/types';
 import { cn } from 'src/lib/utils';
 import useDashboardContext from 'src/views/dashboard/useDashboardContext';
 import ThemeToggle from './ThemeToggle';
-import MobileSidebar from './SmallSidebar';
+import MobileSidebar from './MobileSidebar';
 
 type NavbarProps = {
   user: User;

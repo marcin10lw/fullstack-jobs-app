@@ -4,7 +4,7 @@ import LogoWithText from 'src/components/LogoWithText';
 import { useState } from 'react';
 import { UserRole } from 'src/infrasctucture/user/types';
 import { cn } from 'src/lib/utils';
-import NavLinks from './DesktopNavLinks';
+import MobileNavLinks from './MobileNavLinks';
 
 type MobileSidebarProps = {
   userRole: UserRole;
@@ -46,7 +46,7 @@ const MobileSidebar = ({ userRole }: MobileSidebarProps) => {
             <header>
               <LogoWithText />
             </header>
-            <NavLinks userRole={userRole} onClick={closeSmallSidebar} />
+            <MobileNavLinks userRole={userRole} onClick={closeSmallSidebar} />
           </div>
         </div>
       </aside>
