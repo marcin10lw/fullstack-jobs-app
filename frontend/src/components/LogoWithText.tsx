@@ -1,7 +1,15 @@
+import { ClassValue } from 'clsx';
 import logo from 'src/assets/images/logo_with_text.svg';
+import { cn } from 'src/lib/utils';
 
-const LogoWithText = () => {
-  return <img src={logo} alt="Jobs application" />;
+const LogoWithText = ({ className }: { className?: ClassValue }) => {
+  return (
+    <img
+      src={logo}
+      alt="Jobs application"
+      className={cn('block w-full', className)}
+    />
+  );
 };
 
 export default LogoWithText;

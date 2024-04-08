@@ -31,7 +31,7 @@ const NavLinks = ({ userRole, onClick }: NavLinksProps) => {
             className={({ isActive }) =>
               cn('flex h-14 items-center pl-10 transition-all duration-200', {
                 'border-y-2 border-y-primary/50': isActive,
-                'pl-5': !showSidebar,
+                'pl-4': !showSidebar,
                 group: !isActive,
               })
             }
@@ -48,7 +48,14 @@ const NavLinks = ({ userRole, onClick }: NavLinksProps) => {
               )}
             >
               <span className="shrink-0">{icon}</span>
-              {showSidebar && <span className="truncate">{text}</span>}
+              <span
+                className={cn('truncate transition-all duration-150', {
+                  'visible opacity-100': showSidebar,
+                  'invisible opacity-0': !showSidebar,
+                })}
+              >
+                {text}
+              </span>
             </div>
           </NavLink>
         );
