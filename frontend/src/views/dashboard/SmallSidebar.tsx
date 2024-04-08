@@ -1,5 +1,5 @@
 import { AlignJustify, X } from 'lucide-react';
-import Logo from 'src/components/Logo';
+import LogoWithText from 'src/components/LogoWithText';
 
 import { useState } from 'react';
 import { UserRole } from 'src/infrasctucture/user/types';
@@ -44,7 +44,7 @@ const MobileSidebar = ({ userRole }: MobileSidebarProps) => {
               <X className="h-8 w-8" />
             </button>
             <header>
-              <Logo />
+              <LogoWithText />
             </header>
             <NavLinks userRole={userRole} onClick={closeSmallSidebar} />
           </div>

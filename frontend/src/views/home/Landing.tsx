@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import mainBackground from 'src/assets/images/main.svg';
-import Logo from 'src/components/Logo';
+import LogoWithText from 'src/components/LogoWithText';
 import { buttonVariants } from 'src/components/ui/button';
 import { ROUTES } from 'src/routes';
 
@@ -10,7 +10,7 @@ const Landing = () => {
     <section className="relative">
       <nav className="px-10 pt-8">
         <div className="mx-auto flex h-full max-w-screen-xl items-center">
-          <Logo />
+          <LogoWithText />
         </div>
       </nav>
       <article className="px-12 md:-mt-7">

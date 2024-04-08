@@ -1,5 +1,5 @@
 import ImageWrapper from 'src/components/ImageWrapper';
-import Logo from 'src/components/Logo';
+import LogoWithText from 'src/components/LogoWithText';
 import {
   Card,
   CardContent,
@@ -18,7 +18,7 @@ const AuthFormLayout = ({ title, children }: LayoutProps) => {
       <Card className="z-10 w-full max-w-[400px] border-t-4 border-t-primary shadow-2xl">
         <CardHeader>
           <div className="mb-6 flex justify-center">
-            <Logo />
+            <LogoWithText />
           </div>
           <CardTitle className="text-center">{title}</CardTitle>
         </CardHeader>

@@ -1,6 +1,6 @@
 import { ListCollapse } from 'lucide-react';
 
-import Logo from 'src/components/Logo';
+import LogoWithText from 'src/components/LogoWithText';
 import MaxWidthWrapper from 'src/components/MaxWidthWrapper';
 import UserAvatar from 'src/views/dashboard/UserAvatar';
 import { User } from 'src/infrasctucture/user/types';
@@ -35,7 +35,7 @@ const Navbar = ({ user }: NavbarProps) => {
         </button>
         <div className="flex w-[100px] items-center">
           <div className="hidden sm:block lg:hidden">
-            <Logo />
+            <LogoWithText />
           </div>
           <h4 className="hidden text-2xl lg:block">dashboard</h4>
         </div>
