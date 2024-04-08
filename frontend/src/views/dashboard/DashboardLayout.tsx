@@ -6,7 +6,7 @@ import { User } from 'src/infrasctucture/user/types';
 import { userRepository } from 'src/infrasctucture/user/userRepository';
 import { ROUTES } from 'src/routes';
 import DashboardProvider from 'src/views/dashboard/DashboardContext';
-import DesktopSidebar from './BigSidebar';
+import DesktopSidebar from './DesktopSidebar';
 import Navbar from './Navbar';
 import VerifyEmail from './VerifyEmail';
 

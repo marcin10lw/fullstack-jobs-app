@@ -4,7 +4,7 @@ import LogoWithText from 'src/components/LogoWithText';
 import { useState } from 'react';
 import { UserRole } from 'src/infrasctucture/user/types';
 import { cn } from 'src/lib/utils';
-import NavLinks from './NavLinks';
+import NavLinks from './DesktopNavLinks';
 
 type MobileSidebarProps = {
   userRole: UserRole;
