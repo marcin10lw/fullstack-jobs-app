@@ -10,7 +10,7 @@ const Landing = () => {
     <section className="relative">
       <nav className="px-10 pt-8">
         <div className="mx-auto flex h-full max-w-screen-xl items-center">
-          <LogoWithText />
+          <LogoWithText className="w-[180px]" />
         </div>
       </nav>
       <article className="px-12 md:-mt-7">
