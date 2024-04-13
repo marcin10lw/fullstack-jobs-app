@@ -1,7 +1,10 @@
 import axios, { AxiosInstance } from 'axios';
 import { ROUTES } from 'src/routes';
 
-const BASE_URL = 'http://localhost:8080/api/v1';
+const BASE_URL =
+  process.env.NODE_ENV === 'production'
+    ? import.meta.env.VITE_BASE_URL
+    : 'http://localhost:8080/api/v1';
 
 export const restApi = {
   private: axios.create({

@@ -7,7 +7,7 @@ const LogoWithText = ({ className }: { className?: ClassValue }) => {
     <img
       src={logo}
       alt="Jobs application"
-      className={cn('block w-full', className)}
+      className={cn('block', className)}
     />
   );
 };

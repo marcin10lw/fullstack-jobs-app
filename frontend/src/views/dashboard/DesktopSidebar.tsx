@@ -26,14 +26,14 @@ const DesktopSidebar = ({ userRole }: DesktopSidebarProps) => {
             className={cn(
               'flex h-24 items-center pl-10 transition-all duration-200',
               {
-                'pl-2.5': !showSidebar,
+                'pl-2': !showSidebar,
               },
             )}
           >
             <div className="shrink-0">
               {
                 <LogoWithText
-                  className={cn('[transition:width_200ms_ease-in-out]', {
+                  className={cn('w-full [transition:width_200ms_ease-in-out]', {
                     'w-[120px]': !showSidebar,
                   })}
                 />

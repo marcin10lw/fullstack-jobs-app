@@ -29,30 +29,30 @@ const NavLinks = ({ userRole, onClick }: NavLinksProps) => {
           <NavLink
             to={path}
             className={({ isActive }) =>
-              cn('flex h-14 items-center pl-10 transition-all duration-200', {
-                'border-y-2 border-y-primary/50': isActive,
-                'pl-4': !showSidebar,
-                group: !isActive,
-              })
+              cn(
+                'flex h-14 items-center pl-10 text-primary transition-all duration-200',
+                {
+                  'border-y-2 border-y-border bg-primary/70 text-primary-foreground':
+                    isActive,
+                  'pl-[15px]': !showSidebar,
+                  'hover:bg-primary/40 hover:text-primary-foreground':
+                    !isActive,
+                },
+              )
             }
             onClick={onNavLinkClick}
             key={id}
           >
-            <div
-              className={cn(
-                'flex gap-3 text-lg capitalize text-primary [transition:padding_300ms_ease-in-out]',
-                {
-                  'group-hover:pl-2': showSidebar,
-                  'group-hover:pb-1': !showSidebar,
-                },
-              )}
-            >
+            <div className="flex gap-3 capitalize">
               <span className="shrink-0">{icon}</span>
               <span
-                className={cn('truncate transition-all duration-150', {
-                  'visible opacity-100': showSidebar,
-                  'invisible opacity-0': !showSidebar,
-                })}
+                className={cn(
+                  'truncate text-lg [transition:opacity_100ms_ease-in-out,visibility_100ms_ease-in-out]',
+                  {
+                    'visible opacity-100': showSidebar,
+                    'invisible opacity-0': !showSidebar,
+                  },
+                )}
               >
                 {text}
               </span>
