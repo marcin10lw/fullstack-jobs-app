@@ -79,9 +79,9 @@ const UserAvatar = ({ user }: LogoutContainerProps) => {
             <DropdownMenuSeparator />
           </>
         )}
-        <DropdownMenuItem className="cursor-pointer">
+        <DropdownMenuItem className="cursor-pointer p-0">
           <button
-            className="w-full text-start"
+            className="w-full px-2 py-1.5 text-start"
             onClick={(event) => {
               event.stopPropagation();
               logoutUser();
