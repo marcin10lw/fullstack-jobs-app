@@ -13,8 +13,13 @@ import {
 import { validate } from "../middleware/validate";
 import { validateIdParam } from "../middleware/validateIdParam";
 import { createJobSchema } from "../schemas/job.schema";
+import { ensureEmailVerified } from "../middleware/ensureUserVerified";
+import { authMiddleware } from "../middleware/auth";
 
 const router = Router();
+
+router.use(authMiddleware);
+router.use(ensureEmailVerified);
 
 router
   .route("/")

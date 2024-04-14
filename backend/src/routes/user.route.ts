@@ -10,10 +10,17 @@ import { restrictTo } from "../middleware/restrictTo";
 import { validate } from "../middleware/validate";
 import { changePasswordSchema, updateUserSchema } from "../schemas/user.schema";
 import upload from "../middleware/multer";
+import { ensureEmailVerified } from "../middleware/ensureUserVerified";
+import { authMiddleware } from "../middleware/auth";
 
 const router = Router();
 
+router.use(authMiddleware);
+
 router.get("/current-user", getCurrentUserController);
+
+router.use(ensureEmailVerified);
+
 router.get("/admin/app-stats", [restrictTo("admin")], getAppStatsController);
 router.patch(
   "/update-user",
@@ -23,7 +30,7 @@ router.patch(
 router.delete("/remove-avatar", removeUserAvatarController);
 router.post(
   "/change-password",
-  validate(changePasswordSchema),
+  [validate(changePasswordSchema)],
   changePasswordController
 );
 

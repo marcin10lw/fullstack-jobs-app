@@ -17,17 +17,15 @@ const router = Router();
 router.post("/register", validate(createUserSchema), registerController);
 router.post("/login", validate(loginUserSchema), loginController);
 router.post("/refreshToken", refreshTokenController);
+
+router.use(authMiddleware);
+
 router.post("/logout", logoutController);
 router.post(
   "/verify-email",
-  authMiddleware,
   validate(verifyEmailSchema),
   verifyEmailController
 );
-router.post(
-  "/send-verification-code",
-  authMiddleware,
-  sendVerificationCodeController
-);
+router.post("/send-verification-code", sendVerificationCodeController);
 
 export default router;
