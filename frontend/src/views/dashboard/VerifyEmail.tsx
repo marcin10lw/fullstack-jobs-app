@@ -67,7 +67,7 @@ function Slot(props: SlotProps) {
   return (
     <div
       className={cn(
-        'relative h-16 w-12 text-[2rem] md:h-24 md:w-16',
+        'relative h-14 w-12 text-[2rem] md:h-20 md:w-16',
         'flex items-center justify-center',
         'transition-all duration-100',
         'border-y border-r border-border first:rounded-l-md first:border-l last:rounded-r-md',
