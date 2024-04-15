@@ -10,6 +10,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from 'src/components/ui/dropdown-menu';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from 'src/components/ui/tooltip';
 import { useToast } from 'src/components/ui/use-toast';
 import { authAPI } from 'src/infrasctucture/auth/authApiAdapter';
 import { User } from 'src/infrasctucture/user/types';
@@ -57,10 +63,22 @@ const UserAvatar = ({ user }: LogoutContainerProps) => {
         </Avatar>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent align="end" className="w-50 z-[1000]">
+      <DropdownMenuContent align="end" className="z-[1000] w-52">
         <div className="flex flex-col gap-1 p-2">
           <p className="truncate">Hello {user.name}!</p>
-          <p className="truncate text-sm text-muted-foreground">{user.email}</p>
+
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <p className="truncate text-sm text-muted-foreground">
+                  {user.email}
+                </p>
+              </TooltipTrigger>
+              <TooltipContent align="end" className="bg-secondary">
+                <p className="text-sm text-muted-foreground">{user.email}</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </div>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
