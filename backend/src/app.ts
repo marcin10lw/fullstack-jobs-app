@@ -4,10 +4,9 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
 import morgan from "morgan";
-
 import path from "path";
+
 import { prisma } from "./db/prisma";
-import { authMiddleware } from "./middleware/auth";
 import { errorHandlerMiddleware } from "./middleware/errorHandler";
 import { notFoundMiddleware } from "./middleware/notFound";
 import authRouter from "./routes/auth.route";

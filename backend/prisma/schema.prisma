@@ -52,7 +52,7 @@ model Job {
   jobLocation    String
   jobStatus      JobStatus @default(pending)
   jobType        JobType   @default(full_time)
-  jobDescription String?
+  jobDescription String?   @default("")
 
   User   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String?
