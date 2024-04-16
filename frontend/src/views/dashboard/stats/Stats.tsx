@@ -1,15 +1,13 @@
 import NotFound from 'src/components/NotFound';
-
+import { jobRepository } from 'src/infrasctucture/job/jobRepository';
 import ChartsContainer from 'src/views/dashboard/stats/ChartsContainer';
 import StatsContainer from 'src/views/dashboard/stats/StatsContainer';
-import { jobRepository } from 'src/infrasctucture/job/jobRepository';
-import { Loader2 } from 'lucide-react';
+import ScreenSkeleton from '../ScreenSkeleton';
 
 const Stats = () => {
   const { data, status } = jobRepository.useGetJobStats();
 
-  if (status === 'loading')
-    return <Loader2 className="mx-auto size-10 animate-spin" />;
+  if (status === 'loading') return <ScreenSkeleton />;
 
   if (status === 'error') return <NotFound text="Could not get stats" />;
 

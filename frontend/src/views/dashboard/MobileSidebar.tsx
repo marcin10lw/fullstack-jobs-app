@@ -34,10 +34,14 @@ const MobileSidebar = ({ userRole }: MobileSidebarProps) => {
               'invisible z-[-1] opacity-0': !smallSidebarOpen,
             },
           )}
+          onClick={closeSmallSidebar}
         >
-          <div className="relative flex h-[95vh] w-[90%] flex-col items-center rounded-md bg-secondary p-[4rem_2rem]">
+          <div
+            className="relative flex h-[95vh] w-[90%] flex-col items-center rounded-md bg-secondary p-[4rem_2rem]"
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
-              onClick={() => setSmallSidebarOpen(false)}
+              onClick={closeSmallSidebar}
               type="button"
               className="absolute left-[10px] top-[10px] text-[2rem] text-destructive"
             >

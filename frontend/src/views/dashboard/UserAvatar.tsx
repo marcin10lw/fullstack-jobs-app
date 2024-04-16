@@ -81,16 +81,16 @@ const UserAvatar = ({ user }: LogoutContainerProps) => {
           </TooltipProvider>
         </div>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <Link to={ROUTES.profile} className="w-full">
+        <DropdownMenuItem className="p-0">
+          <Link to={ROUTES.profile} className="w-full px-2 py-1.5">
             Profile
           </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         {user.role === 'admin' && (
           <>
-            <DropdownMenuItem>
-              <Link to={ROUTES.admin} className="w-full">
+            <DropdownMenuItem className="p-0">
+              <Link to={ROUTES.admin} className="w-full px-2 py-1.5">
                 Admin
               </Link>
             </DropdownMenuItem>

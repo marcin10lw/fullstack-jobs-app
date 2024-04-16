@@ -50,19 +50,19 @@ const Job = () => {
       <ContentWrapper className="relative">
         <Link
           to={ROUTES.allJobs}
-          className="absolute left-7 top-4 flex items-center gap-2 text-primary"
+          className="absolute left-4 top-4 flex items-center gap-2 text-primary md:left-7"
         >
           <ArrowLeft className="size-5" />
           Back to jobs
         </Link>
-        <section className="mt-1">
+        <section className=" mt-8 md:mt-2">
           <div className="flex items-center justify-between">
             <h1 className="text-xl">Jobs details</h1>
             <EditJobDrawer jobId={job.id} />
           </div>
 
-          <dl className="mt-4 grid max-w-[80%] md:grid-cols-2">
-            <div>
+          <dl className="mt-4 grid max-w-[80%] gap-1.5 md:grid-cols-2">
+            <div className="flex flex-col gap-1.5">
               <JobDetail
                 descriptionTerm="Company:"
                 descriptionDetail={job.company}
@@ -77,7 +77,7 @@ const Job = () => {
               />
             </div>
 
-            <div>
+            <div className="flex flex-col gap-1.5">
               <JobDetail
                 descriptionTerm="Job Status:"
                 descriptionDetail={job.jobStatus}

@@ -30,7 +30,7 @@ const NavLinks = ({ userRole, onClick }: NavLinksProps) => {
             to={path}
             className={({ isActive }) =>
               cn(
-                'flex h-14 items-center pl-10 text-primary transition-all duration-200',
+                'flex h-14 items-center pl-10 text-primary [transition:padding_200ms]',
                 {
                   'border-y-2 border-y-border bg-primary/70 text-primary-foreground':
                     isActive,
@@ -47,7 +47,7 @@ const NavLinks = ({ userRole, onClick }: NavLinksProps) => {
               <span className="shrink-0">{icon}</span>
               <span
                 className={cn(
-                  'truncate text-lg [transition:opacity_100ms_ease-in-out,visibility_100ms_ease-in-out]',
+                  'truncate text-lg [transition:opacity_200ms_ease-in-out,visibility_200ms_ease-in-out]',
                   {
                     'visible opacity-100': showSidebar,
                     'invisible opacity-0': !showSidebar,
