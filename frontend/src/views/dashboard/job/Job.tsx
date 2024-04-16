@@ -1,5 +1,5 @@
 import { AxiosError } from 'axios';
-import { ArrowLeft, Loader2 } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 
 import ContentWrapper from 'src/components/ContentWrapper';
@@ -8,6 +8,7 @@ import { buttonVariants } from 'src/components/ui/button';
 import { jobRepository } from 'src/infrasctucture/job/jobRepository';
 import { ROUTES } from 'src/routes';
 import EditJobDrawer from '../EditJobDrawer';
+import ScreenSkeleton from '../ScreenSkeleton';
 import JobDescription from './JobDescription';
 import JobDetail from './JobDetail';
 import JobMap from './JobMap';
@@ -23,7 +24,7 @@ const Job = () => {
     error,
   } = jobRepository.useGetJobById(jobId);
 
-  if (isJobLoading) return <Loader2 className="mx-auto size-10 animate-spin" />;
+  if (isJobLoading) return <ScreenSkeleton />;
 
   if (error && error instanceof AxiosError) {
     if (error.response?.status === 404) {

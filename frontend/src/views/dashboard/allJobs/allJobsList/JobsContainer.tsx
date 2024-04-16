@@ -2,6 +2,9 @@ import { ApiJobsResponse } from 'src/infrasctucture/job/types';
 import AllJobsList from './AllJobsList';
 import PageBtnContainer from '../PageBtnContainer';
 import { useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { ROUTES } from 'src/routes';
+import { buttonVariants } from 'src/components/ui/button';
 
 type JobsContainerProps = {
   jobsData: ApiJobsResponse;
@@ -22,8 +25,17 @@ const JobsContainer = ({ jobsData }: JobsContainerProps) => {
 
   if (jobs.length === 0)
     return (
-      <section className="mt-16">
-        <h2 className="normal-case">No jobs to display...</h2>
+      <section className="mt-16 flex flex-col items-center gap-2">
+        <h2 className="text-lg normal-case">No jobs to display</h2>
+        <Link
+          to={ROUTES.addJob}
+          className={buttonVariants({
+            variant: 'link',
+            className: 'text-xl',
+          })}
+        >
+          Add new job
+        </Link>
       </section>
     );
 

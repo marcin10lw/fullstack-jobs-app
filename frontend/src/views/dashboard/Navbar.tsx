@@ -17,7 +17,7 @@ const Navbar = ({ user }: NavbarProps) => {
   const { showSidebar, toggleSidebar } = useDashboardContext();
 
   return (
-    <nav className="top-0 flex h-24 items-center justify-center border-b-2 border-b-border bg-background shadow-sm lg:sticky">
+    <nav className="top-0 flex h-[72px] items-center justify-center border-b-2 border-b-border bg-background shadow-sm md:h-24 lg:sticky">
       <MaxWidthWrapper className="flex items-center justify-between px-4 md:px-8">
         <div className="lg:hidden">
           <MobileSidebar userRole={user.role} />

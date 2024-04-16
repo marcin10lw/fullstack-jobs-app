@@ -70,7 +70,7 @@ const UserAvatar = ({ user }: LogoutContainerProps) => {
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <p className="truncate text-sm text-muted-foreground">
+                <p className="w-fit max-w-full truncate text-sm text-muted-foreground">
                   {user.email}
                 </p>
               </TooltipTrigger>
