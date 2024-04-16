@@ -12,6 +12,7 @@ import ScreenSkeleton from '../ScreenSkeleton';
 import JobDescription from './JobDescription';
 import JobDetail from './JobDetail';
 import JobMap from './JobMap';
+import { convertApiOption } from 'src/lib/helpers/convertApiOption';
 
 const Job = () => {
   const { jobId } = useParams<{ jobId: string }>();
@@ -84,7 +85,7 @@ const Job = () => {
               />
               <JobDetail
                 descriptionTerm="Job Type:"
-                descriptionDetail={job.jobType}
+                descriptionDetail={convertApiOption(job.jobType, '_', '-')}
               />
             </div>
           </dl>

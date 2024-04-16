@@ -6,7 +6,7 @@ export const buildSelectOptions = (
   replacementString: string = '-',
 ): SelectOption[] =>
   options.map((option) => {
-    if (option.includes('_')) {
+    if (option.includes(substringToReplace)) {
       return {
         label: option.replace(substringToReplace, replacementString),
         value: option,
