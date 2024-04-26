@@ -9,7 +9,7 @@ import {
   DropdownMenuTrigger,
 } from 'src/components/ui/dropdown-menu';
 import useDashboardContext from './useDashboardContext';
-import { themeColorsList } from 'src/lib/helpers/themeColorsList';
+import { themeColorsList } from 'src/lib/helpers/themeColorsConfig';
 import { cn } from 'src/lib/utils';
 
 const ChangeThemeColor = () => {

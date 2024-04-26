@@ -13,7 +13,7 @@ const BarChart = ({ monthlyApplications }: BarChartProps) => {
         <XAxis dataKey="date" />
         <YAxis allowDecimals={false} />
         <Tooltip />
-        <Bar type="natural" dataKey="count" fill="#7e22ce" barSize={75} />
+        <Bar type="natural" dataKey="count" className="fill-primary" barSize={75} />
       </Chart>
     </ResponsiveContainer>
   );
