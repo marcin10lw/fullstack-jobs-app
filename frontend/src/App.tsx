@@ -1,7 +1,7 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import { ROUTES } from './routes';
-import Error from './views/Error';
+import Error from './components/Error';
 import DashboardLayout from './views/dashboard/DashboardLayout';
 import AddJob from './views/dashboard/addJob/AddJob';
 import Admin from './views/dashboard/admin/Admin';

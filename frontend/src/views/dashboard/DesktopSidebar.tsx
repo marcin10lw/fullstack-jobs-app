@@ -1,4 +1,4 @@
-import LogoWithText from 'src/components/LogoWithText';
+import LogoWithText from 'src/components/svg/LogoWithText';
 import useDashboardContext from 'src/views/dashboard/useDashboardContext';
 import { UserRole } from 'src/infrasctucture/user/types';
 import { cn } from 'src/lib/utils';

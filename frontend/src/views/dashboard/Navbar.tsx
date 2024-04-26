@@ -1,6 +1,6 @@
 import { ListCollapse } from 'lucide-react';
 
-import LogoWithText from 'src/components/LogoWithText';
+import LogoWithText from 'src/components/svg/LogoWithText';
 import MaxWidthWrapper from 'src/components/MaxWidthWrapper';
 import UserAvatar from 'src/views/dashboard/UserAvatar';
 import { User } from 'src/infrasctucture/user/types';

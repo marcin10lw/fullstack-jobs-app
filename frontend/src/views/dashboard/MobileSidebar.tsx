@@ -1,5 +1,5 @@
 import { AlignJustify, X } from 'lucide-react';
-import LogoWithText from 'src/components/LogoWithText';
+import LogoWithText from 'src/components/svg/LogoWithText';
 
 import { useState } from 'react';
 import { UserRole } from 'src/infrasctucture/user/types';

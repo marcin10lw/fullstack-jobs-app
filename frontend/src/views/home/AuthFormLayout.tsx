@@ -1,5 +1,5 @@
 import ImageWrapper from 'src/components/ImageWrapper';
-import LogoWithText from 'src/components/LogoWithText';
+import LogoWithText from 'src/components/svg/LogoWithText';
 import { Card, CardContent, CardHeader, CardTitle } from 'src/components/ui/card';
 
 interface LayoutProps {

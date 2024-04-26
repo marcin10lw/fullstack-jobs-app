@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
-import mainBackground from 'src/assets/images/main.svg';
-import LogoWithText from 'src/components/LogoWithText';
+import BackgroundMain from 'src/components/svg/BackgroundMain';
+import LogoWithText from 'src/components/svg/LogoWithText';
 import { buttonVariants } from 'src/components/ui/button';
 import { ROUTES } from 'src/routes';
 
@@ -21,7 +21,7 @@ const Landing = () => {
             </h1>
             <p className="mb-6 max-w-[35rem] text-lg leading-loose text-foreground">
               Discover the ease of managing your job applications with our app. Say goodbye to scattered notes and
-              endless spreadsheets – simply add the jobs you've applied for, and let our app keep you organized
+              endless spreadsheets - simply add the jobs you've applied for, and let our app keep you organized
               throughout your job search journey.
             </p>
 
@@ -41,11 +41,9 @@ const Landing = () => {
             </div>
           </div>
 
-          <img
-            src={mainBackground}
-            alt="job hunt"
-            className="absolute inset-0 -z-[1] h-full w-full [filter:blur(4px)_brightness(0.25)] lg:static lg:z-0 lg:block lg:[filter:none]"
-          />
+          <div className="absolute inset-0 -z-[1] h-full w-full [filter:blur(4px)_brightness(0.25)] lg:static lg:z-0 lg:block lg:[filter:none]">
+            <BackgroundMain />
+          </div>
         </div>
       </article>
     </section>
