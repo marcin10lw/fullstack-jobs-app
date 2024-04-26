@@ -7,20 +7,12 @@ interface ErrorMessageProps extends ErrorMessageElementProps {
   isAbsolute?: boolean;
 }
 
-const ErrorMessage = ({
-  errorMessage,
-  className,
-  isAbsolute,
-}: ErrorMessageProps) => {
+const ErrorMessage = ({ errorMessage, className, isAbsolute }: ErrorMessageProps) => {
   return (
     <p
-      className={cn(
-        'mt-1 text-xs font-medium capitalize text-destructive',
-        className,
-        {
-          absolute: isAbsolute,
-        },
-      )}
+      className={cn('mt-1 text-xs font-medium capitalize text-destructive', className, {
+        absolute: isAbsolute,
+      })}
     >
       {errorMessage}
     </p>

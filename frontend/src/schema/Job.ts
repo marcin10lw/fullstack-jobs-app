@@ -14,10 +14,7 @@ export const jobSchema = z.object({
     .trim()
     .min(1, { message: 'position is required' })
     .max(30, { message: 'no more than 30 characters' }),
-  jobLocation: z
-    .string()
-    .trim()
-    .min(1, { message: 'job location is required' }),
+  jobLocation: z.string().trim().min(1, { message: 'job location is required' }),
   jobStatus: z.enum(jobStatusItems, {
     required_error: 'invalid value',
   }),

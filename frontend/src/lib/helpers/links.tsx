@@ -1,10 +1,4 @@
-import {
-  BarChart4,
-  CalendarPlus,
-  Contact2,
-  Lock,
-  NotebookTabs,
-} from 'lucide-react';
+import { BarChart4, CalendarPlus, Contact2, Lock, NotebookTabs } from 'lucide-react';
 import { ROUTES } from 'src/routes';
 
 export const links = [

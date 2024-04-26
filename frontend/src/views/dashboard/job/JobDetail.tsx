@@ -3,10 +3,7 @@ interface JobDescriptionProps {
   descriptionDetail: string;
 }
 
-const JobDetail = ({
-  descriptionTerm,
-  descriptionDetail,
-}: JobDescriptionProps) => {
+const JobDetail = ({ descriptionTerm, descriptionDetail }: JobDescriptionProps) => {
   return (
     <div className="flex items-center gap-2">
       <dt className="font-semibold">{descriptionTerm}</dt>

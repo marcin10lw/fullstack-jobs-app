@@ -39,10 +39,7 @@ export const updateUserSchema = z.object({
 });
 
 export const changePasswordSchema = z.object({
-  currentPassword: z
-    .string()
-    .trim()
-    .min(1, { message: 'password is required' }),
+  currentPassword: z.string().trim().min(1, { message: 'password is required' }),
   newPassword: z
     .string()
     .trim()

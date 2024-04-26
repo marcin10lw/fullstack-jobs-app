@@ -9,41 +9,22 @@ import { useUpdateUser } from './useUpdateUser';
 
 const UpdateUser = () => {
   const { user } = useUser();
-  const {
-    register,
-    control,
-    handleSubmit,
-    errors,
-    isUpdatingProfile,
-    onFormSubmit,
-    hasAnyFieldChanged,
-  } = useUpdateUser();
+  const { register, control, handleSubmit, errors, isUpdatingProfile, onFormSubmit, hasAnyFieldChanged } =
+    useUpdateUser();
 
   return (
     <ContentWrapper title="profile">
-      <form
-        onSubmit={handleSubmit(onFormSubmit)}
-        noValidate
-        encType="multipart/form-data"
-      >
+      <form onSubmit={handleSubmit(onFormSubmit)} noValidate encType="multipart/form-data">
         <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-[1fr_2fr] md:gap-4">
           <Controller
             control={control}
             name="avatar"
             render={({ field: { value, onChange } }) => {
-              return (
-                <ProfilePicture
-                  value={value}
-                  onChange={onChange}
-                  error={errors.avatar}
-                />
-              );
+              return <ProfilePicture value={value} onChange={onChange} error={errors.avatar} />;
             }}
           />
 
-          <div className="text-[clamp(1.5rem,_2vw,_3rem)]">
-            Hello, {user.name}!
-          </div>
+          <div className="text-[clamp(1.5rem,_2vw,_3rem)]">Hello, {user.name}!</div>
         </div>
 
         <div className="mt-14 grid gap-y-4 lg:grid-cols-2 lg:gap-[2rem_1rem] xl:grid-cols-3">

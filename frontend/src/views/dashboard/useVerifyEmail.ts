@@ -44,25 +44,24 @@ export const useVerifyEmail = () => {
     },
   });
 
-  const { mutate: sendVerificationCode, isLoading: isSendingVerificationCode } =
-    useMutation({
-      mutationFn: authAPI.sendVerificationCode,
-      onSuccess: () => {
-        setOtp('');
-        setShowSendButton(false);
-        toast({
-          title: 'New verification code was sent',
-          variant: 'success',
-        });
-      },
-      onError: () => {
-        toast({
-          title: 'Something went wrong',
-          description: 'Please try again',
-          variant: 'destructive',
-        });
-      },
-    });
+  const { mutate: sendVerificationCode, isLoading: isSendingVerificationCode } = useMutation({
+    mutationFn: authAPI.sendVerificationCode,
+    onSuccess: () => {
+      setOtp('');
+      setShowSendButton(false);
+      toast({
+        title: 'New verification code was sent',
+        variant: 'success',
+      });
+    },
+    onError: () => {
+      toast({
+        title: 'Something went wrong',
+        description: 'Please try again',
+        variant: 'destructive',
+      });
+    },
+  });
 
   const onComplete = () => {
     verifyEmail(otp);

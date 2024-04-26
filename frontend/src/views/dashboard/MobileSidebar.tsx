@@ -17,11 +17,7 @@ const MobileSidebar = ({ userRole }: MobileSidebarProps) => {
 
   return (
     <>
-      <button
-        type="button"
-        className="flex-shrink-0 text-3xl text-primary"
-        onClick={() => setSmallSidebarOpen(true)}
-      >
+      <button type="button" className="flex-shrink-0 text-3xl text-primary" onClick={() => setSmallSidebarOpen(true)}>
         <AlignJustify className="block lg:hidden" />
       </button>
 

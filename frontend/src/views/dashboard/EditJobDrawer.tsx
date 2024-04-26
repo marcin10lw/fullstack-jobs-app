@@ -16,14 +16,9 @@ const EditJobDrawer = ({ jobId }: EditJobDrawerProps) => {
   };
 
   return (
-    <Drawer
-      open={isDrawerOpen}
-      onOpenChange={(isOpen) => setIsDrawerOpen(isOpen)}
-    >
+    <Drawer open={isDrawerOpen} onOpenChange={(isOpen) => setIsDrawerOpen(isOpen)}>
       <DrawerTrigger asChild>
-        <Button className="mr-2 flex h-[30px] items-center text-sm">
-          Edit
-        </Button>
+        <Button className="mr-2 flex h-[30px] items-center text-sm">Edit</Button>
       </DrawerTrigger>
       <DrawerContent className="max-h-[100vh] min-h-[40vh]">
         <ScrollArea className="mt-10 px-5 lg:px-10">

@@ -11,27 +11,15 @@ type PageBtnContainerProps = {
   scrollToJobs: () => void;
 };
 
-const PageBtnContainer = ({
-  currentPage,
-  numOfPages,
-  scrollToJobs,
-}: PageBtnContainerProps) => {
-  const [searchParams, setSearchParams] = useSearchParams(
-    searchParamsDefaultValues,
-  );
+const PageBtnContainer = ({ currentPage, numOfPages, scrollToJobs }: PageBtnContainerProps) => {
+  const [searchParams, setSearchParams] = useSearchParams(searchParamsDefaultValues);
 
   const setPage = (pageNumber: number) => {
     searchParams.set('page', String(pageNumber));
     setSearchParams(searchParams);
   };
 
-  const addPageButton = ({
-    pageNumber,
-    activeClass,
-  }: {
-    pageNumber: number;
-    activeClass: boolean;
-  }) => {
+  const addPageButton = ({ pageNumber, activeClass }: { pageNumber: number; activeClass: boolean }) => {
     return (
       <button
         className={cn(

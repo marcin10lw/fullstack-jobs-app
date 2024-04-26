@@ -7,15 +7,7 @@ import { jobStatusItems, jobTypeItems } from 'src/schema/Job';
 import useAddJob from './useAddJob';
 
 const AddJobForm = () => {
-  const {
-    form,
-    control,
-    errors,
-    isAddingJob,
-    handleSubmit,
-    onFormSubmit,
-    register,
-  } = useAddJob();
+  const { form, control, errors, isAddingJob, handleSubmit, onFormSubmit, register } = useAddJob();
 
   return (
     <form onSubmit={handleSubmit(onFormSubmit)} noValidate>

@@ -17,12 +17,7 @@ const RemoveAvatar = () => {
   const onAvatarDelete = () => mutate();
 
   return (
-    <Button
-      onClick={onAvatarDelete}
-      disabled={isLoading}
-      variant="link"
-      className="text-white"
-    >
+    <Button onClick={onAvatarDelete} disabled={isLoading} variant="link" className="text-white">
       {isLoading ? 'Removing...' : 'Remove photo'}
     </Button>
   );

@@ -24,16 +24,12 @@ const ChartsContainer = ({ monthlyApplications }: ChartsContainerProps) => {
   return (
     <section className="mt-16 text-center">
       <h4 className="mb-3 text-center text-xl">Monthly Applications</h4>
-      <button
-        className="mx-auto mt-4 text-xl capitalize text-primary"
-        onClick={toggleChart}
-        type="button"
-      >
+      <button className="mx-auto mt-4 text-xl capitalize text-primary" onClick={toggleChart} type="button">
         {chart === 'area' ? 'Area Chart' : 'Bar Chart'}
       </button>
       <div className="relative">
         <div className="absolute inset-0 -ml-6 h-full w-full">
-          <div className='pb-5 lg:pb-10'>
+          <div className="pb-5 lg:pb-10">
             {chart === 'bar' ? (
               <BarChart monthlyApplications={monthlyApplications} />
             ) : (

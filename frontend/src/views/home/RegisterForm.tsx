@@ -6,18 +6,12 @@ import { ROUTES } from 'src/routes';
 import { useRegisterUser } from './useRegisterUser';
 
 const RegisterForm = () => {
-  const { status, errors, handleSubmit, onRegisterUser, register } =
-    useRegisterUser();
+  const { status, errors, handleSubmit, onRegisterUser, register } = useRegisterUser();
 
   return (
     <form onSubmit={handleSubmit(onRegisterUser)} noValidate>
       <div className="flex flex-col gap-4">
-        <LabeledRegisterInput
-          register={register('name')}
-          label="name"
-          name="name"
-          error={errors.name}
-        />
+        <LabeledRegisterInput register={register('name')} label="name" name="name" error={errors.name} />
         <LabeledRegisterInput
           register={register('lastName')}
           label="last name"
@@ -60,10 +54,7 @@ const RegisterForm = () => {
 
       <p className="mt-6 text-center leading-6">
         Already a member?{' '}
-        <Link
-          to={ROUTES.login}
-          className="ml-1 font-medium tracking-wide text-primary"
-        >
+        <Link to={ROUTES.login} className="ml-1 font-medium tracking-wide text-primary">
           Login
         </Link>
       </p>

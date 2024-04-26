@@ -7,15 +7,10 @@ interface EditJobDrawerContentProps {
   closeDrawer: () => void;
 }
 
-const EditJobDrawerContent = ({
-  jobId,
-  closeDrawer,
-}: EditJobDrawerContentProps) => {
-  const { data: job, isLoading: isJobLoading } =
-    jobRepository.useGetJobById(jobId);
+const EditJobDrawerContent = ({ jobId, closeDrawer }: EditJobDrawerContentProps) => {
+  const { data: job, isLoading: isJobLoading } = jobRepository.useGetJobById(jobId);
 
-  if (isJobLoading)
-    return <Loader2 className="mx-auto mt-3 size-8 animate-spin" />;
+  if (isJobLoading) return <Loader2 className="mx-auto mt-3 size-8 animate-spin" />;
 
   if (!job) return null;
 

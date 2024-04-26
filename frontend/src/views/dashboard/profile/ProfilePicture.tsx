@@ -20,11 +20,7 @@ const ProfilePicture = ({ value, onChange, error }: ProfilePictureProps) => {
       <div className="group relative block h-full w-full overflow-hidden rounded-full">
         <img
           src={
-            value && value.type.includes('image/')
-              ? URL.createObjectURL(value)
-              : user.avatar
-              ? user.avatar
-              : userIcon
+            value && value.type.includes('image/') ? URL.createObjectURL(value) : user.avatar ? user.avatar : userIcon
           }
           alt="user avatar"
           className="block h-full w-full object-cover"
@@ -58,11 +54,7 @@ const ProfilePicture = ({ value, onChange, error }: ProfilePictureProps) => {
         />
       </div>
 
-      {error && (
-        <p className="absolute top-[calc(100%_+_10px)] w-full text-center text-destructive">
-          {error.message}
-        </p>
-      )}
+      {error && <p className="absolute top-[calc(100%_+_10px)] w-full text-center text-destructive">{error.message}</p>}
     </div>
   );
 };

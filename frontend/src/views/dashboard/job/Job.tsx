@@ -19,11 +19,7 @@ const Job = () => {
 
   if (!jobId) return null;
 
-  const {
-    data: job,
-    isLoading: isJobLoading,
-    error,
-  } = jobRepository.useGetJobById(jobId);
+  const { data: job, isLoading: isJobLoading, error } = jobRepository.useGetJobById(jobId);
 
   if (isJobLoading) return <ScreenSkeleton />;
 
@@ -49,10 +45,7 @@ const Job = () => {
   if (job)
     return (
       <ContentWrapper className="relative">
-        <Link
-          to={ROUTES.allJobs}
-          className="absolute left-4 top-4 flex items-center gap-2 text-primary md:left-7"
-        >
+        <Link to={ROUTES.allJobs} className="absolute left-4 top-4 flex items-center gap-2 text-primary md:left-7">
           <ArrowLeft className="size-5" />
           Back to jobs
         </Link>
@@ -64,39 +57,21 @@ const Job = () => {
 
           <dl className="mt-4 grid max-w-[80%] gap-1.5 md:grid-cols-2">
             <div className="flex flex-col gap-1.5">
-              <JobDetail
-                descriptionTerm="Company:"
-                descriptionDetail={job.company}
-              />
-              <JobDetail
-                descriptionTerm="Position:"
-                descriptionDetail={job.position}
-              />
-              <JobDetail
-                descriptionTerm="Location:"
-                descriptionDetail={job.jobLocation}
-              />
+              <JobDetail descriptionTerm="Company:" descriptionDetail={job.company} />
+              <JobDetail descriptionTerm="Position:" descriptionDetail={job.position} />
+              <JobDetail descriptionTerm="Location:" descriptionDetail={job.jobLocation} />
             </div>
 
             <div className="flex flex-col gap-1.5">
-              <JobDetail
-                descriptionTerm="Job Status:"
-                descriptionDetail={job.jobStatus}
-              />
-              <JobDetail
-                descriptionTerm="Job Type:"
-                descriptionDetail={convertApiOption(job.jobType, '_', '-')}
-              />
+              <JobDetail descriptionTerm="Job Status:" descriptionDetail={job.jobStatus} />
+              <JobDetail descriptionTerm="Job Type:" descriptionDetail={convertApiOption(job.jobType, '_', '-')} />
             </div>
           </dl>
 
           {/* <DatePicker /> */}
 
           <div className="mt-8 md:mt-12">
-            <JobDescription
-              jobDescription={job.jobDescription}
-              jobId={job.id}
-            />
+            <JobDescription jobDescription={job.jobDescription} jobId={job.id} />
           </div>
         </section>
 

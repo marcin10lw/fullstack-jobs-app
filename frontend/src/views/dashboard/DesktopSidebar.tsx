@@ -23,12 +23,9 @@ const DesktopSidebar = ({ userRole }: DesktopSidebarProps) => {
       >
         <div className="sticky top-0">
           <header
-            className={cn(
-              'flex h-24 items-center pl-10 transition-all duration-200',
-              {
-                'pl-2': !showSidebar,
-              },
-            )}
+            className={cn('flex h-24 items-center pl-10 transition-all duration-200', {
+              'pl-2': !showSidebar,
+            })}
           >
             <div className="shrink-0">
               {

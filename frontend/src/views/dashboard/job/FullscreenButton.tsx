@@ -9,10 +9,7 @@ interface FullscreenButtonProps {
   toggleFullscreen: () => void;
 }
 
-const FullscreenButton = ({
-  isFullscreen,
-  toggleFullscreen,
-}: FullscreenButtonProps) => {
+const FullscreenButton = ({ isFullscreen, toggleFullscreen }: FullscreenButtonProps) => {
   const map = useMap();
 
   useEffect(() => {

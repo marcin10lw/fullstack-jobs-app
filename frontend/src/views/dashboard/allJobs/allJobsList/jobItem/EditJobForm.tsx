@@ -14,16 +14,8 @@ interface EditJobFormProps {
 }
 
 const EditJobForm = ({ job, jobId, closeDrawer }: EditJobFormProps) => {
-  const {
-    register,
-    handleSubmit,
-    control,
-    errors,
-    hasAnyFieldChanged,
-    isJobUpdating,
-    onFormSubmit,
-    form,
-  } = useUpdateJob({ job, jobId, closeDrawer });
+  const { register, handleSubmit, control, errors, hasAnyFieldChanged, isJobUpdating, onFormSubmit, form } =
+    useUpdateJob({ job, jobId, closeDrawer });
 
   return (
     <MaxWidthWrapper>
@@ -80,11 +72,7 @@ const EditJobForm = ({ job, jobId, closeDrawer }: EditJobFormProps) => {
           </Form>
 
           <div className="mt-6">
-            <Button
-              disabled={isJobUpdating || !hasAnyFieldChanged}
-              isLoading={isJobUpdating}
-              className="w-full"
-            >
+            <Button disabled={isJobUpdating || !hasAnyFieldChanged} isLoading={isJobUpdating} className="w-full">
               Update
             </Button>
           </div>

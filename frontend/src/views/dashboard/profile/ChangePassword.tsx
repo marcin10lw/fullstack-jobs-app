@@ -27,25 +27,23 @@ const ChangePassword = () => {
 
   const { toast } = useToast();
 
-  const { mutate: changePassword, isLoading: isChangingPassword } = useMutation(
-    {
-      mutationFn: userAPI.changePassword,
-      onSuccess: () => {
-        toast({
-          title: 'Password changed successfully',
-          variant: 'success',
-        });
-        resetChangePasswordForm();
-      },
-      onError: (error: CustomAxiosError) => {
-        console.log(error);
-        toast({
-          title: errorMessage(error, 'Could not change password'),
-          variant: 'destructive',
-        });
-      },
+  const { mutate: changePassword, isLoading: isChangingPassword } = useMutation({
+    mutationFn: userAPI.changePassword,
+    onSuccess: () => {
+      toast({
+        title: 'Password changed successfully',
+        variant: 'success',
+      });
+      resetChangePasswordForm();
     },
-  );
+    onError: (error: CustomAxiosError) => {
+      console.log(error);
+      toast({
+        title: errorMessage(error, 'Could not change password'),
+        variant: 'destructive',
+      });
+    },
+  });
 
   const onChangePasswordSubmit = (formData: ChangePasswordSchema) => {
     changePassword(formData);
@@ -53,10 +51,7 @@ const ChangePassword = () => {
 
   return (
     <ContentWrapper title="Change password">
-      <form
-        onSubmit={handleSubmitNewPassword(onChangePasswordSubmit)}
-        noValidate
-      >
+      <form onSubmit={handleSubmitNewPassword(onChangePasswordSubmit)} noValidate>
         <div className="flex flex-col gap-4 md:max-w-[300px]">
           <LabeledRegisterInput
             register={registerChangePassword('currentPassword')}
@@ -74,11 +69,7 @@ const ChangePassword = () => {
             name="newPassword"
             type="password"
           />
-          <Button
-            disabled={isChangingPassword}
-            isLoading={isChangingPassword}
-            className="mt-3"
-          >
+          <Button disabled={isChangingPassword} isLoading={isChangingPassword} className="mt-3">
             Change Password
           </Button>
         </div>

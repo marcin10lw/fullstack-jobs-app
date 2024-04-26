@@ -7,11 +7,7 @@ interface ContentWrapperProps extends ContentWrapperElementProps {
   children?: React.ReactNode;
 }
 
-const ContentWrapper = ({
-  title,
-  children,
-  className,
-}: ContentWrapperProps) => {
+const ContentWrapper = ({ title, children, className }: ContentWrapperProps) => {
   return (
     <div
       className={cn(
@@ -19,11 +15,7 @@ const ContentWrapper = ({
         className,
       )}
     >
-      <div>
-        {title && (
-          <h4 className="mb-8 text-lg font-semibold tracking-wider">{title}</h4>
-        )}
-      </div>
+      <div>{title && <h4 className="mb-8 text-lg font-semibold tracking-wider">{title}</h4>}</div>
       {children}
     </div>
   );

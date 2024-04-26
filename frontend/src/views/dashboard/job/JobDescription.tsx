@@ -19,23 +19,22 @@ const JobDescription = ({ jobId, jobDescription }: JobDescriptionProps) => {
   const qc = useQueryClient();
   const { toast } = useToast();
 
-  const { mutate: updateJobDescription, isLoading: isUpdatingJobDescription } =
-    useMutation({
-      mutationFn: jobAPI.updateJobDescription,
-      onSuccess: () => {
-        toast({
-          title: 'Job description updated',
-          variant: 'success',
-        });
-        qc.invalidateQueries([JOB_BY_ID_QUERY_KEY]);
-      },
-      onError: () => {
-        toast({
-          title: 'Could not update job description',
-          variant: 'destructive',
-        });
-      },
-    });
+  const { mutate: updateJobDescription, isLoading: isUpdatingJobDescription } = useMutation({
+    mutationFn: jobAPI.updateJobDescription,
+    onSuccess: () => {
+      toast({
+        title: 'Job description updated',
+        variant: 'success',
+      });
+      qc.invalidateQueries([JOB_BY_ID_QUERY_KEY]);
+    },
+    onError: () => {
+      toast({
+        title: 'Could not update job description',
+        variant: 'destructive',
+      });
+    },
+  });
 
   const onUpdate = () => {
     if (jobDescription === newJobDescription) return;
@@ -55,10 +54,8 @@ const JobDescription = ({ jobId, jobDescription }: JobDescriptionProps) => {
         <div className="absolute right-0 top-[calc(100%-4px)]">
           <span
             className={cn('text-xs font-semibold', {
-              'text-destructive':
-                newJobDescription.length > maxJobDescriptionLength,
-              'text-muted-foreground':
-                newJobDescription.length <= maxJobDescriptionLength,
+              'text-destructive': newJobDescription.length > maxJobDescriptionLength,
+              'text-muted-foreground': newJobDescription.length <= maxJobDescriptionLength,
             })}
           >
             {newJobDescription.length}/{maxJobDescriptionLength}
@@ -67,9 +64,7 @@ const JobDescription = ({ jobId, jobDescription }: JobDescriptionProps) => {
       </div>
       <Button
         onClick={onUpdate}
-        disabled={
-          isUpdatingJobDescription || jobDescription === newJobDescription
-        }
+        disabled={isUpdatingJobDescription || jobDescription === newJobDescription}
         isLoading={isUpdatingJobDescription}
         spinnerClassName="size-6"
         size="sm"

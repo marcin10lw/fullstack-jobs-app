@@ -13,11 +13,7 @@ import VerifyEmail from './VerifyEmail';
 type ContextType = { user: User };
 
 const DashboardLayout = () => {
-  const {
-    data: userResponse,
-    isError,
-    isSuccess,
-  } = userRepository.useGetCurrentUser();
+  const { data: userResponse, isError, isSuccess } = userRepository.useGetCurrentUser();
 
   return (
     <>
@@ -32,11 +28,7 @@ const DashboardLayout = () => {
                   <Navbar user={userResponse.user} />
                   <ScrollArea className="h-[calc(100vh-96px)]">
                     <MaxWidthWrapper className="h-full px-4 py-8 md:px-8">
-                      <Outlet
-                        context={
-                          { user: userResponse.user } satisfies ContextType
-                        }
-                      />
+                      <Outlet context={{ user: userResponse.user } satisfies ContextType} />
                     </MaxWidthWrapper>
                   </ScrollArea>
                 </div>

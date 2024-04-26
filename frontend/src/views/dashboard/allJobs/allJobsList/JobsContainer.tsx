@@ -46,11 +46,7 @@ const JobsContainer = ({ jobsData }: JobsContainerProps) => {
       </h5>
       <AllJobsList jobs={jobs} />
       {numOfPages > 1 && (
-        <PageBtnContainer
-          currentPage={currentPage}
-          numOfPages={numOfPages}
-          scrollToJobs={scrollToJobs}
-        />
+        <PageBtnContainer currentPage={currentPage} numOfPages={numOfPages} scrollToJobs={scrollToJobs} />
       )}
     </section>
   );

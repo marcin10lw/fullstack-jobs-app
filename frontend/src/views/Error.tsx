@@ -11,19 +11,10 @@ const Error = () => {
     return (
       <main className="mx-auto flex min-h-screen items-center justify-center p-5 text-center">
         <div>
-          <img
-            src={notFountImage}
-            alt="not found"
-            className="m-[-3rem_0_2rem] w-full max-w-[600px]"
-          />
+          <img src={notFountImage} alt="not found" className="m-[-3rem_0_2rem] w-full max-w-[600px]" />
           <h3 className="mb-2 text-4xl">Page not found</h3>
-          <p className="mb-2 text-xl leading-6">
-            we can't seem to find the page you are looking for
-          </p>
-          <Link
-            to={ROUTES.dashboard}
-            className="text-lg capitalize text-primary"
-          >
+          <p className="mb-2 text-xl leading-6">we can't seem to find the page you are looking for</p>
+          <Link to={ROUTES.dashboard} className="text-lg capitalize text-primary">
             back home
           </Link>
         </div>

@@ -2,11 +2,7 @@ import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
-import {
-  ALL_JOBS_QUERY_KEY,
-  JOB_BY_ID_QUERY_KEY,
-  JOB_STATS_QUERY_KEY,
-} from './constants';
+import { ALL_JOBS_QUERY_KEY, JOB_BY_ID_QUERY_KEY, JOB_STATS_QUERY_KEY } from './constants';
 import { jobAPI } from './jobApiAdapter';
 import { searchParamsDefaultValues } from 'src/views/dashboard/allJobs/search/constants';
 

@@ -15,22 +15,14 @@ const DatePicker = () => {
       <PopoverTrigger asChild>
         <Button
           variant={'default'}
-          className={cn(
-            'w-[240px] justify-start text-left font-normal',
-            !date && 'text-muted-foreground',
-          )}
+          className={cn('w-[240px] justify-start text-left font-normal', !date && 'text-muted-foreground')}
         >
           <CalendarIcon className="mr-2 h-4 w-4" />
           {date ? dayjs(date).format('DD/MM/YYYY') : <span>Pick a date</span>}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0" align="start">
-        <Calendar
-          mode="single"
-          selected={date}
-          onSelect={setDate}
-          initialFocus
-        />
+        <Calendar mode="single" selected={date} onSelect={setDate} initialFocus />
       </PopoverContent>
     </Popover>
   );

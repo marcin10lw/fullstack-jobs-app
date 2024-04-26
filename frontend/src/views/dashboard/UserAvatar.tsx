@@ -10,12 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from 'src/components/ui/dropdown-menu';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from 'src/components/ui/tooltip';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from 'src/components/ui/tooltip';
 import { useToast } from 'src/components/ui/use-toast';
 import { authAPI } from 'src/infrasctucture/auth/authApiAdapter';
 import { User } from 'src/infrasctucture/user/types';
@@ -52,14 +47,8 @@ const UserAvatar = ({ user }: LogoutContainerProps) => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Avatar className="size-8 cursor-pointer">
-          <AvatarImage
-            src={user.avatar}
-            alt="profile picture"
-            className="object-cover"
-          />
-          <AvatarFallback className="text-sm">
-            {getUserInitials(user)}
-          </AvatarFallback>
+          <AvatarImage src={user.avatar} alt="profile picture" className="object-cover" />
+          <AvatarFallback className="text-sm">{getUserInitials(user)}</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
 
@@ -70,9 +59,7 @@ const UserAvatar = ({ user }: LogoutContainerProps) => {
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <p className="w-fit max-w-full truncate text-sm text-muted-foreground">
-                  {user.email}
-                </p>
+                <p className="w-fit max-w-full truncate text-sm text-muted-foreground">{user.email}</p>
               </TooltipTrigger>
               <TooltipContent align="end" className="bg-secondary">
                 <p className="text-sm text-muted-foreground">{user.email}</p>
@@ -105,11 +92,7 @@ const UserAvatar = ({ user }: LogoutContainerProps) => {
               logoutUser();
             }}
           >
-            {isLoggingOut ? (
-              <Loader2 className="size-4 animate-spin" />
-            ) : (
-              'Logout'
-            )}
+            {isLoggingOut ? <Loader2 className="size-4 animate-spin" /> : 'Logout'}
           </button>
         </DropdownMenuItem>
       </DropdownMenuContent>

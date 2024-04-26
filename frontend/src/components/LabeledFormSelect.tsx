@@ -17,13 +17,7 @@ interface LabeledFormSelectProps {
   children?: React.ReactNode;
 }
 
-const LabeledFormSelect = ({
-  label,
-  options,
-  children,
-  value,
-  onOptionChange,
-}: LabeledFormSelectProps) => {
+const LabeledFormSelect = ({ label, options, children, value, onOptionChange }: LabeledFormSelectProps) => {
   return (
     <FormItem className="space-y-[2px]">
       <FormLabel className="font-normal capitalize">{label}</FormLabel>

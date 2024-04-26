@@ -9,11 +9,7 @@ import { useToast } from 'src/components/ui/use-toast';
 const GeneralStats = () => {
   const navigate = useNavigate();
 
-  const {
-    data: appStats,
-    status,
-    isError,
-  } = userRepository.useGetAllUsersStats();
+  const { data: appStats, status, isError } = userRepository.useGetAllUsersStats();
 
   const { toast } = useToast();
 
@@ -34,12 +30,7 @@ const GeneralStats = () => {
 
     return (
       <section className="grid gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-3">
-        <StatItem
-          title="current users"
-          count={users}
-          color="text-foreground"
-          icon={<Users className="size-10" />}
-        />
+        <StatItem title="current users" count={users} color="text-foreground" icon={<Users className="size-10" />} />
         <StatItem
           title="current jobs"
           count={jobs}

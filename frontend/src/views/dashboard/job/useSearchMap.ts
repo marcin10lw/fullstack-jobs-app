@@ -26,9 +26,7 @@ interface SearchResult {
 const useSearchMap = () => {
   const [query, setQuery] = useState('');
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
-  const [selectedResult, setSelectedResult] = useState<SearchResult | null>(
-    null,
-  );
+  const [selectedResult, setSelectedResult] = useState<SearchResult | null>(null);
 
   const map = useMap();
 

@@ -1,10 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 import { ROUTES } from 'src/routes';
 
-const BASE_URL =
-  process.env.NODE_ENV === 'production'
-    ? import.meta.env.VITE_BASE_URL
-    : 'http://localhost:8080/api/v1';
+const BASE_URL = process.env.NODE_ENV === 'production' ? import.meta.env.VITE_BASE_URL : 'http://localhost:8080/api/v1';
 
 export const restApi = {
   private: axios.create({
@@ -27,10 +24,7 @@ restApi.private.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    if (
-      error.response.status === 401 &&
-      error.config.url === '/auth/refreshToken'
-    ) {
+    if (error.response.status === 401 && error.config.url === '/auth/refreshToken') {
       window.location.replace(ROUTES.login);
       return;
     }

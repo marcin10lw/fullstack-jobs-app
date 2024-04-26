@@ -6,8 +6,7 @@ import { ROUTES } from 'src/routes';
 import useLoginUser from './useLoginUser';
 
 const LoginForm = () => {
-  const { status, errors, handleSubmit, onFormSubmit, register, onLoginDemo } =
-    useLoginUser();
+  const { status, errors, handleSubmit, onFormSubmit, register, onLoginDemo } = useLoginUser();
 
   return (
     <form onSubmit={handleSubmit(onFormSubmit)} noValidate>
@@ -51,10 +50,7 @@ const LoginForm = () => {
 
       <p className="mt-6 text-center leading-6">
         Not a member yet?{' '}
-        <Link
-          to={ROUTES.register}
-          className="ml-1 font-medium tracking-wide text-primary"
-        >
+        <Link to={ROUTES.register} className="ml-1 font-medium tracking-wide text-primary">
           Register
         </Link>
       </p>

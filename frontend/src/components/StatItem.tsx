@@ -1,9 +1,4 @@
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from 'src/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from 'src/components/ui/card';
 import { cn } from 'src/lib/utils';
 
 type StatItemProps = {
@@ -28,11 +23,7 @@ const StatItem = (stat: StatItemProps) => {
       </CardHeader>
       <CardContent>
         <div className="flex items-center justify-between">
-          <span
-            className={`block text-5xl font-bold ${stat.color} leading-loose`}
-          >
-            {stat.count}
-          </span>
+          <span className={`block text-5xl font-bold ${stat.color} leading-loose`}>{stat.count}</span>
           {stat.icon}
         </div>
       </CardContent>

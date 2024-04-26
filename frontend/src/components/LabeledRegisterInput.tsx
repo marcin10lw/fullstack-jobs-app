@@ -35,12 +35,7 @@ const LabeledRegisterInput = ({
         {label}
       </Label>
       <div className="relative">
-        <Input
-          {...register}
-          type={showPassword ? 'text' : type}
-          id={name}
-          className="mt-[2px]"
-        />
+        <Input {...register} type={showPassword ? 'text' : type} id={name} className="mt-[2px]" />
         {withPasswordToggle && (
           <Button
             onClick={() => setShowPassword((prev) => !prev)}
@@ -48,20 +43,11 @@ const LabeledRegisterInput = ({
             className="absolute right-0 top-1/2 -translate-y-1/2"
             variant="link"
           >
-            {showPassword ? (
-              <Eye className="h-5 w-5" />
-            ) : (
-              <EyeOff className="h-5 w-5" />
-            )}
+            {showPassword ? <Eye className="h-5 w-5" /> : <EyeOff className="h-5 w-5" />}
           </Button>
         )}
       </div>
-      {error?.message && (
-        <ErrorMessage
-          isAbsolute={positionErrorAbsolute}
-          errorMessage={error.message}
-        />
-      )}
+      {error?.message && <ErrorMessage isAbsolute={positionErrorAbsolute} errorMessage={error.message} />}
       {children}
     </div>
   );

@@ -6,10 +6,7 @@ import { useToast } from 'src/components/ui/use-toast';
 
 import { authAPI } from 'src/infrasctucture/auth/authApiAdapter';
 import { ROUTES } from 'src/routes';
-import {
-  RegisterFormDataSchema,
-  registerFormDataSchema,
-} from 'src/schema/Register';
+import { RegisterFormDataSchema, registerFormDataSchema } from 'src/schema/Register';
 
 export const useRegisterUser = () => {
   const navigate = useNavigate();

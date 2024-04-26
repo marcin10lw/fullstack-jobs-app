@@ -3,10 +3,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 
 import { useToast } from 'src/components/ui/use-toast';
-import {
-  ALL_JOBS_QUERY_KEY,
-  JOB_BY_ID_QUERY_KEY,
-} from 'src/infrasctucture/job/constants';
+import { ALL_JOBS_QUERY_KEY, JOB_BY_ID_QUERY_KEY } from 'src/infrasctucture/job/constants';
 import { jobAPI } from 'src/infrasctucture/job/jobApiAdapter';
 import { checkHasAnyFieldChanged } from 'src/lib/helpers/checkHasAnyFieldChanged';
 import errorMessage from 'src/lib/helpers/errorMessage';
@@ -46,10 +43,7 @@ export const useUpdateJob = ({ job, jobId, closeDrawer }: Props) => {
   } = form;
 
   const currentFormValues = watch();
-  const hasAnyFieldChanged = checkHasAnyFieldChanged(
-    currentFormValues,
-    initialJob,
-  );
+  const hasAnyFieldChanged = checkHasAnyFieldChanged(currentFormValues, initialJob);
 
   const { mutate: updateJob, isLoading: isJobUpdating } = useMutation({
     mutationFn: (job: InferJob) => jobAPI.updateJobById(job, jobId),

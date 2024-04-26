@@ -7,15 +7,8 @@ import { cn } from 'src/lib/utils';
 import { useVerifyEmail } from './useVerifyEmail';
 
 const VerifyEmail = () => {
-  const {
-    otp,
-    setOtp,
-    isSendingVerificationCode,
-    isVerifyingEmail,
-    showSendButton,
-    onComplete,
-    sendVerificationCode,
-  } = useVerifyEmail();
+  const { otp, setOtp, isSendingVerificationCode, isVerifyingEmail, showSendButton, onComplete, sendVerificationCode } =
+    useVerifyEmail();
 
   return (
     <ImageWrapper>

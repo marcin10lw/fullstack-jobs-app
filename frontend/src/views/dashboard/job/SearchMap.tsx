@@ -3,19 +3,13 @@ import { useMap } from 'react-leaflet';
 
 import { Button } from 'src/components/ui/button';
 import { Input } from 'src/components/ui/input';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from 'src/components/ui/tooltip';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from 'src/components/ui/tooltip';
 import useSearchMap from './useSearchMap';
 
 const SearchMap = () => {
   const map = useMap();
 
-  const { query, setQuery, onResultClick, searchResults, selectedResult } =
-    useSearchMap();
+  const { query, setQuery, onResultClick, searchResults, selectedResult } = useSearchMap();
 
   return (
     <div className="relative">
@@ -26,11 +20,7 @@ const SearchMap = () => {
           placeholder="Search"
           className="h-[36px] w-full bg-secondary pr-9"
         />
-        <Button
-          variant="link"
-          className="absolute right-0 top-0 h-[36px] px-2"
-          onClick={() => setQuery('')}
-        >
+        <Button variant="link" className="absolute right-0 top-0 h-[36px] px-2" onClick={() => setQuery('')}>
           <X className="size-4 text-muted-foreground" />
         </Button>
       </div>

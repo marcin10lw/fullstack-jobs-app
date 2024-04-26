@@ -16,13 +16,7 @@ interface SelectProps {
   children?: React.ReactNode;
 }
 
-const Select = ({
-  label,
-  options,
-  value,
-  onOptionChange,
-  children,
-}: SelectProps) => {
+const Select = ({ label, options, value, onOptionChange, children }: SelectProps) => {
   return (
     <ShadcnSelect value={value} onValueChange={onOptionChange}>
       <SelectTrigger className="relative w-full">

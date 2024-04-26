@@ -1,12 +1,4 @@
-import {
-  ResponsiveContainer,
-  BarChart as Chart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-} from 'recharts';
+import { ResponsiveContainer, BarChart as Chart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import { MonthlyApplications } from 'src/infrasctucture/job/types';
 
 type BarChartProps = {

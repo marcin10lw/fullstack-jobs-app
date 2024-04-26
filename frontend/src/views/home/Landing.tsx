@@ -20,17 +20,13 @@ const Landing = () => {
               jobs <span className="text-primary">tracking</span> app
             </h1>
             <p className="mb-6 max-w-[35rem] text-lg leading-loose text-foreground">
-              Discover the ease of managing your job applications with our app.
-              Say goodbye to scattered notes and endless spreadsheets – simply
-              add the jobs you've applied for, and let our app keep you
-              organized throughout your job search journey.
+              Discover the ease of managing your job applications with our app. Say goodbye to scattered notes and
+              endless spreadsheets – simply add the jobs you've applied for, and let our app keep you organized
+              throughout your job search journey.
             </p>
 
             <div className="flex items-center gap-4">
-              <Link
-                to={ROUTES.register}
-                className={buttonVariants({ className: 'tracking-wider' })}
-              >
+              <Link to={ROUTES.register} className={buttonVariants({ className: 'tracking-wider' })}>
                 Register
               </Link>
 

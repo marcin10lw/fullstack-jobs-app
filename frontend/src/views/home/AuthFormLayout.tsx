@@ -1,11 +1,6 @@
 import ImageWrapper from 'src/components/ImageWrapper';
 import LogoWithText from 'src/components/LogoWithText';
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from 'src/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from 'src/components/ui/card';
 
 interface LayoutProps {
   title: string;

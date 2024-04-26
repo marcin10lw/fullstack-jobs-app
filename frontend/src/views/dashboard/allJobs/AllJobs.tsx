@@ -4,11 +4,7 @@ import SearchContainer from 'src/views/dashboard/allJobs/search/SearchContainer'
 import AllJobsSkeleton from './AllJobsSkeleton';
 
 const AllJobs = () => {
-  const {
-    data: jobsData,
-    isLoading,
-    isSuccess,
-  } = jobRepository.useGetAllJobs();
+  const { data: jobsData, isLoading, isSuccess } = jobRepository.useGetAllJobs();
 
   if (isLoading) return <AllJobsSkeleton />;
   if (isSuccess) {

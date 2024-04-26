@@ -18,9 +18,7 @@ type JobInfoProps = {
 const JobInfo = ({ icon, text }: JobInfoProps) => {
   return (
     <div className="flex items-center">
-      <span className="mr-4 flex items-center text-base text-[--text-secondary-color]">
-        {icon}
-      </span>
+      <span className="mr-4 flex items-center text-base text-[--text-secondary-color]">{icon}</span>
       <span className="capitalize tracking-[--letter-spacing]">{text}</span>
     </div>
   );
@@ -42,9 +40,7 @@ const JobItem = ({ job }: JobProps) => {
           </div>
           <div>
             <h5 className="mb-2">{job.position}</h5>
-            <p className="capitalize tracking-widest text-muted-foreground">
-              {job.company}
-            </p>
+            <p className="capitalize tracking-widest text-muted-foreground">{job.company}</p>
           </div>
           <ChevronRight className="size-8 text-foreground/50 transition-all duration-300 group-hover:translate-x-1 group-hover:text-foreground" />
         </header>
@@ -55,15 +51,11 @@ const JobItem = ({ job }: JobProps) => {
           <JobInfo icon={<Calendar />} text={date} />
           <JobInfo icon={<Briefcase />} text={job.jobType.replace('_', '-')} />
           <div
-            className={cn(
-              'flex h-[30px] w-[100px] items-center justify-center rounded-sm text-white',
-              {
-                'bg-slate-500 dark:bg-slate-600': job.jobStatus === 'pending',
-                'bg-purple-800 dark:bg-purple-900':
-                  job.jobStatus === 'interview',
-                'bg-red-800 dark:bg-red-950': job.jobStatus === 'declined',
-              },
-            )}
+            className={cn('flex h-[30px] w-[100px] items-center justify-center rounded-sm text-white', {
+              'bg-slate-500 dark:bg-slate-600': job.jobStatus === 'pending',
+              'bg-purple-800 dark:bg-purple-900': job.jobStatus === 'interview',
+              'bg-red-800 dark:bg-red-950': job.jobStatus === 'declined',
+            })}
           >
             {job.jobStatus}
           </div>
