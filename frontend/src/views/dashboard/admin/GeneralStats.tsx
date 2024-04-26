@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { CalendarCheck, Users } from 'lucide-react';
 
 import { userRepository } from 'src/infrasctucture/user/userRepository';
-import StatItem from '../stats/StatItem';
+import StatItem from 'src/components/StatItem';
 import { useToast } from 'src/components/ui/use-toast';
 
-const AdminContent = () => {
+const GeneralStats = () => {
   const navigate = useNavigate();
 
   const {
@@ -51,4 +51,4 @@ const AdminContent = () => {
   }
   return <></>;
 };
-export default AdminContent;
+export default GeneralStats;

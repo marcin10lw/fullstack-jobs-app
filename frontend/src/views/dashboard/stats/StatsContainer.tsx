@@ -1,7 +1,7 @@
 import { Briefcase, Bug, CalendarCheck } from 'lucide-react';
 
 import { DefaultStats } from 'src/infrasctucture/job/types';
-import StatItem from './StatItem';
+import StatItem from 'src/components/StatItem';
 
 type StatsContainerProps = {
   defaultStats: DefaultStats;

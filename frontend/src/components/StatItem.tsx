@@ -3,7 +3,7 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
-} from '../../../components/ui/card';
+} from 'src/components/ui/card';
 import { cn } from 'src/lib/utils';
 
 type StatItemProps = {

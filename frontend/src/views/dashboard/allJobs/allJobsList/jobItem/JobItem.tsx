@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
 
 import advancedFormat from 'dayjs/plugin/advancedFormat';
-
 import { cn } from 'src/lib/utils';
 import { Job as JobType } from 'src/schema/Job';
 import JobItemFooter from './JobItemFooter';
@@ -59,9 +58,10 @@ const JobItem = ({ job }: JobProps) => {
             className={cn(
               'flex h-[30px] w-[100px] items-center justify-center rounded-sm text-white',
               {
-                'bg-slate-600': job.jobStatus === 'pending',
-                'bg-purple-900': job.jobStatus === 'interview',
-                'bg-red-950': job.jobStatus === 'declined',
+                'bg-slate-500 dark:bg-slate-600': job.jobStatus === 'pending',
+                'bg-purple-800 dark:bg-purple-900':
+                  job.jobStatus === 'interview',
+                'bg-red-800 dark:bg-red-950': job.jobStatus === 'declined',
               },
             )}
           >

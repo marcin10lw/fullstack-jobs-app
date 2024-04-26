@@ -1,7 +1,8 @@
 import { useLayoutEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../DashboardLayout';
-import AdminContent from './AdminContent';
+import GeneralStats from './GeneralStats';
+import UsersTable from './UsersTable';
 
 const Admin = () => {
   const { user } = useUser();
@@ -11,6 +12,11 @@ const Admin = () => {
     if (user?.role !== 'admin') navigate(-1);
   }, [user, navigate]);
 
-  return <AdminContent />;
+  return (
+    <section className="flex flex-col gap-8">
+      <GeneralStats />
+      <UsersTable />
+    </section>
+  );
 };
 export default Admin;
