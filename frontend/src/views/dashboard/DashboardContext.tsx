@@ -16,7 +16,7 @@ type DashboardState = {
   themeMode: ThemeMode;
   themeColor: ThemeColor;
   toggleSidebar: () => void;
-  toggleTheme: () => void;
+  toggleThemeMode: () => void;
   changeThemeColor: (themeColor: ThemeColor) => void;
 };
 
@@ -27,7 +27,7 @@ const DashboardProvider = ({ children }: PropsWithChildren) => {
   const [themeMode, setThemeMode] = useState<ThemeMode>(checkDefaultThemeMode());
   const [themeColor, setThemeColor] = useState<ThemeColor>(checkDefaultThemeColor());
 
-  const toggleTheme = () => {
+  const toggleThemeMode = () => {
     setThemeMode((theme) => {
       if (theme === 'dark') {
         return 'light';
@@ -59,7 +59,7 @@ const DashboardProvider = ({ children }: PropsWithChildren) => {
     showSidebar,
     themeMode,
     themeColor,
-    toggleTheme,
+    toggleThemeMode,
     changeThemeColor,
     toggleSidebar,
   };
