@@ -13,8 +13,5 @@ export const checkDefaultTheme = () => {
     LOCAL_STORAGE_THEME_KEY,
   );
 
-  const isDarkTheme = localStorageTheme === 'dark';
-  document.body.classList.toggle('dark', isDarkTheme);
-
   return localStorageTheme ?? userPrefersTheme;
 };

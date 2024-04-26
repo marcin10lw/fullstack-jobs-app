@@ -1,4 +1,3 @@
-import { useLayoutEffect } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import { checkDefaultTheme } from './lib/helpers/checkDefaultTheme';
@@ -73,12 +72,6 @@ const router = createBrowserRouter([
 checkDefaultTheme();
 
 const App = () => {
-  const theme = checkDefaultTheme();
-
-  useLayoutEffect(() => {
-    document.body.classList.toggle('dark', theme === 'dark');
-  }, [theme]);
-
   return <RouterProvider router={router} />;
 };
 

@@ -46,7 +46,7 @@ const DashboardProvider = ({ children }: PropsWithChildren) => {
 
   useEffect(() => {
     saveValueToLocalStorage(LOCAL_STORAGE_THEME_KEY, theme);
-    document.body.classList.toggle('dark', theme === 'dark');
+    document.body.classList.value = theme;
   }, [theme]);
 
   const toggleSidebar = () => {
