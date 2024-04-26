@@ -13,7 +13,7 @@ const AuthFormLayout = ({ title, children }: LayoutProps) => {
       <Card className="z-10 w-full max-w-[400px] border-t-4 border-t-primary shadow-2xl">
         <CardHeader>
           <div className="mb-6 flex justify-center">
-            <LogoWithText />
+            <LogoWithText className="w-[180px]" />
           </div>
           <CardTitle className="text-center">{title}</CardTitle>
         </CardHeader>

@@ -10,15 +10,16 @@ import {
 } from 'src/components/ui/dropdown-menu';
 import useDashboardContext from './useDashboardContext';
 import { themeColorsList } from 'src/lib/helpers/themeColorsList';
+import { cn } from 'src/lib/utils';
 
 const ChangeThemeColor = () => {
-  const { changeThemeColor } = useDashboardContext();
+  const { themeColor, changeThemeColor, themeMode } = useDashboardContext();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button className="mr-4 size-6">
-          <Palette className="text-primary" />
+          <Palette className="text-foreground" />
         </button>
       </DropdownMenuTrigger>
 
@@ -29,10 +30,12 @@ const ChangeThemeColor = () => {
           return (
             <DropdownMenuItem
               key={title}
-              className="flex cursor-pointer items-center gap-3"
+              className={cn('flex cursor-pointer items-center gap-3', {
+                'bg-accent': themeColor === title,
+              })}
               onClick={() => changeThemeColor(title)}
             >
-              <span style={{ backgroundColor: color }} className="size-4 rounded-full" />
+              <span style={{ backgroundColor: color[themeMode] }} className="size-4 rounded-full" />
               <span className="capitalize">{title}</span>
             </DropdownMenuItem>
           );
