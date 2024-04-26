@@ -1,41 +1,34 @@
 import { PropsWithChildren, createContext, useEffect, useState } from 'react';
 
-import { Theme } from 'src/types';
-import { checkDefaultTheme } from 'src/lib/helpers/checkDefaultTheme';
-import {
-  getValueFromLocalStorage,
-  saveValueToLocalStorage,
-} from 'src/lib/helpers/localStorage';
 import {
   LOCAL_STORAGE_SIDEBAR_VISIBLE_KEY,
-  LOCAL_STORAGE_THEME_KEY,
+  LOCAL_STORAGE_THEME_COLOR_KEY,
+  LOCAL_STORAGE_THEME_MODE_KEY,
 } from 'src/common/constants';
-
-const getLocalStorageSidebarVisible = () => {
-  const localStorageTheme = getValueFromLocalStorage<boolean>(
-    LOCAL_STORAGE_SIDEBAR_VISIBLE_KEY,
-  );
-
-  return localStorageTheme ?? true;
-};
+import { buildBodyClassName } from 'src/lib/helpers/buildBodyClassName';
+import { getLocalStorageSidebarVisible } from 'src/lib/helpers/checkDefaultSidebarVisibility';
+import { checkDefaultThemeColor, checkDefaultThemeMode } from 'src/lib/helpers/checkDefaultTheme';
+import { saveValueToLocalStorage } from 'src/lib/helpers/localStorage';
+import { ThemeColor, ThemeMode } from 'src/types';
 
 type DashboardState = {
   showSidebar: boolean;
-  theme: Theme;
-  toggleTheme: () => void;
+  themeMode: ThemeMode;
+  themeColor: ThemeColor;
   toggleSidebar: () => void;
+  toggleTheme: () => void;
+  changeThemeColor: (themeColor: ThemeColor) => void;
 };
 
 export const DashboardContext = createContext({} as DashboardState);
 
 const DashboardProvider = ({ children }: PropsWithChildren) => {
-  const [showSidebar, setShowSidebar] = useState<boolean>(
-    getLocalStorageSidebarVisible(),
-  );
-  const [theme, setTheme] = useState<Theme>(checkDefaultTheme());
+  const [showSidebar, setShowSidebar] = useState<boolean>(getLocalStorageSidebarVisible());
+  const [themeMode, setThemeMode] = useState<ThemeMode>(checkDefaultThemeMode());
+  const [themeColor, setThemeColor] = useState<ThemeColor>(checkDefaultThemeColor());
 
   const toggleTheme = () => {
-    setTheme((theme) => {
+    setThemeMode((theme) => {
       if (theme === 'dark') {
         return 'light';
       }
@@ -44,10 +37,15 @@ const DashboardProvider = ({ children }: PropsWithChildren) => {
     });
   };
 
+  const changeThemeColor = (themeColor: ThemeColor) => setThemeColor(themeColor);
+
   useEffect(() => {
-    saveValueToLocalStorage(LOCAL_STORAGE_THEME_KEY, theme);
-    document.body.classList.value = theme;
-  }, [theme]);
+    const bodyClassName = buildBodyClassName(themeColor, themeMode);
+    document.body.classList.value = bodyClassName;
+
+    saveValueToLocalStorage(LOCAL_STORAGE_THEME_MODE_KEY, themeMode);
+    saveValueToLocalStorage(LOCAL_STORAGE_THEME_COLOR_KEY, themeColor);
+  }, [themeMode, themeColor]);
 
   const toggleSidebar = () => {
     setShowSidebar((showSidebar) => !showSidebar);
@@ -58,17 +56,15 @@ const DashboardProvider = ({ children }: PropsWithChildren) => {
   }, [showSidebar]);
 
   const providerValue: DashboardState = {
-    theme,
     showSidebar,
+    themeMode,
+    themeColor,
     toggleTheme,
+    changeThemeColor,
     toggleSidebar,
   };
 
-  return (
-    <DashboardContext.Provider value={providerValue}>
-      {children}
-    </DashboardContext.Provider>
-  );
+  return <DashboardContext.Provider value={providerValue}>{children}</DashboardContext.Provider>;
 };
 
 export default DashboardProvider;

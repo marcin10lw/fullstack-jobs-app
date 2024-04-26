@@ -4,7 +4,8 @@ export type SearchOnChange = React.ChangeEvent<
   HTMLInputElement | HTMLSelectElement
 >;
 
-export type Theme = 'light' | 'dark';
+export type ThemeMode = 'light' | 'dark';
+export type ThemeColor = 'purple' | 'slate';
 
 export type CustomAxiosError = AxiosError<{ msg?: string }>;
 

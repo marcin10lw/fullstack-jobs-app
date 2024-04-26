@@ -1,7 +1,5 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import { checkDefaultTheme } from './lib/helpers/checkDefaultTheme';
-
 import { ROUTES } from './routes';
 import Error from './views/Error';
 import DashboardLayout from './views/dashboard/DashboardLayout';
@@ -15,6 +13,8 @@ import HomeLayout from './views/home/HomeLayout';
 import Landing from './views/home/Landing';
 import Login from './views/home/Login';
 import Register from './views/home/Register';
+import { checkDefaultThemeColor, checkDefaultThemeMode } from './lib/helpers/checkDefaultTheme';
+import { buildBodyClassName } from './lib/helpers/buildBodyClassName';
 
 const router = createBrowserRouter([
   {
@@ -69,9 +69,14 @@ const router = createBrowserRouter([
   },
 ]);
 
-checkDefaultTheme();
-
 const App = () => {
+  const defaultThemeMode = checkDefaultThemeMode();
+  const defaultThemeColor = checkDefaultThemeColor();
+
+  const defaultBodyClassName = buildBodyClassName(defaultThemeColor, defaultThemeMode);
+
+  document.body.classList.value = defaultBodyClassName;
+
   return <RouterProvider router={router} />;
 };
 
