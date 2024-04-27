@@ -15,24 +15,24 @@ export const themeColorsConfig: Record<ThemeColor, Color> = {
     dark: '#f8fafc',
   },
   rose: {
-    light: '#e11d48',
-    dark: '#e11d48',
+    light: '#b04b62',
+    dark: '#b04b62',
   },
   orange: {
-    light: '#f97316',
-    dark: '#ea580c',
+    light: '#ca6f40',
+    dark: '#d06731',
   },
   green: {
-    light: '#16a34a',
-    dark: '#22c55e',
+    light: '#3e9e62',
+    dark: '#49b872',
   },
   blue: {
-    light: '#2563eb',
-    dark: '#3b82f6',
+    light: '#4e7ece',
+    dark: '#5588dc',
   },
   yellow: {
-    light: '#facc15',
-    dark: '#facc15',
+    light: '#dec14e',
+    dark: '#c8ae46',
   },
 };
 

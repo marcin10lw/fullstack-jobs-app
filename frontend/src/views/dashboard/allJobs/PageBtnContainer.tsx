@@ -23,10 +23,10 @@ const PageBtnContainer = ({ currentPage, numOfPages, scrollToJobs }: PageBtnCont
     return (
       <button
         className={cn(
-          'h-[40px] w-[50px] shrink-0 cursor-pointer text-xl font-bold transition-colors duration-300 ease-in-out first:rounded-l-sm last:rounded-r-sm hover:bg-primary hover:text-white',
+          'h-[40px] w-[50px] shrink-0 cursor-pointer text-xl font-bold transition-colors duration-300 ease-in-out first:rounded-l-sm last:rounded-r-sm hover:bg-primary/50',
           {
-            'bg-primary text-white': activeClass,
-            'bg-transparent text-primary': !activeClass,
+            'bg-primary text-primary-foreground': activeClass,
+            'bg-transparent': !activeClass,
           },
         )}
         key={pageNumber}
