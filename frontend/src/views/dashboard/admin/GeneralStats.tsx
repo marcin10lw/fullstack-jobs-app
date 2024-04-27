@@ -2,7 +2,7 @@ import { useLayoutEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CalendarCheck, Users } from 'lucide-react';
 
-import { userRepository } from 'src/infrasctucture/user/userRepository';
+import { userRepository } from 'src/api/user/userRepository';
 import StatItem from 'src/components/StatItem';
 import { useToast } from 'src/components/ui/use-toast';
 

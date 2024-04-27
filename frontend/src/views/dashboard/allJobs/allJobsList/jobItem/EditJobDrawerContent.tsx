@@ -1,5 +1,5 @@
 import { Loader2 } from 'lucide-react';
-import { jobRepository } from 'src/infrasctucture/job/jobRepository';
+import { jobRepository } from 'src/api/job/jobRepository';
 import EditJobForm from 'src/views/dashboard/allJobs/allJobsList/jobItem/EditJobForm';
 
 interface EditJobDrawerContentProps {

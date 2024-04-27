@@ -1,6 +1,6 @@
 import LogoWithText from 'src/components/svg/LogoWithText';
 import useDashboardContext from 'src/views/dashboard/useDashboardContext';
-import { UserRole } from 'src/infrasctucture/user/types';
+import { UserRole } from 'src/api/user/types';
 import { cn } from 'src/lib/utils';
 import DesktopNavLinks from './DesktopNavLinks';
 

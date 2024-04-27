@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { Button } from 'src/components/ui/button';
 import { Textarea } from 'src/components/ui/textarea';
 import { useToast } from 'src/components/ui/use-toast';
-import { JOB_BY_ID_QUERY_KEY } from 'src/infrasctucture/job/constants';
-import { jobAPI } from 'src/infrasctucture/job/jobApiAdapter';
+import { JOB_BY_ID_QUERY_KEY } from 'src/api/job/constants';
+import { jobAPI } from 'src/api/job/jobApiAdapter';
 import { cn } from 'src/lib/utils';
 
 interface JobDescriptionProps {

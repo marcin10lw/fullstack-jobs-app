@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from 'src/components/ui/use-toast';
 
-import { authAPI } from 'src/infrasctucture/auth/authApiAdapter';
+import { authAPI } from 'src/api/auth/authApiAdapter';
 import { ROUTES } from 'src/routes';
 import { LoginFormDataSchema, loginFormDataSchema } from 'src/schema/Login';
 import { CustomAxiosError } from 'src/types';

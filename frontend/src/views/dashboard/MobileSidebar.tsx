@@ -2,7 +2,7 @@ import { AlignJustify, X } from 'lucide-react';
 import LogoWithText from 'src/components/svg/LogoWithText';
 
 import { useState } from 'react';
-import { UserRole } from 'src/infrasctucture/user/types';
+import { UserRole } from 'src/api/user/types';
 import { cn } from 'src/lib/utils';
 import MobileNavLinks from './MobileNavLinks';
 

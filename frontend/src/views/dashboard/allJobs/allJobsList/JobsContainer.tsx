@@ -1,4 +1,4 @@
-import { ApiJobsResponse } from 'src/infrasctucture/job/types';
+import { ApiJobsResponse } from 'src/api/job/types';
 import AllJobsList from './AllJobsList';
 import PageBtnContainer from '../PageBtnContainer';
 import { useRef } from 'react';

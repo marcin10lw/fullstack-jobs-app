@@ -2,13 +2,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 
-import { userAPI } from 'src/infrasctucture/user/userApiAdapter';
+import { userAPI } from 'src/api/user/userApiAdapter';
 import { checkHasAnyFieldChanged } from 'src/lib/helpers/checkHasAnyFieldChanged';
 import errorMessage from 'src/lib/helpers/errorMessage';
 import { UpdatedUserSchema, updateUserSchema } from 'src/schema/User';
 import { CustomAxiosError } from 'src/types';
 import { useUser } from '../DashboardLayout';
-import { CURRENT_USER_QUERY_KEY } from 'src/infrasctucture/user/constants';
+import { CURRENT_USER_QUERY_KEY } from 'src/api/user/constants';
 import { useToast } from 'src/components/ui/use-toast';
 
 export const useUpdateUser = () => {

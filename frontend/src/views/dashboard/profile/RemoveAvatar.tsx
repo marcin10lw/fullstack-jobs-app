@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { Button } from 'src/components/ui/button';
-import { CURRENT_USER_QUERY_KEY } from 'src/infrasctucture/user/constants';
-import { userAPI } from 'src/infrasctucture/user/userApiAdapter';
+import { CURRENT_USER_QUERY_KEY } from 'src/api/user/constants';
+import { userAPI } from 'src/api/user/userApiAdapter';
 
 const RemoveAvatar = () => {
   const qc = useQueryClient();

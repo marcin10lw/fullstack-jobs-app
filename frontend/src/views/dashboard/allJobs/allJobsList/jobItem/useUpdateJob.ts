@@ -3,8 +3,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 
 import { useToast } from 'src/components/ui/use-toast';
-import { ALL_JOBS_QUERY_KEY, JOB_BY_ID_QUERY_KEY } from 'src/infrasctucture/job/constants';
-import { jobAPI } from 'src/infrasctucture/job/jobApiAdapter';
+import { ALL_JOBS_QUERY_KEY, JOB_BY_ID_QUERY_KEY } from 'src/api/job/constants';
+import { jobAPI } from 'src/api/job/jobApiAdapter';
 import { checkHasAnyFieldChanged } from 'src/lib/helpers/checkHasAnyFieldChanged';
 import errorMessage from 'src/lib/helpers/errorMessage';
 import { InferJob, Job, jobSchema } from 'src/schema/Job';

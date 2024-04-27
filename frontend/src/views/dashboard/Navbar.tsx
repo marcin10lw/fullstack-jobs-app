@@ -3,7 +3,7 @@ import { ListCollapse } from 'lucide-react';
 import LogoWithText from 'src/components/svg/LogoWithText';
 import MaxWidthWrapper from 'src/components/MaxWidthWrapper';
 import UserAvatar from 'src/views/dashboard/UserAvatar';
-import { User } from 'src/infrasctucture/user/types';
+import { User } from 'src/api/user/types';
 import { cn } from 'src/lib/utils';
 import useDashboardContext from 'src/views/dashboard/useDashboardContext';
 import ThemeModeToggle from './ThemeModeToggle';

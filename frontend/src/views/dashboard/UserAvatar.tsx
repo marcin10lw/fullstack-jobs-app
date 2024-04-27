@@ -12,8 +12,8 @@ import {
 } from 'src/components/ui/dropdown-menu';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from 'src/components/ui/tooltip';
 import { useToast } from 'src/components/ui/use-toast';
-import { authAPI } from 'src/infrasctucture/auth/authApiAdapter';
-import { User } from 'src/infrasctucture/user/types';
+import { authAPI } from 'src/api/auth/authApiAdapter';
+import { User } from 'src/api/user/types';
 import { getUserInitials } from 'src/lib/helpers/getUserInitials';
 import { ROUTES } from 'src/routes';
 

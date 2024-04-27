@@ -2,8 +2,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { Button, buttonVariants } from 'src/components/ui/button';
 import { useToast } from 'src/components/ui/use-toast';
-import { ALL_JOBS_QUERY_KEY } from 'src/infrasctucture/job/constants';
-import { jobAPI } from 'src/infrasctucture/job/jobApiAdapter';
+import { ALL_JOBS_QUERY_KEY } from 'src/api/job/constants';
+import { jobAPI } from 'src/api/job/jobApiAdapter';
 import errorMessage from 'src/lib/helpers/errorMessage';
 import { CustomAxiosError } from 'src/types';
 import EditJobDrawer from '../../../EditJobDrawer';

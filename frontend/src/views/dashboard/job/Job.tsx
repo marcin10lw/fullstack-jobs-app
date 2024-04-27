@@ -5,7 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import ContentWrapper from 'src/components/ContentWrapper';
 import NotFound from 'src/components/NotFound';
 import { buttonVariants } from 'src/components/ui/button';
-import { jobRepository } from 'src/infrasctucture/job/jobRepository';
+import { jobRepository } from 'src/api/job/jobRepository';
 import { ROUTES } from 'src/routes';
 import EditJobDrawer from '../EditJobDrawer';
 import ScreenSkeleton from '../ScreenSkeleton';

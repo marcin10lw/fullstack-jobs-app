@@ -6,7 +6,7 @@ import LabeledRegisterInput from 'src/components/LabeledRegisterInput';
 import { Button } from 'src/components/ui/button';
 import { ChangePasswordSchema, changePasswordSchema } from 'src/schema/User';
 import { useMutation } from '@tanstack/react-query';
-import { userAPI } from 'src/infrasctucture/user/userApiAdapter';
+import { userAPI } from 'src/api/user/userApiAdapter';
 import { useToast } from 'src/components/ui/use-toast';
 import errorMessage from 'src/lib/helpers/errorMessage';
 import { CustomAxiosError } from 'src/types';

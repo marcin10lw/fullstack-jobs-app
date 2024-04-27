@@ -2,8 +2,8 @@ import { Navigate, Outlet, useOutletContext } from 'react-router-dom';
 
 import MaxWidthWrapper from 'src/components/MaxWidthWrapper';
 import { ScrollArea } from 'src/components/ui/scroll-area';
-import { User } from 'src/infrasctucture/user/types';
-import { userRepository } from 'src/infrasctucture/user/userRepository';
+import { User } from 'src/api/user/types';
+import { userRepository } from 'src/api/user/userRepository';
 import { ROUTES } from 'src/routes';
 import DashboardProvider from 'src/views/dashboard/DashboardContext';
 import DesktopSidebar from './DesktopSidebar';

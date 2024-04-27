@@ -1,5 +1,5 @@
 import NotFound from 'src/components/NotFound';
-import { jobRepository } from 'src/infrasctucture/job/jobRepository';
+import { jobRepository } from 'src/api/job/jobRepository';
 import ChartsContainer from 'src/views/dashboard/stats/ChartsContainer';
 import StatsContainer from 'src/views/dashboard/stats/StatsContainer';
 import ScreenSkeleton from '../ScreenSkeleton';

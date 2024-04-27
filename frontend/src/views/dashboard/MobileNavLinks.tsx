@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 
-import { UserRole } from 'src/infrasctucture/user/types';
+import { UserRole } from 'src/api/user/types';
 import { links } from 'src/lib/helpers/links';
 import { cn } from 'src/lib/utils';
 import { ROUTES } from 'src/routes';

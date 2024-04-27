@@ -1,4 +1,4 @@
-import { jobRepository } from 'src/infrasctucture/job/jobRepository';
+import { jobRepository } from 'src/api/job/jobRepository';
 import JobsContainer from 'src/views/dashboard/allJobs/allJobsList/JobsContainer';
 import SearchContainer from 'src/views/dashboard/allJobs/search/SearchContainer';
 import AllJobsSkeleton from './AllJobsSkeleton';

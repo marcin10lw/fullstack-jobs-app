@@ -3,8 +3,8 @@ import { AxiosError } from 'axios';
 import { useState } from 'react';
 
 import { useToast } from 'src/components/ui/use-toast';
-import { authAPI } from 'src/infrasctucture/auth/authApiAdapter';
-import { CURRENT_USER_QUERY_KEY } from 'src/infrasctucture/user/constants';
+import { authAPI } from 'src/api/auth/authApiAdapter';
+import { CURRENT_USER_QUERY_KEY } from 'src/api/user/constants';
 
 export const useVerifyEmail = () => {
   const [otp, setOtp] = useState('');
