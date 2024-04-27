@@ -13,6 +13,7 @@ export const jobRepository = {
     const getAllJobsQuery = useQuery({
       queryKey: [ALL_JOBS_QUERY_KEY],
       queryFn: () => jobAPI.getAllJobs(searchParams),
+      refetchOnWindowFocus: false,
     });
 
     useEffect(() => {
