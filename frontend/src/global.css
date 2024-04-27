@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* VIOLET */
 .violet_light {
   --background: 0 0% 100%;
   --foreground: 224 71.4% 4.1%;
@@ -50,6 +51,7 @@
   --radius: 0.5rem;
 }
 
+/* SLATE */
 .slate_light {
   --background: 0 0% 100%;
   --foreground: 222.2 84% 4.9%;
@@ -66,7 +68,7 @@
   --accent: 210 40% 96.1%;
   --accent-foreground: 222.2 47.4% 11.2%;
   --destructive: 0 84.2% 60.2%;
-  --destructive_2: 338 68% 28%;
+  --destructive_2: 342 60% 37%;
   --destructive-foreground: 210 40% 98%;
   --border: 214.3 31.8% 91.4%;
   --input: 214.3 31.8% 91.4%;
@@ -90,7 +92,7 @@
   --accent: 217.2 32.6% 17.5%;
   --accent-foreground: 210 40% 98%;
   --destructive: 0 62.8% 30.6%;
-  --destructive_2: 338 68% 28%;
+  --destructive_2: 350 59% 32%;
   --destructive-foreground: 210 40% 98%;
   --border: 217.2 32.6% 17.5%;
   --input: 217.2 32.6% 17.5%;
@@ -98,6 +100,7 @@
   --radius: 0.5rem;
 }
 
+/* ROSE */
 .rose_light {
   --background: 0 0% 100%;
   --foreground: 240 10% 3.9%;
@@ -146,6 +149,7 @@
   --radius: 0.5rem;
 }
 
+/* ORANGE */
 .orange_light {
   --background: 0 0% 100%;
   --foreground: 20 14.3% 4.1%;
@@ -194,6 +198,7 @@
   --radius: 0.5rem;
 }
 
+/* GREEN */
 .green_light {
   --background: 0 0% 100%;
   --foreground: 240 10% 3.9%;
@@ -242,6 +247,7 @@
   --radius: 0.5rem;
 }
 
+/* BLUE */
 .blue_light {
   --background: 0 0% 100%;
   --foreground: 222.2 84% 4.9%;
@@ -290,6 +296,7 @@
   --radius: 0.5rem;
 }
 
+/* YELLOW */
 .yellow_light {
   --background: 0 0% 100%;
   --foreground: 20 14.3% 4.1%;

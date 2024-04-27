@@ -50,14 +50,9 @@ const JobItem = ({ job }: JobProps) => {
           <JobInfo icon={<Navigation />} text={job.jobLocation} />
           <JobInfo icon={<Calendar />} text={date} />
           <JobInfo icon={<Briefcase />} text={job.jobType.replace('_', '-')} />
-          <div
-            className={cn('flex h-[30px] w-[100px] items-center justify-center rounded-sm text-white', {
-              'bg-slate-500 dark:bg-slate-600': job.jobStatus === 'pending',
-              'bg-purple-800 dark:bg-purple-900': job.jobStatus === 'interview',
-              'bg-red-800 dark:bg-red-950': job.jobStatus === 'declined',
-            })}
-          >
-            {job.jobStatus}
+          <div className={cn('flex h-[30px] items-center justify-start gap-2 rounded-sm text-sm text-white')}>
+            <span>Status:</span>
+            <span className="uppercase">{job.jobStatus}</span>
           </div>
         </div>
         <JobItemFooter jobId={job.id} />

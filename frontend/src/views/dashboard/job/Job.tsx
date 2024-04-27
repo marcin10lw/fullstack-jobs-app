@@ -49,7 +49,7 @@ const Job = () => {
           <ArrowLeft className="size-5" />
           Back to jobs
         </Link>
-        <section className=" mt-8 md:mt-2">
+        <section className=" mt-8 md:mt-3">
           <div className="flex items-center justify-between">
             <h1 className="text-xl">Jobs details</h1>
             <EditJobDrawer jobId={job.id} />
