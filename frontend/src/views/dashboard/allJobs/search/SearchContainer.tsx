@@ -24,14 +24,14 @@ const SearchContainer = () => {
   return (
     <ContentWrapper title="Search">
       <section>
-        <div className="mt-12 grid gap-4 lg:grid-cols-2 lg:items-center lg:gap-[2rem_1rem] xl:grid-cols-3">
+        <div className="mt-10 grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-[2rem_1rem] xl:grid-cols-3">
           <div className="relative">
-            <Label htmlFor="search" className="sr-only">
+            <Label htmlFor="search" className="absolute bottom-[calc(100%+4px)] ml-1 font-normal capitalize">
               search
             </Label>
             <Input
               id="search"
-              placeholder="Search"
+              placeholder="Search for a job"
               value={searchParams.get('search') || search}
               onChange={({ target }) => setQuery('search', target.value)}
             />

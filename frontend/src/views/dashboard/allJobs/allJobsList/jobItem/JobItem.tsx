@@ -50,9 +50,9 @@ const JobItem = ({ job }: JobProps) => {
           <JobInfo icon={<Navigation />} text={job.jobLocation} />
           <JobInfo icon={<Calendar />} text={date} />
           <JobInfo icon={<Briefcase />} text={job.jobType.replace('_', '-')} />
-          <div className={cn('flex h-[30px] items-center justify-start gap-2 rounded-sm text-sm text-white')}>
+          <div className={cn('flex h-[30px] items-center justify-start gap-2 rounded-sm text-sm text-foreground')}>
             <span>Status:</span>
-            <span className="uppercase">{job.jobStatus}</span>
+            <span className="font-semibold uppercase tracking-wide">{job.jobStatus}</span>
           </div>
         </div>
         <JobItemFooter jobId={job.id} />
