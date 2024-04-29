@@ -1,8 +1,8 @@
 import bcryptjs from "bcryptjs";
 import { CookieOptions, Request } from "express";
 import { v4 as uuidv4 } from "uuid";
-
 import { StatusCodes } from "http-status-codes";
+
 import {
   ACCESS_TOKEN_COOKIE_NAME,
   PAYLOAD_USER_NAME,
@@ -12,8 +12,9 @@ import { prisma } from "../db/prisma";
 import { CreateUserInput, LoginUserInput } from "../schemas/user.schema";
 import {
   addRefreshTokenToWhitelist,
-  deleteRefreshToken,
+  softDeleteRefreshToken,
   findRefreshTokenById,
+  deleteRefreshTokens,
 } from "../services/auth.service";
 import {
   createUser,
@@ -122,7 +123,13 @@ export const refreshTokenController = asyncWrapper(async (req, res) => {
   const payload = verifyRefreshToken(refreshToken);
   const dbRefreshToken = await findRefreshTokenById(payload.jti);
 
+  const user = await getCurrentUserById(payload.userId);
+  if (!user) {
+    throw new AppError("Unauthorized", StatusCodes.UNAUTHORIZED);
+  }
+
   if (!dbRefreshToken || dbRefreshToken.revoked) {
+    await deleteRefreshTokens(user.id);
     throw new AppError("Unauthorized", StatusCodes.UNAUTHORIZED);
   }
 
@@ -131,17 +138,14 @@ export const refreshTokenController = asyncWrapper(async (req, res) => {
     throw new AppError("Unauthorized", StatusCodes.UNAUTHORIZED);
   }
 
-  const user = await getCurrentUserById(payload.userId);
-  if (!user) {
-    throw new AppError("Unauthorized", StatusCodes.UNAUTHORIZED);
-  }
+  await softDeleteRefreshToken(dbRefreshToken.id);
 
-  await deleteRefreshToken(dbRefreshToken.id);
   const jti = uuidv4();
   const { accessToken, refreshToken: newRefreshToken } = generateTokens(
     user,
     jti
   );
+
   await addRefreshTokenToWhitelist({
     jti,
     refreshToken: newRefreshToken,
@@ -159,6 +163,10 @@ export const refreshTokenController = asyncWrapper(async (req, res) => {
 });
 
 export const logoutController = asyncWrapper(async (req, res) => {
+  const { userId } = res.locals[PAYLOAD_USER_NAME] as AccessTokenPayloadUser;
+
+  await deleteRefreshTokens(userId);
+
   res.cookie(ACCESS_TOKEN_COOKIE_NAME, "", {
     httpOnly: true,
     expires: new Date(Date.now()),

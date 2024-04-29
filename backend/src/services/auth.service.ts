@@ -19,21 +19,29 @@ export const addRefreshTokenToWhitelist = ({
   });
 };
 
-export const findRefreshTokenById = (id: string) => {
+export const findRefreshTokenById = (tokenId: string) => {
   return prisma.refreshToken.findFirst({
     where: {
-      id,
+      id: tokenId,
     },
   });
 };
 
-export const deleteRefreshToken = (id: string) => {
+export const softDeleteRefreshToken = (tokenId: string) => {
   return prisma.refreshToken.update({
     where: {
-      id,
+      id: tokenId,
     },
     data: {
       revoked: true,
+    },
+  });
+};
+
+export const deleteRefreshTokens = (userId: string) => {
+  return prisma.refreshToken.deleteMany({
+    where: {
+      userId,
     },
   });
 };

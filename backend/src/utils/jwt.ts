@@ -52,7 +52,7 @@ export const verifyAccessToken = <T>(token: string) => {
   const accessTokenKey = process.env.JWT_ACCESS_SECRET;
 
   if (!accessTokenKey) {
-    throw new Error("missing access token key");
+    throw new Error("missing access token secret");
   }
 
   try {
@@ -66,7 +66,7 @@ export const verifyRefreshToken = (token: string) => {
   const refreshTokenKey = process.env.JWT_REFRESH_SECRET;
 
   if (!refreshTokenKey) {
-    throw new Error("missing access token key");
+    throw new Error("missing refresh token secret");
   }
 
   return jwt.verify(token, refreshTokenKey) as RefreshTokenPayload;
