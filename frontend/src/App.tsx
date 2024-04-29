@@ -15,6 +15,7 @@ import Login from './views/home/Login';
 import Register from './views/home/Register';
 import { checkDefaultThemeColor, checkDefaultThemeMode } from './lib/helpers/checkDefaultTheme';
 import { buildBodyClassName } from './lib/helpers/buildBodyClassName';
+import HelmetWrapper from './components/HelmetWrapper';
 
 const router = createBrowserRouter([
   {
@@ -24,21 +25,37 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Landing />,
+        element: (
+          <HelmetWrapper page="landing">
+            <Landing />
+          </HelmetWrapper>
+        ),
       },
       {
         path: ROUTES.register,
-        element: <Register />,
+        element: (
+          <HelmetWrapper page="register">
+            <Register />
+          </HelmetWrapper>
+        ),
       },
       {
         path: ROUTES.login,
-        element: <Login />,
+        element: (
+          <HelmetWrapper page="login">
+            <Login />
+          </HelmetWrapper>
+        ),
       },
     ],
   },
   {
     path: ROUTES.dashboard,
-    element: <DashboardLayout />,
+    element: (
+      <HelmetWrapper page="dashboard">
+        <DashboardLayout />
+      </HelmetWrapper>
+    ),
     errorElement: <Error />,
     children: [
       {
