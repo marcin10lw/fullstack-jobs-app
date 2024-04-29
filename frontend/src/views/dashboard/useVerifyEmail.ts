@@ -7,7 +7,7 @@ import { authAPI } from 'src/api/auth/authApiAdapter';
 import { CURRENT_USER_QUERY_KEY } from 'src/api/user/constants';
 
 export const useVerifyEmail = () => {
-  const [otp, setOtp] = useState('');
+  const [otpValue, setOtpValue] = useState('');
   const [showSendButton, setShowSendButton] = useState(false);
 
   const qc = useQueryClient();
@@ -17,7 +17,7 @@ export const useVerifyEmail = () => {
     mutationFn: authAPI.verifyEmail,
     onSuccess: () => {
       setShowSendButton(false);
-      setOtp('');
+      setOtpValue('');
       toast({
         title: 'Email verified successfully',
         variant: 'success',
@@ -47,7 +47,7 @@ export const useVerifyEmail = () => {
   const { mutate: sendVerificationCode, isLoading: isSendingVerificationCode } = useMutation({
     mutationFn: authAPI.sendVerificationCode,
     onSuccess: () => {
-      setOtp('');
+      setOtpValue('');
       setShowSendButton(false);
       toast({
         title: 'New verification code was sent',
@@ -64,12 +64,12 @@ export const useVerifyEmail = () => {
   });
 
   const onComplete = () => {
-    verifyEmail(otp);
+    verifyEmail(otpValue);
   };
 
   return {
-    otp,
-    setOtp,
+    otpValue,
+    setOtpValue,
     isVerifyingEmail,
     isSendingVerificationCode,
     showSendButton,
