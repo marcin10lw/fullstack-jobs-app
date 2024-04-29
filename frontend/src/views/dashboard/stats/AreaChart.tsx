@@ -16,7 +16,7 @@ const AreaChart = ({ monthlyApplications }: AreaChartProps) => {
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="date" />
         <YAxis allowDecimals={false} />
-        <Tooltip animationEasing="ease-in-out" />
+        <Tooltip animationEasing="ease-in-out" labelClassName="text-black" />
         <Area type="natural" dataKey="count" stroke={appPrimaryColor} fill={`${appPrimaryColor}b3`} />
       </Chart>
     </ResponsiveContainer>
