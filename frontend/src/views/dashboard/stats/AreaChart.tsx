@@ -1,14 +1,14 @@
-import { ResponsiveContainer, AreaChart as Chart, Area, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
+import { Area, CartesianGrid, AreaChart as Chart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+
 import { MonthlyApplications } from 'src/api/job/types';
-import { themeColorsConfig } from 'src/lib/helpers/themeColorsConfig';
-import useDashboardContext from '../useDashboardContext';
+import { useGetThemePrimaryColor } from 'src/hooks/useGetThemeColors';
 
 type AreaChartProps = {
   monthlyApplications: MonthlyApplications;
 };
 
 const AreaChart = ({ monthlyApplications }: AreaChartProps) => {
-  const { themeMode, themeColor } = useDashboardContext();
+  const appPrimaryColor = useGetThemePrimaryColor();
 
   return (
     <ResponsiveContainer width="100%" height={300}>
@@ -17,12 +17,7 @@ const AreaChart = ({ monthlyApplications }: AreaChartProps) => {
         <XAxis dataKey="date" />
         <YAxis allowDecimals={false} />
         <Tooltip animationEasing="ease-in-out" />
-        <Area
-          type="natural"
-          dataKey="count"
-          stroke={themeColorsConfig[themeColor][themeMode]}
-          fill={`${themeColorsConfig[themeColor][themeMode]}b3`}
-        />
+        <Area type="natural" dataKey="count" stroke={appPrimaryColor} fill={`${appPrimaryColor}b3`} />
       </Chart>
     </ResponsiveContainer>
   );

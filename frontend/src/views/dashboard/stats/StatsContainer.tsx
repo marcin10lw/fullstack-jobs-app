@@ -15,23 +15,23 @@ const StatsContainer = ({ defaultStats }: StatsContainerProps) => {
       title: 'pending applications',
       count: defaultStats.pending,
       icon: <Briefcase className="size-8 text-muted-foreground" />,
-      color: 'test-primary-foreground',
+      color: 'text-foreground',
     },
     {
       id: 2,
       status: 'interview',
       title: 'interviews scheduled',
       count: defaultStats.interview,
-      icon: <CalendarCheck className="size-8 text-primary/80" />,
-      color: 'text-purple-700',
+      icon: <CalendarCheck className="size-8 text-primary" />,
+      color: 'text-foreground',
     },
     {
       id: 3,
       status: 'declined',
       title: 'declined applications',
       count: defaultStats.declined,
-      icon: <Bug className="size-8 text-destructive" />,
-      color: 'text-red-800',
+      icon: <Bug className="size-8 text-destructive_2" />,
+      color: 'text-foreground',
     },
   ];
 
