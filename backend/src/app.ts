@@ -1,5 +1,4 @@
 require("dotenv").config();
-import { v2 as cloudinary } from "cloudinary";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
@@ -32,12 +31,6 @@ if (process.env.NODE_ENV === "development") {
     })
   );
 }
-
-cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME,
-  api_key: process.env.CLOUD_API_KEY,
-  api_secret: process.env.CLOUD_API_SECRET,
-});
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);

@@ -1,10 +1,11 @@
-import { Request } from "express";
-import { StatusCodes } from "http-status-codes";
-import cloudinary from "cloudinary";
-import { promises as fs } from "fs";
 import bcryptjs from "bcryptjs";
+import { Request } from "express";
+import { promises as fs, readFileSync } from "fs";
+import { StatusCodes } from "http-status-codes";
 
-import { PAYLOAD_USER_NAME } from "../constants";
+import { PAYLOAD_USER_NAME, SUPABASE_AVATAR_BUCKET_NAME } from "../constants";
+import { supabase } from "../db/supabase";
+import { ChangePasswordInput, UpdateUserInput } from "../schemas/user.schema";
 import {
   getApplicationStats,
   getCurrentUserByEmail,
@@ -14,7 +15,6 @@ import {
 import { AccessTokenPayloadUser } from "../types";
 import AppError from "../utils/appError";
 import { asyncWrapper } from "../utils/asyncWrapper";
-import { ChangePasswordInput, UpdateUserInput } from "../schemas/user.schema";
 
 export const getCurrentUserController = asyncWrapper(async (req, res) => {
   const payloadUser = res.locals[PAYLOAD_USER_NAME] as AccessTokenPayloadUser;
@@ -56,10 +56,31 @@ export const updateUserController = asyncWrapper(
     }
 
     if (req.file) {
-      const response = await cloudinary.v2.uploader.upload(req.file.path);
+      const storedFile = readFileSync(req.file.path);
+
+      const { data: savedFileData, error: savedFileError } =
+        await supabase.storage
+          .from(SUPABASE_AVATAR_BUCKET_NAME)
+          .upload(req.file.originalname, storedFile, {
+            contentType: req.file.mimetype,
+          });
+
+      if (savedFileError) {
+        throw new AppError(
+          savedFileError.message,
+          StatusCodes.INTERNAL_SERVER_ERROR
+        );
+      }
+
+      const {
+        data: { publicUrl },
+      } = supabase.storage
+        .from(SUPABASE_AVATAR_BUCKET_NAME)
+        .getPublicUrl(savedFileData.path);
+
+      newUser.avatar = publicUrl;
+      newUser.avatarPublicId = savedFileData.path;
       await fs.unlink(req.file.path);
-      newUser.avatar = response.secure_url;
-      newUser.avatarPublicId = response.public_id;
     }
 
     const currentUser = await getCurrentUserById(payloadUser.userId);
@@ -67,7 +88,9 @@ export const updateUserController = asyncWrapper(
     await updateUser(newUser, payloadUser.userId);
 
     if (req.file && currentUser?.avatarPublicId) {
-      await cloudinary.v2.uploader.destroy(currentUser.avatarPublicId);
+      await supabase.storage
+        .from(SUPABASE_AVATAR_BUCKET_NAME)
+        .remove([currentUser.avatarPublicId]);
     }
 
     res.status(StatusCodes.OK).json({ msg: "user updated" });
@@ -89,7 +112,9 @@ export const removeUserAvatarController = asyncWrapper(async (req, res) => {
   }
 
   if (user && user.avatarPublicId) {
-    await cloudinary.v2.uploader.destroy(user.avatarPublicId);
+    await supabase.storage
+      .from(SUPABASE_AVATAR_BUCKET_NAME)
+      .remove([user.avatarPublicId]);
   }
 
   await updateUser(
