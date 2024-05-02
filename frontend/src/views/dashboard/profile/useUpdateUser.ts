@@ -29,6 +29,7 @@ export const useUpdateUser = () => {
     handleSubmit,
     control,
     watch,
+    resetField,
   } = useForm<UpdatedUserSchema>({
     defaultValues: initialValues,
     resolver: zodResolver(updateUserSchema),
@@ -42,6 +43,7 @@ export const useUpdateUser = () => {
     mutationFn: userAPI.updateUser,
     onSuccess: () => {
       qc.invalidateQueries([CURRENT_USER_QUERY_KEY]);
+      resetField('avatar');
       toast({
         title: 'User updated',
         variant: 'success',

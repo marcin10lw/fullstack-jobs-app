@@ -61,9 +61,11 @@ export const updateUserController = asyncWrapper(
       const { data: savedFileData, error: savedFileError } =
         await supabase.storage
           .from(SUPABASE_AVATAR_BUCKET_NAME)
-          .upload(req.file.originalname, storedFile, {
+          .upload(req.file.filename, storedFile, {
             contentType: req.file.mimetype,
           });
+
+      await fs.unlink(req.file.path);
 
       if (savedFileError) {
         throw new AppError(
@@ -80,7 +82,6 @@ export const updateUserController = asyncWrapper(
 
       newUser.avatar = publicUrl;
       newUser.avatarPublicId = savedFileData.path;
-      await fs.unlink(req.file.path);
     }
 
     const currentUser = await getCurrentUserById(payloadUser.userId);
