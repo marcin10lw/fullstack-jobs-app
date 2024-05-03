@@ -13,9 +13,9 @@ import HomeLayout from './views/home/HomeLayout';
 import Landing from './views/home/Landing';
 import Login from './views/home/Login';
 import Register from './views/home/Register';
+import HelmetWrapper from './components/HelmetWrapper';
 import { checkDefaultThemeColor, checkDefaultThemeMode } from './lib/helpers/checkDefaultTheme';
 import { buildBodyClassName } from './lib/helpers/buildBodyClassName';
-import HelmetWrapper from './components/HelmetWrapper';
 
 const router = createBrowserRouter([
   {

@@ -13,6 +13,7 @@ import JobDescription from './JobDescription';
 import JobDetail from './JobDetail';
 import JobMap from './JobMap';
 import { convertApiOption } from 'src/lib/helpers/convertApiOption';
+import DatePicker from './DatePicker';
 
 const Job = () => {
   const { jobId } = useParams<{ jobId: string }>();
@@ -44,41 +45,45 @@ const Job = () => {
 
   if (job)
     return (
-      <ContentWrapper className="relative">
-        <Link to={ROUTES.allJobs} className="absolute left-4 top-4 flex items-center gap-2 text-primary md:left-7">
-          <ArrowLeft className="size-5" />
-          Back to jobs
-        </Link>
-        <section className=" mt-8 md:mt-3">
-          <div className="flex items-center justify-between">
-            <h1 className="text-xl">Jobs details</h1>
-            <EditJobDrawer jobId={job.id} />
-          </div>
-
-          <dl className="mt-4 grid max-w-[80%] gap-1.5 md:grid-cols-2">
-            <div className="flex flex-col gap-1.5">
-              <JobDetail descriptionTerm="Company:" descriptionDetail={job.company} />
-              <JobDetail descriptionTerm="Position:" descriptionDetail={job.position} />
-              <JobDetail descriptionTerm="Location:" descriptionDetail={job.jobLocation} />
+      <div className="flex flex-col gap-8">
+        <ContentWrapper className="relative pb-10 md:pb-10">
+          <Link to={ROUTES.allJobs} className="absolute left-4 top-4 flex items-center gap-2 text-primary md:left-7">
+            <ArrowLeft className="size-5" />
+            Back to jobs
+          </Link>
+          <section className=" mt-8 md:mt-3">
+            <div className="flex items-center justify-between">
+              <h1 className="text-xl">Jobs details</h1>
+              <EditJobDrawer jobId={job.id} />
             </div>
 
-            <div className="flex flex-col gap-1.5">
-              <JobDetail descriptionTerm="Job Status:" descriptionDetail={job.jobStatus} />
-              <JobDetail descriptionTerm="Job Type:" descriptionDetail={convertApiOption(job.jobType, '_', '-')} />
+            <dl className="mt-4 grid max-w-[80%] gap-1.5 md:grid-cols-2">
+              <div className="flex flex-col gap-1.5">
+                <JobDetail descriptionTerm="Company:" descriptionDetail={job.company} />
+                <JobDetail descriptionTerm="Position:" descriptionDetail={job.position} />
+                <JobDetail descriptionTerm="Location:" descriptionDetail={job.jobLocation} />
+              </div>
+
+              <div className="flex flex-col gap-1.5">
+                <JobDetail descriptionTerm="Job Status:" descriptionDetail={job.jobStatus} />
+                <JobDetail descriptionTerm="Job Type:" descriptionDetail={convertApiOption(job.jobType, '_', '-')} />
+              </div>
+            </dl>
+
+            <div className="mt-8 md:mt-12">
+              <JobDescription jobDescription={job.jobDescription} jobId={job.id} />
             </div>
-          </dl>
-
-          {/* <DatePicker /> */}
-
-          <div className="mt-8 md:mt-12">
-            <JobDescription jobDescription={job.jobDescription} jobId={job.id} />
+          </section>
+        </ContentWrapper>
+        <ContentWrapper title="Interview Date" className="pb-10 pt-6 md:pb-10 md:pt-6">
+          <div className="md:max-w-[260px]">
+            <DatePicker />
           </div>
-        </section>
-
-        <div className="mt-10">
+        </ContentWrapper>
+        <ContentWrapper title="Location" className="pb-10 pt-6 md:pb-10 md:pt-6">
           <JobMap />
-        </div>
-      </ContentWrapper>
+        </ContentWrapper>
+      </div>
     );
 
   return <div>Job</div>;
