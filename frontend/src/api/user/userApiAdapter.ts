@@ -16,6 +16,8 @@ export const userAPI = {
 
   updateUser: (updateUserData: UpdatedUserSchema) => restApi.private.patch(USER_API_URLS.updateUser, updateUserData),
 
+  changeUserAvatar: (formData: FormData) => restApi.private.post(USER_API_URLS.changeUserAvatar, formData),
+
   removeUserAvatar: () => restApi.private.delete(USER_API_URLS.removeUserAvatar),
 
   changePassword: (changePasswordFormData: ChangePasswordSchema) =>

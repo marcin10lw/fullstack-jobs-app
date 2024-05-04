@@ -1,6 +1,6 @@
+import { File as FileIcon } from 'lucide-react';
 import { createRef, useEffect, useState } from 'react';
 import { Cropper, ReactCropperElement } from 'react-cropper';
-import { File as FileIcon } from 'lucide-react';
 
 import 'cropperjs/dist/cropper.css';
 import { Button, buttonVariants } from 'src/components/ui/button';
@@ -13,7 +13,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from 'src/components/ui/dialog';
-import { dataUrlToFile } from 'src/lib/helpers/dataUrlToFile';
+import ChangeAvatarForm from './ChangeAvatarForm';
 
 const AvatarCropper = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -32,32 +32,6 @@ const AvatarCropper = () => {
   const cropperRef = createRef<ReactCropperElement>();
 
   const buttonDisabled = !selectedImage || imageErrors.length > 0;
-
-  const onFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const cropper = cropperRef.current?.cropper;
-
-    if (buttonDisabled || !cropper) return;
-
-    let quality = 1;
-    // eslint-disable-next-line no-constant-condition
-    while (true) {
-      const canvasDataURL = cropper.getCroppedCanvas().toDataURL('image/jpeg', quality);
-      const file = await dataUrlToFile(canvasDataURL, selectedImage.name, 'image/jpeg');
-
-      if (file.size <= selectedImage.size) {
-        const formData = new FormData();
-        formData.append('avatar', file);
-
-        console.log('FILE', selectedImage);
-        console.log('NEW FILE', file);
-        break;
-      }
-
-      quality -= 0.01;
-    }
-  };
 
   const imageSrc = selectedImage ? URL.createObjectURL(selectedImage) : undefined;
 
@@ -86,7 +60,7 @@ const AvatarCropper = () => {
           <DialogDescription>Select and edit you new profile picture</DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={onFormSubmit} className="flex flex-col gap-4" noValidate encType="multipart/form-data">
+        <div className="flex flex-col gap-4">
           <label htmlFor="avatar" className={buttonVariants({ variant: 'default', className: 'cursor-pointer' })}>
             Choose image
           </label>
@@ -103,11 +77,11 @@ const AvatarCropper = () => {
             accept="image/*"
           />
           {selectedImage ? (
-            <div className="relative">
+            <div className="relative min-h-[260px]">
               <Cropper
                 ref={cropperRef}
-                viewMode={1}
                 src={imageSrc}
+                viewMode={1}
                 zoomTo={0}
                 preview=".img-preview"
                 aspectRatio={1}
@@ -138,10 +112,10 @@ const AvatarCropper = () => {
             </Card>
           )}
 
-          <Button className="mt-2 self-end" type="submit" disabled={buttonDisabled}>
-            Save changes
-          </Button>
-        </form>
+          <div className="ml-auto">
+            <ChangeAvatarForm selectedImage={selectedImage} buttonDisabled={buttonDisabled} cropperRef={cropperRef} />
+          </div>
+        </div>
       </DialogContent>
     </Dialog>
   );
