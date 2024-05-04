@@ -1,6 +1,6 @@
 import userIcon from 'src/assets/images/user.svg';
-import { useUser } from '../DashboardLayout';
-import AvatarCropper from './avatar/AvatarCropper';
+import { useUser } from '../../DashboardLayout';
+import AvatarCropper from './AvatarCropper';
 import RemoveAvatar from './RemoveAvatar';
 
 const ProfilePicture = () => {

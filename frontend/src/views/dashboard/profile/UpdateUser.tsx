@@ -2,7 +2,7 @@ import ContentWrapper from 'src/components/ContentWrapper';
 import LabeledRegisterInput from 'src/components/LabeledRegisterInput';
 import { Button } from 'src/components/ui/button';
 import { useUser } from '../DashboardLayout';
-import ProfilePicture from './ProfilePicture';
+import ProfilePicture from './avatar/ProfilePicture';
 import { useUpdateUser } from './useUpdateUser';
 
 const UpdateUser = () => {
@@ -10,9 +10,11 @@ const UpdateUser = () => {
   const { register, handleSubmit, errors, isUpdatingProfile, onFormSubmit, hasAnyFieldChanged } = useUpdateUser();
 
   return (
-    <ContentWrapper title="profile">
+    <ContentWrapper title="profile" className="text-center md:text-start">
       <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-[1fr_2fr] md:gap-4">
-        <ProfilePicture />
+        <div className="mx-auto md:mx-0">
+          <ProfilePicture />
+        </div>
         <div className="text-[clamp(1.5rem,_2vw,_3rem)]">Hello, {user.name}!</div>
       </div>
 
