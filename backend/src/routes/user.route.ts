@@ -4,6 +4,7 @@ import {
   getAppStatsController,
   getCurrentUserController,
   removeUserAvatarController,
+  updateAvatarController,
   updateUserController,
 } from "../controllers/user.controllers";
 import { restrictTo } from "../middleware/restrictTo";
@@ -24,9 +25,10 @@ router.use(ensureEmailVerified);
 router.get("/admin/app-stats", [restrictTo("admin")], getAppStatsController);
 router.patch(
   "/update-user",
-  [upload.single("avatar"), validate(updateUserSchema)],
+  [validate(updateUserSchema)],
   updateUserController
 );
+router.post("/change-avatar", upload.single("avatar"), updateAvatarController);
 router.delete("/remove-avatar", removeUserAvatarController);
 router.post(
   "/change-password",

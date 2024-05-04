@@ -37,13 +37,6 @@ export const getCurrentUserController = asyncWrapper(async (req, res) => {
 
 export const updateUserController = asyncWrapper(
   async (req: Request<{}, {}, UpdateUserInput>, res) => {
-    const newUser: UpdateUserInput & {
-      avatar?: string;
-      avatarPublicId?: string;
-    } = {
-      ...req.body,
-    };
-
     const payloadUser = res.locals[PAYLOAD_USER_NAME] as AccessTokenPayloadUser;
 
     const existingUser = await getCurrentUserByEmail(req.body.email);
@@ -55,44 +48,7 @@ export const updateUserController = asyncWrapper(
       );
     }
 
-    if (req.file) {
-      const storedFile = readFileSync(req.file.path);
-
-      const { data: savedFileData, error: savedFileError } =
-        await supabase.storage
-          .from(SUPABASE_AVATAR_BUCKET_NAME)
-          .upload(req.file.filename, storedFile, {
-            contentType: req.file.mimetype,
-          });
-
-      await fs.unlink(req.file.path);
-
-      if (savedFileError) {
-        throw new AppError(
-          savedFileError.message,
-          StatusCodes.INTERNAL_SERVER_ERROR
-        );
-      }
-
-      const {
-        data: { publicUrl },
-      } = supabase.storage
-        .from(SUPABASE_AVATAR_BUCKET_NAME)
-        .getPublicUrl(savedFileData.path);
-
-      newUser.avatar = publicUrl;
-      newUser.avatarPublicId = savedFileData.path;
-    }
-
-    const currentUser = await getCurrentUserById(payloadUser.userId);
-
-    await updateUser(newUser, payloadUser.userId);
-
-    if (req.file && currentUser?.avatarPublicId) {
-      await supabase.storage
-        .from(SUPABASE_AVATAR_BUCKET_NAME)
-        .remove([currentUser.avatarPublicId]);
-    }
+    await updateUser(req.body, payloadUser.userId);
 
     res.status(StatusCodes.OK).json({ msg: "user updated" });
   }
@@ -101,6 +57,64 @@ export const updateUserController = asyncWrapper(
 export const getAppStatsController = asyncWrapper(async (req, res) => {
   const { usersAmt, jobsAmt } = await getApplicationStats();
   res.status(StatusCodes.OK).json({ users: usersAmt, jobs: jobsAmt });
+});
+
+export const updateAvatarController = asyncWrapper(async (req, res) => {
+  const { userId } = res.locals[PAYLOAD_USER_NAME] as AccessTokenPayloadUser;
+  const uploadedFile = req.file;
+
+  if (!uploadedFile) {
+    throw new AppError("file data missing", StatusCodes.BAD_REQUEST);
+  }
+
+  if (!uploadedFile.mimetype.startsWith("image/")) {
+    throw new AppError("file must be an image", StatusCodes.BAD_REQUEST);
+  }
+
+  if (uploadedFile.size > 524288) {
+    throw new AppError("file max size is 0.5 MB", StatusCodes.BAD_REQUEST);
+  }
+
+  const storedFile = readFileSync(uploadedFile.path);
+
+  const { data: savedFileData, error: savedFileError } = await supabase.storage
+    .from(SUPABASE_AVATAR_BUCKET_NAME)
+    .upload(uploadedFile.filename, storedFile, {
+      contentType: uploadedFile.mimetype,
+    });
+
+  await fs.unlink(uploadedFile.path);
+
+  if (savedFileError) {
+    throw new AppError(
+      savedFileError.message,
+      StatusCodes.INTERNAL_SERVER_ERROR
+    );
+  }
+
+  const {
+    data: { publicUrl },
+  } = supabase.storage
+    .from(SUPABASE_AVATAR_BUCKET_NAME)
+    .getPublicUrl(savedFileData.path);
+
+  const currentUser = await getCurrentUserById(userId);
+
+  await updateUser(
+    {
+      avatar: publicUrl,
+      avatarPublicId: savedFileData.path,
+    },
+    userId
+  );
+
+  if (uploadedFile && currentUser?.avatarPublicId) {
+    await supabase.storage
+      .from(SUPABASE_AVATAR_BUCKET_NAME)
+      .remove([currentUser.avatarPublicId]);
+  }
+
+  res.status(200).json({ msg: "avatar was changed" });
 });
 
 export const removeUserAvatarController = asyncWrapper(async (req, res) => {

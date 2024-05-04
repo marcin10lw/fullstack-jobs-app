@@ -29,8 +29,6 @@ const AvatarCropper = () => {
     imageErrors.push('File max size is 0.5 MB');
   }
 
-  console.log(imageErrors);
-
   const cropperRef = createRef<ReactCropperElement>();
 
   const buttonDisabled = !selectedImage || imageErrors.length > 0;
