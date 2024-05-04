@@ -1,6 +1,6 @@
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useForm } from 'react-hook-form';
 
 import { userAPI } from 'src/api/user/userApiAdapter';
 import { checkHasAnyFieldChanged } from 'src/lib/helpers/checkHasAnyFieldChanged';
@@ -20,16 +20,13 @@ export const useUpdateUser = () => {
     lastName: user.lastName,
     email: user.email,
     location: user.location,
-    avatar: null,
   };
 
   const {
     register,
     formState: { errors },
     handleSubmit,
-    control,
     watch,
-    resetField,
   } = useForm<UpdatedUserSchema>({
     defaultValues: initialValues,
     resolver: zodResolver(updateUserSchema),
@@ -43,7 +40,6 @@ export const useUpdateUser = () => {
     mutationFn: userAPI.updateUser,
     onSuccess: () => {
       qc.invalidateQueries([CURRENT_USER_QUERY_KEY]);
-      resetField('avatar');
       toast({
         title: 'User updated',
         variant: 'success',
@@ -61,27 +57,13 @@ export const useUpdateUser = () => {
   const onFormSubmit = (user: UpdatedUserSchema) => {
     if (!hasAnyFieldChanged) return;
 
-    const formData = new FormData();
-    const userEntries = Object.entries(user);
-
-    userEntries.forEach(([key, value]) => {
-      if (value) {
-        formData.append(key, value);
-      }
-    });
-
-    if (!user.avatar) {
-      formData.delete('avatar');
-    }
-
-    updateProfile(formData);
+    updateProfile(user);
   };
 
   return {
     register,
     errors,
     handleSubmit,
-    control,
     onFormSubmit,
     isUpdatingProfile,
     hasAnyFieldChanged,

@@ -1,4 +1,4 @@
-import { ChangePasswordSchema } from 'src/schema/User';
+import { ChangePasswordSchema, UpdatedUserSchema } from 'src/schema/User';
 import { restApi } from '../restApi';
 import { UserApiResponse } from './types';
 import { USER_API_URLS } from './userApiUrls';
@@ -14,7 +14,7 @@ export const userAPI = {
     return data;
   },
 
-  updateUser: (updateUserFormData: FormData) => restApi.private.patch(USER_API_URLS.updateUser, updateUserFormData),
+  updateUser: (updateUserData: UpdatedUserSchema) => restApi.private.patch(USER_API_URLS.updateUser, updateUserData),
 
   removeUserAvatar: () => restApi.private.delete(USER_API_URLS.removeUserAvatar),
 

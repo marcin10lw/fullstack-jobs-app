@@ -1,5 +1,3 @@
-import { Controller } from 'react-hook-form';
-
 import ContentWrapper from 'src/components/ContentWrapper';
 import LabeledRegisterInput from 'src/components/LabeledRegisterInput';
 import { Button } from 'src/components/ui/button';
@@ -9,24 +7,16 @@ import { useUpdateUser } from './useUpdateUser';
 
 const UpdateUser = () => {
   const { user } = useUser();
-  const { register, control, handleSubmit, errors, isUpdatingProfile, onFormSubmit, hasAnyFieldChanged } =
-    useUpdateUser();
+  const { register, handleSubmit, errors, isUpdatingProfile, onFormSubmit, hasAnyFieldChanged } = useUpdateUser();
 
   return (
     <ContentWrapper title="profile">
-      <form onSubmit={handleSubmit(onFormSubmit)} noValidate encType="multipart/form-data">
-        <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-[1fr_2fr] md:gap-4">
-          <Controller
-            control={control}
-            name="avatar"
-            render={({ field: { value, onChange } }) => {
-              return <ProfilePicture value={value} onChange={onChange} error={errors.avatar} />;
-            }}
-          />
+      <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-[1fr_2fr] md:gap-4">
+        <ProfilePicture />
+        <div className="text-[clamp(1.5rem,_2vw,_3rem)]">Hello, {user.name}!</div>
+      </div>
 
-          <div className="text-[clamp(1.5rem,_2vw,_3rem)]">Hello, {user.name}!</div>
-        </div>
-
+      <form onSubmit={handleSubmit(onFormSubmit)}>
         <div className="mt-14 grid gap-y-4 lg:grid-cols-2 lg:gap-[2rem_1rem] xl:grid-cols-3">
           <LabeledRegisterInput
             register={register('name')}
