@@ -349,9 +349,11 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply overflow-hidden bg-background text-foreground;
   }
+
   html {
     font-family: 'Barlow', sans-serif;
   }
@@ -393,4 +395,13 @@
 
 .scrollbar-thumb-rounded::-webkit-scrollbar-thumb {
   border-radius: 7px;
+}
+
+.cropper-line,
+.cropper-point {
+  background-color: hsl(var(--primary)) !important;
+}
+
+.cropper-view-box {
+  outline-color: hsl(var(--primary)) !important;
 }
