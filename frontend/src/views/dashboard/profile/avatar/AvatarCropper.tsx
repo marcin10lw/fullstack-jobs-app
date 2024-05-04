@@ -35,6 +35,10 @@ const AvatarCropper = () => {
 
   const imageSrc = selectedImage ? URL.createObjectURL(selectedImage) : undefined;
 
+  const onSuccessCleanup = () => {
+    setSelectedImage(null);
+  };
+
   useEffect(() => {
     let timeout: NodeJS.Timeout;
     if (!dialogOpen) {
@@ -113,7 +117,12 @@ const AvatarCropper = () => {
           )}
 
           <div className="ml-auto">
-            <ChangeAvatarForm selectedImage={selectedImage} buttonDisabled={buttonDisabled} cropperRef={cropperRef} />
+            <ChangeAvatarForm
+              selectedImage={selectedImage}
+              buttonDisabled={buttonDisabled}
+              cropperRef={cropperRef}
+              onSuccessCleanup={onSuccessCleanup}
+            />
           </div>
         </div>
       </DialogContent>

@@ -12,9 +12,10 @@ interface ChangeAvatarFormProps {
   cropperRef: React.RefObject<ReactCropperElement>;
   buttonDisabled: boolean;
   selectedImage: File | null;
+  onSuccessCleanup: () => void;
 }
 
-const ChangeAvatarForm = ({ cropperRef, buttonDisabled, selectedImage }: ChangeAvatarFormProps) => {
+const ChangeAvatarForm = ({ cropperRef, buttonDisabled, selectedImage, onSuccessCleanup }: ChangeAvatarFormProps) => {
   const qc = useQueryClient();
   const { toast } = useToast();
 
@@ -26,6 +27,7 @@ const ChangeAvatarForm = ({ cropperRef, buttonDisabled, selectedImage }: ChangeA
         title: 'Avatar updated successfully',
         variant: 'success',
       });
+      onSuccessCleanup();
     },
     onError: (error) => {
       if (error instanceof AxiosError) {
@@ -65,7 +67,12 @@ const ChangeAvatarForm = ({ cropperRef, buttonDisabled, selectedImage }: ChangeA
 
   return (
     <form onSubmit={onFormSubmit} noValidate encType="multipart/form-data">
-      <Button className="mt-2 self-end" type="submit" disabled={buttonDisabled} isLoading={isUpdatingUserAvatar}>
+      <Button
+        className="mt-2 w-[115px] self-end"
+        type="submit"
+        disabled={buttonDisabled}
+        isLoading={isUpdatingUserAvatar}
+      >
         Save changes
       </Button>
     </form>
